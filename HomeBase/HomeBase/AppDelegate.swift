@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        let storyBoard = UIStoryboard(name: "Login", bundle: nil)
+        let storyBoard = UIStoryboard(name: "Start", bundle: nil)
         let loginVC = storyBoard.instantiateViewController(
             withIdentifier: "LoginViewController")
         

@@ -14,7 +14,7 @@ class PersonalViewController: UIViewController {
     
     // MARK: Methods (tmp)
     
-    @IBAction func signoutButtonDidTapped(_ sender: UIButton) {
+    @IBAction func signOutButtonDidTapped(_ sender: UIButton) {
         do {
             try Auth.auth().signOut()
             
@@ -22,7 +22,7 @@ class PersonalViewController: UIViewController {
                 FBSDKLoginManager().logOut()
             }
             
-            let storyBoard = UIStoryboard(name: "Login", bundle: nil)
+            let storyBoard = UIStoryboard(name: "Start", bundle: nil)
             let loginVC = storyBoard.instantiateViewController(
                 withIdentifier: "LoginViewController")
 
