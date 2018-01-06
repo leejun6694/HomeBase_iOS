@@ -232,9 +232,24 @@
             <point key="canvasLocation" x="429.60000000000002" y="862.21889055472275"/>
         </scene>
         <!--Personal View Controller-->
+        <scene sceneID="sCg-6s-I33">
+            <objects>
+                <viewController id="bjf-iW-gKD" customClass="PersonalViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FSf-M7-xMA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Jab-3C-7pD"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OKW-PX-qja" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2310" y="862"/>
+        </scene>
+        <!--Tmp View Controller-->
         <scene sceneID="zVK-Bk-tGf">
             <objects>
-                <viewController storyboardIdentifier="PersonalViewController" id="UtW-np-JTQ" customClass="PersonalViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PersonalViewController" id="UtW-np-JTQ" customClass="tmpViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yeZ-oa-f5e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -255,7 +270,7 @@
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="signOutButtonDidTapped:" destination="UtW-np-JTQ" eventType="touchUpInside" id="sdC-yH-Vfb"/>
+                                    <action selector="signOutButtonDidTapped:" destination="UtW-np-JTQ" eventType="touchUpInside" id="ovO-J4-Ggw"/>
                                 </connections>
                             </button>
                         </subviews>
