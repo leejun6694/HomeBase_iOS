@@ -9,6 +9,12 @@ target 'HomeBase' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
 
+  pod 'GoogleSignIn'
+
+  pod 'FacebookCore'
+  pod 'FBSDKLoginKit'
+  pod 'FacebookShare'
+
   target 'HomeBaseTests' do
     inherit! :search_paths
     # Pods for testing
