@@ -1,5 +1,5 @@
 //
-//  PersonalViewController.swift
+//  RegisterPlayerInfoViewController.swift
 //  HomeBase
 //
 //  Created by JUN LEE on 2018. 1. 7..
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PersonalViewController: UIViewController {
+class RegisterPlayerInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
