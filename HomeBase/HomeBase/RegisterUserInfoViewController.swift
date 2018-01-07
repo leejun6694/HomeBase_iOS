@@ -12,6 +12,10 @@ class RegisterUserInfoViewController: UIViewController {
 
     // MARK: Properties
     
+    var year = 0
+    var month = 0
+    var day = 0
+    
     @IBOutlet private weak var nameTextField: UITextField! {
         didSet {
             bottomBorderWith(nameTextField)
@@ -20,7 +24,7 @@ class RegisterUserInfoViewController: UIViewController {
     }
     @IBOutlet private var nameConditionLabel: UILabel! {
         didSet {
-            nameConditionLabel.text = "글자 수는 2 - 10자여야 합니다"
+            nameConditionLabel.text = "올바르지 않은 이름입니다"
             nameConditionLabel.textColor = .red
             nameConditionLabel.removeFromSuperview()
         }
@@ -32,6 +36,14 @@ class RegisterUserInfoViewController: UIViewController {
             birthTextField.delegate = self
         }
     }
+    @IBOutlet var birthConditionLabel: UILabel! {
+        didSet {
+            birthConditionLabel.text = "유효한 생년월일을 입력해주세요"
+            birthConditionLabel.textColor = .red
+            birthConditionLabel.removeFromSuperview()
+        }
+    }
+    
     
     @IBOutlet private weak var heightTextField: UITextField! {
         didSet {
@@ -71,8 +83,51 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
         switch textField {
         case nameTextField:
             let nameTextCount = nameTextField.text?.count ?? 0
-            if nameTextCount < 2 || nameTextCount > 10 {
+            if nameTextCount < 2 {
+                nameConditionLabel.text = "이름은 2자 이상이여야 합니다"
                 self.view.addSubview(nameConditionLabel)
+            } else if nameTextCount > 10 {
+                nameConditionLabel.text = "이름은 10자 이하여야 합니다"
+                self.view.addSubview(nameConditionLabel)
+            }
+        case birthTextField:
+            if let birthText = birthTextField.text {
+                if birthText.count != 12 {
+                    self.view.addSubview(birthConditionLabel)
+                } else {
+                    let yearStart = birthText.index(birthText.startIndex, offsetBy: 0)
+                    let yearEnd = birthText.index(birthText.startIndex, offsetBy: 3)
+                    year = Int(birthText[yearStart...yearEnd]) ?? 0
+                    
+                    let monthStart = birthText.index(birthText.startIndex, offsetBy: 6)
+                    let monthEnd = birthText.index(birthText.startIndex, offsetBy: 7)
+                    month = Int(birthText[monthStart...monthEnd]) ?? 0
+                    
+                    let dayStart = birthText.index(birthText.startIndex, offsetBy: 10)
+                    let dayEnd = birthText.index(birthText.startIndex, offsetBy: 11)
+                    day = Int(birthText[dayStart...dayEnd]) ?? 0
+                    
+                    if year < 1900 || year > 2100 {
+                        self.view.addSubview(birthConditionLabel)
+                    } else {
+                        switch month {
+                        case 1, 3, 5, 7, 8, 10, 12:
+                            if day > 31 {
+                                self.view.addSubview(birthConditionLabel)
+                            }
+                        case 4, 6, 9, 11:
+                            if day > 30 {
+                                self.view.addSubview(birthConditionLabel)
+                            }
+                        case 2:
+                            if day > 29 {
+                                self.view.addSubview(birthConditionLabel)
+                            }
+                        default:
+                            self.view.addSubview(birthConditionLabel)
+                        }
+                    }
+                }
             }
         default:
             break
@@ -80,13 +135,27 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         let currentCount = textField.text?.count ?? 0
         let replacementCount = currentCount + string.count - range.length
         
         switch textField {
         case nameTextField:
             if replacementCount <= 13 { return true }
+            else { return false }
+        case birthTextField:
+            if currentCount == 4, string.count == 1 {
+                birthTextField.text?.append(". ")
+            } else if currentCount == 8, string.count == 1 {
+                birthTextField.text?.append(". ")
+            } else if currentCount == 7, range.length == 1 {
+                birthTextField.text?.removeLast()
+                birthTextField.text?.removeLast()
+            } else if currentCount == 11, range.length == 1 {
+                birthTextField.text?.removeLast()
+                birthTextField.text?.removeLast()
+            }
+            
+            if replacementCount <= 12 { return true }
             else { return false }
         default:
             break
@@ -111,6 +180,10 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
         case nameTextField:
             if nameConditionLabel.isDescendant(of: self.view) {
                 nameConditionLabel.removeFromSuperview()
+            }
+        case birthTextField:
+            if birthConditionLabel.isDescendant(of: self.view) {
+                birthConditionLabel.removeFromSuperview()
             }
         default:
             break
