@@ -16,6 +16,36 @@ class RegisterUserInfoViewController: UIViewController {
     var month = 0
     var day = 0
     
+    var nameCondition = false
+    var birthCondition = false
+    var heightCondition = false
+    var weightCondition = false
+    
+    private lazy var accessoryView: UIView = {
+        let accessoryViewFrame = CGRect(x: 0.0,
+                                        y: 0.0,
+                                        width: self.view.frame.width,
+                                        height: 45)
+        let accessoryView = UIView(frame: accessoryViewFrame)
+        accessoryView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return accessoryView
+    }()
+    
+    private lazy var registerButton: UIButton = {
+        let registerButton = UIButton(type: .system)
+        registerButton.setTitle("완료", for: .normal)
+        registerButton.setTitleColor(.white, for: .normal)
+        registerButton.backgroundColor = UIColor(red: 75.0/255.0,
+                                                 green: 75.0/255.0,
+                                                 blue: 75.0/255.0,
+                                                 alpha: 0.8)
+        registerButton.isEnabled = false
+        registerButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return registerButton
+    }()
+    
     @IBOutlet private weak var nameTextField: UITextField! {
         didSet {
             bottomBorderWith(nameTextField)
@@ -44,7 +74,6 @@ class RegisterUserInfoViewController: UIViewController {
         }
     }
     
-    
     @IBOutlet private weak var heightTextField: UITextField! {
         didSet {
             bottomBorderWith(heightTextField)
@@ -57,14 +86,15 @@ class RegisterUserInfoViewController: UIViewController {
             bottomBorderWith(weightTextField)
             weightTextField.delegate = self
         }
-    }
+    }    
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.accessoryView.addSubview(registerButton)
+        self.accessoryView.addConstraints(registerButtonConstraints())
     }
 
     /*
@@ -84,15 +114,20 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
         case nameTextField:
             let nameTextCount = nameTextField.text?.count ?? 0
             if nameTextCount < 2 {
+                nameCondition = false
                 nameConditionLabel.text = "이름은 2자 이상이여야 합니다"
                 self.view.addSubview(nameConditionLabel)
             } else if nameTextCount > 10 {
+                nameCondition = false
                 nameConditionLabel.text = "이름은 10자 이하여야 합니다"
                 self.view.addSubview(nameConditionLabel)
+            } else {
+                nameCondition = true
             }
         case birthTextField:
             if let birthText = birthTextField.text {
                 if birthText.count != 12 {
+                    birthCondition = false
                     self.view.addSubview(birthConditionLabel)
                 } else {
                     let yearStart = birthText.index(birthText.startIndex, offsetBy: 0)
@@ -108,22 +143,28 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
                     day = Int(birthText[dayStart...dayEnd]) ?? 0
                     
                     if year < 1900 || year > 2100 {
+                        birthCondition = false
                         self.view.addSubview(birthConditionLabel)
                     } else {
+                        birthCondition = true
                         switch month {
                         case 1, 3, 5, 7, 8, 10, 12:
                             if day > 31 {
+                                birthCondition = false
                                 self.view.addSubview(birthConditionLabel)
                             }
                         case 4, 6, 9, 11:
                             if day > 30 {
+                                birthCondition = false
                                 self.view.addSubview(birthConditionLabel)
                             }
                         case 2:
                             if day > 29 {
+                                birthCondition = false
                                 self.view.addSubview(birthConditionLabel)
                             }
                         default:
+                            birthCondition = false
                             self.view.addSubview(birthConditionLabel)
                         }
                     }
@@ -153,6 +194,11 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
             } else if currentCount == 11, range.length == 1 {
                 birthTextField.text?.removeLast()
                 birthTextField.text?.removeLast()
+            } else if currentCount == 11, string.count == 1 {
+                birthTextField.text?.append(string)
+                heightTextField.becomeFirstResponder()
+                
+                return false
             }
             
             if replacementCount <= 12 { return true }
@@ -178,10 +224,12 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case nameTextField:
+            nameTextField.inputAccessoryView = self.accessoryView
             if nameConditionLabel.isDescendant(of: self.view) {
                 nameConditionLabel.removeFromSuperview()
             }
         case birthTextField:
+            birthTextField.inputAccessoryView = self.accessoryView
             if birthConditionLabel.isDescendant(of: self.view) {
                 birthConditionLabel.removeFromSuperview()
             }
@@ -192,5 +240,24 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textFieldCondition(textField)
+    }
+}
+
+extension RegisterUserInfoViewController {
+    private func registerButtonConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: self.registerButton, attribute: .top, relatedBy: .equal,
+            toItem: self.accessoryView, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: self.registerButton, attribute: .leading, relatedBy: .equal,
+            toItem: self.accessoryView, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let trailingConstraint = NSLayoutConstraint(
+            item: self.registerButton, attribute: .trailing, relatedBy: .equal,
+            toItem: self.accessoryView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: self.registerButton, attribute: .bottom, relatedBy: .equal,
+            toItem: self.accessoryView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        
+        return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
     }
 }
