@@ -102,13 +102,39 @@ class RegisterUserInfoViewController: UIViewController {
         }
     }
     
+    @IBOutlet var weightConditionLabel: UILabel! {
+        didSet {
+            weightConditionLabel.text = "유효한 체중을 입력해주세요"
+            weightConditionLabel.textColor = .red
+            weightConditionLabel.removeFromSuperview()
+        }
+    }
+    
+    
     // MARK: Methods
     
+    @IBAction func backgroundViewDidTapped(_ sender: UITapGestureRecognizer) {
+        for subview in self.scrollView.subviews {
+            if subview.isFirstResponder {
+                subview.resignFirstResponder()
+                break
+            }
+        }
+    }
+    
     @objc func keyboardWillShow(_ notification: Notification) {
+        self.accessoryView.addSubview(registerButton)
+        self.accessoryView.addConstraints(registerButtonKeyboardConstraints())
+        
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRectangle.height
+            print(keyboardHeight)
         }
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification) {
+        
     }
     
     // MARK: Life Cycle
@@ -116,14 +142,18 @@ class RegisterUserInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.accessoryView.addSubview(registerButton)
-        self.accessoryView.addConstraints(registerButtonConstraints())
-        
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 800)
+        scrollView.contentSize = CGSize(width: self.view.frame.width,
+                                        height: self.view.frame.height + 200.0)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
             name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
     }
@@ -206,13 +236,24 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
             if let heightText = heightTextField.text {
                 height = Int(heightText) ?? 0
                 
-                heightTextField.text?.append(" cm")
-                
-                if height < 0 || height > 300 {
+                if height <= 0 || height > 300 {
                     heightCondition = false
                     self.view.addSubview(heightConditionLabel)
                 } else {
+                    heightTextField.text?.append(" cm")
                     heightCondition = true
+                }
+            }
+        case weightTextField:
+            if let weightText = weightTextField.text {
+                weight = Int(weightText) ?? 0
+                
+                if weight <= 0 || weight > 400 {
+                    weightCondition = false
+                    self.view.addSubview(weightConditionLabel)
+                } else {
+                    weightTextField.text?.append(" kg")
+                    weightCondition = true
                 }
             }
         default:
@@ -244,6 +285,19 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
             heightTextField.inputAccessoryView = self.accessoryView
             if heightConditionLabel.isDescendant(of: self.view) {
                 heightConditionLabel.removeFromSuperview()
+            }
+        case weightTextField:
+            if let weightText = weightTextField.text {
+                if weightText.count > 0 {
+                    weightTextField.text?.removeLast()
+                    weightTextField.text?.removeLast()
+                    weightTextField.text?.removeLast()
+                }
+            }
+            
+            weightTextField.inputAccessoryView = self.accessoryView
+            if weightConditionLabel.isDescendant(of: self.view) {
+                weightConditionLabel.removeFromSuperview()
             }
         default:
             break
@@ -281,8 +335,23 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
         case heightTextField:
             if currentCount == 2, string.count == 1 {
                 heightTextField.text?.append(string)
-                weightTextField.becomeFirstResponder()
                 scrollView.contentInset.bottom = keyboardHeight + 100.0
+                weightTextField.becomeFirstResponder()
+                
+                return false
+            }
+            
+            if replacementCount <= 3 { return true }
+            else { return false }
+        case weightTextField:
+            if currentCount == 1, string.count == 1 {
+                weightTextField.text?.append(string)
+                weightTextField.resignFirstResponder()
+                
+                return false
+            } else if currentCount == 2, string.count == 1 {
+                weightTextField.text?.append(string)
+                weightTextField.resignFirstResponder()
                 
                 return false
             }
@@ -313,7 +382,24 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
 }
 
 extension RegisterUserInfoViewController {
-    private func registerButtonConstraints() -> [NSLayoutConstraint] {
+//    private func registerButtonConstraints() -> [NSLayoutConstraint] {
+//        let topConstraint = NSLayoutConstraint(
+//            item: self.registerButton, attribute: .top, relatedBy: .equal,
+//            toItem: self.scrollView, attribute: .bottom, multiplier: 1.0, constant: -45.0)
+//        let leadingConstraint = NSLayoutConstraint(
+//            item: self.registerButton, attribute: .leading, relatedBy: .equal,
+//            toItem: self.scrollView, attribute: .leading, multiplier: 1.0, constant: 0.0)
+//        let trailingConstraint = NSLayoutConstraint(
+//            item: self.registerButton, attribute: .trailing, relatedBy: .equal,
+//            toItem: self.scrollView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+//        let bottomConstraint = NSLayoutConstraint(
+//            item: self.registerButton, attribute: .bottom, relatedBy: .equal,
+//            toItem: self.scrollView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+//
+//        return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
+//    }
+    
+    private func registerButtonKeyboardConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: self.registerButton, attribute: .top, relatedBy: .equal,
             toItem: self.accessoryView, attribute: .top, multiplier: 1.0, constant: 0.0)
