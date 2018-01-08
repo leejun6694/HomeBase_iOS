@@ -161,7 +161,7 @@ extension UIViewController {
         textField.layer.backgroundColor = UIColor.white.cgColor
         textField.layer.shadowColor = UIColor.darkGray.cgColor
         textField.layer.masksToBounds = false
-        textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        textField.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         textField.layer.shadowOpacity = 1.0
         textField.layer.shadowRadius = 0.0
     }

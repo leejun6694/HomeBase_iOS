@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyBoard = UIStoryboard(name: "Start", bundle: nil)
         let loginVC = storyBoard.instantiateViewController(
-            withIdentifier: "LoginViewController")
+            withIdentifier: "tmpNavigationVC")
         
         self.window?.rootViewController = loginVC
         
