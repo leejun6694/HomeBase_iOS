@@ -12,14 +12,19 @@ class RegisterUserInfoViewController: UIViewController {
 
     // MARK: Properties
     
-    var year = 0
-    var month = 0
-    var day = 0
+    var name: String = ""
+    var year: Int = 0
+    var month: Int = 0
+    var day: Int = 0
+    var height: Int = 0
+    var weight: Int = 0
     
     var nameCondition = false
     var birthCondition = false
     var heightCondition = false
     var weightCondition = false
+    
+    var keyboardHeight: CGFloat = 0
     
     private lazy var accessoryView: UIView = {
         let accessoryViewFrame = CGRect(x: 0.0,
@@ -45,6 +50,8 @@ class RegisterUserInfoViewController: UIViewController {
         
         return registerButton
     }()
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var nameTextField: UITextField! {
         didSet {
@@ -80,13 +87,29 @@ class RegisterUserInfoViewController: UIViewController {
             heightTextField.delegate = self
         }
     }
+    @IBOutlet var heightConditionLabel: UILabel! {
+        didSet {
+            heightConditionLabel.text = "유효한 신장을 입력해주세요"
+            heightConditionLabel.textColor = .red
+            heightConditionLabel.removeFromSuperview()
+        }
+    }
     
     @IBOutlet private weak var weightTextField: UITextField! {
         didSet {
             bottomBorderWith(weightTextField)
             weightTextField.delegate = self
         }
-    }    
+    }
+    
+    // MARK: Methods
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+    }
     
     // MARK: Life Cycle
     
@@ -95,6 +118,14 @@ class RegisterUserInfoViewController: UIViewController {
 
         self.accessoryView.addSubview(registerButton)
         self.accessoryView.addConstraints(registerButtonConstraints())
+        
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 800)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil
+        )
     }
 
     /*
@@ -122,6 +153,7 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
                 nameConditionLabel.text = "이름은 10자 이하여야 합니다"
                 self.view.addSubview(nameConditionLabel)
             } else {
+                name = nameTextField.text ?? "default"
                 nameCondition = true
             }
         case birthTextField:
@@ -170,6 +202,49 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
                     }
                 }
             }
+        case heightTextField:
+            if let heightText = heightTextField.text {
+                height = Int(heightText) ?? 0
+                
+                heightTextField.text?.append(" cm")
+                
+                if height < 0 || height > 300 {
+                    heightCondition = false
+                    self.view.addSubview(heightConditionLabel)
+                } else {
+                    heightCondition = true
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case nameTextField:
+            nameTextField.inputAccessoryView = self.accessoryView
+            if nameConditionLabel.isDescendant(of: self.view) {
+                nameConditionLabel.removeFromSuperview()
+            }
+        case birthTextField:
+            birthTextField.inputAccessoryView = self.accessoryView
+            if birthConditionLabel.isDescendant(of: self.view) {
+                birthConditionLabel.removeFromSuperview()
+            }
+        case heightTextField:
+            if let heightText = heightTextField.text {
+                if heightText.count > 0 {
+                    heightTextField.text?.removeLast()
+                    heightTextField.text?.removeLast()
+                    heightTextField.text?.removeLast()
+                }
+            }
+            
+            heightTextField.inputAccessoryView = self.accessoryView
+            if heightConditionLabel.isDescendant(of: self.view) {
+                heightConditionLabel.removeFromSuperview()
+            }
         default:
             break
         }
@@ -203,6 +278,17 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
             
             if replacementCount <= 12 { return true }
             else { return false }
+        case heightTextField:
+            if currentCount == 2, string.count == 1 {
+                heightTextField.text?.append(string)
+                weightTextField.becomeFirstResponder()
+                scrollView.contentInset.bottom = keyboardHeight + 100.0
+                
+                return false
+            }
+            
+            if replacementCount <= 3 { return true }
+            else { return false }
         default:
             break
         }
@@ -219,23 +305,6 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
         }
         
         return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        switch textField {
-        case nameTextField:
-            nameTextField.inputAccessoryView = self.accessoryView
-            if nameConditionLabel.isDescendant(of: self.view) {
-                nameConditionLabel.removeFromSuperview()
-            }
-        case birthTextField:
-            birthTextField.inputAccessoryView = self.accessoryView
-            if birthConditionLabel.isDescendant(of: self.view) {
-                birthConditionLabel.removeFromSuperview()
-            }
-        default:
-            break
-        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
