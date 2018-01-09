@@ -20,12 +20,25 @@ class LoginViewController: UIViewController {
     
     // MARK: Properties
     
+    private let bottomBorderColor = UIColor(red: 44.0/255.0,
+                                    green: 44.0/255.0,
+                                    blue: 44.0/255.0,
+                                    alpha: 1.0)
+    
     @IBOutlet private weak var facebookSignInButton: FBSDKLoginButton!
     @IBOutlet private weak var emailTextField: UITextField! {
-        didSet { self.bottomBorderWith(emailTextField) }
+        didSet {
+            self.bottomBorderWith(emailTextField,
+                                  backgroundColor: UIColor.white,
+                                  borderColor: bottomBorderColor)
+        }
     }
     @IBOutlet private weak var pwTextField: UITextField! {
-        didSet { self.bottomBorderWith(pwTextField) }
+        didSet {
+            self.bottomBorderWith(pwTextField,
+                                  backgroundColor: UIColor.white,
+                                  borderColor: bottomBorderColor)
+        }
     }
     
     // MARK: Methods
@@ -157,9 +170,9 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
 }
 
 extension UIViewController {
-    func bottomBorderWith(_ textField: UITextField) {
-        textField.layer.backgroundColor = UIColor.white.cgColor
-        textField.layer.shadowColor = UIColor.darkGray.cgColor
+    func bottomBorderWith(_ textField: UITextField, backgroundColor: UIColor, borderColor: UIColor) {
+        textField.layer.backgroundColor = backgroundColor.cgColor
+        textField.layer.shadowColor = borderColor.cgColor
         textField.layer.masksToBounds = false
         textField.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         textField.layer.shadowOpacity = 1.0

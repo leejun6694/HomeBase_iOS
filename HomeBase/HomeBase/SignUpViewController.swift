@@ -14,14 +14,31 @@ class SignUpViewController: UIViewController {
 
     // MARK: Properties
     
+    private let bottomBorderColor = UIColor(red: 44.0/255.0,
+                                    green: 44.0/255.0,
+                                    blue: 44.0/255.0,
+                                    alpha: 1.0)
+    
     @IBOutlet weak var emailTextField: UITextField! {
-        didSet { self.bottomBorderWith(emailTextField) }
+        didSet {
+            self.bottomBorderWith(emailTextField,
+                                  backgroundColor: UIColor.white,
+                                  borderColor: bottomBorderColor)
+        }
     }
     @IBOutlet weak var pwTextField: UITextField! {
-        didSet { self.bottomBorderWith(pwTextField) }
+        didSet {
+            self.bottomBorderWith(pwTextField,
+                                  backgroundColor: UIColor.white,
+                                  borderColor: bottomBorderColor)
+        }
     }
     @IBOutlet weak var confirmPwTextField: UITextField! {
-        didSet { self.bottomBorderWith(confirmPwTextField) }
+        didSet {
+            self.bottomBorderWith(confirmPwTextField,
+                                  backgroundColor: UIColor.white,
+                                  borderColor: bottomBorderColor)
+        }
     }
     
     // MARK: Methods
