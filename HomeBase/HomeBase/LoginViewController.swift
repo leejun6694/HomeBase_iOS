@@ -14,10 +14,6 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
-    private struct StoryBoard {
-        static let LoginToPersonalSegue = "Login To Personal"
-    }
-    
     // MARK: Properties
     
     private let bottomBorderColor = UIColor(red: 44.0/255.0,
@@ -77,15 +73,18 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func emailSignUpButtonDidTapped(_ sender: UIButton) {
-        let signUpVC = storyboard!.instantiateViewController(withIdentifier: "SignUpViewController")
-        self.present(signUpVC, animated: true, completion: nil)
+        let signUpViewController = storyboard!.instantiateViewController(withIdentifier: "SignUpViewController")
+        self.present(signUpViewController, animated: true, completion: nil)
     }
     
     private func userConnected() {
         if let currentUser = Auth.auth().currentUser {
             print("current user email: \(currentUser.email ?? "default")")
             
-            performSegue(withIdentifier: StoryBoard.LoginToPersonalSegue, sender: nil)
+            let registerTeamNavigation =
+                self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation
+            
+            UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
         }
     }
     

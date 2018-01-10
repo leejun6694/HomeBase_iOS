@@ -1,21 +1,15 @@
 //
-//  ttmpViewController.swift
+//  RegisterTeamNavigation.swift
 //  HomeBase
 //
-//  Created by JUN LEE on 2018. 1. 8..
+//  Created by JUN LEE on 2018. 1. 10..
 //  Copyright © 2018년 JUN LEE. All rights reserved.
 //
 
 import UIKit
 
-class ttmpViewController: UIViewController {
+class RegisterTeamNavigation: UINavigationController {
 
-    @IBAction func tmpButtonDidTapped(_ sender: UIButton) {
-        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserInfoViewController")
-        self.navigationController?.pushViewController(nextVC!, animated: true)
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
