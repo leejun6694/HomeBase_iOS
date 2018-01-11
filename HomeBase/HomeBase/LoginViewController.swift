@@ -16,44 +16,27 @@ class LoginViewController: UIViewController {
     
     // MARK: Properties
     
-    private let bottomBorderColor = UIColor(red: 44.0/255.0,
-                                    green: 44.0/255.0,
-                                    blue: 44.0/255.0,
-                                    alpha: 1.0)
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var pwTextField: UITextField!
     
-    @IBOutlet private weak var facebookSignInButton: FBSDKLoginButton!
-    @IBOutlet private weak var emailTextField: UITextField! {
-        didSet {
-            self.bottomBorderWith(emailTextField,
-                                  backgroundColor: UIColor.white,
-                                  borderColor: bottomBorderColor)
-        }
-    }
-    @IBOutlet private weak var pwTextField: UITextField! {
-        didSet {
-            self.bottomBorderWith(pwTextField,
-                                  backgroundColor: UIColor.white,
-                                  borderColor: bottomBorderColor)
-        }
-    }
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
     
-    @IBAction func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
+    @IBAction private func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
         emailTextField.resignFirstResponder()
         pwTextField.resignFirstResponder()
     }
-    
-    @IBAction private func googleSignInButtonDidTapped(_ sender: UIButton) {
-        GIDSignIn.sharedInstance().signIn()
-    }
-    
-    @IBAction func emailSignInButtonDidTapped(_ sender: UIButton) {
+   
+    @IBAction private func emailSignInButtonDidTapped(_ sender: UIButton) {
+        self.spinner.startAnimating()
+        
         if let email = emailTextField.text, let pw = pwTextField.text {
             Auth.auth().signIn(withEmail: email, password: pw) {
                 (user, error) in
                 
                 if let error = error {
+                    self.spinner.stopAnimating()
                     if let errorCode = AuthErrorCode(rawValue: error._code) {
                         switch errorCode {
                         case .userNotFound: print("no user")
@@ -72,12 +55,52 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func emailSignUpButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func emailSignUpButtonDidTapped(_ sender: UIButton) {
         let signUpViewController = storyboard!.instantiateViewController(withIdentifier: "SignUpViewController")
         self.present(signUpViewController, animated: true, completion: nil)
     }
     
+    @IBAction private func googleSignInButtonDidTapped(_ sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    @IBAction private func facebookSignInButtonDidTapped(_ sender: UIButton) {
+        let facebookLoginManager = FBSDKLoginManager()
+        facebookLoginManager.logIn(withReadPermissions: ["email"], from: self) {
+            (result, error) in
+            
+            self.spinner.startAnimating()
+            if error != nil {
+                self.spinner.stopAnimating()
+                print("facebook sign in error")
+            }
+            if let loginResult = result {
+                if loginResult.isCancelled {
+                    print("facebook sign in cancelled")
+                } else {
+                    let credential = FacebookAuthProvider.credential(
+                        withAccessToken: FBSDKAccessToken.current().tokenString)
+                    
+                    Auth.auth().signIn(with: credential) {
+                        (user, error) in
+                        
+                        if let error = error {
+                            self.spinner.stopAnimating()
+                            print("facebook sign in error: \(error)")
+                            return
+                        } else {
+                            print("facebook connected")
+                            self.userConnected()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     private func userConnected() {
+        self.spinner.stopAnimating()
+        
         if let currentUser = Auth.auth().currentUser {
             print("current user email: \(currentUser.email ?? "default")")
             
@@ -95,14 +118,28 @@ class LoginViewController: UIViewController {
         
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
-        facebookSignInButton.delegate = self
+        
+        if FBSDKAccessToken.current() == nil {
+            print("facebook not log in")
+        } else {
+            print("facebook log in")
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
     }
 }
 
 // MARK: Google Delegate
 extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        self.spinner.startAnimating()
+        
         if let error = error {
+            self.spinner.stopAnimating()
             print("google sign in error: \(error)")
             
             return
@@ -117,6 +154,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
             (user, error) in
             
             if let error = error {
+                self.spinner.stopAnimating()
                 print("google sign in error: \(error)")
                 return
             } else {
@@ -132,49 +170,5 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         } else {
             print("google disconnected")
         }
-    }
-}
-
-// MARK: Facebook Sign in
-extension LoginViewController: FBSDKLoginButtonDelegate {
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        
-        if let error = error {
-            print("facebook sign in error: \(error)")
-            
-            return
-        } else if result.isCancelled {
-            print("cancelled")
-        } else {
-            let credential = FacebookAuthProvider.credential(
-                withAccessToken: FBSDKAccessToken.current().tokenString)
-            
-            Auth.auth().signIn(with: credential) {
-                (user, error) in
-                
-                if let error = error {
-                    print("facebook sign in error: \(error)")
-                    return
-                } else {
-                    print("facebook connected")
-                    self.userConnected()
-                }
-            }
-        }
-    }
-    
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("facebook disconnected")
-    }
-}
-
-extension UIViewController {
-    func bottomBorderWith(_ textField: UITextField, backgroundColor: UIColor, borderColor: UIColor) {
-        textField.layer.backgroundColor = backgroundColor.cgColor
-        textField.layer.shadowColor = borderColor.cgColor
-        textField.layer.masksToBounds = false
-        textField.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        textField.layer.shadowOpacity = 1.0
-        textField.layer.shadowRadius = 0.0
     }
 }

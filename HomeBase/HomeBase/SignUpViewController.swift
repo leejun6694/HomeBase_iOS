@@ -19,27 +19,9 @@ class SignUpViewController: UIViewController {
                                     blue: 44.0/255.0,
                                     alpha: 1.0)
     
-    @IBOutlet weak var emailTextField: UITextField! {
-        didSet {
-            self.bottomBorderWith(emailTextField,
-                                  backgroundColor: UIColor.white,
-                                  borderColor: bottomBorderColor)
-        }
-    }
-    @IBOutlet weak var pwTextField: UITextField! {
-        didSet {
-            self.bottomBorderWith(pwTextField,
-                                  backgroundColor: UIColor.white,
-                                  borderColor: bottomBorderColor)
-        }
-    }
-    @IBOutlet weak var confirmPwTextField: UITextField! {
-        didSet {
-            self.bottomBorderWith(confirmPwTextField,
-                                  backgroundColor: UIColor.white,
-                                  borderColor: bottomBorderColor)
-        }
-    }
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var pwTextField: UITextField!
+    @IBOutlet weak var confirmPwTextField: UITextField!
     
     // MARK: Methods
     
