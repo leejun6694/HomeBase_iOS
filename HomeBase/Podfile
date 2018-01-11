@@ -8,6 +8,7 @@ target 'HomeBase' do
   # Pods for HomeBase
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
   pod 'GoogleSignIn'
 

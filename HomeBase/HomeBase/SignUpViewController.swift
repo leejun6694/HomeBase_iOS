@@ -15,9 +15,9 @@ class SignUpViewController: UIViewController {
     // MARK: Properties
     
     private var name: String = ""
-    private var year: Int = 0
-    private var month: Int = 0
-    private var day: Int = 0
+    private var year: String = ""
+    private var month: String = ""
+    private var day: String = ""
     
     private var emailCondition = false
     private var pwCondition = false
@@ -146,6 +146,16 @@ class SignUpViewController: UIViewController {
         doneButton.alpha = 0.5
     }
     
+    private func emailInfoSaved(_ user: User) {
+        let email = emailTextField.text ?? "default"
+        
+        let ref = Database.database().reference()
+        
+        ref.child("users").child(user.uid).setValue(["email": email,
+                                                     "name": name,
+                                                     "birth": "\(year)\(month)\(day)"])
+    }
+    
     @objc func doneButtonDidTapped(_ sender: UIButton) {
         self.spinner.startAnimating()
         if let email = emailTextField.text,
@@ -168,9 +178,13 @@ class SignUpViewController: UIViewController {
                             }
                         }
                     } else {
-                        self.spinner.stopAnimating()
-                        print("email sign up")
-                        self.dismiss(animated: true, completion: nil)
+                        if let createUser = user {
+                            self.emailInfoSaved(createUser)
+                        
+                            self.spinner.stopAnimating()
+                            print("email sign up")
+                            self.dismiss(animated: true, completion: nil)
+                        }
                     }
                 }
             } else {
@@ -375,28 +389,32 @@ extension SignUpViewController: UITextFieldDelegate {
         } else {
             let yearStart = birthText.index(birthText.startIndex, offsetBy: 0)
             let yearEnd = birthText.index(birthText.startIndex, offsetBy: 3)
-            year = Int(birthText[yearStart...yearEnd]) ?? 0
+            year = String(birthText[yearStart...yearEnd])
             
             let monthStart = birthText.index(birthText.startIndex, offsetBy: 6)
             let monthEnd = birthText.index(birthText.startIndex, offsetBy: 7)
-            month = Int(birthText[monthStart...monthEnd]) ?? 0
+            month = String(birthText[monthStart...monthEnd])
             
             let dayStart = birthText.index(birthText.startIndex, offsetBy: 10)
             let dayEnd = birthText.index(birthText.startIndex, offsetBy: 11)
-            day = Int(birthText[dayStart...dayEnd]) ?? 0
+            day = String(birthText[dayStart...dayEnd])
             
-            if year < 1900 || year > 2100 {
+            let intYear = Int(year) ?? 0
+            let intMonth = Int(month) ?? 0
+            let intDay = Int(day) ?? 0
+            
+            if intYear < 1900 || intYear > 2100 {
                 return false
             } else {
-                switch month {
+                switch intMonth {
                 case 1, 3, 5, 7, 8, 10, 12:
-                    if day > 31 { return false }
+                    if intDay > 31 { return false }
                     else { return true }
                 case 4, 6, 9, 11:
-                    if day > 30 { return false }
+                    if intDay > 30 { return false }
                     else { return true }
                 case 2:
-                    if day > 29 { return false }
+                    if intDay > 29 { return false }
                     else { return true }
                 default:
                     return false
