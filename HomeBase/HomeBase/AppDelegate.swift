@@ -22,13 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        FBSDKApplicationDelegate.sharedInstance().application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions)
         
         let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-        let loginVC = storyBoard.instantiateViewController(
-            withIdentifier: "StartNavigationViewController")
+        let loginVC = storyBoard.instantiateInitialViewController()
         
-        self.window?.rootViewController = loginVC
+        window?.rootViewController = loginVC
         
         return true
     }

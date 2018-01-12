@@ -13,14 +13,16 @@ class RegisterTeamChoiceViewController: UIViewController {
     // MARK: Methods
     
     @IBAction func createButtonDidTapped(_ sender: UIButton) {
-        if let registerTeamCreateViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamCreateViewController") as? RegisterTeamCreateViewController {
+        if let registerTeamCreateViewController =
+            self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamCreateViewController") as? RegisterTeamCreateViewController {
             
             self.navigationController?.pushViewController(registerTeamCreateViewController, animated: true)
         }
     }
     
     @IBAction func joinButtonDidTapped(_ sender: UIButton) {
-        if let registerTeamJoinViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinViewController") as? RegisterTeamJoinViewController {
+        if let registerTeamJoinViewController =
+            self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinViewController") as? RegisterTeamJoinViewController {
             
             self.navigationController?.pushViewController(registerTeamJoinViewController, animated: true)
         }
