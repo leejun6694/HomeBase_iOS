@@ -279,7 +279,7 @@
         <!--Register Team Choice View Controller-->
         <scene sceneID="TXR-HG-xRZ">
             <objects>
-                <viewController id="LTN-G9-9za" customClass="RegisterTeamChoiceViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterTeamChoiceViewController" id="LTN-G9-9za" customClass="RegisterTeamChoiceViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qT7-ZZ-IPk"/>
                         <viewControllerLayoutGuide type="bottom" id="CBn-vp-gNf"/>
@@ -474,7 +474,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ylz-pf-wEK">
-                                                <rect key="frame" x="44" y="61.666666666666657" width="326" height="37.333333333333343"/>
+                                                <rect key="frame" x="44" y="61.666666666666657" width="336" height="37.333333333333343"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -493,7 +493,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AkK-dZ-g6a">
-                                                <rect key="frame" x="44" y="154.33333333333334" width="326" height="37"/>
+                                                <rect key="frame" x="44" y="154.33333333333334" width="336" height="37"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -512,7 +512,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c7V-QL-iKJ">
-                                                <rect key="frame" x="44" y="254.99999999999997" width="326" height="36.666666666666657"/>
+                                                <rect key="frame" x="44" y="254.99999999999997" width="336" height="36.666666666666657"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -531,7 +531,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mBm-yM-BBm" userLabel="Name Text Field">
-                                                <rect key="frame" x="44" y="381.33333333333331" width="326" height="36.666666666666686"/>
+                                                <rect key="frame" x="44" y="381.33333333333331" width="336" height="36.666666666666686"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -550,7 +550,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY. MM. DD" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dWR-qQ-GCq" userLabel="Birth Text Field">
-                                                <rect key="frame" x="44" y="474.33333333333337" width="326" height="37.333333333333314"/>
+                                                <rect key="frame" x="44" y="474.33333333333337" width="336" height="37.333333333333314"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -599,11 +599,11 @@
                                             <constraint firstItem="U9L-r2-RPx" firstAttribute="width" secondItem="DAv-pM-VQe" secondAttribute="width" id="PSP-Hr-02T"/>
                                             <constraint firstItem="ylz-pf-wEK" firstAttribute="top" secondItem="DAv-pM-VQe" secondAttribute="bottom" id="QWr-7o-LXS"/>
                                             <constraint firstItem="O2J-Tb-shz" firstAttribute="leading" secondItem="NCv-Nn-E4d" secondAttribute="centerX" multiplier="35/207" id="R7c-bK-G9k"/>
-                                            <constraint firstItem="ylz-pf-wEK" firstAttribute="centerX" secondItem="NCv-Nn-E4d" secondAttribute="centerX" id="SAH-KC-jCf"/>
+                                            <constraint firstItem="ylz-pf-wEK" firstAttribute="leading" secondItem="NCv-Nn-E4d" secondAttribute="centerX" multiplier="44/207" id="SAH-KC-jCf"/>
                                             <constraint firstItem="z8W-W2-dK1" firstAttribute="leading" secondItem="DAv-pM-VQe" secondAttribute="leading" id="SoY-db-qQU"/>
                                             <constraint firstItem="cKD-19-Lvq" firstAttribute="leading" secondItem="DAv-pM-VQe" secondAttribute="leading" id="UFL-nt-SSy"/>
                                             <constraint firstItem="AkK-dZ-g6a" firstAttribute="leading" secondItem="ylz-pf-wEK" secondAttribute="leading" id="WfX-Px-2ya"/>
-                                            <constraint firstItem="ylz-pf-wEK" firstAttribute="width" secondItem="NCv-Nn-E4d" secondAttribute="width" multiplier="326/414" id="XIw-mV-nv7"/>
+                                            <constraint firstItem="ylz-pf-wEK" firstAttribute="width" secondItem="NCv-Nn-E4d" secondAttribute="width" multiplier="336/414" id="XIw-mV-nv7"/>
                                             <constraint firstItem="mBm-yM-BBm" firstAttribute="width" secondItem="ylz-pf-wEK" secondAttribute="width" id="aDs-0o-XMd"/>
                                             <constraint firstItem="TlG-gT-LdH" firstAttribute="top" secondItem="AkK-dZ-g6a" secondAttribute="bottom" id="c6v-UZ-2v1"/>
                                             <constraint firstItem="O2J-Tb-shz" firstAttribute="height" secondItem="NCv-Nn-E4d" secondAttribute="height" multiplier="2/610" id="cKE-bG-D1f"/>
@@ -721,7 +721,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i6q-4O-MJ5">
-                                                <rect key="frame" x="35" y="67" width="344.66666666666669" height="36.666666666666657"/>
+                                                <rect key="frame" x="44" y="67" width="336" height="36.666666666666657"/>
                                                 <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -729,7 +729,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WDP-vd-ysm">
-                                                <rect key="frame" x="35" y="103.66666666666667" width="344.66666666666669" height="2"/>
+                                                <rect key="frame" x="35" y="103.66666666666667" width="345" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="생년월일" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCr-9K-csV">
@@ -739,7 +739,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY. MM. DD" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K5T-65-VdU">
-                                                <rect key="frame" x="35" y="174" width="344.66666666666669" height="36.666666666666657"/>
+                                                <rect key="frame" x="44" y="174" width="336" height="36.666666666666657"/>
                                                 <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -752,7 +752,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGM-Go-eNO">
-                                                <rect key="frame" x="35" y="210.66666666666666" width="344.66666666666669" height="2"/>
+                                                <rect key="frame" x="35" y="210.66666666666666" width="345" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신장" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REV-dl-MXW">
@@ -762,7 +762,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="cm" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iuh-0o-uqw">
-                                                <rect key="frame" x="35" y="290.33333333333331" width="344.66666666666669" height="36.666666666666686"/>
+                                                <rect key="frame" x="44" y="290.33333333333331" width="336" height="36.666666666666686"/>
                                                 <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -775,7 +775,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xG-uA-hWQ">
-                                                <rect key="frame" x="35" y="327" width="344.66666666666669" height="2"/>
+                                                <rect key="frame" x="35" y="327" width="345" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="체중" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJ5-Da-Xcm">
@@ -785,7 +785,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="kg" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b3K-ol-MaJ">
-                                                <rect key="frame" x="35" y="405.33333333333331" width="344.66666666666669" height="36"/>
+                                                <rect key="frame" x="44" y="405.33333333333331" width="336" height="36"/>
                                                 <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -798,40 +798,40 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="etR-8B-bKY">
-                                                <rect key="frame" x="35" y="441.33333333333331" width="344.66666666666669" height="2.3333333333333144"/>
+                                                <rect key="frame" x="35" y="441.33333333333331" width="345" height="2.3333333333333144"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="i6q-4O-MJ5" firstAttribute="width" secondItem="FZn-9F-R6r" secondAttribute="width" multiplier="345/414" id="1Vg-is-fQa"/>
+                                            <constraint firstItem="i6q-4O-MJ5" firstAttribute="width" secondItem="FZn-9F-R6r" secondAttribute="width" multiplier="336/414" id="1Vg-is-fQa"/>
                                             <constraint firstItem="2xG-uA-hWQ" firstAttribute="top" secondItem="Iuh-0o-uqw" secondAttribute="bottom" id="38I-Up-cVo"/>
                                             <constraint firstItem="K5T-65-VdU" firstAttribute="leading" secondItem="i6q-4O-MJ5" secondAttribute="leading" id="4nG-Vv-xZF"/>
                                             <constraint firstItem="b3K-ol-MaJ" firstAttribute="leading" secondItem="Iuh-0o-uqw" secondAttribute="leading" id="5pZ-lS-fqP"/>
                                             <constraint firstItem="usw-Al-Srs" firstAttribute="leading" secondItem="FZn-9F-R6r" secondAttribute="centerX" multiplier="44/207" id="7qZ-Wd-ub2"/>
                                             <constraint firstItem="VCr-9K-csV" firstAttribute="top" secondItem="FZn-9F-R6r" secondAttribute="centerY" multiplier="161/345.5" id="8Ap-ST-Hvf"/>
                                             <constraint firstItem="K5T-65-VdU" firstAttribute="height" secondItem="i6q-4O-MJ5" secondAttribute="height" id="8dW-89-cL0"/>
-                                            <constraint firstItem="JGM-Go-eNO" firstAttribute="trailing" secondItem="K5T-65-VdU" secondAttribute="trailing" id="9w0-Ox-80L"/>
+                                            <constraint firstItem="JGM-Go-eNO" firstAttribute="trailing" secondItem="WDP-vd-ysm" secondAttribute="trailing" id="9w0-Ox-80L"/>
                                             <constraint firstItem="K5T-65-VdU" firstAttribute="trailing" secondItem="i6q-4O-MJ5" secondAttribute="trailing" id="Aqs-sy-9IJ"/>
-                                            <constraint firstItem="2xG-uA-hWQ" firstAttribute="trailing" secondItem="Iuh-0o-uqw" secondAttribute="trailing" id="DXb-rY-Jfj"/>
+                                            <constraint firstItem="2xG-uA-hWQ" firstAttribute="trailing" secondItem="WDP-vd-ysm" secondAttribute="trailing" id="DXb-rY-Jfj"/>
                                             <constraint firstItem="WDP-vd-ysm" firstAttribute="height" secondItem="FZn-9F-R6r" secondAttribute="height" multiplier="2/671" id="GLM-cG-e7X"/>
                                             <constraint firstItem="rJ5-Da-Xcm" firstAttribute="leading" secondItem="REV-dl-MXW" secondAttribute="leading" id="Jv1-dO-A9m"/>
-                                            <constraint firstItem="JGM-Go-eNO" firstAttribute="leading" secondItem="K5T-65-VdU" secondAttribute="leading" id="LS7-5K-DVo"/>
+                                            <constraint firstItem="JGM-Go-eNO" firstAttribute="leading" secondItem="WDP-vd-ysm" secondAttribute="leading" id="LS7-5K-DVo"/>
                                             <constraint firstItem="i6q-4O-MJ5" firstAttribute="top" secondItem="usw-Al-Srs" secondAttribute="bottom" id="N4b-l9-tp6"/>
                                             <constraint firstItem="JGM-Go-eNO" firstAttribute="top" secondItem="K5T-65-VdU" secondAttribute="bottom" id="OSG-ow-uA2"/>
                                             <constraint firstItem="Iuh-0o-uqw" firstAttribute="leading" secondItem="K5T-65-VdU" secondAttribute="leading" id="Pqu-Na-D7s"/>
                                             <constraint firstItem="K5T-65-VdU" firstAttribute="top" secondItem="VCr-9K-csV" secondAttribute="bottom" id="SKf-2B-JRc"/>
-                                            <constraint firstItem="WDP-vd-ysm" firstAttribute="trailing" secondItem="i6q-4O-MJ5" secondAttribute="trailing" id="VKQ-JI-5iO"/>
+                                            <constraint firstItem="WDP-vd-ysm" firstAttribute="width" secondItem="FZn-9F-R6r" secondAttribute="width" multiplier="345/414" id="Sdf-bS-TbS"/>
                                             <constraint firstItem="i6q-4O-MJ5" firstAttribute="height" secondItem="FZn-9F-R6r" secondAttribute="height" multiplier="37/671" id="YbI-cP-71l"/>
                                             <constraint firstItem="usw-Al-Srs" firstAttribute="top" secondItem="FZn-9F-R6r" secondAttribute="centerY" multiplier="51/345.5" id="b7O-19-j28"/>
                                             <constraint firstItem="etR-8B-bKY" firstAttribute="top" secondItem="b3K-ol-MaJ" secondAttribute="bottom" id="dne-EM-6k5"/>
                                             <constraint firstItem="rJ5-Da-Xcm" firstAttribute="top" secondItem="FZn-9F-R6r" secondAttribute="centerY" multiplier="399/345.5" id="dyc-xc-nDs"/>
                                             <constraint firstItem="VCr-9K-csV" firstAttribute="leading" secondItem="usw-Al-Srs" secondAttribute="leading" id="eTc-9b-6yR"/>
                                             <constraint firstItem="WDP-vd-ysm" firstAttribute="top" secondItem="i6q-4O-MJ5" secondAttribute="bottom" id="fgO-r1-CQz"/>
-                                            <constraint firstItem="2xG-uA-hWQ" firstAttribute="leading" secondItem="Iuh-0o-uqw" secondAttribute="leading" id="hDK-E8-lyt"/>
+                                            <constraint firstItem="2xG-uA-hWQ" firstAttribute="leading" secondItem="WDP-vd-ysm" secondAttribute="leading" id="hDK-E8-lyt"/>
                                             <constraint firstItem="REV-dl-MXW" firstAttribute="top" secondItem="FZn-9F-R6r" secondAttribute="centerY" multiplier="280/345.5" id="hnU-uQ-qNk"/>
-                                            <constraint firstItem="i6q-4O-MJ5" firstAttribute="leading" secondItem="FZn-9F-R6r" secondAttribute="centerX" multiplier="35/207" id="iiF-aR-fh9"/>
-                                            <constraint firstItem="etR-8B-bKY" firstAttribute="leading" secondItem="b3K-ol-MaJ" secondAttribute="leading" id="jgS-ve-lhA"/>
+                                            <constraint firstItem="i6q-4O-MJ5" firstAttribute="leading" secondItem="FZn-9F-R6r" secondAttribute="centerX" multiplier="44/207" id="iiF-aR-fh9"/>
+                                            <constraint firstItem="etR-8B-bKY" firstAttribute="leading" secondItem="WDP-vd-ysm" secondAttribute="leading" id="jgS-ve-lhA"/>
                                             <constraint firstItem="b3K-ol-MaJ" firstAttribute="top" secondItem="rJ5-Da-Xcm" secondAttribute="bottom" id="joJ-Le-q0n"/>
                                             <constraint firstItem="Iuh-0o-uqw" firstAttribute="height" secondItem="K5T-65-VdU" secondAttribute="height" id="lHg-Dg-Ng0"/>
                                             <constraint firstItem="Iuh-0o-uqw" firstAttribute="top" secondItem="REV-dl-MXW" secondAttribute="bottom" id="m4W-gu-qKc"/>
@@ -842,8 +842,8 @@
                                             <constraint firstItem="etR-8B-bKY" firstAttribute="height" secondItem="WDP-vd-ysm" secondAttribute="height" id="tDL-Yv-z9q"/>
                                             <constraint firstItem="b3K-ol-MaJ" firstAttribute="height" secondItem="Iuh-0o-uqw" secondAttribute="height" id="wLh-80-RM7"/>
                                             <constraint firstItem="Iuh-0o-uqw" firstAttribute="trailing" secondItem="K5T-65-VdU" secondAttribute="trailing" id="war-pz-Itu"/>
-                                            <constraint firstItem="WDP-vd-ysm" firstAttribute="leading" secondItem="i6q-4O-MJ5" secondAttribute="leading" id="wi7-k8-QAL"/>
-                                            <constraint firstItem="etR-8B-bKY" firstAttribute="trailing" secondItem="b3K-ol-MaJ" secondAttribute="trailing" id="zdD-ld-6Oo"/>
+                                            <constraint firstItem="WDP-vd-ysm" firstAttribute="leading" secondItem="FZn-9F-R6r" secondAttribute="centerX" multiplier="35/207" id="wi7-k8-QAL"/>
+                                            <constraint firstItem="etR-8B-bKY" firstAttribute="trailing" secondItem="WDP-vd-ysm" secondAttribute="trailing" id="zdD-ld-6Oo"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -919,7 +919,7 @@
         <!--Navigation Controller-->
         <scene sceneID="fkA-dY-6JG">
             <objects>
-                <navigationController storyboardIdentifier="StartNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="xZB-Bz-aWt" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StartNavigation" automaticallyAdjustsScrollViewInsets="NO" id="xZB-Bz-aWt" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="hsb-4x-xep">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -987,7 +987,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UKi-gQ-wU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733" y="157"/>
+            <point key="canvasLocation" x="777" y="157"/>
         </scene>
     </scenes>
     <resources>

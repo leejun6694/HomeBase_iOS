@@ -18,18 +18,35 @@ class LoginViewController: UIViewController {
     
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var pwTextField: UITextField!
-    
+
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
     
     @IBAction private func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
-        emailTextField.resignFirstResponder()
-        pwTextField.resignFirstResponder()
+        for subview in self.view.subviews {
+            if subview.isFirstResponder {
+                subview.resignFirstResponder()
+                break
+            }
+        }
+    }
+    
+    private func userConnected() {
+        spinner.stopAnimating()
+        
+        if let currentUser = Auth.auth().currentUser {
+            print("current user email: \(currentUser.email ?? "default")")
+            
+            let registerTeamNavigation =
+                self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation
+            
+            UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
+        }
     }
    
     @IBAction private func emailSignInButtonDidTapped(_ sender: UIButton) {
-        self.spinner.startAnimating()
+        spinner.startAnimating()
         
         if let email = emailTextField.text, let pw = pwTextField.text {
             Auth.auth().signIn(withEmail: email, password: pw) {
@@ -37,6 +54,7 @@ class LoginViewController: UIViewController {
                 
                 if let error = error {
                     self.spinner.stopAnimating()
+                    
                     if let errorCode = AuthErrorCode(rawValue: error._code) {
                         switch errorCode {
                         case .userNotFound: print("no user")
@@ -56,8 +74,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction private func emailSignUpButtonDidTapped(_ sender: UIButton) {
-        let signUpViewController = storyboard!.instantiateViewController(withIdentifier: "SignUpViewController")
-        self.present(signUpViewController, animated: true, completion: nil)
+        if let signUpViewController =
+            self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as?  SignUpViewController {
+            
+            self.present(signUpViewController, animated: true, completion: nil)
+        }
     }
     
     @IBAction private func googleSignInButtonDidTapped(_ sender: UIButton) {
@@ -65,17 +86,18 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction private func facebookSignInButtonDidTapped(_ sender: UIButton) {
+        spinner.startAnimating()
+        
         let facebookLoginManager = FBSDKLoginManager()
         facebookLoginManager.logIn(withReadPermissions: ["email"], from: self) {
             (result, error) in
             
-            self.spinner.startAnimating()
             if error != nil {
                 self.spinner.stopAnimating()
                 print("facebook sign in error")
             }
-            if let loginResult = result {
-                if loginResult.isCancelled {
+            if let result = result {
+                if result.isCancelled {
                     print("facebook sign in cancelled")
                 } else {
                     let credential = FacebookAuthProvider.credential(
@@ -98,19 +120,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func userConnected() {
-        self.spinner.stopAnimating()
-        
-        if let currentUser = Auth.auth().currentUser {
-            print("current user email: \(currentUser.email ?? "default")")
-            
-            let registerTeamNavigation =
-                self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation
-            
-            UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
-        }
-    }
-    
     // MARK: Life Cycles
     
     override func viewDidLoad() {
@@ -118,12 +127,6 @@ class LoginViewController: UIViewController {
         
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
-        
-        if FBSDKAccessToken.current() == nil {
-            print("facebook not log in")
-        } else {
-            print("facebook log in")
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -136,10 +139,10 @@ class LoginViewController: UIViewController {
 // MARK: Google Delegate
 extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        self.spinner.startAnimating()
+        spinner.startAnimating()
         
         if let error = error {
-            self.spinner.stopAnimating()
+            spinner.stopAnimating()
             print("google sign in error: \(error)")
             
             return

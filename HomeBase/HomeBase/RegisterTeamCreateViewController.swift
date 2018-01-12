@@ -13,7 +13,8 @@ class RegisterTeamCreateViewController: UIViewController {
     // MARK: Methods
     
     @IBAction func doneButtonDidTapped(_ sender: UIButton) {
-        if let registerUserInfoViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserInfoViewController") as? RegisterUserInfoViewController {
+        if let registerUserInfoViewController =
+            self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserInfoViewController") as? RegisterUserInfoViewController {
             
             self.navigationController?.pushViewController(registerUserInfoViewController, animated: true)
         }
