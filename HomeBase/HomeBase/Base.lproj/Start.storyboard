@@ -953,26 +953,50 @@
                                     <segment title="우"/>
                                 </segments>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="타자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaj-MD-0ZZ">
+                                <rect key="frame" x="35" y="393" width="30" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="kth-NP-Lzp">
+                                <rect key="frame" x="313" y="389.66666666666669" width="53" height="29"/>
+                                <segments>
+                                    <segment title="좌"/>
+                                    <segment title="우"/>
+                                </segments>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJW-ZU-65d">
+                                <rect key="frame" x="0.0" y="706" width="414" height="30"/>
+                                <state key="normal" title="완료"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="kth-NP-Lzp" firstAttribute="trailing" secondItem="0vf-BZ-kUE" secondAttribute="trailing" id="0Ga-oR-qUb"/>
                             <constraint firstItem="Sig-Ce-koY" firstAttribute="top" secondItem="Rnc-kt-j57" secondAttribute="bottom" constant="15" id="3vG-v1-d30"/>
                             <constraint firstItem="0vf-BZ-kUE" firstAttribute="centerY" secondItem="vbt-z1-qv7" secondAttribute="centerY" id="679-or-uwu"/>
                             <constraint firstItem="MDR-tF-pEG" firstAttribute="leading" secondItem="oL3-lx-duI" secondAttribute="leading" id="BaZ-wn-isQ"/>
+                            <constraint firstItem="bJW-ZU-65d" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" id="Ca4-hZ-3gP"/>
                             <constraint firstItem="Rnc-kt-j57" firstAttribute="leading" secondItem="MDR-tF-pEG" secondAttribute="leading" id="GLj-oh-kU9"/>
                             <constraint firstItem="Sig-Ce-koY" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" multiplier="0.8" id="MYp-4t-KiK"/>
                             <constraint firstItem="4xd-f6-1HA" firstAttribute="top" secondItem="zqj-Je-dzl" secondAttribute="bottom" id="QR1-MB-BFA"/>
+                            <constraint firstItem="kth-NP-Lzp" firstAttribute="centerY" secondItem="Oaj-MD-0ZZ" secondAttribute="centerY" id="Saq-st-sf1"/>
                             <constraint firstItem="0vf-BZ-kUE" firstAttribute="trailing" secondItem="Sig-Ce-koY" secondAttribute="trailing" id="Sce-ht-1Qu"/>
                             <constraint firstItem="oL3-lx-duI" firstAttribute="top" secondItem="4xd-f6-1HA" secondAttribute="top" constant="70" id="YBM-eT-tbE"/>
+                            <constraint firstItem="Oaj-MD-0ZZ" firstAttribute="top" secondItem="vbt-z1-qv7" secondAttribute="bottom" constant="60" id="azj-XT-K8Z"/>
                             <constraint firstItem="Rnc-kt-j57" firstAttribute="top" secondItem="MDR-tF-pEG" secondAttribute="bottom" constant="30" id="c58-k6-Bhd"/>
                             <constraint firstItem="oL3-lx-duI" firstAttribute="leading" secondItem="4xd-f6-1HA" secondAttribute="leading" constant="35" id="duZ-fS-V2Q"/>
                             <constraint firstItem="Sig-Ce-koY" firstAttribute="leading" secondItem="Rnc-kt-j57" secondAttribute="leading" id="eYJ-6y-68w"/>
+                            <constraint firstItem="bJW-ZU-65d" firstAttribute="leading" secondItem="FSf-M7-xMA" secondAttribute="leading" id="foM-YG-5Rq"/>
                             <constraint firstItem="MDR-tF-pEG" firstAttribute="top" secondItem="oL3-lx-duI" secondAttribute="bottom" constant="15" id="hMi-Of-uvL"/>
                             <constraint firstItem="vbt-z1-qv7" firstAttribute="leading" secondItem="Sig-Ce-koY" secondAttribute="leading" id="hPi-iV-lQg"/>
                             <constraint firstItem="4xd-f6-1HA" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" id="m5b-Zn-xhl"/>
                             <constraint firstItem="4xd-f6-1HA" firstAttribute="leading" secondItem="FSf-M7-xMA" secondAttribute="leading" id="nFj-o1-B41"/>
+                            <constraint firstItem="Oaj-MD-0ZZ" firstAttribute="leading" secondItem="vbt-z1-qv7" secondAttribute="leading" id="nfx-oL-ZEV"/>
                             <constraint firstItem="vbt-z1-qv7" firstAttribute="top" secondItem="Sig-Ce-koY" secondAttribute="bottom" constant="60" id="rw9-oP-7RZ"/>
+                            <constraint firstAttribute="bottom" secondItem="bJW-ZU-65d" secondAttribute="bottom" id="vgu-l7-kdO"/>
                             <constraint firstItem="MDR-tF-pEG" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" multiplier="0.8" id="y0r-mi-z3Y"/>
                         </constraints>
                         <connections>
@@ -980,6 +1004,8 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="done" destination="bJW-ZU-65d" id="Axn-5q-jVC"/>
+                        <outlet property="hitter" destination="kth-NP-Lzp" id="Y4o-4U-hgy"/>
                         <outlet property="number" destination="Sig-Ce-koY" id="GCa-Hg-Avs"/>
                         <outlet property="pitcher" destination="0vf-BZ-kUE" id="x3V-td-CAS"/>
                         <outlet property="position" destination="MDR-tF-pEG" id="beR-ci-YEe"/>
