@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xZB-Bz-aWt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bjf-iW-gKD">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -909,8 +909,41 @@
                     <view key="view" contentMode="scaleToFill" id="FSf-M7-xMA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xd-f6-1HA">
+                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="정보 입력" id="6Mw-7X-EeU"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="포지션" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oL3-lx-duI">
+                                <rect key="frame" x="35" y="90" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MDR-tF-pEG">
+                                <rect key="frame" x="35" y="126" width="331.33333333333331" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MDR-tF-pEG" firstAttribute="leading" secondItem="oL3-lx-duI" secondAttribute="leading" id="BaZ-wn-isQ"/>
+                            <constraint firstItem="4xd-f6-1HA" firstAttribute="top" secondItem="zqj-Je-dzl" secondAttribute="bottom" id="QR1-MB-BFA"/>
+                            <constraint firstItem="oL3-lx-duI" firstAttribute="top" secondItem="4xd-f6-1HA" secondAttribute="top" constant="70" id="YBM-eT-tbE"/>
+                            <constraint firstItem="oL3-lx-duI" firstAttribute="leading" secondItem="4xd-f6-1HA" secondAttribute="leading" constant="35" id="duZ-fS-V2Q"/>
+                            <constraint firstItem="MDR-tF-pEG" firstAttribute="top" secondItem="oL3-lx-duI" secondAttribute="bottom" constant="15" id="hMi-Of-uvL"/>
+                            <constraint firstItem="4xd-f6-1HA" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" id="m5b-Zn-xhl"/>
+                            <constraint firstItem="4xd-f6-1HA" firstAttribute="leading" secondItem="FSf-M7-xMA" secondAttribute="leading" id="nFj-o1-B41"/>
+                            <constraint firstItem="MDR-tF-pEG" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" multiplier="0.8" id="y0r-mi-z3Y"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="position" destination="MDR-tF-pEG" id="beR-ci-YEe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OKW-PX-qja" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
