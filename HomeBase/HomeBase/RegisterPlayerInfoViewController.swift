@@ -11,10 +11,12 @@ import UIKit
 class RegisterPlayerInfoViewController: UIViewController {
     // MARK: Properties
     @IBOutlet weak var position: UITextField!
+    @IBOutlet weak var number: UITextField!
     
     let positionData = [String](arrayLiteral: "선발투수", "중간계투", "마무리투수", "포수", "1루수", "2루수", "3루수", "유격수", "좌익수", "중견수", "우익수", "지명타자")
     
     private var positionText: String = ""
+    private var numberText: Int = 0
 
     // MARK: Life Cycle
     override func viewDidLoad() {

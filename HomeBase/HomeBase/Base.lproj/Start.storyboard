@@ -928,13 +928,30 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="선수번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnc-kt-j57">
+                                <rect key="frame" x="35" y="186" width="59" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Sig-Ce-koY">
+                                <rect key="frame" x="35" y="222" width="331.33333333333331" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Sig-Ce-koY" firstAttribute="top" secondItem="Rnc-kt-j57" secondAttribute="bottom" constant="15" id="3vG-v1-d30"/>
                             <constraint firstItem="MDR-tF-pEG" firstAttribute="leading" secondItem="oL3-lx-duI" secondAttribute="leading" id="BaZ-wn-isQ"/>
+                            <constraint firstItem="Rnc-kt-j57" firstAttribute="leading" secondItem="MDR-tF-pEG" secondAttribute="leading" id="GLj-oh-kU9"/>
+                            <constraint firstItem="Sig-Ce-koY" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" multiplier="0.8" id="MYp-4t-KiK"/>
                             <constraint firstItem="4xd-f6-1HA" firstAttribute="top" secondItem="zqj-Je-dzl" secondAttribute="bottom" id="QR1-MB-BFA"/>
                             <constraint firstItem="oL3-lx-duI" firstAttribute="top" secondItem="4xd-f6-1HA" secondAttribute="top" constant="70" id="YBM-eT-tbE"/>
+                            <constraint firstItem="Rnc-kt-j57" firstAttribute="top" secondItem="MDR-tF-pEG" secondAttribute="bottom" constant="30" id="c58-k6-Bhd"/>
                             <constraint firstItem="oL3-lx-duI" firstAttribute="leading" secondItem="4xd-f6-1HA" secondAttribute="leading" constant="35" id="duZ-fS-V2Q"/>
+                            <constraint firstItem="Sig-Ce-koY" firstAttribute="leading" secondItem="Rnc-kt-j57" secondAttribute="leading" id="eYJ-6y-68w"/>
                             <constraint firstItem="MDR-tF-pEG" firstAttribute="top" secondItem="oL3-lx-duI" secondAttribute="bottom" constant="15" id="hMi-Of-uvL"/>
                             <constraint firstItem="4xd-f6-1HA" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" id="m5b-Zn-xhl"/>
                             <constraint firstItem="4xd-f6-1HA" firstAttribute="leading" secondItem="FSf-M7-xMA" secondAttribute="leading" id="nFj-o1-B41"/>
@@ -942,6 +959,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="number" destination="Sig-Ce-koY" id="GCa-Hg-Avs"/>
                         <outlet property="position" destination="MDR-tF-pEG" id="beR-ci-YEe"/>
                     </connections>
                 </viewController>
