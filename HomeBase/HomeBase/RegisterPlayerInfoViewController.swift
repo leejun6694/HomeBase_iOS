@@ -18,6 +18,11 @@ class RegisterPlayerInfoViewController: UIViewController {
     private var positionText: String = ""
     private var numberText: Int = 0
 
+    // MARK: Action
+    @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
