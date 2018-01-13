@@ -940,22 +940,39 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbt-z1-qv7">
+                                <rect key="frame" x="35" y="312" width="30" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="0vf-BZ-kUE">
+                                <rect key="frame" x="313" y="309" width="53" height="29"/>
+                                <segments>
+                                    <segment title="좌"/>
+                                    <segment title="우"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Sig-Ce-koY" firstAttribute="top" secondItem="Rnc-kt-j57" secondAttribute="bottom" constant="15" id="3vG-v1-d30"/>
+                            <constraint firstItem="0vf-BZ-kUE" firstAttribute="centerY" secondItem="vbt-z1-qv7" secondAttribute="centerY" id="679-or-uwu"/>
                             <constraint firstItem="MDR-tF-pEG" firstAttribute="leading" secondItem="oL3-lx-duI" secondAttribute="leading" id="BaZ-wn-isQ"/>
                             <constraint firstItem="Rnc-kt-j57" firstAttribute="leading" secondItem="MDR-tF-pEG" secondAttribute="leading" id="GLj-oh-kU9"/>
                             <constraint firstItem="Sig-Ce-koY" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" multiplier="0.8" id="MYp-4t-KiK"/>
                             <constraint firstItem="4xd-f6-1HA" firstAttribute="top" secondItem="zqj-Je-dzl" secondAttribute="bottom" id="QR1-MB-BFA"/>
+                            <constraint firstItem="0vf-BZ-kUE" firstAttribute="trailing" secondItem="Sig-Ce-koY" secondAttribute="trailing" id="Sce-ht-1Qu"/>
                             <constraint firstItem="oL3-lx-duI" firstAttribute="top" secondItem="4xd-f6-1HA" secondAttribute="top" constant="70" id="YBM-eT-tbE"/>
                             <constraint firstItem="Rnc-kt-j57" firstAttribute="top" secondItem="MDR-tF-pEG" secondAttribute="bottom" constant="30" id="c58-k6-Bhd"/>
                             <constraint firstItem="oL3-lx-duI" firstAttribute="leading" secondItem="4xd-f6-1HA" secondAttribute="leading" constant="35" id="duZ-fS-V2Q"/>
                             <constraint firstItem="Sig-Ce-koY" firstAttribute="leading" secondItem="Rnc-kt-j57" secondAttribute="leading" id="eYJ-6y-68w"/>
                             <constraint firstItem="MDR-tF-pEG" firstAttribute="top" secondItem="oL3-lx-duI" secondAttribute="bottom" constant="15" id="hMi-Of-uvL"/>
+                            <constraint firstItem="vbt-z1-qv7" firstAttribute="leading" secondItem="Sig-Ce-koY" secondAttribute="leading" id="hPi-iV-lQg"/>
                             <constraint firstItem="4xd-f6-1HA" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" id="m5b-Zn-xhl"/>
                             <constraint firstItem="4xd-f6-1HA" firstAttribute="leading" secondItem="FSf-M7-xMA" secondAttribute="leading" id="nFj-o1-B41"/>
+                            <constraint firstItem="vbt-z1-qv7" firstAttribute="top" secondItem="Sig-Ce-koY" secondAttribute="bottom" constant="60" id="rw9-oP-7RZ"/>
                             <constraint firstItem="MDR-tF-pEG" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" multiplier="0.8" id="y0r-mi-z3Y"/>
                         </constraints>
                         <connections>
@@ -964,6 +981,7 @@
                     </view>
                     <connections>
                         <outlet property="number" destination="Sig-Ce-koY" id="GCa-Hg-Avs"/>
+                        <outlet property="pitcher" destination="0vf-BZ-kUE" id="x3V-td-CAS"/>
                         <outlet property="position" destination="MDR-tF-pEG" id="beR-ci-YEe"/>
                     </connections>
                 </viewController>
