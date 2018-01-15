@@ -22,7 +22,7 @@ class RegisterPlayerInfoViewController: UIViewController {
     private var numberText: Int = 0
     private var pitcherText: String = ""
     private var hitterText: String = ""
-
+    
     // MARK: Action
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
