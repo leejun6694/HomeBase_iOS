@@ -16,8 +16,12 @@ class LoginViewController: UIViewController {
     
     // MARK: Properties
     
-    @IBOutlet private weak var emailTextField: UITextField!
-    @IBOutlet private weak var pwTextField: UITextField!
+    @IBOutlet private weak var emailTextField: UITextField! {
+        didSet { emailTextField.delegate = self }
+    }
+    @IBOutlet private weak var pwTextField: UITextField! {
+        didSet { pwTextField.delegate = self }
+    }
 
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
@@ -81,6 +85,15 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func forgotButtonDidTapped(_ sender: UIButton) {
+        if let forgotSelectNavigation =
+            self.storyboard?.instantiateViewController(withIdentifier: "ForgotSelectNavigation") as? ForgotSelectNavigation {
+            
+            forgotSelectNavigation.modalPresentationStyle = .overCurrentContext
+            self.present(forgotSelectNavigation, animated: false, completion: nil)
+        }
+    }
+    
     @IBAction private func googleSignInButtonDidTapped(_ sender: UIButton) {
         GIDSignIn.sharedInstance().signIn()
     }
@@ -98,6 +111,7 @@ class LoginViewController: UIViewController {
             }
             if let result = result {
                 if result.isCancelled {
+                    self.spinner.stopAnimating()
                     print("facebook sign in cancelled")
                 } else {
                     let credential = FacebookAuthProvider.credential(
@@ -173,5 +187,21 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         } else {
             print("google disconnected")
         }
+    }
+}
+
+// MARK: TextField Delegate
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case emailTextField:
+            pwTextField.becomeFirstResponder()
+        case pwTextField:
+            pwTextField.resignFirstResponder()
+        default:
+            break
+        }
+        
+        return true
     }
 }

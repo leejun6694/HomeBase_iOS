@@ -10,26 +10,38 @@ import UIKit
 
 class ForgotSelectViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: Methods
+    
+    @IBAction private func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
+        dismiss(animated: false, completion: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction private func emailButtonDidTapped(_ sender: UIButton) {
+        if let forgotEmailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotEmailViewController") as? ForgotEmailViewController {
+            
+            self.navigationController?.pushViewController(forgotEmailViewController, animated: false)
+        }
     }
-    */
-
+    
+    @IBAction private func pwButtonDidTapped(_ sender: UIButton) {
+        if let forgotPasswordViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
+            
+            self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
+        }
+    }
+    
+    // MARK: Life Cycles
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
+        self.view.isOpaque = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
 }

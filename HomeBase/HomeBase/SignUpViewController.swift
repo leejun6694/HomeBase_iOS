@@ -73,11 +73,11 @@ class SignUpViewController: UIViewController {
         return emailConditionImageView
     }()
     
-    @IBOutlet weak var pwLabel: UILabel!
+    @IBOutlet private weak var pwLabel: UILabel!
     @IBOutlet private weak var pwTextField: UITextField! {
         didSet { pwTextField.delegate = self }
     }
-    @IBOutlet weak var pwTextFieldBorder: UIView!
+    @IBOutlet private weak var pwTextFieldBorder: UIView!
     private lazy var pwConditionImageView: UIImageView = {
         let pwConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
         pwConditionImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,11 +85,11 @@ class SignUpViewController: UIViewController {
         return pwConditionImageView
     }()
     
-    @IBOutlet weak var confirmPwLabel: UILabel!
+    @IBOutlet private weak var confirmPwLabel: UILabel!
     @IBOutlet private weak var confirmPwTextField: UITextField! {
         didSet { confirmPwTextField.delegate = self }
     }
-    @IBOutlet weak var confirmPwTextFieldBorder: UIView!
+    @IBOutlet private weak var confirmPwTextFieldBorder: UIView!
     private lazy var confirmPwConditionImageView: UIImageView = {
         let confirmPwConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
         confirmPwConditionImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,11 +97,11 @@ class SignUpViewController: UIViewController {
         return confirmPwConditionImageView
     }()
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var nameTextField: UITextField! {
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var nameTextField: UITextField! {
         didSet { nameTextField.delegate = self }
     }
-    @IBOutlet weak var nameTextFieldBorder: UIView!
+    @IBOutlet private weak var nameTextFieldBorder: UIView!
     private lazy var nameConditionImageView: UIImageView = {
         let nameConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
         nameConditionImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,11 +109,11 @@ class SignUpViewController: UIViewController {
         return nameConditionImageView
     }()
     
-    @IBOutlet weak var birthLabel: UILabel!
-    @IBOutlet weak var birthTextField: UITextField! {
+    @IBOutlet private weak var birthLabel: UILabel!
+    @IBOutlet private weak var birthTextField: UITextField! {
         didSet { birthTextField.delegate = self }
     }
-    @IBOutlet weak var birthTextFieldBorder: UIView!
+    @IBOutlet private weak var birthTextFieldBorder: UIView!
     private lazy var birthConditionImageView: UIImageView = {
         let birthConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
         birthConditionImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -139,7 +139,7 @@ class SignUpViewController: UIViewController {
     private func emailInfoSaved(_ user: User, email: String) {
         let ref = Database.database().reference()
         ref.child("users").child(user.uid).setValue(
-            ["email": email, "name": name, "birth": "\(year)\(month)\(day)"])
+            ["email": email, "name": name, "birth": "\(year).\(month).\(day)"])
         
         print("email sign up")
     }
@@ -455,14 +455,13 @@ extension SignUpViewController: UITextFieldDelegate {
             
             confirmPwTextField.inputAccessoryView = accessoryView
         case nameTextField:
-            scrollView.contentInset.bottom = keyboardHeight + 10.0
-            
             let nameTextCount = nameTextField.text?.count ?? 0
             
             if nameTextCount < 2 { nameTextFieldCondition(false) }
             else if nameTextCount > 10 { nameTextFieldCondition(false) }
             else { nameTextFieldCondition(true) }
             
+            scrollView.contentInset.bottom = keyboardHeight + 10.0
             nameTextField.inputAccessoryView = accessoryView
         case birthTextField:
             birthTextFieldCondition(birthChecked(birthTextField))
