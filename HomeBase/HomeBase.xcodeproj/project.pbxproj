@@ -24,6 +24,10 @@
 		72E96C982006026200B68F29 /* RegisterTeamChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C972006026200B68F29 /* RegisterTeamChoiceViewController.swift */; };
 		72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C99200603A000B68F29 /* RegisterTeamJoinViewController.swift */; };
 		72E96C9C200607D000B68F29 /* RegisterTeamNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C9B200607D000B68F29 /* RegisterTeamNavigation.swift */; };
+		72F07BFF200C6B9B004C83F6 /* ForgotSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F07BFE200C6B9B004C83F6 /* ForgotSelectViewController.swift */; };
+		72F07C01200C6BB0004C83F6 /* ForgotEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F07C00200C6BB0004C83F6 /* ForgotEmailViewController.swift */; };
+		72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F07C02200C6BBD004C83F6 /* ForgotPasswordViewController.swift */; };
+		72F07C0B200C77FC004C83F6 /* ForgotSelectNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F07C0A200C77FC004C83F6 /* ForgotSelectNavigation.swift */; };
 		CADF9380625219F89F8972A3 /* Pods_HomeBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365E131BF0132C671D3B24D8 /* Pods_HomeBaseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +66,10 @@
 		72E96C972006026200B68F29 /* RegisterTeamChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamChoiceViewController.swift; sourceTree = "<group>"; };
 		72E96C99200603A000B68F29 /* RegisterTeamJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinViewController.swift; sourceTree = "<group>"; };
 		72E96C9B200607D000B68F29 /* RegisterTeamNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamNavigation.swift; sourceTree = "<group>"; };
+		72F07BFE200C6B9B004C83F6 /* ForgotSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotSelectViewController.swift; sourceTree = "<group>"; };
+		72F07C00200C6BB0004C83F6 /* ForgotEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotEmailViewController.swift; sourceTree = "<group>"; };
+		72F07C02200C6BBD004C83F6 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		72F07C0A200C77FC004C83F6 /* ForgotSelectNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotSelectNavigation.swift; sourceTree = "<group>"; };
 		85D28CE54F7FB2CB3B7FE2D2 /* Pods-HomeBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeBase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeBase/Pods-HomeBase.debug.xcconfig"; sourceTree = "<group>"; };
 		A196C76AF66304FEA028D6BC /* Pods-HomeBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeBaseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeBaseTests/Pods-HomeBaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		B1610B1C17C0264F1B7B9E0A /* Pods-HomeBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeBaseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeBaseTests/Pods-HomeBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +123,7 @@
 				72881E7A1FFA8579009D23C2 /* AppDelegate.swift */,
 				72881E9F1FFB32F6009D23C2 /* LoginViewController.swift */,
 				725B84FF1FFE326B0024588D /* SignUpViewController.swift */,
+				72F07C04200C6E94004C83F6 /* Forgot */,
 				72E96C9B200607D000B68F29 /* RegisterTeamNavigation.swift */,
 				72E96C972006026200B68F29 /* RegisterTeamChoiceViewController.swift */,
 				72E96C95200600E000B68F29 /* RegisterTeamCreateViewController.swift */,
@@ -138,6 +147,17 @@
 				72881E911FFA8579009D23C2 /* Info.plist */,
 			);
 			path = HomeBaseTests;
+			sourceTree = "<group>";
+		};
+		72F07C04200C6E94004C83F6 /* Forgot */ = {
+			isa = PBXGroup;
+			children = (
+				72F07C0A200C77FC004C83F6 /* ForgotSelectNavigation.swift */,
+				72F07BFE200C6B9B004C83F6 /* ForgotSelectViewController.swift */,
+				72F07C00200C6BB0004C83F6 /* ForgotEmailViewController.swift */,
+				72F07C02200C6BBD004C83F6 /* ForgotPasswordViewController.swift */,
+			);
+			name = Forgot;
 			sourceTree = "<group>";
 		};
 		F34A4FAEB3520F2A1C92E813 /* Frameworks */ = {
@@ -401,15 +421,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72F07BFF200C6B9B004C83F6 /* ForgotSelectViewController.swift in Sources */,
 				72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */,
 				725B850A200181350024588D /* RegisterUserInfoViewController.swift in Sources */,
 				72881EA01FFB32F6009D23C2 /* LoginViewController.swift in Sources */,
+				72F07C0B200C77FC004C83F6 /* ForgotSelectNavigation.swift in Sources */,
 				72E96C96200600E000B68F29 /* RegisterTeamCreateViewController.swift in Sources */,
 				72E96C9C200607D000B68F29 /* RegisterTeamNavigation.swift in Sources */,
 				72378A7020081BC0007ED442 /* CustomMethods.swift in Sources */,
 				725B8508200180D90024588D /* RegisterPlayerInfoViewController.swift in Sources */,
 				725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
+				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,
+				72F07C01200C6BB0004C83F6 /* ForgotEmailViewController.swift in Sources */,
 				72E96C982006026200B68F29 /* RegisterTeamChoiceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
