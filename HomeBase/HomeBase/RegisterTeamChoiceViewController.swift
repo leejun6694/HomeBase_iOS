@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterTeamChoiceViewController: UIViewController {
 
@@ -29,6 +30,10 @@ class RegisterTeamChoiceViewController: UIViewController {
     }
     
     // MARK: Life Cycles
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
