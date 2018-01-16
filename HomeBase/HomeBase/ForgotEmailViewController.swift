@@ -120,6 +120,8 @@ class ForgotEmailViewController: UIViewController {
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.barTintColor =
+            UIColor(red: 44.0/255.0, green: 44.0/255.0, blue: 44.0/255.0, alpha: 1.0)
         self.navigationItem.titleView = titleLabel
         
         self.view.addSubview(doneButton)
