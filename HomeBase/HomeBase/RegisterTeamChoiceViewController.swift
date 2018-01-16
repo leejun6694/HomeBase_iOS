@@ -34,5 +34,7 @@ class RegisterTeamChoiceViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.navigationBar.barTintColor =
+            UIColor(red: 44.0/255.0, green: 44.0/255.0, blue: 44.0/255.0, alpha: 1.0)
     }
 }

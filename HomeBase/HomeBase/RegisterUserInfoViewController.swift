@@ -51,18 +51,19 @@ class RegisterUserInfoViewController: UIViewController {
         return accessoryView
     }()
     
-    private lazy var donebutton: UIButton = {
-        let donebutton = UIButton(type: .system)
-        donebutton.setTitle("완료", for: .normal)
-        donebutton.setTitleColor(.white, for: .normal)
-        donebutton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18.0)
-        donebutton.backgroundColor = UIColor(red: 75.0/255.0,
+    private lazy var doneButton: UIButton = {
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("완료", for: .normal)
+        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18.0)
+        doneButton.addTarget(self, action: #selector(doneButtonDidTapped(_:)), for: .touchUpInside)
+        doneButton.backgroundColor = UIColor(red: 75.0/255.0,
                                              green: 75.0/255.0,
                                              blue: 75.0/255.0,
                                              alpha: 1.0)
-        donebutton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
         
-        return donebutton
+        return doneButton
     }()
     
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -127,10 +128,25 @@ class RegisterUserInfoViewController: UIViewController {
         }
     }
     
+    @objc private func doneButtonDidTapped(_ sender: UIButton) {
+        if let registerPlayerInfoViewController =
+            self.storyboard?.instantiateViewController(withIdentifier: "RegisterPlayerInfoViewController") as? RegisterPlayerInfoViewController {
+            
+            registerPlayerInfoViewController.name = self.name
+            registerPlayerInfoViewController.year = self.year
+            registerPlayerInfoViewController.month = self.month
+            registerPlayerInfoViewController.day = self.day
+            registerPlayerInfoViewController.height = self.height
+            registerPlayerInfoViewController.weight = self.weight
+            
+            self.navigationController?.pushViewController(registerPlayerInfoViewController, animated: true)
+        }
+    }
+    
     @objc private func keyboardWillShow(_ notification: Notification) {
-        donebutton.removeFromSuperview()
-        accessoryView.addSubview(donebutton)
-        accessoryView.addConstraints(donebuttonKeyboardConstraints())
+        doneButton.removeFromSuperview()
+        accessoryView.addSubview(doneButton)
+        accessoryView.addConstraints(doneButtonKeyboardConstraints())
         
         if let keyboardFrame: NSValue =
             notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
@@ -141,9 +157,9 @@ class RegisterUserInfoViewController: UIViewController {
     }
     
     @objc private func keyboardWillHide(notification:NSNotification) {
-        donebutton.removeFromSuperview()
-        self.view.addSubview(donebutton)
-        self.view.addConstraints(donebuttonConstraints())
+        doneButton.removeFromSuperview()
+        self.view.addSubview(doneButton)
+        self.view.addConstraints(doneButtonConstraints())
         
         scrollView.contentInset.bottom = 0
     }
@@ -156,16 +172,15 @@ class RegisterUserInfoViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         self.navigationItem.titleView = titleLabel
-//        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "path3")
-//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "path3")
         
         scrollView.contentSize = contentsView.frame.size
         
-        self.view.addSubview(donebutton)
-        self.view.addConstraints(donebuttonConstraints())
-        buttonDisabled(donebutton)
+        self.view.addSubview(doneButton)
+        self.view.addConstraints(doneButtonConstraints())
+        buttonDisabled(doneButton)
         
         NotificationCenter.default.addObserver(
             self,
@@ -188,9 +203,9 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     
     private func textFieldConditionChecked() {
         if nameCondition, birthCondition, heightCondition, weightCondition {
-            buttonEnabled(donebutton)
+            buttonEnabled(doneButton)
         } else {
-            buttonDisabled(donebutton)
+            buttonDisabled(doneButton)
         }
     }
     
@@ -393,7 +408,7 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        buttonDisabled(donebutton)
+        buttonDisabled(doneButton)
         
         let currentCount = textField.text?.count ?? 0
         let replacementCount = currentCount + string.count - range.length
@@ -581,35 +596,35 @@ extension RegisterUserInfoViewController {
         return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
     }
     
-    private func donebuttonConstraints() -> [NSLayoutConstraint] {
+    private func doneButtonConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
-            item: donebutton, attribute: .top, relatedBy: .equal,
+            item: doneButton, attribute: .top, relatedBy: .equal,
             toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: -45.0)
         let leadingConstraint = NSLayoutConstraint(
-            item: donebutton, attribute: .leading, relatedBy: .equal,
+            item: doneButton, attribute: .leading, relatedBy: .equal,
             toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 0.0)
         let trailingConstraint = NSLayoutConstraint(
-            item: donebutton, attribute: .trailing, relatedBy: .equal,
+            item: doneButton, attribute: .trailing, relatedBy: .equal,
             toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: 0.0)
         let bottomConstraint = NSLayoutConstraint(
-            item: donebutton, attribute: .bottom, relatedBy: .equal,
+            item: doneButton, attribute: .bottom, relatedBy: .equal,
             toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
 
         return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
     }
     
-    private func donebuttonKeyboardConstraints() -> [NSLayoutConstraint] {
+    private func doneButtonKeyboardConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
-            item: donebutton, attribute: .top, relatedBy: .equal,
+            item: doneButton, attribute: .top, relatedBy: .equal,
             toItem: accessoryView, attribute: .top, multiplier: 1.0, constant: 0.0)
         let leadingConstraint = NSLayoutConstraint(
-            item: donebutton, attribute: .leading, relatedBy: .equal,
+            item: doneButton, attribute: .leading, relatedBy: .equal,
             toItem: accessoryView, attribute: .leading, multiplier: 1.0, constant: 0.0)
         let trailingConstraint = NSLayoutConstraint(
-            item: donebutton, attribute: .trailing, relatedBy: .equal,
+            item: doneButton, attribute: .trailing, relatedBy: .equal,
             toItem: accessoryView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
         let bottomConstraint = NSLayoutConstraint(
-            item: donebutton, attribute: .bottom, relatedBy: .equal,
+            item: doneButton, attribute: .bottom, relatedBy: .equal,
             toItem: accessoryView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         
         return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
