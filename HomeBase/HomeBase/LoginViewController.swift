@@ -85,7 +85,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func forgotButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func forgotButtonDidTapped(_ sender: UIButton) {        
         if let forgotSelectNavigation =
             self.storyboard?.instantiateViewController(withIdentifier: "ForgotSelectNavigation") as? ForgotSelectNavigation {
             

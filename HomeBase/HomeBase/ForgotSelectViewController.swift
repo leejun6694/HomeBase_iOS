@@ -16,6 +16,10 @@ class ForgotSelectViewController: UIViewController {
         dismiss(animated: false, completion: nil)
     }
     
+    @IBAction func cancelButtonDidTapped(_ sender: UIButton) {
+        dismiss(animated: false, completion: nil)
+    }
+    
     @IBAction private func emailButtonDidTapped(_ sender: UIButton) {
         if let forgotEmailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotEmailViewController") as? ForgotEmailViewController {
             
