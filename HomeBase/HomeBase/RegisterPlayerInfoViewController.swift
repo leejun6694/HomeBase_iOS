@@ -32,6 +32,10 @@ class RegisterPlayerInfoViewController: UIViewController {
                                        blue: 223.0/255.0,
                                        alpha: 1.0)
     
+    private let systemFont = UIFont.systemFont(ofSize: 13.0)
+    private let barButtonFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 17.0)
+    private let controlFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 13.0)
+    
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "정보 입력"
@@ -89,6 +93,9 @@ class RegisterPlayerInfoViewController: UIViewController {
                                                  style: .plain,
                                                  target: self,
                                                  action: #selector(positionDoneButtonDidTapped(_:)))
+        positionDoneButton.setTitleTextAttributes(
+            [NSAttributedStringKey.font: barButtonFont ?? systemFont],
+            for: .normal)
         positionDoneButton.tintColor = correctColor
         let positionSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                                 target: nil,
@@ -97,6 +104,9 @@ class RegisterPlayerInfoViewController: UIViewController {
                                                    style: .plain,
                                                    target: self,
                                                    action: #selector(positionCancelButtondDidTapped(_:)))
+        positionCancelButton.setTitleTextAttributes(
+            [NSAttributedStringKey.font: barButtonFont ?? systemFont],
+            for: .normal)
         positionCancelButton.tintColor = correctColor
         toolBar.setItems([positionCancelButton, positionSpaceItem, positionDoneButton], animated: false)
         
@@ -106,6 +116,11 @@ class RegisterPlayerInfoViewController: UIViewController {
                                           "포수", "1루수", "2루수",
                                           "3루수", "유격수", "좌익수",
                                           "중견수", "우익수", "지명타자"]
+    private let subData: [String] = ["SP", "RP", "CP",
+                                     "C", "1B", "2B",
+                                     "3B", "SS", "LF",
+                                     "CF", "RF", "DH"]
+    
     private lazy var positionPickerView: UIPickerView = {
         let positionPickerView = UIPickerView()
         positionPickerView.backgroundColor = .white
@@ -127,10 +142,22 @@ class RegisterPlayerInfoViewController: UIViewController {
     }()
     
     @IBOutlet weak var pitcherLabel: UILabel!
-    @IBOutlet private weak var pitcherControl: UISegmentedControl!
+    @IBOutlet private weak var pitcherControl: UISegmentedControl! {
+        didSet {
+            pitcherControl.setTitleTextAttributes(
+                [NSAttributedStringKey.font: controlFont ?? systemFont],
+                for: .normal)
+        }
+    }
     
     @IBOutlet weak var hitterLabel: UILabel!
-    @IBOutlet private weak var hitterControl: UISegmentedControl!
+    @IBOutlet private weak var hitterControl: UISegmentedControl! {
+        didSet {
+            hitterControl.setTitleTextAttributes(
+                [NSAttributedStringKey.font: controlFont ?? systemFont],
+                for: .normal)
+        }
+    }
     
     // MARK: Methods
     
@@ -233,8 +260,19 @@ extension RegisterPlayerInfoViewController: UIPickerViewDelegate, UIPickerViewDa
         return positionData.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return positionData[row]
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return positionData[row]
+//    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        
+        pickerLabel.textColor = .black
+        pickerLabel.textAlignment = .center
+        pickerLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 19.0)
+        pickerLabel.text = "\(positionData[row]) (\(subData[row]))"
+        
+        return pickerLabel
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

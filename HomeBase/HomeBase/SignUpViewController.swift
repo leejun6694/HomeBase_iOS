@@ -139,7 +139,10 @@ class SignUpViewController: UIViewController {
     private func emailInfoSaved(_ user: User, email: String) {
         let ref = Database.database().reference()
         ref.child("users").child(user.uid).setValue(
-            ["email": email, "name": name, "birth": "\(year).\(month).\(day)"])
+            ["email": email,
+             "name": name,
+             "birth": "\(year).\(month).\(day)",
+             "provider": "password"])
         
         print("email sign up")
     }

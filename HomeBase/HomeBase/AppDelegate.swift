@@ -28,10 +28,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application,
             didFinishLaunchingWithOptions: launchOptions)
         
-        let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-        let loginVC = storyBoard.instantiateInitialViewController()
-        
-        window?.rootViewController = loginVC
+        if let currentUser = Auth.auth().currentUser {
+            print("loading user: \(currentUser.email ?? "default")")
+            
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let mainViewController = storyBoard.instantiateInitialViewController()
+            
+            window?.rootViewController = mainViewController
+        } else {
+            let storyBoard = UIStoryboard(name: "Start", bundle: nil)
+            let loginViewController = storyBoard.instantiateInitialViewController()
+            
+            window?.rootViewController = loginViewController
+        }
         
         return true
     }
