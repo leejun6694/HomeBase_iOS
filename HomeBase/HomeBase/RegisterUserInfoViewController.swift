@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class RegisterUserInfoViewController: UIViewController {
 
@@ -117,6 +119,9 @@ class RegisterUserInfoViewController: UIViewController {
         return weightConditionImageView
     }()
     
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
+    
+    
     // MARK: Methods
     
     @IBAction private func backgroundViewDidTapped(_ sender: UITapGestureRecognizer) {
@@ -141,6 +146,42 @@ class RegisterUserInfoViewController: UIViewController {
             
             self.navigationController?.pushViewController(registerPlayerInfoViewController, animated: true)
         }
+    }
+    
+    private func autoCompleteTextField() {
+        spinnerStartAnimating(spinner)
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let currentUser = Auth.auth().currentUser {
+                let ref = Database.database().reference()
+                
+                ref.child("users").child(currentUser.uid).observeSingleEvent(of: .value) {
+                    (snapshot, error) in
+                    
+                    if let error = error {
+                        print("database error: \(error)")
+                    } else {
+                        let value = snapshot.value as? NSDictionary
+                        let provider = value?["provider"] as? String ?? ""
+                        print(provider)
+                        
+                        if provider == "password" {
+                            let name = value?["name"] as? String ?? ""
+                            let birth = value?["birth"] as? String ?? ""
+                            
+                            DispatchQueue.main.async {
+                                self.nameTextField.text = name
+                                self.birthTextField.text = birth
+                                
+                                self.nameTextFieldCondition(true)
+                                self.birthTextFieldCondition(true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        spinnerStopAnimating(spinner)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -195,6 +236,12 @@ class RegisterUserInfoViewController: UIViewController {
             object: nil
         )
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        autoCompleteTextField()
+    }
 }
 
 extension RegisterUserInfoViewController: UITextFieldDelegate {
@@ -239,19 +286,18 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     private func birthChecked(_ birthTextField: UITextField) -> Bool {
         let birthText = birthTextField.text ?? ""
         
-        if birthText.count != 12 {
-            return false
-        } else {
+        if birthText.count != 10 { return false }
+        else {
             let yearStart = birthText.index(birthText.startIndex, offsetBy: 0)
             let yearEnd = birthText.index(birthText.startIndex, offsetBy: 3)
             year = String(birthText[yearStart...yearEnd])
             
-            let monthStart = birthText.index(birthText.startIndex, offsetBy: 6)
-            let monthEnd = birthText.index(birthText.startIndex, offsetBy: 7)
+            let monthStart = birthText.index(birthText.startIndex, offsetBy: 5)
+            let monthEnd = birthText.index(birthText.startIndex, offsetBy: 6)
             month = String(birthText[monthStart...monthEnd])
             
-            let dayStart = birthText.index(birthText.startIndex, offsetBy: 10)
-            let dayEnd = birthText.index(birthText.startIndex, offsetBy: 11)
+            let dayStart = birthText.index(birthText.startIndex, offsetBy: 8)
+            let dayEnd = birthText.index(birthText.startIndex, offsetBy: 9)
             day = String(birthText[dayStart...dayEnd])
             
             let intYear = Int(year) ?? 0
@@ -423,29 +469,27 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
             else { return false }
         case birthTextField:
             if currentCount == 4, string.count == 1 {
-                birthTextField.text?.append(". ")
-            } else if currentCount == 8, string.count == 1 {
-                birthTextField.text?.append(". ")
-            } else if currentCount == 7, range.length == 1 {
+                birthTextField.text?.append(".")
+            } else if currentCount == 7, string.count == 1 {
+                birthTextField.text?.append(".")
+            } else if currentCount == 6, range.length == 1 {
                 birthTextField.text?.removeLast()
+            } else if currentCount == 9, range.length == 1 {
                 birthTextField.text?.removeLast()
-            } else if currentCount == 11, range.length == 1 {
-                birthTextField.text?.removeLast()
-                birthTextField.text?.removeLast()
-            } else if currentCount == 11, string.count == 1 {
+            } else if currentCount == 9, string.count == 1 {
                 birthTextField.text?.append(string)
-                heightTextField.becomeFirstResponder()
+                birthTextField.resignFirstResponder()
                 
                 return false
             }
             
-            if currentCount == 12, range.length == 1 {
+            if currentCount == 10, range.length == 1 {
                 birthTextFieldCondition(false)
             } else {
                 birthTextFieldCondition(birthChecked(birthTextField))
             }
             
-            if replacementCount < 13 { return true }
+            if replacementCount < 11 { return true }
             else { return false }
         case heightTextField:
             if currentCount == 2, string.count == 1 {
