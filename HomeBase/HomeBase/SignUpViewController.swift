@@ -172,10 +172,18 @@ class SignUpViewController: UIViewController {
                         }
                     } else {
                         if let user = user {
-                            self.emailInfoSaved(user, email: email)
-                            self.spinner.stopAnimating()
-                            
-                            self.dismiss(animated: true, completion: nil)
+                            Auth.auth().currentUser?.sendEmailVerification() {
+                                (error) in
+                                
+                                if let verifyError = error {
+                                    print("verification error: \(verifyError)")
+                                } else {
+                                    self.emailInfoSaved(user, email: email)
+                                    self.spinner.stopAnimating()
+                                    
+                                    self.dismiss(animated: true, completion: nil)
+                                }
+                            }
                         } else {
                             print("no user")
                         }

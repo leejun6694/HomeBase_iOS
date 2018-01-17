@@ -70,8 +70,15 @@ class LoginViewController: UIViewController {
                         }
                     }
                 } else {
-                    print("email connected")
-                    self.userConnected()
+                    if let currentUser = user {
+                        if currentUser.isEmailVerified {
+                            print("email connected")
+                            self.userConnected()
+                        } else {
+                            print("email isn't verified")
+                            self.spinner.stopAnimating()
+                        }
+                    }
                 }
             }
         }
