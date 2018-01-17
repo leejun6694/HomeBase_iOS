@@ -21,5 +21,15 @@ extension UIViewController {
         button.alpha = 0.5
         button.isEnabled = false
     }
+    
+    func spinnerStartAnimating(_ spinner: UIActivityIndicatorView) {
+        self.view.isUserInteractionEnabled = false
+        spinner.startAnimating()
+    }
+    
+    func spinnerStopAnimating(_ spinner: UIActivityIndicatorView) {
+        self.view.isUserInteractionEnabled = true
+        spinner.stopAnimating()
+    }
 }
 

@@ -179,7 +179,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY. MM. DD" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="QKN-Kl-8LM">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY.MM.DD" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="QKN-Kl-8LM">
                                 <rect key="frame" x="44" y="221.66666666666666" width="326" height="39.999999999999972"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -684,7 +684,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1136" y="155"/>
+            <point key="canvasLocation" x="-1136.231884057971" y="154.89130434782609"/>
         </scene>
         <!--Register Team Choice View Controller-->
         <scene sceneID="TXR-HG-xRZ">
@@ -971,7 +971,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY. MM. DD" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dWR-qQ-GCq" userLabel="Birth Text Field">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY.MM.DD" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dWR-qQ-GCq" userLabel="Birth Text Field">
                                                 <rect key="frame" x="44" y="474.33333333333337" width="335.66666666666669" height="37.666666666666629"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1168,7 +1168,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY. MM. DD" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K5T-65-VdU">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY.MM.DD" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K5T-65-VdU">
                                                 <rect key="frame" x="44" y="174" width="335.66666666666669" height="37"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1282,6 +1282,9 @@
                                     <constraint firstAttribute="trailing" secondItem="FZn-9F-R6r" secondAttribute="trailing" id="z8i-uV-D74"/>
                                 </constraints>
                             </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1P3-bA-JfM">
+                                <rect key="frame" x="197" y="358" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -1292,6 +1295,8 @@
                             <constraint firstItem="FZn-9F-R6r" firstAttribute="height" secondItem="M6d-25-sby" secondAttribute="height" constant="-65" id="NJa-cA-Kh5"/>
                             <constraint firstItem="r0P-KI-obc" firstAttribute="leading" secondItem="M6d-25-sby" secondAttribute="leading" id="R4I-dQ-UwA"/>
                             <constraint firstItem="fzV-KV-5m1" firstAttribute="top" secondItem="r0P-KI-obc" secondAttribute="bottom" constant="45" id="a2f-3M-jHa"/>
+                            <constraint firstItem="1P3-bA-JfM" firstAttribute="centerX" secondItem="M6d-25-sby" secondAttribute="centerX" id="bln-3v-32f"/>
+                            <constraint firstItem="1P3-bA-JfM" firstAttribute="centerY" secondItem="M6d-25-sby" secondAttribute="centerY" id="faw-hZ-jbU"/>
                             <constraint firstItem="CTm-86-9h3" firstAttribute="height" secondItem="M6d-25-sby" secondAttribute="height" id="ip2-eR-hks"/>
                             <constraint firstItem="CTm-86-9h3" firstAttribute="centerX" secondItem="M6d-25-sby" secondAttribute="centerX" id="qRA-8Q-GSf"/>
                             <constraint firstAttribute="trailing" secondItem="r0P-KI-obc" secondAttribute="trailing" id="rI7-kh-53z"/>
@@ -1313,6 +1318,7 @@
                         <outlet property="nameTextField" destination="i6q-4O-MJ5" id="9g9-02-y7O"/>
                         <outlet property="nameTextFieldBorder" destination="WDP-vd-ysm" id="KYo-2M-4S5"/>
                         <outlet property="scrollView" destination="r0P-KI-obc" id="AmK-gV-1Fy"/>
+                        <outlet property="spinner" destination="1P3-bA-JfM" id="2TO-ID-SlA"/>
                         <outlet property="weightLabel" destination="rJ5-Da-Xcm" id="jEQ-EI-rVW"/>
                         <outlet property="weightTextField" destination="b3K-ol-MaJ" id="4Rg-Oa-xwp"/>
                         <outlet property="weightTextFieldBorder" destination="etR-8B-bKY" id="8Or-lk-UJa"/>

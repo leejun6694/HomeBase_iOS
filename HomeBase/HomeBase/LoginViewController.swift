@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     }
     
     private func userConnected() {
-        spinner.stopAnimating()
+        spinnerStopAnimating(spinner)
         
         if let currentUser = Auth.auth().currentUser {
             print("current user email: \(currentUser.email ?? "default")")
@@ -50,14 +50,14 @@ class LoginViewController: UIViewController {
     }
    
     @IBAction private func emailSignInButtonDidTapped(_ sender: UIButton) {
-        spinner.startAnimating()
+        spinnerStartAnimating(spinner)
         
         if let email = emailTextField.text, let pw = pwTextField.text {
             Auth.auth().signIn(withEmail: email, password: pw) {
                 (user, error) in
                 
                 if let error = error {
-                    self.spinner.stopAnimating()
+                    self.spinnerStopAnimating(self.spinner)
                     
                     if let errorCode = AuthErrorCode(rawValue: error._code) {
                         switch errorCode {
@@ -76,7 +76,7 @@ class LoginViewController: UIViewController {
                             self.userConnected()
                         } else {
                             print("email isn't verified")
-                            self.spinner.stopAnimating()
+                            self.spinnerStopAnimating(self.spinner)
                         }
                     }
                 }
@@ -106,19 +106,19 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction private func facebookSignInButtonDidTapped(_ sender: UIButton) {
-        spinner.startAnimating()
+        spinnerStartAnimating(spinner)
         
         let facebookLoginManager = FBSDKLoginManager()
         facebookLoginManager.logIn(withReadPermissions: ["email"], from: self) {
             (result, error) in
             
             if error != nil {
-                self.spinner.stopAnimating()
+                self.spinnerStopAnimating(self.spinner)
                 print("facebook sign in error")
             }
             if let result = result {
                 if result.isCancelled {
-                    self.spinner.stopAnimating()
+                    self.spinnerStopAnimating(self.spinner)
                     print("facebook sign in cancelled")
                 } else {
                     let credential = FacebookAuthProvider.credential(
@@ -128,7 +128,7 @@ class LoginViewController: UIViewController {
                         (user, error) in
                         
                         if let error = error {
-                            self.spinner.stopAnimating()
+                            self.spinnerStopAnimating(self.spinner)
                             print("facebook sign in error: \(error)")
                             return
                         } else {
@@ -160,10 +160,10 @@ class LoginViewController: UIViewController {
 // MARK: Google Delegate
 extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        spinner.startAnimating()
+        spinnerStartAnimating(self.spinner)
         
         if let error = error {
-            spinner.stopAnimating()
+            spinnerStopAnimating(spinner)
             print("google sign in error: \(error)")
             
             return
@@ -178,7 +178,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
             (user, error) in
             
             if let error = error {
-                self.spinner.stopAnimating()
+                self.spinnerStopAnimating(self.spinner)
                 print("google sign in error: \(error)")
                 return
             } else {

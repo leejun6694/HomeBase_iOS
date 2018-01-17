@@ -148,7 +148,7 @@ class SignUpViewController: UIViewController {
     }
     
     @objc func doneButtonDidTapped(_ sender: UIButton) {
-        spinner.startAnimating()
+        spinnerStartAnimating(spinner)
         
         if let email = emailTextField.text,
             let pw = pwTextField.text,
@@ -159,7 +159,7 @@ class SignUpViewController: UIViewController {
                     (user, error) in
                     
                     if let error = error {
-                        self.spinner.stopAnimating()
+                        self.spinnerStopAnimating(self.spinner)
                         
                         if let errorCode = AuthErrorCode(rawValue: error._code) {
                             switch errorCode {
@@ -179,7 +179,7 @@ class SignUpViewController: UIViewController {
                                     print("verification error: \(verifyError)")
                                 } else {
                                     self.emailInfoSaved(user, email: email)
-                                    self.spinner.stopAnimating()
+                                    self.spinnerStopAnimating(self.spinner)
                                     
                                     self.dismiss(animated: true, completion: nil)
                                 }
@@ -190,7 +190,7 @@ class SignUpViewController: UIViewController {
                     }
                 }
             } else {
-                self.spinner.stopAnimating()
+                self.spinnerStopAnimating(spinner)
                 print("pw != confirmPw")
             }
         }
@@ -386,18 +386,18 @@ extension SignUpViewController: UITextFieldDelegate {
     private func birthChecked(_ birthTextField: UITextField) -> Bool {
         let birthText = birthTextField.text ?? ""
         
-        if birthText.count != 12 { return false }
+        if birthText.count != 10 { return false }
         else {
             let yearStart = birthText.index(birthText.startIndex, offsetBy: 0)
             let yearEnd = birthText.index(birthText.startIndex, offsetBy: 3)
             year = String(birthText[yearStart...yearEnd])
             
-            let monthStart = birthText.index(birthText.startIndex, offsetBy: 6)
-            let monthEnd = birthText.index(birthText.startIndex, offsetBy: 7)
+            let monthStart = birthText.index(birthText.startIndex, offsetBy: 5)
+            let monthEnd = birthText.index(birthText.startIndex, offsetBy: 6)
             month = String(birthText[monthStart...monthEnd])
             
-            let dayStart = birthText.index(birthText.startIndex, offsetBy: 10)
-            let dayEnd = birthText.index(birthText.startIndex, offsetBy: 11)
+            let dayStart = birthText.index(birthText.startIndex, offsetBy: 8)
+            let dayEnd = birthText.index(birthText.startIndex, offsetBy: 9)
             day = String(birthText[dayStart...dayEnd])
             
             let intYear = Int(year) ?? 0
@@ -514,29 +514,27 @@ extension SignUpViewController: UITextFieldDelegate {
             else { return false }
         case birthTextField:
             if currentCount == 4, string.count == 1 {
-                birthTextField.text?.append(". ")
-            } else if currentCount == 8, string.count == 1 {
-                birthTextField.text?.append(". ")
-            } else if currentCount == 7, range.length == 1 {
+                birthTextField.text?.append(".")
+            } else if currentCount == 7, string.count == 1 {
+                birthTextField.text?.append(".")
+            } else if currentCount == 6, range.length == 1 {
                 birthTextField.text?.removeLast()
+            } else if currentCount == 9, range.length == 1 {
                 birthTextField.text?.removeLast()
-            } else if currentCount == 11, range.length == 1 {
-                birthTextField.text?.removeLast()
-                birthTextField.text?.removeLast()
-            } else if currentCount == 11, string.count == 1 {
+            } else if currentCount == 9, string.count == 1 {
                 birthTextField.text?.append(string)
                 birthTextField.resignFirstResponder()
                 
                 return false
             }
             
-            if currentCount == 12, range.length == 1 {
+            if currentCount == 10, range.length == 1 {
                 birthTextFieldCondition(false)
             } else {
                 birthTextFieldCondition(birthChecked(birthTextField))
             }
             
-            if replacementCount < 13 { return true }
+            if replacementCount < 11 { return true }
             else { return false }
         default:
             break
