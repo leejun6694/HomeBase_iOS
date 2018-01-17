@@ -30,7 +30,7 @@ class ForgotSelectViewController: UIViewController {
     @IBAction private func pwButtonDidTapped(_ sender: UIButton) {
         if let forgotPasswordViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
             
-            self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
+            self.navigationController?.pushViewController(forgotPasswordViewController, animated: false)
         }
     }
     
