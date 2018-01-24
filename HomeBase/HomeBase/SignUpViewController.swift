@@ -72,6 +72,16 @@ class SignUpViewController: UIViewController {
         
         return emailConditionImageView
     }()
+    private lazy var emailConditionLabel: UILabel = {
+        let emailConditionLabel = UILabel()
+        emailConditionLabel.text = "이메일 형식에 맞춰 입력해주세요"
+        emailConditionLabel.textColor = .red
+        emailConditionLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)
+        emailConditionLabel.textAlignment = .left
+        emailConditionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return emailConditionLabel
+    }()
     
     @IBOutlet private weak var pwLabel: UILabel!
     @IBOutlet private weak var pwTextField: UITextField! {
@@ -83,6 +93,16 @@ class SignUpViewController: UIViewController {
         pwConditionImageView.translatesAutoresizingMaskIntoConstraints = false
         
         return pwConditionImageView
+    }()
+    private lazy var pwConditionLabel: UILabel = {
+        let pwConditionLabel = UILabel()
+        pwConditionLabel.text = "비밀번호는 6-14자 입니다"
+        pwConditionLabel.textColor = .red
+        pwConditionLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)
+        pwConditionLabel.textAlignment = .left
+        pwConditionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return pwConditionLabel
     }()
     
     @IBOutlet private weak var confirmPwLabel: UILabel!
@@ -96,6 +116,16 @@ class SignUpViewController: UIViewController {
         
         return confirmPwConditionImageView
     }()
+    private lazy var confirmPwConditionLabel: UILabel = {
+        let confirmPwConditionLabel = UILabel()
+        confirmPwConditionLabel.text = "비밀번호와 일치하지 않습니다"
+        confirmPwConditionLabel.textColor = .red
+        confirmPwConditionLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)
+        confirmPwConditionLabel.textAlignment = .left
+        confirmPwConditionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return confirmPwConditionLabel
+    }()
     
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var nameTextField: UITextField! {
@@ -108,6 +138,16 @@ class SignUpViewController: UIViewController {
         
         return nameConditionImageView
     }()
+    private lazy var nameConditionLabel: UILabel = {
+        let nameConditionLabel = UILabel()
+        nameConditionLabel.text = "이름은 2-10자 입니다"
+        nameConditionLabel.textColor = .red
+        nameConditionLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)
+        nameConditionLabel.textAlignment = .left
+        nameConditionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return nameConditionLabel
+    }()
     
     @IBOutlet private weak var birthLabel: UILabel!
     @IBOutlet private weak var birthTextField: UITextField! {
@@ -119,6 +159,16 @@ class SignUpViewController: UIViewController {
         birthConditionImageView.translatesAutoresizingMaskIntoConstraints = false
         
         return birthConditionImageView
+    }()
+    private lazy var birthConditionLabel: UILabel = {
+        let birthConditionLabel = UILabel()
+        birthConditionLabel.text = "생년월일 형식에 맞춰 입력해주세요"
+        birthConditionLabel.textColor = .red
+        birthConditionLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)
+        birthConditionLabel.textAlignment = .left
+        birthConditionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return birthConditionLabel
     }()
     
     // MARK: Methods
@@ -137,12 +187,17 @@ class SignUpViewController: UIViewController {
     }
     
     private func emailInfoSaved(_ user: User, email: String) {
+        var provider:String = ""
+        for profile in user.providerData {
+            provider = profile.providerID
+        }
+        
         let ref = Database.database().reference()
         ref.child("users").child(user.uid).setValue(
             ["email": email,
              "name": name,
              "birth": "\(year).\(month).\(day)",
-             "provider": "password"])
+             "provider": provider])
         
         print("email sign up")
     }
@@ -163,12 +218,26 @@ class SignUpViewController: UIViewController {
                         
                         if let errorCode = AuthErrorCode(rawValue: error._code) {
                             switch errorCode {
-                            case .invalidEmail: print("invalid email")
-                            case .emailAlreadyInUse: print("email already in use")
-                            case .operationNotAllowed: print("not allow account")
+                            case .invalidEmail:
+                                self.emailConditionLabel.text = "유효하지 않은 이메일 형식입니다"
+                            case .emailAlreadyInUse:
+                                self.emailConditionLabel.text = "이메일이 이미 존재합니다"
+                            case .operationNotAllowed:
+                                self.emailConditionLabel.text = "인증되지 않은 방법입니다"
                             case .weakPassword: print("weak password")
                             default: break
                             }
+                            
+                            self.emailTextField.becomeFirstResponder()
+                            self.emailLabel.textColor = .white
+                            self.emailTextField.textColor = .white
+                            self.emailTextField.tintColor = .white
+                            self.emailTextFieldBorder.backgroundColor = .red
+                            if self.emailConditionImageView.isDescendant(of: self.contentsView) {
+                                self.emailConditionImageView.removeFromSuperview()
+                            }
+                            self.contentsView.addSubview(self.emailConditionLabel)
+                            self.contentsView.addConstraints(self.emailConditionLabelConstraints())
                         }
                     } else {
                         if let user = user {
@@ -181,7 +250,10 @@ class SignUpViewController: UIViewController {
                                     self.emailInfoSaved(user, email: email)
                                     self.spinnerStopAnimating(self.spinner)
                                     
-                                    self.dismiss(animated: true, completion: nil)
+                                    if let signUpCompleteViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignUpCompleteViewController") as? SignUpCompleteViewController {
+                                    
+                                        self.present(signUpCompleteViewController, animated: true, completion: nil)
+                                    }
                                 }
                             }
                         } else {
@@ -454,28 +526,39 @@ extension SignUpViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case emailTextField:
+            if emailConditionLabel.isDescendant(of: contentsView) {
+                emailTextFieldBorder.backgroundColor = .white
+                emailConditionLabel.removeFromSuperview()
+            }
+            
             emailTextField.inputAccessoryView = accessoryView
         case pwTextField:
-            pwTextFieldCondition(pwChecked(pwTextField))
+            if pwConditionLabel.isDescendant(of: contentsView) {
+                pwTextFieldBorder.backgroundColor = .white
+                pwConditionLabel.removeFromSuperview()
+            }
             
             pwTextField.inputAccessoryView = accessoryView
         case confirmPwTextField:
-            let confirmed = confirmChecked(pwTextField: pwTextField,
-                                           confirmPwTextField: confirmPwTextField)
-            confirmPwTextFieldCondition(confirmed)
+            if confirmPwConditionLabel.isDescendant(of: contentsView) {
+                confirmPwTextFieldBorder.backgroundColor = .white
+                confirmPwConditionLabel.removeFromSuperview()
+            }
             
             confirmPwTextField.inputAccessoryView = accessoryView
         case nameTextField:
-            let nameTextCount = nameTextField.text?.count ?? 0
-            
-            if nameTextCount < 2 { nameTextFieldCondition(false) }
-            else if nameTextCount > 10 { nameTextFieldCondition(false) }
-            else { nameTextFieldCondition(true) }
+            if nameConditionLabel.isDescendant(of: contentsView) {
+                nameTextFieldBorder.backgroundColor = .white
+                nameConditionLabel.removeFromSuperview()
+            }
             
             scrollView.contentInset.bottom = keyboardHeight + 10.0
             nameTextField.inputAccessoryView = accessoryView
         case birthTextField:
-            birthTextFieldCondition(birthChecked(birthTextField))
+            if birthConditionLabel.isDescendant(of: contentsView) {
+                birthTextFieldBorder.backgroundColor = .white
+                birthConditionLabel.removeFromSuperview()
+            }
             
             scrollView.contentInset.bottom = keyboardHeight + 30.0
             birthTextField.inputAccessoryView = accessoryView
@@ -491,6 +574,11 @@ extension SignUpViewController: UITextFieldDelegate {
         
         switch textField {
         case emailTextField:
+            if emailConditionLabel.isDescendant(of: contentsView) {
+                emailConditionLabel.removeFromSuperview()
+            }
+            emailTextFieldCondition(emailChecked(emailTextField))
+            
             if replacementCount < 25 { return true }
             else { return false }
         case pwTextField:
@@ -564,21 +652,54 @@ extension SignUpViewController: UITextFieldDelegate {
         switch textField {
         case emailTextField:
             emailTextFieldCondition(emailChecked(emailTextField))
+            
+            if !emailChecked(emailTextField) {
+                emailTextFieldBorder.backgroundColor = .red
+                emailConditionLabel.text = "이메일 형식에 맞춰 입력해주세요"
+                contentsView.addSubview(emailConditionLabel)
+                contentsView.addConstraints(emailConditionLabelConstraints())
+            } else {
+                if emailConditionLabel.isDescendant(of: contentsView) {
+                    emailConditionLabel.removeFromSuperview()
+                }
+            }
         case pwTextField:
             pwTextFieldCondition(pwChecked(pwTextField))
+            
+            if !pwChecked(pwTextField) {
+                pwTextFieldBorder.backgroundColor = .red
+                contentsView.addSubview(pwConditionLabel)
+                contentsView.addConstraints(pwConditionLabelConstraints())
+            }
         case confirmPwTextField:
             let confirmed = confirmChecked(pwTextField: pwTextField,
                                            confirmPwTextField: confirmPwTextField)
             confirmPwTextFieldCondition(confirmed)
+            
+            if !confirmed {
+                confirmPwTextFieldBorder.backgroundColor = .red
+                contentsView.addSubview(confirmPwConditionLabel)
+                contentsView.addConstraints(confirmPwConditionLabelConstraints())
+            }
         case nameTextField:
             let nameTextCount = nameTextField.text?.count ?? 0
             if nameTextCount < 2 || nameTextCount > 10 {
                 nameTextFieldCondition(false)
+                
+                nameTextFieldBorder.backgroundColor = .red
+                contentsView.addSubview(nameConditionLabel)
+                contentsView.addConstraints(nameConditionLabelConstraints())
             } else {
                 nameTextFieldCondition(true)
             }
         case birthTextField:
             birthTextFieldCondition(birthChecked(birthTextField))
+            
+            if !birthChecked(birthTextField) {
+                birthTextFieldBorder.backgroundColor = .red
+                contentsView.addSubview(birthConditionLabel)
+                contentsView.addConstraints(birthConditionLabelConstraints())
+            }
         default:
             break
         }
@@ -603,6 +724,17 @@ extension SignUpViewController {
         return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
     }
     
+    private func emailConditionLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: emailConditionLabel, attribute: .top, relatedBy: .equal,
+            toItem: emailTextFieldBorder, attribute: .bottom, multiplier: 1.0, constant: 2.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: emailConditionLabel, attribute: .leading, relatedBy: .equal,
+            toItem: emailTextField, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        
+        return [topConstraint, leadingConstraint]
+    }
+    
     private func pwConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
             item: pwConditionImageView, attribute: .centerY, relatedBy: .equal,
@@ -620,6 +752,17 @@ extension SignUpViewController {
         return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
     }
     
+    private func pwConditionLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: pwConditionLabel, attribute: .top, relatedBy: .equal,
+            toItem: pwTextFieldBorder, attribute: .bottom, multiplier: 1.0, constant: 2.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: pwConditionLabel, attribute: .leading, relatedBy: .equal,
+            toItem: pwTextField, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        
+        return [topConstraint, leadingConstraint]
+    }
+    
     private func confirmPwConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
             item: confirmPwConditionImageView, attribute: .centerY, relatedBy: .equal,
@@ -635,6 +778,17 @@ extension SignUpViewController {
             toItem: confirmPwTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
         return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func confirmPwConditionLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: confirmPwConditionLabel, attribute: .top, relatedBy: .equal,
+            toItem: confirmPwTextFieldBorder, attribute: .bottom, multiplier: 1.0, constant: 2.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: confirmPwConditionLabel, attribute: .leading, relatedBy: .equal,
+            toItem: confirmPwTextField, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        
+        return [topConstraint, leadingConstraint]
     }
 
     private func nameConditionImageViewConstraints() -> [NSLayoutConstraint] {
@@ -654,6 +808,17 @@ extension SignUpViewController {
         return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
     }
     
+    private func nameConditionLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: nameConditionLabel, attribute: .top, relatedBy: .equal,
+            toItem: nameTextFieldBorder, attribute: .bottom, multiplier: 1.0, constant: 2.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: nameConditionLabel, attribute: .leading, relatedBy: .equal,
+            toItem: nameTextField, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        
+        return [topConstraint, leadingConstraint]
+    }
+    
     private func birthConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .centerY, relatedBy: .equal,
@@ -669,6 +834,17 @@ extension SignUpViewController {
             toItem: birthTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
         return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func birthConditionLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: birthConditionLabel, attribute: .top, relatedBy: .equal,
+            toItem: birthTextFieldBorder, attribute: .bottom, multiplier: 1.0, constant: 2.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: birthConditionLabel, attribute: .leading, relatedBy: .equal,
+            toItem: birthTextField, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        
+        return [topConstraint, leadingConstraint]
     }
     
     private func doneButtonConstraints() -> [NSLayoutConstraint] {
