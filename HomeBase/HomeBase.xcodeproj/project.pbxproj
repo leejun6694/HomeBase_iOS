@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		357810D13BFC4CBDA544F959 /* Pods_HomeBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DBCC19726630941F5990CD6 /* Pods_HomeBase.framework */; };
 		721A6199200E8EA4000A5646 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A6198200E8EA4000A5646 /* MainViewController.swift */; };
+		721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */; };
 		72378A7020081BC0007ED442 /* CustomMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72378A6F20081BC0007ED442 /* CustomMethods.swift */; };
 		725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B84FF1FFE326B0024588D /* SignUpViewController.swift */; };
 		725B8508200180D90024588D /* RegisterPlayerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B8507200180D90024588D /* RegisterPlayerInfoViewController.swift */; };
@@ -47,6 +48,7 @@
 		365E131BF0132C671D3B24D8 /* Pods_HomeBaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeBaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBCC19726630941F5990CD6 /* Pods_HomeBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		721A6198200E8EA4000A5646 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompleteViewController.swift; sourceTree = "<group>"; };
 		72378A6F20081BC0007ED442 /* CustomMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMethods.swift; sourceTree = "<group>"; };
 		725B84FF1FFE326B0024588D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		725B8507200180D90024588D /* RegisterPlayerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPlayerInfoViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		721A619E20189F09000A5646 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				725B84FF1FFE326B0024588D /* SignUpViewController.swift */,
+				721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
 		72881E6E1FFA8579009D23C2 = {
 			isa = PBXGroup;
 			children = (
@@ -124,7 +135,7 @@
 				72378A6F20081BC0007ED442 /* CustomMethods.swift */,
 				72881E7A1FFA8579009D23C2 /* AppDelegate.swift */,
 				72881E9F1FFB32F6009D23C2 /* LoginViewController.swift */,
-				725B84FF1FFE326B0024588D /* SignUpViewController.swift */,
+				721A619E20189F09000A5646 /* SignUp */,
 				72F07C04200C6E94004C83F6 /* Forgot */,
 				72FA574B200DD3A900A838B0 /* Register */,
 				721A6198200E8EA4000A5646 /* MainViewController.swift */,
@@ -443,6 +454,7 @@
 				725B8508200180D90024588D /* RegisterPlayerInfoViewController.swift in Sources */,
 				721A6199200E8EA4000A5646 /* MainViewController.swift in Sources */,
 				725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */,
+				721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
 				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,
 				72F07C01200C6BB0004C83F6 /* ForgotEmailViewController.swift in Sources */,
