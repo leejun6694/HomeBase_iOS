@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import Alamofire
 
 class ForgotEmailViewController: UIViewController {
 
@@ -62,6 +62,8 @@ class ForgotEmailViewController: UIViewController {
         return doneButton
     }()
     
+    @IBOutlet var spinner: UIActivityIndicatorView!
+    
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var nameTextField: UITextField! {
         didSet { nameTextField.delegate = self }
@@ -98,7 +100,42 @@ class ForgotEmailViewController: UIViewController {
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
+        spinnerStartAnimating(spinner)
         
+        let findEmailURL = CloudFunction.methodURL(method: Method.findEmail)
+        let birth: String = "\(year).\(month).\(day)"
+        let parameterDictionary = ["name": name, "birth": birth]
+        
+        Alamofire.request(
+            findEmailURL,
+            method: .post,
+            parameters: parameterDictionary).responseString {
+                (response) -> Void in
+                
+                if response.result.isSuccess {
+                    if let value = response.result.value {
+                        self.spinnerStopAnimating(self.spinner)
+                        if value == "User is not found" {
+                            if let forgotEmailErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotEmailErrorViewController") as? ForgotEmailErrorViewController {
+                                
+                                forgotEmailErrorViewController.modalPresentationStyle = .overCurrentContext
+                                self.present(forgotEmailErrorViewController, animated: false, completion: nil)
+                            }
+                        } else {
+                            if let findEmailViewController = self.storyboard?.instantiateViewController(withIdentifier: "FindEmailViewController") as? FindEmailViewController {
+                                
+                                findEmailViewController.name = self.name
+                                findEmailViewController.email = value
+                                
+                                self.navigationController?.pushViewController(findEmailViewController, animated: true)
+                            }
+                        }
+                    }
+                } else {
+                    self.spinnerStopAnimating(self.spinner)
+                    print(response.result.error)
+                }
+        }
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

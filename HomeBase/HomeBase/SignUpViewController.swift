@@ -199,6 +199,15 @@ class SignUpViewController: UIViewController {
              "birth": "\(year).\(month).\(day)",
              "provider": provider])
         
+//        if let user = Auth.auth().currentUser {
+//            do {
+//                print("sign out: \(user.email ?? "default")")
+//                try Auth.auth().signOut()
+//            } catch {
+//                print(error)
+//            }
+//        }
+        
         print("email sign up")
     }
     

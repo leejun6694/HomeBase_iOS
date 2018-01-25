@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,16 +42,16 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconSelect" translatesAutoresizingMaskIntoConstraints="NO" id="dlV-4k-yBX">
-                                        <rect key="frame" x="120" y="44.666666666666657" width="70" height="64"/>
+                                        <rect key="frame" x="120" y="44.000000000000036" width="70" height="64.666666666666686"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="찾으실 정보를 선택해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNV-UN-fnf">
-                                        <rect key="frame" x="30.333333333333329" y="116.66666666666666" width="249.33333333333337" height="28"/>
+                                        <rect key="frame" x="30.333333333333329" y="116.00000000000003" width="249.33333333333337" height="28"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQ5-4w-pyH">
-                                        <rect key="frame" x="22" y="173.33333333333334" width="266" height="41.333333333333343"/>
+                                        <rect key="frame" x="22" y="173.33333333333334" width="266" height="40.666666666666657"/>
                                         <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <state key="normal" title="이메일 찾기"/>
@@ -64,7 +65,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tay-fY-16L">
-                                        <rect key="frame" x="22" y="229.33333333333334" width="266" height="40.666666666666657"/>
+                                        <rect key="frame" x="22" y="229.33333333333334" width="266" height="40.000000000000028"/>
                                         <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <state key="normal" title="비밀번호 찾기"/>
@@ -135,6 +136,102 @@
             </objects>
             <point key="canvasLocation" x="-1136.231884057971" y="-1201.6304347826087"/>
         </scene>
+        <!--Forgot Email Error View Controller-->
+        <scene sceneID="sLA-vQ-0TQ">
+            <objects>
+                <viewController storyboardIdentifier="ForgotEmailErrorViewController" id="pF2-ci-vjV" customClass="ForgotEmailErrorViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="89p-0U-fCr"/>
+                        <viewControllerLayoutGuide type="bottom" id="FBC-i8-bUt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kdZ-OJ-Pz4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zvY-hH-XAK">
+                                <rect key="frame" x="52" y="218" width="310" height="307"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconError" translatesAutoresizingMaskIntoConstraints="NO" id="GkQ-lP-TQI">
+                                        <rect key="frame" x="120" y="38" width="70" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="GkQ-lP-TQI" secondAttribute="height" multiplier="1:1" id="Ouy-Yh-0hc"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQ3-aH-qkF">
+                                        <rect key="frame" x="56" y="108" width="198" height="70"/>
+                                        <string key="text">등록되지 않은 정보를
+입력하셨습니다.</string>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMI-Hd-vQw">
+                                        <rect key="frame" x="22" y="192" width="266" height="45"/>
+                                        <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="doneButtonDidTapped:" destination="pF2-ci-vjV" eventType="touchUpInside" id="AX8-mP-b7l"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43n-uu-TVb">
+                                        <rect key="frame" x="75.333333333333329" y="251" width="159.33333333333337" height="45"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="회원가입하기">
+                                            <color key="titleColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signUpButtonDidTapped:" destination="pF2-ci-vjV" eventType="touchUpInside" id="S8r-Cy-nYG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="dQ3-aH-qkF" firstAttribute="height" secondItem="zvY-hH-XAK" secondAttribute="height" multiplier="70/307" id="0yl-fB-xO2"/>
+                                    <constraint firstItem="GkQ-lP-TQI" firstAttribute="centerX" secondItem="zvY-hH-XAK" secondAttribute="centerX" id="2b2-Np-2WF"/>
+                                    <constraint firstItem="GkQ-lP-TQI" firstAttribute="height" secondItem="zvY-hH-XAK" secondAttribute="height" multiplier="70/307" id="67R-hb-2qy"/>
+                                    <constraint firstItem="43n-uu-TVb" firstAttribute="height" secondItem="bMI-Hd-vQw" secondAttribute="height" id="AOK-er-avN"/>
+                                    <constraint firstItem="dQ3-aH-qkF" firstAttribute="centerX" secondItem="zvY-hH-XAK" secondAttribute="centerX" id="Ab2-w7-nCz"/>
+                                    <constraint firstItem="bMI-Hd-vQw" firstAttribute="width" secondItem="zvY-hH-XAK" secondAttribute="width" multiplier="266/310" id="D8C-6J-smC"/>
+                                    <constraint firstItem="bMI-Hd-vQw" firstAttribute="top" secondItem="zvY-hH-XAK" secondAttribute="centerY" multiplier="192/153.5" id="OTn-Wx-tr6"/>
+                                    <constraint firstItem="43n-uu-TVb" firstAttribute="width" secondItem="bMI-Hd-vQw" secondAttribute="width" multiplier="0.6" id="PQp-8o-Ab3"/>
+                                    <constraint firstItem="dQ3-aH-qkF" firstAttribute="width" secondItem="zvY-hH-XAK" secondAttribute="width" multiplier="198/310" id="SKK-qN-iUY"/>
+                                    <constraint firstItem="43n-uu-TVb" firstAttribute="top" secondItem="zvY-hH-XAK" secondAttribute="centerY" multiplier="251/153.5" id="TxQ-Mx-VUz"/>
+                                    <constraint firstItem="bMI-Hd-vQw" firstAttribute="height" secondItem="zvY-hH-XAK" secondAttribute="height" multiplier="45/307" id="UVW-F7-68P"/>
+                                    <constraint firstItem="dQ3-aH-qkF" firstAttribute="top" secondItem="GkQ-lP-TQI" secondAttribute="bottom" id="Z1N-o2-irb"/>
+                                    <constraint firstItem="43n-uu-TVb" firstAttribute="centerX" secondItem="zvY-hH-XAK" secondAttribute="centerX" id="bwK-9n-7ml"/>
+                                    <constraint firstItem="bMI-Hd-vQw" firstAttribute="centerX" secondItem="zvY-hH-XAK" secondAttribute="centerX" id="dJ7-Gh-YFw"/>
+                                    <constraint firstItem="GkQ-lP-TQI" firstAttribute="centerY" secondItem="zvY-hH-XAK" secondAttribute="centerY" multiplier="73/153.5" id="zGU-vd-5Ry"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zvY-hH-XAK" firstAttribute="height" secondItem="kdZ-OJ-Pz4" secondAttribute="height" multiplier="307/736" id="JLq-Ph-VmM"/>
+                            <constraint firstItem="zvY-hH-XAK" firstAttribute="centerX" secondItem="kdZ-OJ-Pz4" secondAttribute="centerX" id="aD0-MI-aHb"/>
+                            <constraint firstItem="zvY-hH-XAK" firstAttribute="width" secondItem="kdZ-OJ-Pz4" secondAttribute="width" multiplier="310/414" id="fxQ-sW-NDD"/>
+                            <constraint firstItem="zvY-hH-XAK" firstAttribute="centerY" secondItem="kdZ-OJ-Pz4" secondAttribute="centerY" multiplier="371.5/368" id="oSy-ax-WMQ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N6P-gR-RDH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-386" y="-2386"/>
+        </scene>
         <!--Forgot Email View Controller-->
         <scene sceneID="m78-TL-W2J">
             <objects>
@@ -196,6 +293,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="FPs-DP-cJ5">
+                                <rect key="frame" x="197" y="358" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -216,11 +316,13 @@
                             <constraint firstItem="OKF-Wu-nSY" firstAttribute="leading" secondItem="dTR-v4-feR" secondAttribute="leading" id="P9K-1W-WkV"/>
                             <constraint firstItem="PSL-TN-zi4" firstAttribute="width" secondItem="5mU-MJ-qHd" secondAttribute="width" multiplier="345/414" id="Pqe-MR-EmB"/>
                             <constraint firstItem="cKb-3E-x5b" firstAttribute="leading" secondItem="PSL-TN-zi4" secondAttribute="leading" id="Pse-ke-qTz"/>
+                            <constraint firstItem="FPs-DP-cJ5" firstAttribute="centerX" secondItem="5mU-MJ-qHd" secondAttribute="centerX" id="QJU-V0-gdV"/>
                             <constraint firstItem="cKb-3E-x5b" firstAttribute="top" secondItem="QKN-Kl-8LM" secondAttribute="bottom" id="S7q-ey-eaB"/>
                             <constraint firstItem="C0U-Mb-3K3" firstAttribute="top" secondItem="dTR-v4-feR" secondAttribute="bottom" id="U8X-Io-2hx"/>
                             <constraint firstItem="QKN-Kl-8LM" firstAttribute="leading" secondItem="C0U-Mb-3K3" secondAttribute="leading" id="VFe-Z4-17G"/>
                             <constraint firstItem="QKN-Kl-8LM" firstAttribute="height" secondItem="C0U-Mb-3K3" secondAttribute="height" id="VSb-8t-pbf"/>
                             <constraint firstItem="PEm-1r-nlW" firstAttribute="centerX" secondItem="5mU-MJ-qHd" secondAttribute="centerX" id="Vk6-P0-TPP"/>
+                            <constraint firstItem="FPs-DP-cJ5" firstAttribute="centerY" secondItem="5mU-MJ-qHd" secondAttribute="centerY" id="Wj1-I4-izH"/>
                             <constraint firstItem="dTR-v4-feR" firstAttribute="height" secondItem="5mU-MJ-qHd" secondAttribute="height" multiplier="19/692" id="hYM-Sx-mmg"/>
                             <constraint firstItem="C0U-Mb-3K3" firstAttribute="height" secondItem="5mU-MJ-qHd" secondAttribute="height" multiplier="37/692" id="hgR-EZ-aPs"/>
                             <constraint firstItem="dTR-v4-feR" firstAttribute="width" secondItem="5mU-MJ-qHd" secondAttribute="width" multiplier="80/414" id="iIE-6S-No0"/>
@@ -242,6 +344,7 @@
                         <outlet property="nameLabel" destination="dTR-v4-feR" id="ILb-Jy-AJT"/>
                         <outlet property="nameTextField" destination="C0U-Mb-3K3" id="aRH-R6-ik2"/>
                         <outlet property="nameTextFieldBorder" destination="PSL-TN-zi4" id="c58-9a-xop"/>
+                        <outlet property="spinner" destination="FPs-DP-cJ5" id="sM1-f6-dfv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="38N-ND-Qlg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -253,10 +356,10 @@
             </objects>
             <point key="canvasLocation" x="-385" y="-1684"/>
         </scene>
-        <!--View Controller-->
+        <!--Find Email View Controller-->
         <scene sceneID="trh-TU-kcT">
             <objects>
-                <viewController id="tAO-ad-nSV" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FindEmailViewController" id="tAO-ad-nSV" customClass="FindEmailViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aFA-oy-saG"/>
                         <viewControllerLayoutGuide type="bottom" id="a2Y-id-CNx"/>
@@ -264,10 +367,111 @@
                     <view key="view" contentMode="scaleToFill" id="MJA-NA-LTl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundSignup2" translatesAutoresizingMaskIntoConstraints="NO" id="xt2-HD-IXv">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록 이메일은" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wq1-Fl-Yul">
+                                <rect key="frame" x="32.333333333333343" y="264" width="350" height="35"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5D-40-RRr">
+                                <rect key="frame" x="57" y="299" width="300" height="35"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="23"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQ3-bo-Fda">
+                                <rect key="frame" x="57" y="335" width="300" height="2"/>
+                                <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJo-Sx-sLQ">
+                                <rect key="frame" x="157" y="337" width="100" height="35"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="lEs-LM-wir">
+                                <rect key="frame" x="190.66666666666666" y="408" width="33" height="18"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzS-VW-3TP">
+                                <rect key="frame" x="32" y="488" width="350" height="45"/>
+                                <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="로그인하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signInButtonDidTapped:" destination="tAO-ad-nSV" eventType="touchUpInside" id="rCh-cX-Voh"/>
+                                    <segue destination="4ds-qn-uYb" kind="unwind" identifier="FindEmailToSignIn" unwindAction="unwindToSignInSegue:" id="7UG-sR-Nh6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZ7-EG-7zi">
+                                <rect key="frame" x="32" y="550" width="350" height="45"/>
+                                <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="비밀번호 찾기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lEs-LM-wir" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="0Ok-29-QrA"/>
+                            <constraint firstItem="FQ3-bo-Fda" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="300/414" id="1rk-ck-cxR"/>
+                            <constraint firstItem="wZ7-EG-7zi" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="2Ze-Rw-PTy"/>
+                            <constraint firstItem="wZ7-EG-7zi" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" multiplier="572.5/368" id="4ko-oL-oEB"/>
+                            <constraint firstItem="LJo-Sx-sLQ" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="100/414" id="4m3-b7-4sZ"/>
+                            <constraint firstItem="lEs-LM-wir" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="33/414" id="5GL-n4-BC0"/>
+                            <constraint firstItem="LJo-Sx-sLQ" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="5ps-nV-xv8"/>
+                            <constraint firstItem="xt2-HD-IXv" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" id="6Gv-fh-rT2"/>
+                            <constraint firstItem="xt2-HD-IXv" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="6IG-Ty-KJH"/>
+                            <constraint firstItem="Wq1-Fl-Yul" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" multiplier="281.5/368" id="AOt-ad-hGQ"/>
+                            <constraint firstItem="Wq1-Fl-Yul" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="350/414" id="ClW-gG-IJ8"/>
+                            <constraint firstItem="lEs-LM-wir" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="18/736" id="EGZ-K2-paw"/>
+                            <constraint firstItem="v5D-40-RRr" firstAttribute="top" secondItem="Wq1-Fl-Yul" secondAttribute="bottom" id="FHh-4z-h3l"/>
+                            <constraint firstItem="wZ7-EG-7zi" firstAttribute="width" secondItem="bzS-VW-3TP" secondAttribute="width" id="GCF-nz-6tB"/>
+                            <constraint firstItem="Wq1-Fl-Yul" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="IcG-lc-Qg8"/>
+                            <constraint firstItem="xt2-HD-IXv" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" id="IsE-ss-hM7"/>
+                            <constraint firstItem="bzS-VW-3TP" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" multiplier="510.5/368" id="J1T-Ii-r14"/>
+                            <constraint firstItem="v5D-40-RRr" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="35/736" id="J4Z-Ar-8AH"/>
+                            <constraint firstItem="bzS-VW-3TP" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="350/414" id="LQ5-tb-hhK"/>
+                            <constraint firstItem="v5D-40-RRr" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="N4e-0n-vlt"/>
+                            <constraint firstItem="FQ3-bo-Fda" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="OS4-Ad-auu"/>
+                            <constraint firstItem="Wq1-Fl-Yul" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="35/736" id="SYV-gn-w1s"/>
+                            <constraint firstItem="FQ3-bo-Fda" firstAttribute="top" secondItem="v5D-40-RRr" secondAttribute="bottom" constant="1" id="Uui-x6-IoX"/>
+                            <constraint firstItem="bzS-VW-3TP" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="fHu-Uf-RPG"/>
+                            <constraint firstItem="v5D-40-RRr" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="300/414" id="kiY-Ri-zzs"/>
+                            <constraint firstItem="LJo-Sx-sLQ" firstAttribute="top" secondItem="FQ3-bo-Fda" secondAttribute="bottom" id="myw-mO-uYo"/>
+                            <constraint firstItem="lEs-LM-wir" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" multiplier="417/368" id="oCB-Yk-KRp"/>
+                            <constraint firstItem="xt2-HD-IXv" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" id="py3-mn-ReX"/>
+                            <constraint firstItem="LJo-Sx-sLQ" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="35/736" id="rWn-iu-AHU"/>
+                            <constraint firstItem="FQ3-bo-Fda" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="2/736" id="sHQ-c2-re0"/>
+                            <constraint firstItem="bzS-VW-3TP" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="45/736" id="smd-Ax-zZa"/>
+                            <constraint firstItem="wZ7-EG-7zi" firstAttribute="height" secondItem="bzS-VW-3TP" secondAttribute="height" id="vfX-DB-yhT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailLabel" destination="v5D-40-RRr" id="4SI-5R-bLS"/>
+                        <outlet property="nameLabel" destination="Wq1-Fl-Yul" id="TXi-a3-38v"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2qK-9Y-Umc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="4ds-qn-uYb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="293" y="-1684"/>
         </scene>
@@ -1167,7 +1371,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="signInButtonDidTapped:" destination="pkq-Pp-Y4q" eventType="touchUpInside" id="iMW-mM-wiT"/>
-                                    <segue destination="4RH-Jw-3t6" kind="unwind" identifier="UnwindToSignIn" unwindAction="unwindToSignInSegue:" id="CeY-GX-78P"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1197,7 +1400,6 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ons-cU-dB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="4RH-Jw-3t6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3" y="933"/>
         </scene>
@@ -1670,6 +1872,7 @@
         <image name="backgroundSignup2" width="414" height="736"/>
         <image name="facebook" width="33" height="33"/>
         <image name="google" width="33" height="33"/>
+        <image name="iconError" width="70" height="70"/>
         <image name="iconExit" width="45" height="45"/>
         <image name="iconSelect" width="70" height="70"/>
         <image name="mail" width="80" height="58"/>
