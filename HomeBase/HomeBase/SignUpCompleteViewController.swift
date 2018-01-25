@@ -11,20 +11,19 @@ import FirebaseAuth
 
 class SignUpCompleteViewController: UIViewController {
     
+    // MARK: Methods
+    
     @IBAction func signInButtonDidTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "UnwindToSignIn", sender: nil)
+        if let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            
+            UIApplication.shared.keyWindow?.rootViewController = loginViewController
+        }
     }
+    
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let user = Auth.auth().currentUser {
-            do {
-                print("sign out: \(user.email ?? "default")")
-                try Auth.auth().signOut()
-            } catch {
-                print(error)
-            }
-        }
     }
 }

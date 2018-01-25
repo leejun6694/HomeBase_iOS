@@ -16,6 +16,8 @@ target 'HomeBase' do
   pod 'FBSDKLoginKit'
   pod 'FacebookShare'
 
+  pod 'Alamofire', '~> 4.5'
+
   target 'HomeBaseTests' do
     inherit! :search_paths
     # Pods for testing
