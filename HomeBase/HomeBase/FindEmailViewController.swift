@@ -21,7 +21,10 @@ class FindEmailViewController: UIViewController {
     // MARK: Methods
     
     @IBAction func signInButtonDidTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "FindEmailToSignIn", sender: nil)
+        if let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            
+            UIApplication.shared.keyWindow?.rootViewController = loginViewController
+        }
     }
     
     // MARK: Life Cycle
