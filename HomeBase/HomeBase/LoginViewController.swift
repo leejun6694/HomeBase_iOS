@@ -141,9 +141,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func unwindToSignIn(segue: UIStoryboardSegue) {
-    }
-    
     // MARK: Life Cycles
     
     override func viewDidLoad() {

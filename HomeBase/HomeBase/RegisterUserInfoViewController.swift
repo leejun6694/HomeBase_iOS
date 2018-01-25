@@ -134,6 +134,8 @@ class RegisterUserInfoViewController: UIViewController {
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         if let registerPlayerInfoViewController =
             self.storyboard?.instantiateViewController(withIdentifier: "RegisterPlayerInfoViewController") as? RegisterPlayerInfoViewController {
             
@@ -359,7 +361,6 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     private func heightTextFieldCondition(_ state: Bool) {
         if state {
             heightCondition = true
-            height = Int(heightTextField.text ?? "0") ?? 0
             heightLabel.textColor = correctColor
             heightTextField.textColor = correctColor
             heightTextField.tintColor = correctColor
@@ -368,6 +369,15 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
             if !heightConditionImageView.isDescendant(of: contentsView) {
                 contentsView.addSubview(heightConditionImageView)
                 contentsView.addConstraints(heightConditionImageViewConstraints())
+            }
+            
+            var heightText = heightTextField.text ?? ""
+            if heightText.count > 3 {
+                heightText.removeLast()
+                heightText.removeLast()
+                heightText.removeLast()
+                
+                height = Int(heightText) ?? 0
             }
         } else {
             heightCondition = false
@@ -386,7 +396,6 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     private func weightTextFieldCondition(_ state: Bool) {
         if state {
             weightCondition = true
-            weight = Int(weightTextField.text ?? "0") ?? 0
             weightLabel.textColor = correctColor
             weightTextField.textColor = correctColor
             weightTextField.tintColor = correctColor
@@ -395,6 +404,15 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
             if !weightConditionImageView.isDescendant(of: contentsView) {
                 contentsView.addSubview(weightConditionImageView)
                 contentsView.addConstraints(weightConditionImageViewConstraints())
+            }
+            
+            var weightText = weightTextField.text ?? ""
+            if weightText.count > 3 {
+                weightText.removeLast()
+                weightText.removeLast()
+                weightText.removeLast()
+                
+                weight = Int(weightText) ?? 0
             }
         } else {
             weightCondition = false
@@ -555,16 +573,22 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
             else { nameTextFieldCondition(true) }
         case birthTextField:
             birthTextFieldCondition(birthChecked(birthTextField))
+            
+            heightTextField.becomeFirstResponder()
         case heightTextField:
             let heightTextCount = heightTextField.text?.count ?? 0
             if heightTextCount != 0 { heightTextField.text?.append(" cm") }
             
             heightTextFieldCondition(bodyChecked(heightTextField))
+            
+            weightTextField.becomeFirstResponder()
         case weightTextField:
             let weightTextCount = weightTextField.text?.count ?? 0
             if weightTextCount != 0 { weightTextField.text?.append(" kg") }
             
             weightTextFieldCondition(bodyChecked(weightTextField))
+            
+            weightTextField.resignFirstResponder()
         default:
             break
         }

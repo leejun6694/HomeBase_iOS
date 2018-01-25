@@ -411,7 +411,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="signInButtonDidTapped:" destination="tAO-ad-nSV" eventType="touchUpInside" id="rCh-cX-Voh"/>
-                                    <segue destination="4ds-qn-uYb" kind="unwind" identifier="FindEmailToSignIn" unwindAction="unwindToSignInSegue:" id="7UG-sR-Nh6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZ7-EG-7zi">
@@ -471,7 +470,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2qK-9Y-Umc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="4ds-qn-uYb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="293" y="-1684"/>
         </scene>
@@ -1695,6 +1693,9 @@
                                 </segments>
                                 <color key="tintColor" red="0.0" green="0.70588235290000001" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BHl-Fb-s2X">
+                                <rect key="frame" x="197" y="358" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -1715,12 +1716,14 @@
                             <constraint firstItem="oL3-lx-duI" firstAttribute="width" secondItem="FSf-M7-xMA" secondAttribute="width" multiplier="80/414" id="F7T-Lf-tnX"/>
                             <constraint firstItem="Oaj-MD-0ZZ" firstAttribute="height" secondItem="oL3-lx-duI" secondAttribute="height" id="FEQ-jb-liY"/>
                             <constraint firstItem="MDR-tF-pEG" firstAttribute="leading" secondItem="oL3-lx-duI" secondAttribute="leading" id="FMJ-QF-nJX"/>
+                            <constraint firstItem="BHl-Fb-s2X" firstAttribute="centerY" secondItem="FSf-M7-xMA" secondAttribute="centerY" id="GDc-8y-pjc"/>
                             <constraint firstItem="DP4-zr-oN6" firstAttribute="leading" secondItem="FSf-M7-xMA" secondAttribute="centerX" multiplier="35/207" id="HBm-8K-kNf"/>
                             <constraint firstItem="oL3-lx-duI" firstAttribute="height" secondItem="FSf-M7-xMA" secondAttribute="height" multiplier="19/692" id="INT-v8-mOm"/>
                             <constraint firstItem="oL3-lx-duI" firstAttribute="leading" secondItem="FSf-M7-xMA" secondAttribute="centerX" multiplier="44/207" id="JcF-g9-7dO"/>
                             <constraint firstItem="4fY-g5-DQr" firstAttribute="height" secondItem="DP4-zr-oN6" secondAttribute="height" id="KIm-6W-6wB"/>
                             <constraint firstItem="kth-NP-Lzp" firstAttribute="centerY" secondItem="Oaj-MD-0ZZ" secondAttribute="centerY" id="N9t-Uf-te3"/>
                             <constraint firstItem="Oaj-MD-0ZZ" firstAttribute="width" secondItem="oL3-lx-duI" secondAttribute="width" id="Pwo-GD-eIq"/>
+                            <constraint firstItem="BHl-Fb-s2X" firstAttribute="centerX" secondItem="FSf-M7-xMA" secondAttribute="centerX" id="QQn-EV-x5t"/>
                             <constraint firstItem="oL3-lx-duI" firstAttribute="top" secondItem="FSf-M7-xMA" secondAttribute="centerY" multiplier="48/346" id="WmU-81-hPR"/>
                             <constraint firstItem="4fY-g5-DQr" firstAttribute="leading" secondItem="DP4-zr-oN6" secondAttribute="leading" id="XZY-Fj-a6W"/>
                             <constraint firstItem="0vf-BZ-kUE" firstAttribute="height" secondItem="FSf-M7-xMA" secondAttribute="height" multiplier="30/692" id="YJz-eY-vjm"/>
@@ -1759,6 +1762,7 @@
                         <outlet property="positionLabel" destination="oL3-lx-duI" id="yrv-9i-zsw"/>
                         <outlet property="positionTextField" destination="MDR-tF-pEG" id="Csf-er-Xbp"/>
                         <outlet property="positionTextFieldBorder" destination="DP4-zr-oN6" id="ehv-Mk-L4C"/>
+                        <outlet property="spinner" destination="BHl-Fb-s2X" id="t7a-pK-vGB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OKW-PX-qja" userLabel="First Responder" sceneMemberID="firstResponder"/>

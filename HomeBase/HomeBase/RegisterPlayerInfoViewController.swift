@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class RegisterPlayerInfoViewController: UIViewController {
     
@@ -16,8 +18,8 @@ class RegisterPlayerInfoViewController: UIViewController {
     var year: String = ""
     var month: String = ""
     var day: String = ""
-    var height: Int = 0
-    var weight: Int = 0
+    var height: Int!
+    var weight: Int!
     
     private var position: String = ""
     private var playerNumber: Int = 0
@@ -71,6 +73,8 @@ class RegisterPlayerInfoViewController: UIViewController {
         
         return doneButton
     }()
+    
+    @IBOutlet var spinner: UIActivityIndicatorView!
     
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet private weak var positionTextField: UITextField! {
@@ -162,11 +166,66 @@ class RegisterPlayerInfoViewController: UIViewController {
     // MARK: Methods
     
     @IBAction func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
-        view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
+        spinnerStartAnimating(spinner)
         
+        if let user = Auth.auth().currentUser {
+            let ref = Database.database().reference()
+            
+            var provider:String = ""
+            for profile in user.providerData {
+                provider = profile.providerID
+            }
+            
+            var batPosition = "우"
+            let hitterControlValue = hitterControl.selectedSegmentIndex
+            if hitterControlValue == 0 { batPosition = "좌" }
+            else { batPosition = "우" }
+            
+            var pitchPosition = "우"
+            let pitcherControlValue = pitcherControl.selectedSegmentIndex
+            if pitcherControlValue == 0 { pitchPosition = "좌" }
+            else { pitchPosition = "우" }
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+            let joinedAt = dateFormatter.string(from: Date())
+            
+            if provider == "password" {
+                ref.child("users").child(user.uid).updateChildValues(
+                    ["name": name,
+                     "birth": "\(year).\(month).\(day)"])
+            } else if provider == "google.com" || provider == "facebook.com" {
+                ref.child("users").child(user.uid).setValue(
+                    ["email": user.email,
+                     "name": name,
+                     "birth": "\(year).\(month).\(day)",
+                     "provider": provider])
+            }
+            
+            ref.child("players").child(user.uid).setValue(
+                ["name": name,
+                 "height": height,
+                 "weight": weight,
+                 "position": position,
+                 "backNumber": playerNumber,
+                 "batPosition": batPosition,
+                 "pitchPosition": pitchPosition,
+                 "joinedAt": joinedAt])
+            
+            spinnerStopAnimating(spinner)
+            
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainViewController = mainStoryboard.instantiateInitialViewController()
+            
+            UIApplication.shared.keyWindow?.rootViewController = mainViewController
+        } else {
+            spinnerStopAnimating(spinner)
+        }
     }
     
     @objc private func positionDoneButtonDidTapped(_ sender: UIBarButtonItem) {
@@ -260,10 +319,6 @@ extension RegisterPlayerInfoViewController: UIPickerViewDelegate, UIPickerViewDa
         return positionData.count
     }
     
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return positionData[row]
-//    }
-    
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         
@@ -302,7 +357,7 @@ extension RegisterPlayerInfoViewController: UITextFieldDelegate {
     private func playerNumberTextFieldCondition(_ state: Bool) {
         if state {
             playerNumberCondition = true
-            playerNumber = Int(playerNumberTextField.text ?? "default") ?? 0
+            playerNumber = Int(playerNumberTextField.text ?? "0") ?? 0
             playerNumberLabel.textColor = correctColor
             playerNumberTextField.textColor = correctColor
             playerNumberTextField.tintColor = correctColor
@@ -314,7 +369,7 @@ extension RegisterPlayerInfoViewController: UITextFieldDelegate {
             }
         } else {
             playerNumberCondition = false
-            playerNumber = Int(playerNumberTextField.text ?? "default") ?? 0
+            playerNumber = Int(playerNumberTextField.text ?? "0") ?? 0
             playerNumberLabel.textColor = .white
             playerNumberTextField.textColor = .white
             playerNumberTextField.tintColor = .white
@@ -332,6 +387,8 @@ extension RegisterPlayerInfoViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case positionTextField:
+            positionTextField.text = "선발투수"
+            
             positionTextField.inputView = positionPickerView
             positionTextField.inputAccessoryView = pickerToolBar
         case playerNumberTextField:
@@ -348,6 +405,12 @@ extension RegisterPlayerInfoViewController: UITextFieldDelegate {
         
         switch textField {
         case playerNumberTextField:
+            if currentCount == 1, string.count == 1 {
+                if playerNumberTextField.text == "0" {
+                    playerNumberTextField.text?.removeLast()
+                }
+            }
+            
             if currentCount == 2, string.count == 1 {
                 playerNumberTextField.text?.append(string)
                 playerNumberTextField.resignFirstResponder()
@@ -384,12 +447,18 @@ extension RegisterPlayerInfoViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        switch textField {
+        switch textField {
 //        case positionTextField:
-//        case playerNumberTextField:
-//        default:
-//            break
-//        }
+        case playerNumberTextField:
+            let playerNumberText = playerNumberTextField.text ?? ""
+            if playerNumberText.count > 0, playerNumberText.count < 4 {
+                playerNumberTextFieldCondition(true)
+            } else {
+                playerNumberTextFieldCondition(false)
+            }
+        default:
+            break
+        }
     }
 }
 
