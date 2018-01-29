@@ -10,7 +10,6 @@
 		357810D13BFC4CBDA544F959 /* Pods_HomeBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DBCC19726630941F5990CD6 /* Pods_HomeBase.framework */; };
 		721A6199200E8EA4000A5646 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A6198200E8EA4000A5646 /* MainViewController.swift */; };
 		721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */; };
-		722384DC201A3BCE005DBAC4 /* ForgotEmailErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722384DB201A3BCE005DBAC4 /* ForgotEmailErrorViewController.swift */; };
 		7231C9272018F3AD004FE531 /* CloudFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C9262018F3AD004FE531 /* CloudFunction.swift */; };
 		7231C929201905F7004FE531 /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C928201905F7004FE531 /* FindEmailViewController.swift */; };
 		72378A7020081BC0007ED442 /* CustomMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72378A6F20081BC0007ED442 /* CustomMethods.swift */; };
@@ -25,6 +24,8 @@
 		72881E9E1FFB3291009D23C2 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881E9C1FFB3291009D23C2 /* Start.storyboard */; };
 		72881EA01FFB32F6009D23C2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72881E9F1FFB32F6009D23C2 /* LoginViewController.swift */; };
 		72881EA31FFB3B98009D23C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881EA11FFB3B98009D23C2 /* Main.storyboard */; };
+		7297626E201EF91000A2CE4A /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297626D201EF91000A2CE4A /* FindPasswordViewController.swift */; };
+		72976272201EFB8A00A2CE4A /* ForgotErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */; };
 		72E96C96200600E000B68F29 /* RegisterTeamCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C95200600E000B68F29 /* RegisterTeamCreateViewController.swift */; };
 		72E96C982006026200B68F29 /* RegisterTeamChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C972006026200B68F29 /* RegisterTeamChoiceViewController.swift */; };
 		72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C99200603A000B68F29 /* RegisterTeamJoinViewController.swift */; };
@@ -52,7 +53,6 @@
 		5DBCC19726630941F5990CD6 /* Pods_HomeBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		721A6198200E8EA4000A5646 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompleteViewController.swift; sourceTree = "<group>"; };
-		722384DB201A3BCE005DBAC4 /* ForgotEmailErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotEmailErrorViewController.swift; sourceTree = "<group>"; };
 		7231C9262018F3AD004FE531 /* CloudFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunction.swift; sourceTree = "<group>"; };
 		7231C928201905F7004FE531 /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
 		72378A6F20081BC0007ED442 /* CustomMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMethods.swift; sourceTree = "<group>"; };
@@ -72,6 +72,8 @@
 		72881E9D1FFB3291009D23C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Start.storyboard; sourceTree = "<group>"; };
 		72881E9F1FFB32F6009D23C2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		72881EA21FFB3B98009D23C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7297626D201EF91000A2CE4A /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
+		72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotErrorViewController.swift; sourceTree = "<group>"; };
 		72E96C95200600E000B68F29 /* RegisterTeamCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCreateViewController.swift; sourceTree = "<group>"; };
 		72E96C972006026200B68F29 /* RegisterTeamChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamChoiceViewController.swift; sourceTree = "<group>"; };
 		72E96C99200603A000B68F29 /* RegisterTeamJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinViewController.swift; sourceTree = "<group>"; };
@@ -171,9 +173,10 @@
 				72F07C0A200C77FC004C83F6 /* ForgotSelectNavigation.swift */,
 				72F07BFE200C6B9B004C83F6 /* ForgotSelectViewController.swift */,
 				72F07C00200C6BB0004C83F6 /* ForgotEmailViewController.swift */,
-				722384DB201A3BCE005DBAC4 /* ForgotEmailErrorViewController.swift */,
 				7231C928201905F7004FE531 /* FindEmailViewController.swift */,
 				72F07C02200C6BBD004C83F6 /* ForgotPasswordViewController.swift */,
+				7297626D201EF91000A2CE4A /* FindPasswordViewController.swift */,
+				72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */,
 			);
 			name = Forgot;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72976272201EFB8A00A2CE4A /* ForgotErrorViewController.swift in Sources */,
 				72F07BFF200C6B9B004C83F6 /* ForgotSelectViewController.swift in Sources */,
 				72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */,
 				725B850A200181350024588D /* RegisterUserInfoViewController.swift in Sources */,
@@ -470,7 +474,7 @@
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
 				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,
 				72F07C01200C6BB0004C83F6 /* ForgotEmailViewController.swift in Sources */,
-				722384DC201A3BCE005DBAC4 /* ForgotEmailErrorViewController.swift in Sources */,
+				7297626E201EF91000A2CE4A /* FindPasswordViewController.swift in Sources */,
 				7231C929201905F7004FE531 /* FindEmailViewController.swift in Sources */,
 				72E96C982006026200B68F29 /* RegisterTeamChoiceViewController.swift in Sources */,
 			);

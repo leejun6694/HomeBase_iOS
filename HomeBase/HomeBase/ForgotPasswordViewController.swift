@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Alamofire
 
 class ForgotPasswordViewController: UIViewController {
 
@@ -33,6 +35,8 @@ class ForgotPasswordViewController: UIViewController {
         
         return accessoryView
     }()
+    
+    @IBOutlet private var spinner: UIActivityIndicatorView!
     
     private lazy var doneButton: UIButton = {
         let doneButton = UIButton(type: .system)
@@ -86,7 +90,46 @@ class ForgotPasswordViewController: UIViewController {
     // MARK: Methods
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
+        spinnerStartAnimating(spinner)
         
+        let parameterDictionary = ["name": name, "email": email]
+        Alamofire.request(
+            CloudFunction.methodURL(method: Method.findPassword),
+            method: .post,
+            parameters: parameterDictionary).responseString {
+                (response) -> Void in
+                
+                if response.result.isSuccess {
+                    if response.result.value == "User is not found" {
+                        if let forgotErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotErrorViewController") as? ForgotErrorViewController {
+                            
+                            forgotErrorViewController.modalPresentationStyle = .overCurrentContext
+                            self.spinnerStopAnimating(self.spinner)
+                            self.present(forgotErrorViewController, animated: false, completion: nil)
+                        }
+                    } else {
+                        Auth.auth().sendPasswordReset(withEmail: self.email) {
+                            (error) in
+                            
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        }
+
+                        if let findPasswordViewController = self.storyboard?.instantiateViewController(withIdentifier: "FindPasswordViewController") as? FindPasswordViewController {
+                            
+                            findPasswordViewController.name = self.name
+                            findPasswordViewController.email = self.email
+                            
+                            self.spinnerStopAnimating(self.spinner)
+                            self.navigationController?.pushViewController(findPasswordViewController, animated: true)
+                        }
+                    }
+                } else {
+                    self.spinnerStopAnimating(self.spinner)
+                    print("fail")
+                }
+        }
     }
     
     @IBAction private func backgroundViewDidTapped(_ sender: UITapGestureRecognizer) {
@@ -198,6 +241,7 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
     
     private func emailTextFieldCondition(_ state: Bool) {
         if state {
+            email = emailTextField.text ?? ""
             emailCondition = true
             emailLabel.textColor = correctColor
             emailTextField.textColor = correctColor
@@ -233,6 +277,8 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
             
             nameTextField.inputAccessoryView = accessoryView
         case emailTextField:
+            emailTextFieldCondition(emailChecked(emailTextField))
+            
             emailTextField.inputAccessoryView = accessoryView
         default:
             break
@@ -253,6 +299,8 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
             if replacementCount < 14 { return true }
             else { return false }
         case emailTextField:
+            emailTextFieldCondition(emailChecked(emailTextField))
+            
             if replacementCount < 25 { return true }
             else { return false }
         default:

@@ -20,10 +20,17 @@ class FindEmailViewController: UIViewController {
     
     // MARK: Methods
     
-    @IBAction func signInButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func signInButtonDidTapped(_ sender: UIButton) {
         if let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
             
             UIApplication.shared.keyWindow?.rootViewController = loginViewController
+        }
+    }
+    
+    @IBAction func forgotPasswordButtonDidTapped(_ sender: UIButton) {
+        if let forgotPasswordViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
+            
+            self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
         }
     }
     
@@ -31,8 +38,6 @@ class FindEmailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationController?.isNavigationBarHidden = true
         
         nameLabel.text = "\(name)님의 등록 이메일은"
         emailTextView.isScrollEnabled = false
@@ -43,6 +48,12 @@ class FindEmailViewController: UIViewController {
                 emailTextView.text.append("\(email)" + "\n")
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {

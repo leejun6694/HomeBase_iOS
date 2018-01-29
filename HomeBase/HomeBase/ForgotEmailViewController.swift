@@ -115,23 +115,22 @@ class ForgotEmailViewController: UIViewController {
                 if response.result.isSuccess {
                     if let value = response.result.value as? [String: [String]] {
                         if let emails = value["emails"] {
-                            self.spinnerStopAnimating(self.spinner)
-                            
                             if let findEmailViewController = self.storyboard?.instantiateViewController(withIdentifier: "FindEmailViewController") as? FindEmailViewController {
                                 
                                 findEmailViewController.name = self.name
                                 findEmailViewController.emails = emails
                                 
+                                self.spinnerStopAnimating(self.spinner)
                                 self.navigationController?.pushViewController(findEmailViewController, animated: true)
                             }
                         }
                     }
                 } else {
-                    self.spinnerStopAnimating(self.spinner)
-                    if let forgotEmailErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotEmailErrorViewController") as? ForgotEmailErrorViewController {
+                    if let forgotErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotErrorViewController") as? ForgotErrorViewController {
                         
-                        forgotEmailErrorViewController.modalPresentationStyle = .overCurrentContext
-                        self.present(forgotEmailErrorViewController, animated: false, completion: nil)
+                        forgotErrorViewController.modalPresentationStyle = .overCurrentContext
+                        self.spinnerStopAnimating(self.spinner)
+                        self.present(forgotErrorViewController, animated: false, completion: nil)
                 }
             }
         }
