@@ -220,9 +220,10 @@ class RegisterPlayerInfoViewController: UIViewController {
             spinnerStopAnimating(spinner)
             
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainViewController = mainStoryboard.instantiateInitialViewController()
-            
-            UIApplication.shared.keyWindow?.rootViewController = mainViewController
+            if let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+                
+                UIApplication.shared.keyWindow?.rootViewController = mainViewController
+            }
         } else {
             spinnerStopAnimating(spinner)
         }

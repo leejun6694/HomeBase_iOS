@@ -39,8 +39,6 @@ class LoginViewController: UIViewController {
     
     private func userConnected() {
         if let currentUser = Auth.auth().currentUser {
-            print("current user email: \(currentUser.email ?? "default")")
-            
             let getPlayerURL = CloudFunction.methodURL(method: Method.getPlayer)
             let parameterDictionary = ["uid": currentUser.uid]
             
@@ -52,7 +50,7 @@ class LoginViewController: UIViewController {
                 
                     if response.result.isSuccess {
                         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        if let mainViewController = mainStoryboard.instantiateInitialViewController() as? MainViewController {
+                        if let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
                             
                             self.spinnerStopAnimating(self.spinner)
                             UIApplication.shared.keyWindow?.rootViewController = mainViewController
@@ -92,7 +90,6 @@ class LoginViewController: UIViewController {
                 } else {
                     if let currentUser = user {
                         if currentUser.isEmailVerified {
-                            print("email connected")
                             self.userConnected()
                         } else {
                             print("email isn't verified")

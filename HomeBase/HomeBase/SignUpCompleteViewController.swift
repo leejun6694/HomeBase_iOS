@@ -24,6 +24,5 @@ class SignUpCompleteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 }
