@@ -11,6 +11,7 @@ import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        sleep(1)
         
         FirebaseApp.configure()
         
@@ -29,17 +28,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions)
         
         if let currentUser = Auth.auth().currentUser {
-            print("loading user: \(currentUser.email ?? "default")")
+            let getPlayerURL = CloudFunction.methodURL(method: Method.getPlayer)
+            let parameterDictionary = ["uid": currentUser.uid]
             
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let mainViewController = storyBoard.instantiateInitialViewController()
-            
-            window?.rootViewController = mainViewController
+            Alamofire.request(
+                getPlayerURL,
+                method: .get,
+                parameters: parameterDictionary).responseJSON {
+                    (response) -> Void in
+                    
+                    if response.result.isSuccess {
+                        print("loading user: \(currentUser.email ?? "default")")
+                        
+                        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+                        if let mainViewController = mainStoryBoard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+                            
+                            self.window?.rootViewController = mainViewController
+                        }
+                    } else {
+                        do {
+                            try Auth.auth().signOut()
+                        } catch {
+                            print("sign out error")
+                        }
+                        
+                        let storyBoard = UIStoryboard(name: "Start", bundle: nil)
+                        let signInViewController = storyBoard.instantiateInitialViewController()
+                        
+                        self.window?.rootViewController = signInViewController
+                    }
+            }
         } else {
             let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-            let loginViewController = storyBoard.instantiateInitialViewController()
+            let signInViewController = storyBoard.instantiateInitialViewController()
             
-            window?.rootViewController = loginViewController
+            window?.rootViewController = signInViewController
         }
         
         return true

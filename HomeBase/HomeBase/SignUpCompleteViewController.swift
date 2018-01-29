@@ -14,9 +14,9 @@ class SignUpCompleteViewController: UIViewController {
     // MARK: Methods
     
     @IBAction func signInButtonDidTapped(_ sender: UIButton) {
-        if let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+        if let signInViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController {
             
-            UIApplication.shared.keyWindow?.rootViewController = loginViewController
+            UIApplication.shared.keyWindow?.rootViewController = signInViewController
         }
     }
     
@@ -24,6 +24,5 @@ class SignUpCompleteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 }

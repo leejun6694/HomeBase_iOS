@@ -711,10 +711,10 @@
             </objects>
             <point key="canvasLocation" x="292.75362318840581" y="-789.13043478260875"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Sign In View Controller-->
         <scene sceneID="87t-kt-zta">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="od5-5D-g5j" customClass="LoginViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" id="od5-5D-g5j" customClass="SignInViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c6z-VS-Ajg"/>
                         <viewControllerLayoutGuide type="bottom" id="2qW-mh-Jvs"/>
@@ -1111,6 +1111,86 @@
             </objects>
             <point key="canvasLocation" x="1577" y="-222"/>
         </scene>
+        <!--Sign In Error View Controller-->
+        <scene sceneID="E6s-8e-XlT">
+            <objects>
+                <viewController storyboardIdentifier="SignInErrorViewController" id="Yk1-20-pPW" customClass="SignInErrorViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0vd-bH-8kl"/>
+                        <viewControllerLayoutGuide type="bottom" id="8xe-hL-RGv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nu0-IP-gmk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8c-eL-Pjs">
+                                <rect key="frame" x="52" y="207" width="310" height="294"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconError" translatesAutoresizingMaskIntoConstraints="NO" id="7UY-0x-081">
+                                        <rect key="frame" x="120" y="38" width="70" height="70"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="FCk-Dr-lLP">
+                                        <rect key="frame" x="55" y="117" width="200" height="35"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rts-93-0aY">
+                                        <rect key="frame" x="22" y="210" width="266" height="45"/>
+                                        <color key="backgroundColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="doneButtonDidTapped:" destination="Yk1-20-pPW" eventType="touchUpInside" id="PAy-cE-Ed6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="FCk-Dr-lLP" firstAttribute="centerX" secondItem="r8c-eL-Pjs" secondAttribute="centerX" id="0aS-Ak-0CL"/>
+                                    <constraint firstItem="7UY-0x-081" firstAttribute="width" secondItem="r8c-eL-Pjs" secondAttribute="width" multiplier="70/310" id="8KJ-6X-4OO"/>
+                                    <constraint firstItem="7UY-0x-081" firstAttribute="top" secondItem="r8c-eL-Pjs" secondAttribute="centerY" multiplier="38/147" id="9Pg-cw-H3g"/>
+                                    <constraint firstItem="Rts-93-0aY" firstAttribute="width" secondItem="r8c-eL-Pjs" secondAttribute="width" multiplier="266/310" id="BSi-D2-Te4"/>
+                                    <constraint firstItem="FCk-Dr-lLP" firstAttribute="top" secondItem="r8c-eL-Pjs" secondAttribute="centerY" multiplier="117/147" id="Go5-jt-KaK"/>
+                                    <constraint firstItem="Rts-93-0aY" firstAttribute="centerX" secondItem="r8c-eL-Pjs" secondAttribute="centerX" id="VRY-z9-7VG"/>
+                                    <constraint firstItem="FCk-Dr-lLP" firstAttribute="width" secondItem="r8c-eL-Pjs" secondAttribute="width" multiplier="200/310" id="Wqd-0f-RtQ"/>
+                                    <constraint firstItem="7UY-0x-081" firstAttribute="height" secondItem="r8c-eL-Pjs" secondAttribute="height" multiplier="70/294" id="Zsm-OC-uLu"/>
+                                    <constraint firstItem="Rts-93-0aY" firstAttribute="top" secondItem="r8c-eL-Pjs" secondAttribute="centerY" multiplier="210/147" id="cAk-Rj-Egm"/>
+                                    <constraint firstItem="FCk-Dr-lLP" firstAttribute="height" secondItem="r8c-eL-Pjs" secondAttribute="height" multiplier="35/294" id="eyr-Va-4Hp"/>
+                                    <constraint firstItem="Rts-93-0aY" firstAttribute="height" secondItem="r8c-eL-Pjs" secondAttribute="height" multiplier="45/294" id="hYf-tc-BWe"/>
+                                    <constraint firstItem="7UY-0x-081" firstAttribute="centerX" secondItem="r8c-eL-Pjs" secondAttribute="centerX" id="qp0-P6-8iv"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="r8c-eL-Pjs" firstAttribute="height" secondItem="nu0-IP-gmk" secondAttribute="height" multiplier="294/736" id="7qf-47-5mg"/>
+                            <constraint firstItem="r8c-eL-Pjs" firstAttribute="centerX" secondItem="nu0-IP-gmk" secondAttribute="centerX" id="OwO-m5-gGO"/>
+                            <constraint firstItem="r8c-eL-Pjs" firstAttribute="width" secondItem="nu0-IP-gmk" secondAttribute="width" multiplier="310/414" id="PAu-RH-R9O"/>
+                            <constraint firstItem="r8c-eL-Pjs" firstAttribute="top" secondItem="nu0-IP-gmk" secondAttribute="centerY" multiplier="207/368" id="pvT-kl-LNA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="errorLabel" destination="FCk-Dr-lLP" id="Uir-LN-QWB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EvJ-mP-cuY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1500" y="872"/>
+        </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="qf2-rP-XYk">
             <objects>
@@ -1404,7 +1484,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-828.98550724637687" y="932.60869565217399"/>
+            <point key="canvasLocation" x="-386" y="975"/>
         </scene>
         <!--Sign Up Complete View Controller-->
         <scene sceneID="3i0-yl-Hzf">
@@ -1483,7 +1563,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ons-cU-dB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3" y="933"/>
+            <point key="canvasLocation" x="446" y="975"/>
         </scene>
         <!--Register User Info View Controller-->
         <scene sceneID="uz4-7r-NaV">

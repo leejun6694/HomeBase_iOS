@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zQx-vt-7Lw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oIP-qw-dDw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +14,7 @@
         <!--Main View Controller-->
         <scene sceneID="g1L-XJ-uv8">
             <objects>
-                <viewController id="zQx-vt-7Lw" customClass="MainViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="zQx-vt-7Lw" customClass="MainViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vpx-qN-KOE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,7 +35,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mY9-8o-ejY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="288.80000000000001" y="156.97151424287858"/>
+            <point key="canvasLocation" x="1217" y="142"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="qs0-f3-31J">
+            <objects>
+                <viewController id="oIP-qw-dDw" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vap-KM-GrN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="Us8-bL-Xch">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Sol-gd-uSg">
+                                <rect key="frame" x="110" y="260.5" width="154" height="120.5"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="f9a-97-JdQ" firstAttribute="bottom" secondItem="Us8-bL-Xch" secondAttribute="bottom" id="0ai-St-u5d"/>
+                            <constraint firstItem="Sol-gd-uSg" firstAttribute="centerY" secondItem="Us8-bL-Xch" secondAttribute="centerY" multiplier="354.6/368" id="1xR-lI-Bcp"/>
+                            <constraint firstItem="Sol-gd-uSg" firstAttribute="centerX" secondItem="Us8-bL-Xch" secondAttribute="centerX" id="85P-5u-KtF"/>
+                            <constraint firstItem="Sol-gd-uSg" firstAttribute="height" secondItem="Us8-bL-Xch" secondAttribute="height" multiplier="133.2/736" id="OdO-Xv-uwg"/>
+                            <constraint firstItem="Sol-gd-uSg" firstAttribute="width" secondItem="Us8-bL-Xch" secondAttribute="width" multiplier="170/414" id="Y2x-B9-PK6"/>
+                            <constraint firstItem="Us8-bL-Xch" firstAttribute="leading" secondItem="f9a-97-JdQ" secondAttribute="leading" id="cKB-hl-zmK"/>
+                            <constraint firstItem="Us8-bL-Xch" firstAttribute="trailing" secondItem="f9a-97-JdQ" secondAttribute="trailing" id="dzX-a8-dNC"/>
+                            <constraint firstItem="Us8-bL-Xch" firstAttribute="top" secondItem="vap-KM-GrN" secondAttribute="top" id="jf4-Ny-RhO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="f9a-97-JdQ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fxa-Lq-bnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="423" y="142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="208" height="163"/>
+        <image name="splash" width="414" height="736"/>
+    </resources>
 </document>

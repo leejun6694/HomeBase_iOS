@@ -18,9 +18,9 @@ class MainViewController: UIViewController {
                 try Auth.auth().signOut()
                 
                 let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-                let loginViewController = storyBoard.instantiateInitialViewController()
+                let signInViewController = storyBoard.instantiateInitialViewController()
                 
-                UIApplication.shared.keyWindow?.rootViewController = loginViewController
+                UIApplication.shared.keyWindow?.rootViewController = signInViewController
             } catch {
                 print(error)
             }

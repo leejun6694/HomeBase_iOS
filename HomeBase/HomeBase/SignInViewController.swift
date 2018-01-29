@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  SignInViewController.swift
 //  HomeBase
 //
 //  Created by JUN LEE on 2018. 1. 2..
@@ -11,8 +11,9 @@ import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Alamofire
 
-class LoginViewController: UIViewController {
+class SignInViewController: UIViewController {
     
     // MARK: Properties
     
@@ -22,7 +23,7 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var pwTextField: UITextField! {
         didSet { pwTextField.delegate = self }
     }
-
+    
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
@@ -37,46 +38,85 @@ class LoginViewController: UIViewController {
     }
     
     private func userConnected() {
-        spinnerStopAnimating(spinner)
-        
         if let currentUser = Auth.auth().currentUser {
-            print("current user email: \(currentUser.email ?? "default")")
+            let getPlayerURL = CloudFunction.methodURL(method: Method.getPlayer)
+            let parameterDictionary = ["uid": currentUser.uid]
             
-            let registerTeamNavigation =
-                self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation
-            
-            UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
+            Alamofire.request(
+                getPlayerURL,
+                method: .get,
+                parameters: parameterDictionary).responseJSON {
+                    (response) -> Void in
+                    
+                    if response.result.isSuccess {
+                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        if let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+                            
+                            self.spinnerStopAnimating(self.spinner)
+                            UIApplication.shared.keyWindow?.rootViewController = mainViewController
+                        }
+                    } else {
+                        if let registerTeamNavigation =
+                            self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation {
+                            
+                            self.spinnerStopAnimating(self.spinner)
+                            UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
+                        }
+                    }
+            }
         }
     }
-   
+    
     @IBAction private func emailSignInButtonDidTapped(_ sender: UIButton) {
         spinnerStartAnimating(spinner)
+        
+        if let _ = Auth.auth().currentUser {
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("sign out error")
+            }
+        }
         
         if let email = emailTextField.text, let pw = pwTextField.text {
             Auth.auth().signIn(withEmail: email, password: pw) {
                 (user, error) in
                 
                 if let error = error {
-                    self.spinnerStopAnimating(self.spinner)
+                    var errorText: String = ""
                     
                     if let errorCode = AuthErrorCode(rawValue: error._code) {
                         switch errorCode {
-                        case .userNotFound: print("no user")
-                        case .operationNotAllowed: print("not allow account")
-                        case .invalidEmail: print("invalid email")
-                        case .userDisabled: print("disabled user")
-                        case .wrongPassword: print("wrong password")
+                        case .userNotFound: errorText = "존재하지 않는 사용자입니다"
+                        case .operationNotAllowed: errorText = "허용되지 않은 사용자입니다"
+                        case .invalidEmail: errorText = "존재하지 않는 이메일입니다"
+                        case .userDisabled: errorText = "접근할 수 없는 사용자입니다"
+                        case .wrongPassword: errorText = "잘못된 비밀번호입니다"
                         default: break
                         }
+                    }
+                    
+                    if let signInErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignInErrorViewController") as? SignInErrorViewController {
+                        
+                        signInErrorViewController.errorText = errorText
+                        signInErrorViewController.modalPresentationStyle = .overCurrentContext
+                        self.spinnerStopAnimating(self.spinner)
+                        self.present(signInErrorViewController, animated: false, completion: nil)
                     }
                 } else {
                     if let currentUser = user {
                         if currentUser.isEmailVerified {
-                            print("email connected")
                             self.userConnected()
                         } else {
-                            print("email isn't verified")
-                            self.spinnerStopAnimating(self.spinner)
+                            let errorText: String = "이메일 인증이 되지 않은 사용자입니다"
+                            
+                            if let signInErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignInErrorViewController") as? SignInErrorViewController {
+                                
+                                signInErrorViewController.errorText = errorText
+                                signInErrorViewController.modalPresentationStyle = .overCurrentContext
+                                self.spinnerStopAnimating(self.spinner)
+                                self.present(signInErrorViewController, animated: false, completion: nil)
+                            }
                         }
                     }
                 }
@@ -92,7 +132,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction private func forgotButtonDidTapped(_ sender: UIButton) {        
+    @IBAction private func forgotButtonDidTapped(_ sender: UIButton) {
         if let forgotSelectNavigation =
             self.storyboard?.instantiateViewController(withIdentifier: "ForgotSelectNavigation") as? ForgotSelectNavigation {
             
@@ -102,11 +142,27 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction private func googleSignInButtonDidTapped(_ sender: UIButton) {
+        if let _ = Auth.auth().currentUser {
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("sign out error")
+            }
+        }
+        
         GIDSignIn.sharedInstance().signIn()
     }
     
     @IBAction private func facebookSignInButtonDidTapped(_ sender: UIButton) {
         spinnerStartAnimating(spinner)
+        
+        if let _ = Auth.auth().currentUser {
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("sign out error")
+            }
+        }
         
         let facebookLoginManager = FBSDKLoginManager()
         facebookLoginManager.logIn(withReadPermissions: ["email"], from: self) {
@@ -145,7 +201,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
     }
@@ -158,7 +214,7 @@ class LoginViewController: UIViewController {
 }
 
 // MARK: Google Delegate
-extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
+extension SignInViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         spinnerStartAnimating(self.spinner)
         
@@ -198,7 +254,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
 }
 
 // MARK: TextField Delegate
-extension LoginViewController: UITextFieldDelegate {
+extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case emailTextField:
@@ -212,3 +268,4 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 }
+

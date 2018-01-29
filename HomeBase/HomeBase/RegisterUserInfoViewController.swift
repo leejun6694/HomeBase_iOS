@@ -165,7 +165,6 @@ class RegisterUserInfoViewController: UIViewController {
                     } else {
                         let value = snapshot.value as? NSDictionary
                         let provider = value?["provider"] as? String ?? ""
-                        print(provider)
                         
                         if provider == "password" {
                             let name = value?["name"] as? String ?? ""
