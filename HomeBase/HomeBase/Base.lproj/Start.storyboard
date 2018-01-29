@@ -136,10 +136,10 @@
             </objects>
             <point key="canvasLocation" x="-1136.231884057971" y="-1201.6304347826087"/>
         </scene>
-        <!--Forgot Email Error View Controller-->
+        <!--Forgot Error View Controller-->
         <scene sceneID="sLA-vQ-0TQ">
             <objects>
-                <viewController storyboardIdentifier="ForgotEmailErrorViewController" id="pF2-ci-vjV" customClass="ForgotEmailErrorViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForgotErrorViewController" id="pF2-ci-vjV" customClass="ForgotErrorViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="89p-0U-fCr"/>
                         <viewControllerLayoutGuide type="bottom" id="FBC-i8-bUt"/>
@@ -230,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6P-gR-RDH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-386" y="-2386"/>
+            <point key="canvasLocation" x="1065" y="-1202"/>
         </scene>
         <!--Forgot Email View Controller-->
         <scene sceneID="m78-TL-W2J">
@@ -422,6 +422,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="forgotPasswordButtonDidTapped:" destination="tAO-ad-nSV" eventType="touchUpInside" id="dUV-1M-sZg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -538,9 +541,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xhe-wg-YRr">
+                                <rect key="frame" x="197" y="358" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="xhe-wg-YRr" firstAttribute="centerX" secondItem="rAU-sy-DpI" secondAttribute="centerX" id="0dr-eJ-Cq2"/>
                             <constraint firstItem="R9v-ju-F5f" firstAttribute="top" secondItem="8Oj-EK-SXY" secondAttribute="bottom" id="1np-25-q68"/>
                             <constraint firstItem="8Oj-EK-SXY" firstAttribute="leading" secondItem="rAU-sy-DpI" secondAttribute="centerX" multiplier="44/207" id="4Km-FR-Slh"/>
                             <constraint firstItem="oOu-ZN-jDm" firstAttribute="width" secondItem="rAU-sy-DpI" secondAttribute="width" multiplier="80/414" id="5E2-8v-DHJ"/>
@@ -558,6 +565,7 @@
                             <constraint firstItem="8Oj-EK-SXY" firstAttribute="width" secondItem="rAU-sy-DpI" secondAttribute="width" multiplier="60/414" id="K6Q-tH-jXj"/>
                             <constraint firstItem="9YU-ql-imp" firstAttribute="leading" secondItem="rAU-sy-DpI" secondAttribute="centerX" multiplier="35/207" id="Ldg-D3-z7c"/>
                             <constraint firstItem="V7P-vA-T2D" firstAttribute="centerY" secondItem="rAU-sy-DpI" secondAttribute="centerY" id="Lnz-Ze-WrV"/>
+                            <constraint firstItem="xhe-wg-YRr" firstAttribute="centerY" secondItem="rAU-sy-DpI" secondAttribute="centerY" id="NC1-fs-pF5"/>
                             <constraint firstItem="7H3-A9-9Q5" firstAttribute="width" secondItem="8Oj-EK-SXY" secondAttribute="width" id="OI2-Vd-urW"/>
                             <constraint firstItem="oOu-ZN-jDm" firstAttribute="top" secondItem="rAU-sy-DpI" secondAttribute="centerY" multiplier="37/346" id="OPJ-C0-Qks"/>
                             <constraint firstItem="oOu-ZN-jDm" firstAttribute="centerX" secondItem="rAU-sy-DpI" secondAttribute="centerX" id="R1Q-Hw-WJ5"/>
@@ -590,6 +598,7 @@
                         <outlet property="nameLabel" destination="8Oj-EK-SXY" id="lIB-Er-IO7"/>
                         <outlet property="nameTextField" destination="R9v-ju-F5f" id="Zjw-KZ-A9F"/>
                         <outlet property="nameTextFieldBorder" destination="9YU-ql-imp" id="i6G-Fn-jgu"/>
+                        <outlet property="spinner" destination="xhe-wg-YRr" id="037-Xz-eba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G0x-Bc-eoV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -601,10 +610,10 @@
             </objects>
             <point key="canvasLocation" x="-385" y="-789"/>
         </scene>
-        <!--View Controller-->
+        <!--Find Password View Controller-->
         <scene sceneID="fWt-F3-Z6K">
             <objects>
-                <viewController id="CdE-uP-f4M" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FindPasswordViewController" id="CdE-uP-f4M" customClass="FindPasswordViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i65-FN-KDK"/>
                         <viewControllerLayoutGuide type="bottom" id="L3A-Om-Q0Q"/>
@@ -612,12 +621,95 @@
                     <view key="view" contentMode="scaleToFill" id="bjA-cd-hQb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundSignup2" translatesAutoresizingMaskIntoConstraints="NO" id="z6N-Ul-cck">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="님의 이메일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="osH-YC-QDw">
+                                <rect key="frame" x="107" y="264" width="200" height="35"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Q4e-3p-h41">
+                                <rect key="frame" x="32" y="299" width="350" height="35"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="23"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBs-Mu-ByW">
+                                <rect key="frame" x="57" y="334" width="300" height="2"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="에 비밀번호 변경요청 메일을 전송했습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="nA0-gG-QP4">
+                                <rect key="frame" x="32" y="336" width="350" height="35"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="4IK-cP-dC3">
+                                <rect key="frame" x="190.66666666666666" y="417" width="33" height="17"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acG-sw-ac8">
+                                <rect key="frame" x="32" y="488" width="350" height="45"/>
+                                <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="로그인하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signInButtonDidTapped:" destination="CdE-uP-f4M" eventType="touchUpInside" id="AV1-R1-hmP"/>
+                                    <action selector="signInButtonDidTapped:" destination="tAO-ad-nSV" eventType="touchUpInside" id="CNc-df-dhc"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="osH-YC-QDw" firstAttribute="centerX" secondItem="bjA-cd-hQb" secondAttribute="centerX" id="5lB-qI-YRH"/>
+                            <constraint firstItem="pBs-Mu-ByW" firstAttribute="top" secondItem="Q4e-3p-h41" secondAttribute="bottom" id="6ce-fo-deA"/>
+                            <constraint firstItem="pBs-Mu-ByW" firstAttribute="centerX" secondItem="bjA-cd-hQb" secondAttribute="centerX" id="85g-9J-Hy1"/>
+                            <constraint firstItem="pBs-Mu-ByW" firstAttribute="height" secondItem="bjA-cd-hQb" secondAttribute="height" multiplier="2/736" id="8Gw-EB-iSI"/>
+                            <constraint firstItem="z6N-Ul-cck" firstAttribute="centerX" secondItem="bjA-cd-hQb" secondAttribute="centerX" id="8hF-oZ-CXo"/>
+                            <constraint firstItem="4IK-cP-dC3" firstAttribute="height" secondItem="bjA-cd-hQb" secondAttribute="height" multiplier="17/736" id="94m-EN-QjW"/>
+                            <constraint firstItem="Q4e-3p-h41" firstAttribute="width" secondItem="bjA-cd-hQb" secondAttribute="width" multiplier="350/414" id="9O1-Gb-sXb"/>
+                            <constraint firstItem="acG-sw-ac8" firstAttribute="top" secondItem="bjA-cd-hQb" secondAttribute="centerY" multiplier="488/368" id="CFu-oO-qQv"/>
+                            <constraint firstItem="osH-YC-QDw" firstAttribute="height" secondItem="bjA-cd-hQb" secondAttribute="height" multiplier="35/736" id="CG6-IP-McK"/>
+                            <constraint firstItem="acG-sw-ac8" firstAttribute="width" secondItem="bjA-cd-hQb" secondAttribute="width" multiplier="350/414" id="DJM-Aq-zCM"/>
+                            <constraint firstItem="acG-sw-ac8" firstAttribute="height" secondItem="bjA-cd-hQb" secondAttribute="height" multiplier="45/736" id="GQF-zD-kKx"/>
+                            <constraint firstItem="Q4e-3p-h41" firstAttribute="height" secondItem="bjA-cd-hQb" secondAttribute="height" multiplier="35/736" id="IGA-Lc-Hng"/>
+                            <constraint firstItem="nA0-gG-QP4" firstAttribute="height" secondItem="bjA-cd-hQb" secondAttribute="height" multiplier="35/736" id="RT1-8H-Rbw"/>
+                            <constraint firstItem="nA0-gG-QP4" firstAttribute="top" secondItem="pBs-Mu-ByW" secondAttribute="bottom" id="Spi-aF-dx9"/>
+                            <constraint firstItem="pBs-Mu-ByW" firstAttribute="width" secondItem="bjA-cd-hQb" secondAttribute="width" multiplier="300/414" id="UCY-XR-T7z"/>
+                            <constraint firstItem="4IK-cP-dC3" firstAttribute="top" secondItem="bjA-cd-hQb" secondAttribute="centerY" multiplier="417/368" id="cOW-bc-sbL"/>
+                            <constraint firstItem="4IK-cP-dC3" firstAttribute="width" secondItem="bjA-cd-hQb" secondAttribute="width" multiplier="33/414" id="ha6-r2-Xhd"/>
+                            <constraint firstItem="nA0-gG-QP4" firstAttribute="width" secondItem="bjA-cd-hQb" secondAttribute="width" multiplier="350/414" id="hrt-Wb-Boi"/>
+                            <constraint firstItem="4IK-cP-dC3" firstAttribute="centerX" secondItem="bjA-cd-hQb" secondAttribute="centerX" id="iFK-DS-Wcz"/>
+                            <constraint firstItem="Q4e-3p-h41" firstAttribute="centerX" secondItem="bjA-cd-hQb" secondAttribute="centerX" id="jgW-kV-Z0X"/>
+                            <constraint firstItem="osH-YC-QDw" firstAttribute="width" secondItem="bjA-cd-hQb" secondAttribute="width" multiplier="200/414" id="kGg-Xw-JMN"/>
+                            <constraint firstItem="z6N-Ul-cck" firstAttribute="width" secondItem="bjA-cd-hQb" secondAttribute="width" id="kqr-rx-V3V"/>
+                            <constraint firstItem="nA0-gG-QP4" firstAttribute="centerX" secondItem="bjA-cd-hQb" secondAttribute="centerX" id="m5c-N5-UcN"/>
+                            <constraint firstItem="osH-YC-QDw" firstAttribute="top" secondItem="bjA-cd-hQb" secondAttribute="centerY" multiplier="264/368" id="o6d-aL-TwL"/>
+                            <constraint firstItem="z6N-Ul-cck" firstAttribute="centerY" secondItem="bjA-cd-hQb" secondAttribute="centerY" id="pNs-xp-Vfz"/>
+                            <constraint firstItem="z6N-Ul-cck" firstAttribute="height" secondItem="bjA-cd-hQb" secondAttribute="height" id="vgO-81-GOw"/>
+                            <constraint firstItem="Q4e-3p-h41" firstAttribute="top" secondItem="osH-YC-QDw" secondAttribute="bottom" id="xqN-sx-yxD"/>
+                            <constraint firstItem="acG-sw-ac8" firstAttribute="centerX" secondItem="bjA-cd-hQb" secondAttribute="centerX" id="zbu-TC-cuU"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailLabel" destination="Q4e-3p-h41" id="9dB-9s-cfw"/>
+                        <outlet property="nameLabel" destination="osH-YC-QDw" id="rfN-4n-G7f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NnT-D5-yZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="293" y="-789"/>
+            <point key="canvasLocation" x="292.75362318840581" y="-789.13043478260875"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="87t-kt-zta">

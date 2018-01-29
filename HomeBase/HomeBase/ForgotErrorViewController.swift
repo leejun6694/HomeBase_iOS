@@ -1,14 +1,14 @@
 //
-//  ForgotEmailErrorViewController.swift
+//  ForgotErrorViewController.swift
 //  HomeBase
 //
-//  Created by JUN LEE on 2018. 1. 26..
+//  Created by JUN LEE on 2018. 1. 29..
 //  Copyright © 2018년 JUN LEE. All rights reserved.
 //
 
 import UIKit
 
-class ForgotEmailErrorViewController: UIViewController {
+class ForgotErrorViewController: UIViewController {
 
     // MARK: Methods
     
@@ -27,7 +27,7 @@ class ForgotEmailErrorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
         self.view.isOpaque = false
     }
