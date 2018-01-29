@@ -53,16 +53,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         
                         let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-                        let loginViewController = storyBoard.instantiateInitialViewController()
+                        let signInViewController = storyBoard.instantiateInitialViewController()
                         
-                        self.window?.rootViewController = loginViewController
+                        self.window?.rootViewController = signInViewController
                     }
             }
         } else {
             let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-            let loginViewController = storyBoard.instantiateInitialViewController()
+            let signInViewController = storyBoard.instantiateInitialViewController()
             
-            window?.rootViewController = loginViewController
+            window?.rootViewController = signInViewController
         }
         
         return true
