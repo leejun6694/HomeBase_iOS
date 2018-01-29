@@ -109,23 +109,18 @@ class ForgotEmailViewController: UIViewController {
         Alamofire.request(
             findEmailURL,
             method: .post,
-            parameters: parameterDictionary).responseString {
+            parameters: parameterDictionary).responseJSON {
                 (response) -> Void in
                 
                 if response.result.isSuccess {
-                    if let value = response.result.value {
-                        self.spinnerStopAnimating(self.spinner)
-                        if value == "User is not found" {
-                            if let forgotEmailErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotEmailErrorViewController") as? ForgotEmailErrorViewController {
-                                
-                                forgotEmailErrorViewController.modalPresentationStyle = .overCurrentContext
-                                self.present(forgotEmailErrorViewController, animated: false, completion: nil)
-                            }
-                        } else {
+                    if let value = response.result.value as? [String: [String]] {
+                        if let emails = value["emails"] {
+                            self.spinnerStopAnimating(self.spinner)
+                            
                             if let findEmailViewController = self.storyboard?.instantiateViewController(withIdentifier: "FindEmailViewController") as? FindEmailViewController {
                                 
                                 findEmailViewController.name = self.name
-                                findEmailViewController.email = value
+                                findEmailViewController.emails = emails
                                 
                                 self.navigationController?.pushViewController(findEmailViewController, animated: true)
                             }
@@ -133,8 +128,12 @@ class ForgotEmailViewController: UIViewController {
                     }
                 } else {
                     self.spinnerStopAnimating(self.spinner)
-                    print(response.result.error)
+                    if let forgotEmailErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotEmailErrorViewController") as? ForgotEmailErrorViewController {
+                        
+                        forgotEmailErrorViewController.modalPresentationStyle = .overCurrentContext
+                        self.present(forgotEmailErrorViewController, animated: false, completion: nil)
                 }
+            }
         }
     }
     

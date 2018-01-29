@@ -13,10 +13,10 @@ class FindEmailViewController: UIViewController {
     // MARK: Properties
     
     var name: String = ""
-    var email: String = ""
+    var emails: [String] = []
     
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var emailLabel: UILabel!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var emailTextView: UITextView!
     
     // MARK: Methods
     
@@ -35,6 +35,19 @@ class FindEmailViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         
         nameLabel.text = "\(name)님의 등록 이메일은"
-        emailLabel.text = email
+        emailTextView.isScrollEnabled = false
+        for (index, email) in emails.enumerated() {
+            if (index + 1) == emails.count {
+                emailTextView.text.append("\(email)")
+            } else {
+                emailTextView.text.append("\(email)" + "\n")
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        emailTextView.isScrollEnabled = true
     }
 }

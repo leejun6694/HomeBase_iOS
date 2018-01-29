@@ -42,16 +42,16 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconSelect" translatesAutoresizingMaskIntoConstraints="NO" id="dlV-4k-yBX">
-                                        <rect key="frame" x="120" y="44.000000000000036" width="70" height="64.666666666666686"/>
+                                        <rect key="frame" x="120" y="44.666666666666657" width="70" height="64"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="찾으실 정보를 선택해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNV-UN-fnf">
-                                        <rect key="frame" x="30.333333333333329" y="116.00000000000003" width="249.33333333333337" height="28"/>
+                                        <rect key="frame" x="30.333333333333329" y="116.33333333333333" width="249.33333333333337" height="27.333333333333329"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQ5-4w-pyH">
-                                        <rect key="frame" x="22" y="173.33333333333334" width="266" height="40.666666666666657"/>
+                                        <rect key="frame" x="22" y="173.33333333333334" width="266" height="40.333333333333343"/>
                                         <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <state key="normal" title="이메일 찾기"/>
@@ -65,7 +65,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tay-fY-16L">
-                                        <rect key="frame" x="22" y="229.33333333333334" width="266" height="40.000000000000028"/>
+                                        <rect key="frame" x="22" y="229.33333333333334" width="266" height="40.333333333333343"/>
                                         <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <state key="normal" title="비밀번호 찾기"/>
@@ -158,7 +158,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQ3-aH-qkF">
-                                        <rect key="frame" x="56" y="108" width="198" height="70"/>
+                                        <rect key="frame" x="56" y="108" width="198" height="70.666666666666686"/>
                                         <string key="text">등록되지 않은 정보를
 입력하셨습니다.</string>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
@@ -166,7 +166,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMI-Hd-vQw">
-                                        <rect key="frame" x="22" y="192" width="266" height="45"/>
+                                        <rect key="frame" x="22" y="192.33333333333331" width="266" height="44.666666666666657"/>
                                         <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -183,7 +183,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43n-uu-TVb">
-                                        <rect key="frame" x="75.333333333333329" y="251" width="159.33333333333337" height="45"/>
+                                        <rect key="frame" x="75.333333333333329" y="251.33333333333329" width="159.33333333333337" height="44.666666666666657"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                         <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="회원가입하기">
@@ -271,13 +271,13 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="생년월일" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKF-Wu-nSY">
-                                <rect key="frame" x="44" y="202" width="80" height="19.666666666666657"/>
+                                <rect key="frame" x="44" y="202" width="80" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY.MM.DD" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="QKN-Kl-8LM">
-                                <rect key="frame" x="44" y="221.66666666666666" width="326" height="39.999999999999972"/>
+                                <rect key="frame" x="44" y="222.33333333333334" width="326" height="39.666666666666657"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -289,7 +289,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKb-3E-x5b" userLabel="Birth Text Field Border">
-                                <rect key="frame" x="35" y="261.66666666666669" width="345" height="2"/>
+                                <rect key="frame" x="35" y="262" width="345" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -372,29 +372,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록 이메일은" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wq1-Fl-Yul">
-                                <rect key="frame" x="32.333333333333343" y="264" width="350" height="35"/>
+                                <rect key="frame" x="32" y="264" width="350" height="35"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5D-40-RRr">
-                                <rect key="frame" x="57" y="299" width="300" height="35"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vEy-kJ-a84">
+                                <rect key="frame" x="57" y="299" width="300" height="85"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="23"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQ3-bo-Fda">
-                                <rect key="frame" x="57" y="335" width="300" height="2"/>
-                                <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJo-Sx-sLQ">
-                                <rect key="frame" x="157" y="337" width="100" height="35"/>
+                                <rect key="frame" x="157" y="384" width="100" height="35"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="lEs-LM-wir">
-                                <rect key="frame" x="190.66666666666666" y="408" width="33" height="18"/>
+                                <rect key="frame" x="190.66666666666666" y="438" width="33" height="18"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzS-VW-3TP">
                                 <rect key="frame" x="32" y="488" width="350" height="45"/>
@@ -414,7 +410,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZ7-EG-7zi">
-                                <rect key="frame" x="32" y="550" width="350" height="45"/>
+                                <rect key="frame" x="32" y="549.66666666666663" width="350" height="45.666666666666629"/>
                                 <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -431,8 +427,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="lEs-LM-wir" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="0Ok-29-QrA"/>
-                            <constraint firstItem="FQ3-bo-Fda" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="300/414" id="1rk-ck-cxR"/>
                             <constraint firstItem="wZ7-EG-7zi" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="2Ze-Rw-PTy"/>
+                            <constraint firstItem="vEy-kJ-a84" firstAttribute="top" secondItem="Wq1-Fl-Yul" secondAttribute="bottom" id="31f-p6-vlw"/>
                             <constraint firstItem="wZ7-EG-7zi" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" multiplier="572.5/368" id="4ko-oL-oEB"/>
                             <constraint firstItem="LJo-Sx-sLQ" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="100/414" id="4m3-b7-4sZ"/>
                             <constraint firstItem="lEs-LM-wir" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="33/414" id="5GL-n4-BC0"/>
@@ -440,32 +436,28 @@
                             <constraint firstItem="xt2-HD-IXv" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" id="6Gv-fh-rT2"/>
                             <constraint firstItem="xt2-HD-IXv" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="6IG-Ty-KJH"/>
                             <constraint firstItem="Wq1-Fl-Yul" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" multiplier="281.5/368" id="AOt-ad-hGQ"/>
+                            <constraint firstItem="vEy-kJ-a84" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="Bhd-IT-TcK"/>
+                            <constraint firstItem="vEy-kJ-a84" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="300/414" id="C4o-rf-z74"/>
                             <constraint firstItem="Wq1-Fl-Yul" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="350/414" id="ClW-gG-IJ8"/>
                             <constraint firstItem="lEs-LM-wir" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="18/736" id="EGZ-K2-paw"/>
-                            <constraint firstItem="v5D-40-RRr" firstAttribute="top" secondItem="Wq1-Fl-Yul" secondAttribute="bottom" id="FHh-4z-h3l"/>
                             <constraint firstItem="wZ7-EG-7zi" firstAttribute="width" secondItem="bzS-VW-3TP" secondAttribute="width" id="GCF-nz-6tB"/>
                             <constraint firstItem="Wq1-Fl-Yul" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="IcG-lc-Qg8"/>
                             <constraint firstItem="xt2-HD-IXv" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" id="IsE-ss-hM7"/>
                             <constraint firstItem="bzS-VW-3TP" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" multiplier="510.5/368" id="J1T-Ii-r14"/>
-                            <constraint firstItem="v5D-40-RRr" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="35/736" id="J4Z-Ar-8AH"/>
                             <constraint firstItem="bzS-VW-3TP" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="350/414" id="LQ5-tb-hhK"/>
-                            <constraint firstItem="v5D-40-RRr" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="N4e-0n-vlt"/>
-                            <constraint firstItem="FQ3-bo-Fda" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="OS4-Ad-auu"/>
                             <constraint firstItem="Wq1-Fl-Yul" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="35/736" id="SYV-gn-w1s"/>
-                            <constraint firstItem="FQ3-bo-Fda" firstAttribute="top" secondItem="v5D-40-RRr" secondAttribute="bottom" constant="1" id="Uui-x6-IoX"/>
                             <constraint firstItem="bzS-VW-3TP" firstAttribute="centerX" secondItem="MJA-NA-LTl" secondAttribute="centerX" id="fHu-Uf-RPG"/>
-                            <constraint firstItem="v5D-40-RRr" firstAttribute="width" secondItem="MJA-NA-LTl" secondAttribute="width" multiplier="300/414" id="kiY-Ri-zzs"/>
-                            <constraint firstItem="LJo-Sx-sLQ" firstAttribute="top" secondItem="FQ3-bo-Fda" secondAttribute="bottom" id="myw-mO-uYo"/>
-                            <constraint firstItem="lEs-LM-wir" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" multiplier="417/368" id="oCB-Yk-KRp"/>
+                            <constraint firstItem="LJo-Sx-sLQ" firstAttribute="top" secondItem="vEy-kJ-a84" secondAttribute="bottom" id="fXG-MC-Lbj"/>
+                            <constraint firstItem="vEy-kJ-a84" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="85/736" id="lUS-Us-hSe"/>
+                            <constraint firstItem="lEs-LM-wir" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" multiplier="447/368" id="oCB-Yk-KRp"/>
                             <constraint firstItem="xt2-HD-IXv" firstAttribute="centerY" secondItem="MJA-NA-LTl" secondAttribute="centerY" id="py3-mn-ReX"/>
                             <constraint firstItem="LJo-Sx-sLQ" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="35/736" id="rWn-iu-AHU"/>
-                            <constraint firstItem="FQ3-bo-Fda" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="2/736" id="sHQ-c2-re0"/>
                             <constraint firstItem="bzS-VW-3TP" firstAttribute="height" secondItem="MJA-NA-LTl" secondAttribute="height" multiplier="45/736" id="smd-Ax-zZa"/>
                             <constraint firstItem="wZ7-EG-7zi" firstAttribute="height" secondItem="bzS-VW-3TP" secondAttribute="height" id="vfX-DB-yhT"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailLabel" destination="v5D-40-RRr" id="4SI-5R-bLS"/>
+                        <outlet property="emailTextView" destination="vEy-kJ-a84" id="NUi-17-1nX"/>
                         <outlet property="nameLabel" destination="Wq1-Fl-Yul" id="TXi-a3-38v"/>
                     </connections>
                 </viewController>
@@ -524,13 +516,13 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7H3-A9-9Q5">
-                                <rect key="frame" x="44" y="351" width="60" height="20.333333333333314"/>
+                                <rect key="frame" x="44" y="351" width="60" height="19.666666666666686"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="example@domain.com" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iIR-VN-5ZW" userLabel="Email Text Field">
-                                <rect key="frame" x="44" y="371.33333333333331" width="326" height="39.333333333333314"/>
+                                <rect key="frame" x="44" y="370.66666666666669" width="326" height="39.333333333333314"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -542,7 +534,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cxa-Fd-Rp1" userLabel="Email Text Field Border">
-                                <rect key="frame" x="35" y="410.66666666666669" width="345" height="2"/>
+                                <rect key="frame" x="35" y="410" width="345" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -662,7 +654,7 @@
                                 <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dD-8J-X2V">
-                                <rect key="frame" x="44" y="330.66666666666669" width="70" height="17.333333333333314"/>
+                                <rect key="frame" x="44" y="330.66666666666669" width="70" height="17.666666666666686"/>
                                 <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                 <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -720,18 +712,18 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YHO-cT-9kX" userLabel="Google View">
-                                <rect key="frame" x="35" y="524" width="345" height="41.333333333333371"/>
+                                <rect key="frame" x="35" y="524" width="345" height="41.666666666666629"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="2Ue-Aw-rgV">
-                                        <rect key="frame" x="27" y="5.9999999999999982" width="33" height="30.333333333333329"/>
+                                        <rect key="frame" x="27" y="6.3333333333333695" width="33" height="30.333333333333329"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOl-SA-OA5" userLabel="Google Border">
-                                        <rect key="frame" x="81" y="10.666666666666629" width="0.6666666666666714" height="21"/>
+                                        <rect key="frame" x="81" y="10.333333333333373" width="0.6666666666666714" height="20.666666666666671"/>
                                         <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RXP-u7-Xke">
-                                        <rect key="frame" x="122.33333333333334" y="11.666666666666627" width="170.00000000000003" height="17.333333333333329"/>
+                                        <rect key="frame" x="122.33333333333334" y="11.666666666666629" width="170.00000000000003" height="18"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -768,15 +760,15 @@
                                 <rect key="frame" x="35" y="578" width="345" height="41"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="Flk-S4-5VK">
-                                        <rect key="frame" x="27" y="5" width="33" height="30"/>
+                                        <rect key="frame" x="27" y="5.333333333333373" width="33" height="30.666666666666671"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KbF-Ko-2Gn" userLabel="Facebook Border">
-                                        <rect key="frame" x="81" y="11.000000000000002" width="0.6666666666666714" height="20.666666666666671"/>
+                                        <rect key="frame" x="81" y="10.666666666666629" width="0.6666666666666714" height="21"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5f-Vw-1c3">
-                                        <rect key="frame" x="122.33333333333334" y="11" width="190.00000000000003" height="17"/>
+                                        <rect key="frame" x="122.33333333333334" y="10.999999999999998" width="190.00000000000003" height="16.333333333333329"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Facebook 계정으로 시작">
@@ -939,7 +931,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXq-b7-GcK">
-                                <rect key="frame" x="32" y="505.66666666666657" width="350" height="41.333333333333314"/>
+                                <rect key="frame" x="32" y="506.00000000000006" width="350" height="40.666666666666686"/>
                                 <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1112,26 +1104,26 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AkK-dZ-g6a">
-                                                <rect key="frame" x="44" y="154.33333333333334" width="335.66666666666669" height="37.333333333333343"/>
+                                                <rect key="frame" x="44" y="154.33333333333334" width="335.66666666666669" height="37.666666666666657"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TlG-gT-LdH" userLabel="Pw Text Field Border">
-                                                <rect key="frame" x="35" y="191.66666666666669" width="344.66666666666669" height="2.3333333333333428"/>
+                                                <rect key="frame" x="35" y="192" width="344.66666666666669" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 확인" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1W-gG-HOV">
-                                                <rect key="frame" x="43.999999999999993" y="236.33333333333331" width="120.33333333333331" height="19"/>
+                                                <rect key="frame" x="43.999999999999993" y="236.33333333333331" width="120.33333333333331" height="19.333333333333343"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c7V-QL-iKJ">
-                                                <rect key="frame" x="44" y="255.33333333333334" width="335.66666666666669" height="37.333333333333343"/>
+                                                <rect key="frame" x="44" y="255.66666666666669" width="335.66666666666669" height="37"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -1143,14 +1135,14 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKD-19-Lvq">
-                                                <rect key="frame" x="43.999999999999993" y="363" width="120.33333333333331" height="18.666666666666686"/>
+                                                <rect key="frame" x="43.999999999999993" y="363.33333333333331" width="120.33333333333331" height="19.333333333333314"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이름을 입력하세요 (2-10자)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mBm-yM-BBm" userLabel="Name Text Field">
-                                                <rect key="frame" x="44" y="381.66666666666669" width="335.66666666666669" height="37.333333333333314"/>
+                                                <rect key="frame" x="44" y="382.66666666666669" width="335.66666666666669" height="37.333333333333314"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -1162,7 +1154,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IK7-3w-CEf" userLabel="Name Text Field Border">
-                                                <rect key="frame" x="35" y="419" width="344.66666666666669" height="2.6666666666666856"/>
+                                                <rect key="frame" x="35" y="420" width="344.66666666666669" height="2.6666666666666856"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
@@ -1485,17 +1477,17 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xG-uA-hWQ">
-                                                <rect key="frame" x="35" y="327" width="344.66666666666669" height="2"/>
+                                                <rect key="frame" x="35" y="327" width="344.66666666666669" height="2.3333333333333144"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="체중" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJ5-Da-Xcm">
-                                                <rect key="frame" x="44" y="387.66666666666669" width="26" height="18"/>
+                                                <rect key="frame" x="44" y="388" width="26" height="18"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="kg" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b3K-ol-MaJ">
-                                                <rect key="frame" x="44" y="405.66666666666669" width="335.66666666666669" height="35.666666666666686"/>
+                                                <rect key="frame" x="44" y="406" width="335.66666666666669" height="36.333333333333314"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
@@ -1507,7 +1499,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="etR-8B-bKY">
-                                                <rect key="frame" x="35" y="441.33333333333331" width="344.66666666666669" height="2.3333333333333144"/>
+                                                <rect key="frame" x="35" y="442.33333333333331" width="344.66666666666669" height="2.3333333333333144"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -1655,24 +1647,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Sig-Ce-koY">
-                                <rect key="frame" x="44" y="188.33333333333334" width="326" height="39.333333333333343"/>
+                                <rect key="frame" x="44" y="188.33333333333334" width="326" height="38.666666666666657"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4fY-g5-DQr" userLabel="Player Number Text Field Border">
-                                <rect key="frame" x="35" y="227.66666666666666" width="345" height="2"/>
+                                <rect key="frame" x="35" y="227" width="345" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투수" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbt-z1-qv7">
-                                <rect key="frame" x="44" y="292.33333333333331" width="80" height="20.333333333333314"/>
+                                <rect key="frame" x="44" y="292.33333333333331" width="80" height="21"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="0vf-BZ-kUE">
-                                <rect key="frame" x="223" y="287" width="153" height="32.666666666666686"/>
+                                <rect key="frame" x="223" y="287" width="153" height="33"/>
                                 <segments>
                                     <segment title="좌"/>
                                     <segment title="우"/>
@@ -1686,7 +1678,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="kth-NP-Lzp">
-                                <rect key="frame" x="223" y="369.33333333333331" width="153" height="32.333333333333314"/>
+                                <rect key="frame" x="223" y="369" width="153" height="33.333333333333314"/>
                                 <segments>
                                     <segment title="좌"/>
                                     <segment title="우"/>
