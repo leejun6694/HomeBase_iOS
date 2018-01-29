@@ -11,6 +11,7 @@ import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Alamofire
 
 class LoginViewController: UIViewController {
     
@@ -37,15 +38,34 @@ class LoginViewController: UIViewController {
     }
     
     private func userConnected() {
-        spinnerStopAnimating(spinner)
-        
         if let currentUser = Auth.auth().currentUser {
             print("current user email: \(currentUser.email ?? "default")")
             
-            let registerTeamNavigation =
-                self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation
+            let getPlayerURL = CloudFunction.methodURL(method: Method.getPlayer)
+            let parameterDictionary = ["uid": currentUser.uid]
             
-            UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
+            Alamofire.request(
+                getPlayerURL,
+                method: .get,
+                parameters: parameterDictionary).responseJSON {
+                    (response) -> Void in
+                
+                    if response.result.isSuccess {
+                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        if let mainViewController = mainStoryboard.instantiateInitialViewController() as? MainViewController {
+                            
+                            self.spinnerStopAnimating(self.spinner)
+                            UIApplication.shared.keyWindow?.rootViewController = mainViewController
+                        }
+                    } else {
+                        if let registerTeamNavigation =
+                            self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation {
+                            
+                            self.spinnerStopAnimating(self.spinner)
+                            UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
+                        }
+                    }
+            }
         }
     }
    

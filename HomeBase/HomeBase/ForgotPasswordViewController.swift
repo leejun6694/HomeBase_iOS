@@ -92,9 +92,11 @@ class ForgotPasswordViewController: UIViewController {
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
         spinnerStartAnimating(spinner)
         
+        let findPasswordURL = CloudFunction.methodURL(method: Method.findPassword)
         let parameterDictionary = ["name": name, "email": email]
+        
         Alamofire.request(
-            CloudFunction.methodURL(method: Method.findPassword),
+            findPasswordURL,
             method: .post,
             parameters: parameterDictionary).responseString {
                 (response) -> Void in

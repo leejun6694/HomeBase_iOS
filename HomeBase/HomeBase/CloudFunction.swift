@@ -11,6 +11,7 @@ import Foundation
 enum Method:String {
     case findEmail = "findEmail"
     case findPassword = "checkEmailByName"
+    case getPlayer = "getPlayer"
 }
 
 struct CloudFunction {
