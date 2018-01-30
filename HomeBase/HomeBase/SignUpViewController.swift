@@ -202,6 +202,7 @@ class SignUpViewController: UIViewController {
     
     @objc func doneButtonDidTapped(_ sender: UIButton) {
         spinnerStartAnimating(spinner)
+        self.view.endEditing(true)
         
         if let email = emailTextField.text,
             let pw = pwTextField.text,

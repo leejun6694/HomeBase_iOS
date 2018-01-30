@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class RegisterTeamCreateViewController: UIViewController {
 
@@ -62,6 +65,9 @@ class RegisterTeamCreateViewController: UIViewController {
         return doneButton
     }()
     
+    @IBOutlet var spinner: UIActivityIndicatorView!
+    
+    
     @IBOutlet private weak var teamLogoImageView: UIImageView!
     
     @IBOutlet private weak var teamNameLabel: UILabel!
@@ -116,10 +122,38 @@ class RegisterTeamCreateViewController: UIViewController {
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
-        if let registerUserInfoViewController =
-            self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserInfoViewController") as? RegisterUserInfoViewController {
-
-            self.navigationController?.pushViewController(registerUserInfoViewController, animated: true)
+        self.view.endEditing(true)
+        spinnerStartAnimating(spinner)
+        
+        let databaseRef = Database.database().reference()
+        let teamCode = databaseRef.child("teams").childByAutoId().key
+        
+        let storageRef = Storage.storage().reference()
+        if let logoData = UIImagePNGRepresentation(teamLogo) {
+            let logoRef = storageRef.child(teamCode).child("teamLogo.png")
+            logoRef.putData(logoData)
+            
+            if let currentUser = Auth.auth().currentUser {
+                databaseRef.child("teams").child(teamCode).setValue(
+                    ["name": teamName,
+                     "logo": logoRef.fullPath,
+                     "description": teamIntro,
+                     "homeStadium": teamHome,
+                     "admin": currentUser.uid,
+                     "members": currentUser.uid])
+            }
+            
+            if let registerTeamCompleteViewController =
+                self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamCompleteViewController") as? RegisterTeamCompleteViewController {
+                
+                registerTeamCompleteViewController.teamName = self.teamName
+                registerTeamCompleteViewController.teamCode = teamCode
+                spinnerStopAnimating(spinner)
+                self.navigationController?.pushViewController(registerTeamCompleteViewController, animated: true)
+            }
+        } else {
+            spinnerStopAnimating(spinner)
+            print("UIImage to Data error")
         }
     }
     
