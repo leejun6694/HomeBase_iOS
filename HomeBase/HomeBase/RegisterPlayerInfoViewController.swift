@@ -246,7 +246,7 @@ class RegisterPlayerInfoViewController: UIViewController {
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
     }
     
-    @objc private func keyboardWillHide(notification:NSNotification) {
+    @objc private func keyboardWillHide(_ notification:NSNotification) {
         doneButton.removeFromSuperview()
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())

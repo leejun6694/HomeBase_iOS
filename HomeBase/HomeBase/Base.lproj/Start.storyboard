@@ -1091,8 +1091,16 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundBlackGray" translatesAutoresizingMaskIntoConstraints="NO" id="lgm-d8-pTF">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="uu2-Hi-VAj">
-                                <rect key="frame" x="147" y="28.666666666666671" width="120" height="133"/>
+                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="uu2-Hi-VAj">
+                                <rect key="frame" x="140.66666666666666" y="28.666666666666671" width="132.99999999999997" height="133"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="uu2-Hi-VAj" secondAttribute="height" multiplier="1:1" id="PO9-Wi-jOf"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="BBi-uC-aR7" appends="YES" id="sy9-Qm-LlD"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팀 이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="tae-O9-Dch">
                                 <rect key="frame" x="44" y="189.66666666666666" width="102" height="22.333333333333343"/>
@@ -1120,10 +1128,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nee-uo-9z8">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nee-uo-9z8">
                                 <rect key="frame" x="35" y="337" width="344" height="133"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="우리는 우주 최강 사회인 야구팀, 홈베이스이다. 다 덤벼라 얍!" translatesAutoresizingMaskIntoConstraints="NO" id="kUN-cg-XwE">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUN-cg-XwE">
                                         <rect key="frame" x="16" y="14.333333333333307" width="312" height="104.33333333333331"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="17"/>
@@ -1164,6 +1172,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="EYw-eM-Cod" firstAttribute="width" secondItem="UHL-uf-hXw" secondAttribute="width" multiplier="326/414" id="06M-lM-SSm"/>
                             <constraint firstItem="uu2-Hi-VAj" firstAttribute="height" secondItem="UHL-uf-hXw" secondAttribute="height" multiplier="120/664" id="2FK-dC-paw"/>
@@ -1202,10 +1211,12 @@
                             <constraint firstItem="IWW-kY-mh3" firstAttribute="height" secondItem="tae-O9-Dch" secondAttribute="height" id="qPu-ws-WsF"/>
                             <constraint firstItem="uu2-Hi-VAj" firstAttribute="top" secondItem="UHL-uf-hXw" secondAttribute="centerY" multiplier="26/332" id="rNU-Zp-eHV"/>
                             <constraint firstItem="EYw-eM-Cod" firstAttribute="leading" secondItem="tae-O9-Dch" secondAttribute="leading" id="uj0-nw-fPI"/>
-                            <constraint firstItem="uu2-Hi-VAj" firstAttribute="width" secondItem="UHL-uf-hXw" secondAttribute="width" multiplier="120/414" id="uwc-J2-DH9"/>
                             <constraint firstItem="0on-Jq-xgh" firstAttribute="height" secondItem="0fN-hb-BhY" secondAttribute="height" id="xe4-Dn-SuS"/>
                             <constraint firstItem="0on-Jq-xgh" firstAttribute="top" secondItem="Zdd-n6-mOq" secondAttribute="bottom" id="y3K-YG-0G0"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="KOX-Kt-SJp" appends="YES" id="cF5-qS-63o"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="teamHomeLabel" destination="IWW-kY-mh3" id="mZS-to-3Dd"/>
@@ -1221,6 +1232,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Umn-Ju-iOT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="KOX-Kt-SJp">
+                    <connections>
+                        <action selector="backgroundDidTapped:" destination="cCd-zR-Q2Z" id="TWh-9Z-2J6"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="BBi-uC-aR7">
+                    <connections>
+                        <action selector="teamLogoDidTapped:" destination="cCd-zR-Q2Z" id="HUt-zR-cE5"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1640.5797101449277" y="-223.36956521739131"/>
         </scene>
