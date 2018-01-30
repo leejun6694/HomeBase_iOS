@@ -202,6 +202,7 @@ class SignUpViewController: UIViewController {
     
     @objc func doneButtonDidTapped(_ sender: UIButton) {
         spinnerStartAnimating(spinner)
+        self.view.endEditing(true)
         
         if let email = emailTextField.text,
             let pw = pwTextField.text,
@@ -279,7 +280,7 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    @objc private func keyboardWillHide(notification:NSNotification) {
+    @objc private func keyboardWillHide(_ notification:NSNotification) {
         doneButton.removeFromSuperview()
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())
