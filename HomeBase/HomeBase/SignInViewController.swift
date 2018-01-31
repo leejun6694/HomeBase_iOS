@@ -39,21 +39,49 @@ class SignInViewController: UIViewController {
     
     private func userConnected() {
         if let currentUser = Auth.auth().currentUser {
-            let getPlayerURL = CloudFunction.methodURL(method: Method.getPlayer)
             let parameterDictionary = ["uid": currentUser.uid]
             
             Alamofire.request(
-                getPlayerURL,
+                CloudFunction.methodURL(method: Method.getUser),
                 method: .get,
                 parameters: parameterDictionary).responseJSON {
                     (response) -> Void in
                     
                     if response.result.isSuccess {
-                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        if let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
-                            
-                            self.spinnerStopAnimating(self.spinner)
-                            UIApplication.shared.keyWindow?.rootViewController = mainViewController
+                        if let value = response.result.value as? [String: Any] {
+                            if let hasTeam = value["hasTeam"] as? Bool {
+                                if hasTeam {
+                                    Alamofire.request(
+                                        CloudFunction.methodURL(method: Method.getPlayer),
+                                        method: .get,
+                                        parameters: parameterDictionary).responseJSON {
+                                            (response) -> Void in
+                                            
+                                            if response.result.isSuccess {
+                                                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                                if let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+                                                    
+                                                    self.spinnerStopAnimating(self.spinner)
+                                                    UIApplication.shared.keyWindow?.rootViewController = mainViewController
+                                                }
+                                            } else {
+                                                if let registerUserNavigation =
+                                                    self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
+                                                    
+                                                    self.spinnerStopAnimating(self.spinner)
+                                                    UIApplication.shared.keyWindow?.rootViewController = registerUserNavigation
+                                                }
+                                            }
+                                    }
+                                } else {
+                                    if let registerTeamNavigation =
+                                        self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation {
+                                        
+                                        self.spinnerStopAnimating(self.spinner)
+                                        UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
+                                    }
+                                }
+                            }
                         }
                     } else {
                         if let registerTeamNavigation =

@@ -28,41 +28,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions)
         
         if let currentUser = Auth.auth().currentUser {
-            let getPlayerURL = CloudFunction.methodURL(method: Method.getPlayer)
             let parameterDictionary = ["uid": currentUser.uid]
             
             Alamofire.request(
-                getPlayerURL,
+                CloudFunction.methodURL(method: Method.getPlayer),
                 method: .get,
                 parameters: parameterDictionary).responseJSON {
                     (response) -> Void in
                     
                     if response.result.isSuccess {
-                        print("loading user: \(currentUser.email ?? "default")")
-                        
                         let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
                         if let mainViewController = mainStoryBoard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
                             
                             self.window?.rootViewController = mainViewController
                         }
-                    } else {
-                        do {
-                            try Auth.auth().signOut()
-                        } catch {
-                            print("sign out error")
-                        }
-                        
-                        let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-                        let signInViewController = storyBoard.instantiateInitialViewController()
+                    }
+                    else {
+                        let startStoryBoard = UIStoryboard(name: "Start", bundle: nil)
+                        let signInViewController = startStoryBoard.instantiateInitialViewController()
                         
                         self.window?.rootViewController = signInViewController
                     }
             }
         } else {
-            let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-            let signInViewController = storyBoard.instantiateInitialViewController()
+            let startStoryBoard = UIStoryboard(name: "Start", bundle: nil)
+            let signInViewController = startStoryBoard.instantiateInitialViewController()
             
-            window?.rootViewController = signInViewController
+            self.window?.rootViewController = signInViewController
         }
         
         return true

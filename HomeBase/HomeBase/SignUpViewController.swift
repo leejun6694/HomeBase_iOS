@@ -191,13 +191,15 @@ class SignUpViewController: UIViewController {
         for profile in user.providerData {
             provider = profile.providerID
         }
+        let hasTeam:Bool = false
         
         let ref = Database.database().reference()
         ref.child("users").child(user.uid).setValue(
             ["email": email,
              "name": name,
              "birth": "\(year).\(month).\(day)",
-                "provider": provider])
+             "provider": provider,
+             "hasTeam": hasTeam])
     }
     
     @objc func doneButtonDidTapped(_ sender: UIButton) {

@@ -1,5 +1,5 @@
 //
-//  RegisterTeamCompleteViewController.swift
+//  RegisterUserNavigation.swift
 //  HomeBase
 //
 //  Created by JUN LEE on 2018. 1. 31..
@@ -8,13 +8,11 @@
 
 import UIKit
 
-class RegisterTeamCompleteViewController: UIViewController {
+class RegisterUserNavigation: UINavigationController {
 
-    var teamName:String!
-    var teamCode:String!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Do any additional setup after loading the view.
     }
 }
