@@ -13,7 +13,7 @@ class RegisterTeamChoiceViewController: UIViewController {
 
     // MARK: Methods
     
-    @IBAction func createButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func createButtonDidTapped(_ sender: UIButton) {
         if let registerTeamCreateViewController =
             self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamCreateViewController") as? RegisterTeamCreateViewController {
             
@@ -21,7 +21,7 @@ class RegisterTeamChoiceViewController: UIViewController {
         }
     }
     
-    @IBAction func joinButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func joinButtonDidTapped(_ sender: UIButton) {
         if let registerTeamJoinViewController =
             self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinViewController") as? RegisterTeamJoinViewController {
             

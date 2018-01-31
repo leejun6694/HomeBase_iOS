@@ -66,8 +66,7 @@ class RegisterTeamCreateViewController: UIViewController {
         return doneButton
     }()
     
-    @IBOutlet var spinner: UIActivityIndicatorView!
-    
+    @IBOutlet private var spinner: UIActivityIndicatorView!
     
     @IBOutlet private weak var teamLogoImageView: UIImageView!
     

@@ -15,10 +15,10 @@ class RegisterTeamCompleteViewController: UIViewController {
     var teamName:String = "홈베이스"
     var teamCode:String = ""
     
-    @IBOutlet var teamLogoImageView: UIImageView!
-    @IBOutlet var teamNameLabel: UILabel!
-    @IBOutlet var teamCodeLabel: UILabel!
-    @IBOutlet var copyButton: UIButton! {
+    @IBOutlet private var teamLogoImageView: UIImageView!
+    @IBOutlet private var teamNameLabel: UILabel!
+    @IBOutlet private var teamCodeLabel: UILabel!
+    @IBOutlet private var copyButton: UIButton! {
         didSet {
             copyButton.layer.borderWidth = 2.0
             copyButton.layer.borderColor = UIColor(red: 44.0/255.0,
@@ -30,11 +30,11 @@ class RegisterTeamCompleteViewController: UIViewController {
     
     // MARK: Methods
     
-    @IBAction func copyButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func copyButtonDidTapped(_ sender: UIButton) {
         UIPasteboard.general.string = teamCode
     }
     
-    @IBAction func doneButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func doneButtonDidTapped(_ sender: UIButton) {
         if let registerUserNavigation = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
             
             self.present(registerUserNavigation, animated: true, completion: nil)

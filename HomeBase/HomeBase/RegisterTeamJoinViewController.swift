@@ -10,9 +10,16 @@ import UIKit
 
 class RegisterTeamJoinViewController: UIViewController {
     
+    @IBOutlet private var spinner: UIActivityIndicatorView!
+    @IBOutlet private var teamCodeTextField: UITextField!
+    
     // MARK: Methods
     
-    @IBAction func doneButtonDidTapped(_ sender: UIButton) {
+    @IBAction func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    @IBAction private func doneButtonDidTapped(_ sender: UIButton) {
         
     }
     
@@ -20,9 +27,11 @@ class RegisterTeamJoinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
 }
