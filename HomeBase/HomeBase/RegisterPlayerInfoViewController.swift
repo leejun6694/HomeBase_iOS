@@ -173,11 +173,11 @@ class RegisterPlayerInfoViewController: UIViewController {
         self.view.endEditing(true)
         spinnerStartAnimating(spinner)
         
-        if let user = Auth.auth().currentUser {
+        if let currentUser = Auth.auth().currentUser {
             let ref = Database.database().reference()
             
             var provider:String = ""
-            for profile in user.providerData {
+            for profile in currentUser.providerData {
                 provider = profile.providerID
             }
             
@@ -195,19 +195,13 @@ class RegisterPlayerInfoViewController: UIViewController {
             dateFormatter.dateFormat = "yyyy.MM.dd"
             let joinedAt = dateFormatter.string(from: Date())
             
-            if provider == "password" {
-                ref.child("users").child(user.uid).updateChildValues(
-                    ["name": name,
-                     "birth": "\(year).\(month).\(day)"])
-            } else if provider == "google.com" || provider == "facebook.com" {
-                ref.child("users").child(user.uid).setValue(
-                    ["email": user.email,
-                     "name": name,
-                     "birth": "\(year).\(month).\(day)",
-                     "provider": provider])
-            }
+            ref.child("users").child(currentUser.uid).updateChildValues(
+                ["email": currentUser.email ?? "no email",
+                 "name": name,
+                 "birth": "\(year).\(month).\(day)",
+                 "provider": provider])
             
-            ref.child("players").child(user.uid).setValue(
+            ref.child("players").child(currentUser.uid).setValue(
                 ["name": name,
                  "height": height,
                  "weight": weight,
@@ -257,8 +251,6 @@ class RegisterPlayerInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.titleView = titleLabel
-        
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())
         buttonDisabled(doneButton)
@@ -275,6 +267,13 @@ class RegisterPlayerInfoViewController: UIViewController {
             name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.titleView = titleLabel
     }
 }
 

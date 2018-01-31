@@ -214,8 +214,8 @@ class RegisterUserInfoViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        
+        self.navigationController?.navigationBar.barTintColor =
+            UIColor(red: 44.0/255.0, green: 44.0/255.0, blue: 44.0/255.0, alpha: 1.0)
         self.navigationItem.titleView = titleLabel
         
         scrollView.contentSize = contentsView.frame.size
@@ -242,6 +242,7 @@ class RegisterUserInfoViewController: UIViewController {
         super.viewWillAppear(animated)
         
         autoCompleteTextField()
+        
     }
 }
 

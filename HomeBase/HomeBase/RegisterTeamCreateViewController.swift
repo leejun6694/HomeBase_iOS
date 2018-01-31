@@ -16,6 +16,7 @@ class RegisterTeamCreateViewController: UIViewController {
     // MARK: Properties
     
     private var teamLogo: UIImage = UIImage()
+    private var isTeamLogoChanged:Bool = false
     private var teamName:String = ""
     private var teamIntro:String = ""
     private var teamHome:String = ""
@@ -129,11 +130,28 @@ class RegisterTeamCreateViewController: UIViewController {
         let teamCode = databaseRef.child("teams").childByAutoId().key
         
         let storageRef = Storage.storage().reference()
+        if isTeamLogoChanged == false {
+            teamLogo = #imageLiteral(resourceName: "team_logo")
+        }
         if let logoData = UIImagePNGRepresentation(teamLogo) {
             let logoRef = storageRef.child(teamCode).child("teamLogo.png")
             logoRef.putData(logoData)
             
             if let currentUser = Auth.auth().currentUser {
+                var provider:String = ""
+                for profile in currentUser.providerData {
+                    provider = profile.providerID
+                }
+                let hasTeam:Bool = true
+                
+                if provider == "password" {
+                    databaseRef.child("users").child(currentUser.uid).updateChildValues(
+                        ["hasTeam": hasTeam])
+                } else {
+                    databaseRef.child("users").child(currentUser.uid).setValue(
+                        ["hasTeam": hasTeam])
+                }
+                
                 databaseRef.child("teams").child(teamCode).setValue(
                     ["name": teamName,
                      "logo": logoRef.fullPath,
@@ -222,6 +240,8 @@ class RegisterTeamCreateViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2.0
     }
 }
@@ -231,6 +251,7 @@ extension RegisterTeamCreateViewController: UIImagePickerControllerDelegate, UIN
         
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             teamLogo = image
+            isTeamLogoChanged = true
             teamLogoImageView.image = teamLogo
         }
         

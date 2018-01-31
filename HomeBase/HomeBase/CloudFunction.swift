@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import FirebaseAuth
+import Alamofire
 
 enum Method:String {
     case findEmail = "findEmail"
     case findPassword = "checkEmailByName"
+    case getUser = "getUser"
     case getPlayer = "getPlayer"
 }
 
@@ -22,4 +25,44 @@ struct CloudFunction {
         
         return url
     }
+    
+//    static func hasTeamTo(_ currentUser: User) -> Bool {
+//        let parameterDictionary = ["uid": currentUser.uid]
+//        var result: Bool = false
+//
+//        Alamofire.request(
+//            CloudFunction.methodURL(method: Method.getUser),
+//            method: .get,
+//            parameters: parameterDictionary).responseJSON {
+//                (response) -> Void in
+//
+//                if response.result.isSuccess {
+//                    if let value = response.result.value as? [String: Any] {
+//                        if let hasTeam = value["hasTeam"] as? Bool {
+//                            if hasTeam { result = true }
+//                            else { result = false }
+//                        }
+//                    }
+//                }
+//        }
+//
+//        return result
+//    }
+//
+//    static func hasPlayerInfoTo(_ currentUser: User) -> Bool {
+//        let parameterDictionary = ["uid": currentUser.uid]
+//        var result:Bool = false
+//
+//        Alamofire.request(
+//            CloudFunction.methodURL(method: Method.getPlayer),
+//            method: .get,
+//            parameters: parameterDictionary).responseJSON {
+//                (response) -> Void in
+//
+//                if response.result.isSuccess { result = true }
+//                else { result = false }
+//        }
+//        
+//        return result
+//    }
 }
