@@ -240,6 +240,8 @@ class RegisterTeamCreateViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2.0
     }
 }
