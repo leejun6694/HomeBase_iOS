@@ -160,7 +160,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQ3-aH-qkF">
                                         <rect key="frame" x="56" y="108" width="198" height="70.666666666666686"/>
                                         <string key="text">등록되지 않은 정보를
-입력하셨습니다.</string>
+입력하셨습니다</string>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -383,7 +383,7 @@
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="23"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJo-Sx-sLQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJo-Sx-sLQ">
                                 <rect key="frame" x="157" y="384" width="100" height="35"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -490,7 +490,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Tv-PZ-r5Q">
                                 <rect key="frame" x="82" y="121.33333333333331" width="250" height="53"/>
                                 <string key="text">회원님께서 설정한 이메일로 
-비밀번호 변경 메일이 전송됩니다.</string>
+비밀번호 변경 메일이 전송됩니다</string>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -642,7 +642,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="에 비밀번호 변경요청 메일을 전송했습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="nA0-gG-QP4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="에 비밀번호 변경요청 메일을 전송했습니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="nA0-gG-QP4">
                                 <rect key="frame" x="32" y="336" width="350" height="35"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1272,7 +1272,7 @@
                                     <constraint firstAttribute="width" secondItem="0NR-Nd-n1f" secondAttribute="height" multiplier="1:1" id="sxz-bW-y8S"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팀 등록이 완료되었습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="esw-Q3-Icb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팀 등록이 완료되었습니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="esw-Q3-Icb">
                                 <rect key="frame" x="82" y="257" width="250" height="30"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1298,7 +1298,7 @@
                                         <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="wlU-Z5-ldW">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="wlU-Z5-ldW">
                                         <rect key="frame" x="150" y="94" width="50" height="35"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                         <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1792,7 +1792,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundLogin" translatesAutoresizingMaskIntoConstraints="NO" id="BV1-wR-0cP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입이 완료되었습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWx-HB-Pna">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입이 완료되었습니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWx-HB-Pna">
                                 <rect key="frame" x="32" y="268" width="350" height="34"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <color key="textColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
@@ -1801,7 +1801,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8h-GK-mKA">
                                 <rect key="frame" x="32" y="323" width="350" height="60"/>
                                 <string key="text">회원님의 이메일로 인증 메일이 발송되었습니다.
-이메일 인증 후 로그인이 가능합니다.</string>
+이메일 인증 후 로그인이 가능합니다</string>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                 <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2262,28 +2262,115 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLa-zg-LDX">
-                                <rect key="frame" x="184" y="536" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="done"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundEnter" translatesAutoresizingMaskIntoConstraints="NO" id="pgM-7i-ZlA">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <gestureRecognizers/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="1ab-NV-gfe">
+                                <rect key="frame" x="128" y="116" width="158" height="124"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="참가하실 팀의 코드를 입력해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="HXD-KM-ZP2">
+                                <rect key="frame" x="52" y="306" width="310" height="30"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 팀 코드란 처음 팀 등록시에 생성된 숫자, 영문 코드를 말합니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="jQc-xr-m7s">
+                                <rect key="frame" x="57" y="345" width="300" height="20"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="AaBbCcDdEeFfGgHhIiJj" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="MGU-2U-kxi">
+                                <rect key="frame" x="37.666666666666657" y="434" width="340" height="35"/>
+                                <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKo-9P-EaC">
+                                <rect key="frame" x="37" y="469" width="340" height="2"/>
+                                <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Y0c-kf-LxF">
+                                <rect key="frame" x="190.66666666666666" y="515" width="33" height="17"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLa-zg-LDX">
+                                <rect key="frame" x="32" y="593" width="350" height="45"/>
+                                <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="완료">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="doneButtonDidTapped:" destination="FM9-Jd-IAE" eventType="touchUpInside" id="xA4-wo-ydU"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Join" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HtO-nV-y7A">
-                                <rect key="frame" x="133" y="241" width="149" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="J2P-3N-Puk">
+                                <rect key="frame" x="197" y="358" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nLa-zg-LDX" firstAttribute="centerX" secondItem="zY5-2n-dp9" secondAttribute="centerX" id="2nU-PB-ZGo"/>
+                            <constraint firstItem="jQc-xr-m7s" firstAttribute="top" secondItem="zY5-2n-dp9" secondAttribute="centerY" multiplier="345/368" id="3Na-tD-P5i"/>
+                            <constraint firstItem="Y0c-kf-LxF" firstAttribute="width" secondItem="zY5-2n-dp9" secondAttribute="width" multiplier="33/414" id="3nG-hS-NQE"/>
+                            <constraint firstItem="pgM-7i-ZlA" firstAttribute="height" secondItem="zY5-2n-dp9" secondAttribute="height" id="5Fu-6q-1dG"/>
+                            <constraint firstItem="Y0c-kf-LxF" firstAttribute="top" secondItem="zY5-2n-dp9" secondAttribute="centerY" multiplier="515/368" id="Ain-HD-41X"/>
+                            <constraint firstItem="1ab-NV-gfe" firstAttribute="height" secondItem="zY5-2n-dp9" secondAttribute="height" multiplier="124/736" id="B29-Ni-YZk"/>
+                            <constraint firstItem="HXD-KM-ZP2" firstAttribute="centerX" secondItem="zY5-2n-dp9" secondAttribute="centerX" id="DFa-11-JYl"/>
+                            <constraint firstItem="MGU-2U-kxi" firstAttribute="width" secondItem="zY5-2n-dp9" secondAttribute="width" multiplier="340/414" id="Dpe-Nr-hZt"/>
+                            <constraint firstItem="pgM-7i-ZlA" firstAttribute="centerX" secondItem="zY5-2n-dp9" secondAttribute="centerX" id="Fub-Wq-2sL"/>
+                            <constraint firstItem="Y0c-kf-LxF" firstAttribute="centerX" secondItem="zY5-2n-dp9" secondAttribute="centerX" id="GSm-TI-eEc"/>
+                            <constraint firstItem="YKo-9P-EaC" firstAttribute="centerX" secondItem="zY5-2n-dp9" secondAttribute="centerX" id="Gu0-ZS-NgX"/>
+                            <constraint firstItem="J2P-3N-Puk" firstAttribute="centerX" secondItem="zY5-2n-dp9" secondAttribute="centerX" id="HYu-90-yew"/>
+                            <constraint firstItem="nLa-zg-LDX" firstAttribute="width" secondItem="zY5-2n-dp9" secondAttribute="width" multiplier="350/414" id="HhI-0o-6eU"/>
+                            <constraint firstItem="pgM-7i-ZlA" firstAttribute="centerY" secondItem="zY5-2n-dp9" secondAttribute="centerY" id="Iof-5Q-u1h"/>
+                            <constraint firstItem="1ab-NV-gfe" firstAttribute="top" secondItem="zY5-2n-dp9" secondAttribute="centerY" multiplier="116/368" id="L4G-qy-ASq"/>
+                            <constraint firstItem="jQc-xr-m7s" firstAttribute="centerX" secondItem="zY5-2n-dp9" secondAttribute="centerX" id="NGi-5d-JSO"/>
+                            <constraint firstItem="YKo-9P-EaC" firstAttribute="height" secondItem="zY5-2n-dp9" secondAttribute="height" multiplier="2/736" id="Oi3-k6-reJ"/>
+                            <constraint firstItem="J2P-3N-Puk" firstAttribute="centerY" secondItem="zY5-2n-dp9" secondAttribute="centerY" id="Pio-T7-nV1"/>
+                            <constraint firstItem="1ab-NV-gfe" firstAttribute="centerX" secondItem="zY5-2n-dp9" secondAttribute="centerX" id="PpH-u5-GrQ"/>
+                            <constraint firstItem="Y0c-kf-LxF" firstAttribute="height" secondItem="zY5-2n-dp9" secondAttribute="height" multiplier="17/736" id="QvU-Bv-yok"/>
+                            <constraint firstItem="HXD-KM-ZP2" firstAttribute="height" secondItem="zY5-2n-dp9" secondAttribute="height" multiplier="30/736" id="Tzb-ug-XPI"/>
+                            <constraint firstItem="jQc-xr-m7s" firstAttribute="width" secondItem="zY5-2n-dp9" secondAttribute="width" multiplier="300/414" id="X5v-Uo-2k1"/>
+                            <constraint firstItem="nLa-zg-LDX" firstAttribute="height" secondItem="zY5-2n-dp9" secondAttribute="height" multiplier="45/736" id="ZE5-eD-EAc"/>
+                            <constraint firstItem="nLa-zg-LDX" firstAttribute="top" secondItem="zY5-2n-dp9" secondAttribute="centerY" multiplier="593/368" id="bo1-6K-Hg6"/>
+                            <constraint firstItem="YKo-9P-EaC" firstAttribute="top" secondItem="MGU-2U-kxi" secondAttribute="bottom" id="bvi-pc-twW"/>
+                            <constraint firstItem="MGU-2U-kxi" firstAttribute="top" secondItem="zY5-2n-dp9" secondAttribute="centerY" multiplier="434/368" id="exQ-mN-pIQ"/>
+                            <constraint firstItem="HXD-KM-ZP2" firstAttribute="width" secondItem="zY5-2n-dp9" secondAttribute="width" multiplier="310/414" id="gZO-Lq-ZS5"/>
+                            <constraint firstItem="YKo-9P-EaC" firstAttribute="width" secondItem="MGU-2U-kxi" secondAttribute="width" id="q5k-kf-8Yi"/>
+                            <constraint firstItem="MGU-2U-kxi" firstAttribute="centerX" secondItem="zY5-2n-dp9" secondAttribute="centerX" id="q6Q-7T-4zh"/>
+                            <constraint firstItem="HXD-KM-ZP2" firstAttribute="top" secondItem="zY5-2n-dp9" secondAttribute="centerY" multiplier="306/368" id="u9z-w4-Ljr"/>
+                            <constraint firstItem="MGU-2U-kxi" firstAttribute="height" secondItem="zY5-2n-dp9" secondAttribute="height" multiplier="35/736" id="uCR-ab-FWU"/>
+                            <constraint firstItem="1ab-NV-gfe" firstAttribute="width" secondItem="zY5-2n-dp9" secondAttribute="width" multiplier="158/414" id="uEm-zv-S8Y"/>
+                            <constraint firstItem="jQc-xr-m7s" firstAttribute="height" secondItem="zY5-2n-dp9" secondAttribute="height" multiplier="20/736" id="uUt-41-hVD"/>
+                            <constraint firstItem="pgM-7i-ZlA" firstAttribute="width" secondItem="zY5-2n-dp9" secondAttribute="width" id="wnC-md-j7r"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="QFA-ek-fFf" appends="YES" id="hGR-yG-HcU"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="spinner" destination="J2P-3N-Puk" id="Oda-OC-DTF"/>
+                        <outlet property="teamCodeTextField" destination="MGU-2U-kxi" id="T1E-f2-cgb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ajw-wW-S2O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QFA-ek-fFf">
+                    <connections>
+                        <action selector="backgroundDidTapped:" destination="FM9-Jd-IAE" id="bvl-1d-rm9"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2059" y="551"/>
+            <point key="canvasLocation" x="2057.971014492754" y="550.27173913043487"/>
         </scene>
         <!--Register Team Navigation-->
         <scene sceneID="yZO-kM-Iq8">
@@ -2348,6 +2435,7 @@
     <resources>
         <image name="arrow" width="33" height="17"/>
         <image name="backgroundBlackGray" width="414" height="736"/>
+        <image name="backgroundEnter" width="414" height="736"/>
         <image name="backgroundForgotPw" width="414" height="658"/>
         <image name="backgroundLogin" width="414" height="736"/>
         <image name="backgroundSignup2" width="414" height="736"/>
@@ -2356,6 +2444,7 @@
         <image name="iconError" width="70" height="70"/>
         <image name="iconExit" width="45" height="45"/>
         <image name="iconSelect" width="70" height="70"/>
+        <image name="logo" width="208" height="163"/>
         <image name="mail" width="80" height="58"/>
         <image name="oval" width="120" height="120"/>
         <image name="team_logo" width="121" height="121"/>
