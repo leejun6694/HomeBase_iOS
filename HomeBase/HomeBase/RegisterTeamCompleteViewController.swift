@@ -12,8 +12,8 @@ class RegisterTeamCompleteViewController: UIViewController {
 
     // MARK: Properties
     
-    var teamName:String!
-    var teamCode:String!
+    var teamName:String = "홈베이스"
+    var teamCode:String = ""
     
     @IBOutlet var teamLogoImageView: UIImageView!
     @IBOutlet var teamNameLabel: UILabel!
@@ -31,9 +31,14 @@ class RegisterTeamCompleteViewController: UIViewController {
     // MARK: Methods
     
     @IBAction func copyButtonDidTapped(_ sender: UIButton) {
+        UIPasteboard.general.string = teamCode
     }
     
     @IBAction func doneButtonDidTapped(_ sender: UIButton) {
+        if let registerUserNavigation = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
+            
+            self.present(registerUserNavigation, animated: true, completion: nil)
+        }
     }
     
     // MARK: Life Cycle
@@ -41,6 +46,8 @@ class RegisterTeamCompleteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        teamNameLabel.text = "\(teamName)의 팀 코드는"
+        teamCodeLabel.text = teamCode
     }
     
     override func viewWillAppear(_ animated: Bool) {
