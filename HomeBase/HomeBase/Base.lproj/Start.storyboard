@@ -1854,7 +1854,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="me2-zl-0gy">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="me2-zl-0gy">
                                 <rect key="frame" x="147" y="305" width="120" height="120"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="completeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4jz-gm-x2a">
@@ -1896,7 +1896,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kwy-LB-tPa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1577" y="1293"/>
+            <point key="canvasLocation" x="2462" y="-951"/>
         </scene>
         <!--Register Team Join Error View Controller-->
         <scene sceneID="Ra1-Ex-m3A">
@@ -1909,12 +1909,71 @@
                     <view key="view" contentMode="scaleToFill" id="8Ya-4r-S48">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXA-ue-bff">
+                                <rect key="frame" x="52" y="256" width="310" height="254"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconError" translatesAutoresizingMaskIntoConstraints="NO" id="81o-qn-nLx">
+                                        <rect key="frame" x="120" y="35" width="70" height="70"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="존재하지 않는 코드입니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="HkV-tf-Qgg">
+                                        <rect key="frame" x="55" y="117" width="200" height="31"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D5W-Y2-jqT">
+                                        <rect key="frame" x="22" y="179" width="266" height="45"/>
+                                        <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="doneButtonDidTapped:" destination="KwG-Zu-n3B" eventType="touchUpInside" id="egs-Tc-lal"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="81o-qn-nLx" firstAttribute="height" secondItem="aXA-ue-bff" secondAttribute="height" multiplier="70/254" id="Aen-TK-2ZO"/>
+                                    <constraint firstItem="D5W-Y2-jqT" firstAttribute="centerX" secondItem="aXA-ue-bff" secondAttribute="centerX" id="Da6-e4-7PY"/>
+                                    <constraint firstItem="81o-qn-nLx" firstAttribute="width" secondItem="aXA-ue-bff" secondAttribute="width" multiplier="70/310" id="EfD-fH-RB0"/>
+                                    <constraint firstItem="D5W-Y2-jqT" firstAttribute="height" secondItem="aXA-ue-bff" secondAttribute="height" multiplier="45/254" id="LpT-xl-bRA"/>
+                                    <constraint firstItem="HkV-tf-Qgg" firstAttribute="centerX" secondItem="aXA-ue-bff" secondAttribute="centerX" id="M1x-yX-X6L"/>
+                                    <constraint firstItem="HkV-tf-Qgg" firstAttribute="height" secondItem="aXA-ue-bff" secondAttribute="height" multiplier="31/254" id="RgN-IX-kG3"/>
+                                    <constraint firstItem="HkV-tf-Qgg" firstAttribute="width" secondItem="aXA-ue-bff" secondAttribute="width" multiplier="200/310" id="UBK-Lu-5MD"/>
+                                    <constraint firstItem="D5W-Y2-jqT" firstAttribute="width" secondItem="aXA-ue-bff" secondAttribute="width" multiplier="266/310" id="Uzc-pY-nV9"/>
+                                    <constraint firstItem="D5W-Y2-jqT" firstAttribute="top" secondItem="aXA-ue-bff" secondAttribute="centerY" multiplier="179/127" id="arv-yn-hMs"/>
+                                    <constraint firstItem="81o-qn-nLx" firstAttribute="top" secondItem="aXA-ue-bff" secondAttribute="centerY" multiplier="35/127" id="iBH-SL-F0h"/>
+                                    <constraint firstItem="81o-qn-nLx" firstAttribute="centerX" secondItem="aXA-ue-bff" secondAttribute="centerX" id="oJO-eG-x9o"/>
+                                    <constraint firstItem="HkV-tf-Qgg" firstAttribute="top" secondItem="aXA-ue-bff" secondAttribute="centerY" multiplier="117/127" id="u5P-GN-wjn"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aXA-ue-bff" firstAttribute="width" secondItem="8Ya-4r-S48" secondAttribute="width" multiplier="310/414" id="59t-EP-SNx"/>
+                            <constraint firstItem="aXA-ue-bff" firstAttribute="height" secondItem="8Ya-4r-S48" secondAttribute="height" multiplier="254/736" id="NDs-zq-PDi"/>
+                            <constraint firstItem="aXA-ue-bff" firstAttribute="top" secondItem="8Ya-4r-S48" secondAttribute="centerY" multiplier="256/368" id="ohg-j4-S2L"/>
+                            <constraint firstItem="aXA-ue-bff" firstAttribute="centerX" secondItem="8Ya-4r-S48" secondAttribute="centerX" id="xXI-9Y-NSs"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgp-7I-7gv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2314" y="1293"/>
+            <point key="canvasLocation" x="1641" y="1293"/>
         </scene>
         <!--Register Team Join Enter View Controller-->
         <scene sceneID="7er-hw-1JQ">
@@ -1927,12 +1986,84 @@
                     <view key="view" contentMode="scaleToFill" id="5lr-wb-1cF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7E-BD-MFm">
+                                <rect key="frame" x="52" y="215" width="310" height="302"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A4Z-JO-ySZ">
+                                        <rect key="frame" x="105" y="26" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="A4Z-JO-ySZ" secondAttribute="height" multiplier="1:1" id="fzE-mg-vd2"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="wG4-9E-qIo">
+                                        <rect key="frame" x="45" y="134" width="220" height="45"/>
+                                        <string key="text">홈베이스팀으로
+입장하시겠습니까?</string>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AR9-ks-BUV">
+                                        <rect key="frame" x="22" y="200" width="266" height="45"/>
+                                        <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXP-m0-GJM">
+                                        <rect key="frame" x="22" y="260" width="266" height="27"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="취소">
+                                            <color key="titleColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="PXP-m0-GJM" firstAttribute="top" secondItem="L7E-BD-MFm" secondAttribute="centerY" multiplier="260/151" id="7Ea-bo-rDU"/>
+                                    <constraint firstItem="A4Z-JO-ySZ" firstAttribute="height" secondItem="L7E-BD-MFm" secondAttribute="height" multiplier="100/302" id="8zO-la-28j"/>
+                                    <constraint firstItem="PXP-m0-GJM" firstAttribute="width" secondItem="L7E-BD-MFm" secondAttribute="width" multiplier="266/310" id="AbS-hG-4Rf"/>
+                                    <constraint firstItem="AR9-ks-BUV" firstAttribute="top" secondItem="L7E-BD-MFm" secondAttribute="centerY" multiplier="200/151" id="EDa-no-san"/>
+                                    <constraint firstItem="wG4-9E-qIo" firstAttribute="top" secondItem="L7E-BD-MFm" secondAttribute="centerY" multiplier="134/151" id="F2w-Tb-7rm"/>
+                                    <constraint firstItem="PXP-m0-GJM" firstAttribute="centerX" secondItem="L7E-BD-MFm" secondAttribute="centerX" id="FQq-1F-A5D"/>
+                                    <constraint firstItem="wG4-9E-qIo" firstAttribute="height" secondItem="L7E-BD-MFm" secondAttribute="height" multiplier="45/302" id="IJL-9c-00P"/>
+                                    <constraint firstItem="wG4-9E-qIo" firstAttribute="centerX" secondItem="L7E-BD-MFm" secondAttribute="centerX" id="QJU-Fy-dFY"/>
+                                    <constraint firstItem="AR9-ks-BUV" firstAttribute="height" secondItem="L7E-BD-MFm" secondAttribute="height" multiplier="45/302" id="ZeW-YH-0o2"/>
+                                    <constraint firstItem="A4Z-JO-ySZ" firstAttribute="centerX" secondItem="L7E-BD-MFm" secondAttribute="centerX" id="jVd-0J-9o4"/>
+                                    <constraint firstItem="AR9-ks-BUV" firstAttribute="width" secondItem="L7E-BD-MFm" secondAttribute="width" multiplier="266/310" id="klF-aP-8y6"/>
+                                    <constraint firstItem="A4Z-JO-ySZ" firstAttribute="top" secondItem="L7E-BD-MFm" secondAttribute="centerY" multiplier="26/151" id="nQP-ia-5tk"/>
+                                    <constraint firstItem="PXP-m0-GJM" firstAttribute="height" secondItem="L7E-BD-MFm" secondAttribute="height" multiplier="27/302" id="oJs-1k-1nS"/>
+                                    <constraint firstItem="AR9-ks-BUV" firstAttribute="centerX" secondItem="L7E-BD-MFm" secondAttribute="centerX" id="vfR-nz-2e8"/>
+                                    <constraint firstItem="wG4-9E-qIo" firstAttribute="width" secondItem="L7E-BD-MFm" secondAttribute="width" multiplier="220/310" id="xO5-79-1hy"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="L7E-BD-MFm" firstAttribute="height" secondItem="5lr-wb-1cF" secondAttribute="height" multiplier="302/736" id="6GM-lv-PXI"/>
+                            <constraint firstItem="L7E-BD-MFm" firstAttribute="width" secondItem="5lr-wb-1cF" secondAttribute="width" multiplier="310/414" id="UDy-Jw-QCA"/>
+                            <constraint firstItem="L7E-BD-MFm" firstAttribute="centerX" secondItem="5lr-wb-1cF" secondAttribute="centerX" id="fJD-r4-qxL"/>
+                            <constraint firstItem="L7E-BD-MFm" firstAttribute="top" secondItem="5lr-wb-1cF" secondAttribute="centerY" multiplier="215/368" id="yDk-eI-O3W"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feS-rc-iJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3045" y="1293"/>
+            <point key="canvasLocation" x="2462" y="1293"/>
         </scene>
         <!--Register User Info View Controller-->
         <scene sceneID="uz4-7r-NaV">
