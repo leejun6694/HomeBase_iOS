@@ -14,6 +14,8 @@ class RegisterUserInfoViewController: UIViewController {
 
     // MARK: Properties
     
+    private var currentOriginY:CGFloat = 0.0
+    
     private var name: String = ""
     private var year: String = ""
     private var month: String = ""
@@ -68,7 +70,6 @@ class RegisterUserInfoViewController: UIViewController {
         return doneButton
     }()
     
-    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var contentsView: UIView!
     
     @IBOutlet private weak var nameLabel: UILabel!
@@ -190,11 +191,19 @@ class RegisterUserInfoViewController: UIViewController {
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
         
-        if let keyboardFrame: NSValue =
-            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            keyboardHeight = keyboardRectangle.height
+            let keyboardHeight = keyboardRectangle.height + accessoryView.frame.size.height
+            
+            for subview in contentsView.subviews {
+                if subview.isFirstResponder {
+                    if bottomLocationOf(subview) < keyboardHeight {
+                        self.view.frame.origin.y +=
+                            (bottomLocationOf(subview) - keyboardHeight)
+                    }
+                    break
+                }
+            }
         }
     }
     
@@ -203,7 +212,7 @@ class RegisterUserInfoViewController: UIViewController {
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())
         
-        scrollView.contentInset.bottom = 0
+        self.view.frame.origin.y = currentOriginY
     }
     
     // MARK: Life Cycles
@@ -217,8 +226,6 @@ class RegisterUserInfoViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor =
             UIColor(red: 44.0/255.0, green: 44.0/255.0, blue: 44.0/255.0, alpha: 1.0)
         self.navigationItem.titleView = titleLabel
-        
-        scrollView.contentSize = contentsView.frame.size
         
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())
@@ -241,8 +248,15 @@ class RegisterUserInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        spinnerStartAnimating(spinner)
         autoCompleteTextField()
+        spinnerStopAnimating(spinner)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
+        currentOriginY = self.view.frame.origin.y
     }
 }
 
@@ -464,7 +478,6 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
             
             weightTextFieldCondition(bodyChecked(weightTextField))
             
-            scrollView.contentInset.bottom = keyboardHeight + 10.0
             weightTextField.inputAccessoryView = accessoryView
         default:
             break
@@ -512,7 +525,7 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
         case heightTextField:
             if currentCount == 2, string.count == 1 {
                 heightTextField.text?.append(string)
-                weightTextField.becomeFirstResponder()
+                heightTextField.resignFirstResponder()
                 
                 return false
             }
@@ -553,12 +566,7 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case nameTextField:
-            birthTextField.becomeFirstResponder()
-        default:
-            break
-        }
+        self.view.endEditing(true)
         
         return true
     }
@@ -600,68 +608,68 @@ extension RegisterUserInfoViewController {
         let centerYConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: nameTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: nameConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: nameTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: nameConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: nameTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: nameTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: nameTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: nameTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func birthConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: birthTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: birthConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: birthTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: birthConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: birthTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: birthTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: birthTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: birthTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func heightConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
             item: heightConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: heightTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: heightConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: heightTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: heightConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: heightTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: heightConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: heightTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: heightTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: heightConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: heightTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func weightConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
             item: weightConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: weightTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: weightConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: weightTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: weightConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: weightTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: weightConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: weightTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: weightTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: weightConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: weightTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func doneButtonConstraints() -> [NSLayoutConstraint] {

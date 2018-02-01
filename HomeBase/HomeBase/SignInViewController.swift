@@ -17,6 +17,8 @@ class SignInViewController: UIViewController {
     
     // MARK: Properties
     
+    private var currentOriginY:CGFloat = 0.0
+    
     @IBOutlet private weak var emailTextField: UITextField! {
         didSet { emailTextField.delegate = self }
     }
@@ -225,6 +227,27 @@ class SignInViewController: UIViewController {
         }
     }
     
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            for subview in self.view.subviews {
+                if subview.isFirstResponder {
+                    if bottomLocationOf(subview) < keyboardHeight {
+                        currentOriginY = self.view.frame.origin.y
+                        self.view.frame.origin.y = bottomLocationOf(subview)
+                    }
+                    break
+                }
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification:NSNotification) {
+        self.view.frame.origin.y = currentOriginY
+    }
+    
     // MARK: Life Cycles
     
     override func viewDidLoad() {
@@ -232,6 +255,19 @@ class SignInViewController: UIViewController {
         
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: NSNotification.Name.UIKeyboardWillHide,
+            object: nil
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -284,14 +320,7 @@ extension SignInViewController: GIDSignInDelegate, GIDSignInUIDelegate {
 // MARK: TextField Delegate
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case emailTextField:
-            pwTextField.becomeFirstResponder()
-        case pwTextField:
-            pwTextField.resignFirstResponder()
-        default:
-            break
-        }
+        self.view.endEditing(true)
         
         return true
     }

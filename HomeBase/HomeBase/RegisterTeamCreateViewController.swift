@@ -15,6 +15,8 @@ class RegisterTeamCreateViewController: UIViewController {
 
     // MARK: Properties
     
+    private var currentOriginY:CGFloat = 0.0
+    
     private var teamLogo: UIImage = UIImage()
     private var isTeamLogoChanged:Bool = false
     private var teamName:String = ""
@@ -179,10 +181,28 @@ class RegisterTeamCreateViewController: UIViewController {
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
 
-        if teamNameTextField.isFirstResponder {
-            self.view.frame.origin.y -= 100.0
-        } else {
-            self.view.frame.origin.y -= 140.0
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height + accessoryView.frame.size.height
+            
+            self.view.frame.origin.y = currentOriginY
+            
+            for subview in self.view.subviews {
+                if subview.isFirstResponder {
+                    if bottomLocationOf(subview) < keyboardHeight {
+                        self.view.frame.origin.y +=
+                            (bottomLocationOf(subview) - keyboardHeight)
+                    }
+                    break
+                }
+            }
+            
+            if teamIntroTextView.isFirstResponder {
+                if bottomLocationOf(teamIntroBaseView) < keyboardHeight {
+                    self.view.frame.origin.y +=
+                        (bottomLocationOf(teamIntroBaseView) - keyboardHeight)
+                }
+            }
         }
     }
     
@@ -191,12 +211,7 @@ class RegisterTeamCreateViewController: UIViewController {
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())
         
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        var navigationBarHeight: CGFloat = 0.0
-        if let navigation = self.navigationController {
-            navigationBarHeight = navigation.navigationBar.frame.height
-        }
-        self.view.frame.origin.y = statusBarHeight + navigationBarHeight
+        self.view.frame.origin.y = currentOriginY
     }
     
     // MARK: Life Cycles
@@ -236,6 +251,12 @@ class RegisterTeamCreateViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        currentOriginY = self.view.frame.origin.y
     }
     
     override func viewDidLayoutSubviews() {
@@ -375,17 +396,7 @@ extension RegisterTeamCreateViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case teamNameTextField:
-            teamNameTextField.resignFirstResponder()
-            teamIntroTextView.becomeFirstResponder()
-            
-            return false
-        case teamHomeTextField:
-            teamHomeTextField.resignFirstResponder()
-        default:
-            break
-        }
+        self.view.endEditing(true)
         
         return true
     }
@@ -468,34 +479,34 @@ extension RegisterTeamCreateViewController {
         let centerYConstraint = NSLayoutConstraint(
             item: teamNameConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: teamNameTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: teamNameConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: teamNameTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: teamNameConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: teamNameTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: teamNameConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: teamNameTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: teamNameTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: teamNameConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: teamNameTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func teamHomeConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
             item: teamHomeConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: teamHomeTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: teamHomeConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: teamHomeTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: teamHomeConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: teamHomeTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: teamHomeConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: teamHomeTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: teamHomeTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: teamHomeConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: teamHomeTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func doneButtonConstraints() -> [NSLayoutConstraint] {

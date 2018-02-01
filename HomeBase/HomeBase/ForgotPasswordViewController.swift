@@ -14,6 +14,8 @@ class ForgotPasswordViewController: UIViewController {
 
     // MARK: Properties
     
+    private var currentOriginY:CGFloat = 0.0
+    
     private var name: String = ""
     private var email: String = ""
     
@@ -148,7 +150,22 @@ class ForgotPasswordViewController: UIViewController {
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
         
-        self.view.frame.origin.y -= 100.0
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height + accessoryView.frame.size.height
+            
+            self.view.frame.origin.y = currentOriginY
+            
+            for subview in self.view.subviews {
+                if subview.isFirstResponder {
+                    if bottomLocationOf(subview) < keyboardHeight {
+                        self.view.frame.origin.y +=
+                            (bottomLocationOf(subview) - keyboardHeight)
+                    }
+                    break
+                }
+            }
+        }
     }
     
     @objc private func keyboardWillHide(_ notification:NSNotification) {
@@ -156,7 +173,7 @@ class ForgotPasswordViewController: UIViewController {
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())
         
-        self.view.frame.origin.y += 100.0
+        self.view.frame.origin.y = currentOriginY
     }
     
     // MARK: Life Cycles
@@ -192,6 +209,12 @@ class ForgotPasswordViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        currentOriginY = self.view.frame.origin.y
     }
 }
 
@@ -303,7 +326,7 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
         case emailTextField:
             emailTextFieldCondition(emailChecked(emailTextField))
             
-            if replacementCount < 25 { return true }
+            if replacementCount < 31 { return true }
             else { return false }
         default:
             break
@@ -313,14 +336,7 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case nameTextField:
-            emailTextField.becomeFirstResponder()
-        case emailTextField:
-            emailTextField.resignFirstResponder()
-        default:
-            break
-        }
+        self.view.endEditing(true)
         
         return true
     }
@@ -347,34 +363,34 @@ extension ForgotPasswordViewController {
         let centerYConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: nameTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: nameConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: nameTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: nameConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: nameTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: nameTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: nameTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: nameTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func emailConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
             item: emailConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: emailTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: emailConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: emailTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: emailConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: emailTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: emailConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: emailTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: emailTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: emailConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: emailTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func doneButtonConstraints() -> [NSLayoutConstraint] {

@@ -54,6 +54,8 @@ class FindEmailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationItem.backBarButtonItem =
+            UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
