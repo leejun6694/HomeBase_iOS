@@ -1842,6 +1842,98 @@
             </objects>
             <point key="canvasLocation" x="446" y="975"/>
         </scene>
+        <!--Register Team Complete Copy View Controller-->
+        <scene sceneID="JNx-aN-lOP">
+            <objects>
+                <viewController storyboardIdentifier="RegisterTeamCompleteCopyViewController" id="XEB-1i-Isb" customClass="RegisterTeamCompleteCopyViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qPr-Mq-3pQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="t3M-fO-B67"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zhq-Rc-Moh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="me2-zl-0gy">
+                                <rect key="frame" x="147" y="305" width="120" height="120"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="completeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4jz-gm-x2a">
+                                        <rect key="frame" x="29.666666666666657" y="12" width="61" height="61"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="복사완료" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="bBY-f2-b0T">
+                                        <rect key="frame" x="24" y="82" width="72" height="30"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="bBY-f2-b0T" firstAttribute="centerX" secondItem="me2-zl-0gy" secondAttribute="centerX" id="Qk9-Or-VRL"/>
+                                    <constraint firstItem="4jz-gm-x2a" firstAttribute="top" secondItem="me2-zl-0gy" secondAttribute="centerY" multiplier="12/60" id="U8e-vz-dZe"/>
+                                    <constraint firstItem="bBY-f2-b0T" firstAttribute="top" secondItem="me2-zl-0gy" secondAttribute="centerY" multiplier="82/60" id="cJJ-8P-27K"/>
+                                    <constraint firstItem="4jz-gm-x2a" firstAttribute="height" secondItem="me2-zl-0gy" secondAttribute="height" multiplier="61/120" id="dXr-Jw-Ifb"/>
+                                    <constraint firstItem="4jz-gm-x2a" firstAttribute="centerX" secondItem="me2-zl-0gy" secondAttribute="centerX" id="kwk-SF-dXc"/>
+                                    <constraint firstItem="bBY-f2-b0T" firstAttribute="width" secondItem="me2-zl-0gy" secondAttribute="width" multiplier="72/120" id="rTU-7o-BfB"/>
+                                    <constraint firstItem="4jz-gm-x2a" firstAttribute="width" secondItem="me2-zl-0gy" secondAttribute="width" multiplier="61/120" id="uIb-Kx-YgZ"/>
+                                    <constraint firstItem="bBY-f2-b0T" firstAttribute="height" secondItem="me2-zl-0gy" secondAttribute="height" multiplier="30/120" id="uJ7-r3-RhA"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="me2-zl-0gy" firstAttribute="height" secondItem="Zhq-Rc-Moh" secondAttribute="height" multiplier="120/736" id="423-DG-B3h"/>
+                            <constraint firstItem="me2-zl-0gy" firstAttribute="centerX" secondItem="Zhq-Rc-Moh" secondAttribute="centerX" id="BBL-bv-hoA"/>
+                            <constraint firstItem="me2-zl-0gy" firstAttribute="top" secondItem="Zhq-Rc-Moh" secondAttribute="centerY" multiplier="305/368" id="Vbf-2T-tlE"/>
+                            <constraint firstItem="me2-zl-0gy" firstAttribute="width" secondItem="Zhq-Rc-Moh" secondAttribute="width" multiplier="120/414" id="vEt-Ly-beW"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kwy-LB-tPa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1577" y="1293"/>
+        </scene>
+        <!--Register Team Join Error View Controller-->
+        <scene sceneID="Ra1-Ex-m3A">
+            <objects>
+                <viewController storyboardIdentifier="RegisterTeamJoinErrorViewController" id="KwG-Zu-n3B" customClass="RegisterTeamJoinErrorViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PJw-L7-34s"/>
+                        <viewControllerLayoutGuide type="bottom" id="euw-iz-9Xw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Ya-4r-S48">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lgp-7I-7gv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2314" y="1293"/>
+        </scene>
+        <!--Register Team Join Enter View Controller-->
+        <scene sceneID="7er-hw-1JQ">
+            <objects>
+                <viewController storyboardIdentifier="RegisterTeamJoinEnterViewController" id="RQc-JH-VQk" customClass="RegisterTeamJoinEnterViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OIJ-PF-aDI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Eug-ku-wm5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5lr-wb-1cF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="feS-rc-iJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3045" y="1293"/>
+        </scene>
         <!--Register User Info View Controller-->
         <scene sceneID="uz4-7r-NaV">
             <objects>
@@ -2409,6 +2501,7 @@
         <image name="backgroundForgotPw" width="414" height="658"/>
         <image name="backgroundLogin" width="414" height="736"/>
         <image name="backgroundSignup2" width="414" height="736"/>
+        <image name="completeIcon" width="61" height="61"/>
         <image name="facebook" width="33" height="33"/>
         <image name="google" width="33" height="33"/>
         <image name="iconError" width="70" height="70"/>

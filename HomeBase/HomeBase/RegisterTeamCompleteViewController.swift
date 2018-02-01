@@ -32,6 +32,12 @@ class RegisterTeamCompleteViewController: UIViewController {
     
     @IBAction private func copyButtonDidTapped(_ sender: UIButton) {
         UIPasteboard.general.string = teamCode
+        
+        if let registerTeamCompleteCopyViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamCompleteCopyViewController") as? RegisterTeamCompleteCopyViewController {
+            
+            registerTeamCompleteCopyViewController.modalPresentationStyle = .overCurrentContext
+            self.present(registerTeamCompleteCopyViewController, animated: false, completion: nil)
+        }
     }
     
     @IBAction private func doneButtonDidTapped(_ sender: UIButton) {

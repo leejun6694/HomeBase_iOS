@@ -47,7 +47,6 @@ class RegisterTeamJoinViewController: UIViewController {
     }
     
     @objc private func keyboardWillHide(_ notification:NSNotification) {
-        
         self.view.frame.origin.y = currentOriginY
     }
     
