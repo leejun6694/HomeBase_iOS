@@ -23,6 +23,15 @@ class RegisterTeamJoinViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    @IBAction func backButtonDidTapped(_ sender: UIButton) {
+        if let navigation = self.navigationController {
+            navigation.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
     @IBAction private func doneButtonDidTapped(_ sender: UIButton) {
         
     }
@@ -47,7 +56,6 @@ class RegisterTeamJoinViewController: UIViewController {
     }
     
     @objc private func keyboardWillHide(_ notification:NSNotification) {
-        
         self.view.frame.origin.y = currentOriginY
     }
     
