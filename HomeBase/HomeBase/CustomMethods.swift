@@ -31,5 +31,14 @@ extension UIViewController {
         self.view.isUserInteractionEnabled = true
         spinner.stopAnimating()
     }
+    
+    func bottomLocationOf(_ view: UIView) -> CGFloat {
+        var bottomLocation:CGFloat = 0.0
+        let viewFrameY = view.frame.origin.y
+        let viewFrameHeight = view.frame.size.height
+        bottomLocation = self.view.frame.height - (viewFrameY + viewFrameHeight)
+        
+        return bottomLocation
+    }
 }
 

@@ -13,6 +13,8 @@ class ForgotEmailViewController: UIViewController {
 
     // MARK: Properties
     
+    private var currentOriginY:CGFloat = 0.0
+    
     private var name: String = ""
     private var year: String = ""
     private var month: String = ""
@@ -140,12 +142,31 @@ class ForgotEmailViewController: UIViewController {
         doneButton.removeFromSuperview()
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height + accessoryView.frame.size.height
+            
+            self.view.frame.origin.y = currentOriginY
+            
+            for subview in self.view.subviews {
+                if subview.isFirstResponder {
+                    if bottomLocationOf(subview) < keyboardHeight {
+                        self.view.frame.origin.y +=
+                            (bottomLocationOf(subview) - keyboardHeight)
+                    }
+                    break
+                }
+            }
+        }
     }
     
     @objc private func keyboardWillHide(_ notification:NSNotification) {
         doneButton.removeFromSuperview()
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())
+        
+        self.view.frame.origin.y = currentOriginY
     }
     
     // MARK: Life Cycles
@@ -181,6 +202,12 @@ class ForgotEmailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        currentOriginY = self.view.frame.origin.y
     }
 }
 
@@ -355,14 +382,7 @@ extension ForgotEmailViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case nameTextField:
-            birthTextField.becomeFirstResponder()
-        case birthTextField:
-            birthTextField.resignFirstResponder()
-        default:
-            break
-        }
+        self.view.endEditing(true)
         
         return true
     }
@@ -389,34 +409,34 @@ extension ForgotEmailViewController {
         let centerYConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: nameTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: nameConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: nameTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: nameConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: nameTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: nameTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: nameTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: nameTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func birthConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: birthTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: birthConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: birthTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: birthConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: birthTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: birthTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: birthTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: birthTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func doneButtonConstraints() -> [NSLayoutConstraint] {

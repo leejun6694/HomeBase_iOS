@@ -14,6 +14,8 @@ class SignUpViewController: UIViewController {
 
     // MARK: Properties
     
+    private var currentOriginY:CGFloat = 0.0
+    
     private var name: String = ""
     private var year: String = ""
     private var month: String = ""
@@ -25,7 +27,6 @@ class SignUpViewController: UIViewController {
     private var nameCondition = false
     private var birthCondition = false
     
-    private var keyboardHeight: CGFloat = 0.0
     private let correctColor = UIColor(red: 0.0,
                                        green: 180.0/255.0,
                                        blue: 233.0/255.0,
@@ -57,9 +58,10 @@ class SignUpViewController: UIViewController {
         return doneButton
     }()
     
-    @IBOutlet private var scrollView: UIScrollView!
-    @IBOutlet private var contentsView: UIView!
-    @IBOutlet var spinner: UIActivityIndicatorView!
+    
+    @IBOutlet private weak var titleView: UIView!
+    @IBOutlet private weak var contentsView: UIView!
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     @IBOutlet private weak var emailLabel: UILabel!
     @IBOutlet private weak var emailTextField: UITextField! {
@@ -274,11 +276,23 @@ class SignUpViewController: UIViewController {
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
         
-        if let keyboardFrame: NSValue =
-            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            keyboardHeight = keyboardRectangle.height
+            let keyboardHeight = keyboardRectangle.height + accessoryView.frame.size.height
+            
+            self.view.frame.origin.y = currentOriginY
+            
+            for subview in contentsView.subviews {
+                if subview.isFirstResponder {
+                    if bottomLocationOf(subview) < keyboardHeight {
+                        self.view.frame.origin.y +=
+                            (bottomLocationOf(subview)
+                                - titleView.frame.size.height
+                                - keyboardHeight)
+                    }
+                    break
+                }
+            }
         }
     }
     
@@ -287,15 +301,13 @@ class SignUpViewController: UIViewController {
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())
         
-        scrollView.contentInset.bottom = 0
+        self.view.frame.origin.y = currentOriginY
     }
     
     // MARK: Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        scrollView.contentSize = contentsView.frame.size
         
         self.view.addSubview(doneButton)
         self.view.addConstraints(doneButtonConstraints())
@@ -313,6 +325,12 @@ class SignUpViewController: UIViewController {
             name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        currentOriginY = self.view.frame.origin.y
     }
 }
 
@@ -553,7 +571,6 @@ extension SignUpViewController: UITextFieldDelegate {
                 nameConditionLabel.removeFromSuperview()
             }
             
-            scrollView.contentInset.bottom = keyboardHeight + 10.0
             nameTextField.inputAccessoryView = accessoryView
         case birthTextField:
             if birthConditionLabel.isDescendant(of: contentsView) {
@@ -561,7 +578,6 @@ extension SignUpViewController: UITextFieldDelegate {
                 birthConditionLabel.removeFromSuperview()
             }
             
-            scrollView.contentInset.bottom = keyboardHeight + 30.0
             birthTextField.inputAccessoryView = accessoryView
         default:
             break
@@ -580,7 +596,7 @@ extension SignUpViewController: UITextFieldDelegate {
             }
             emailTextFieldCondition(emailChecked(emailTextField))
             
-            if replacementCount < 25 { return true }
+            if replacementCount < 31 { return true }
             else { return false }
         case pwTextField:
             pwTextFieldCondition(pwChecked(pwTextField))
@@ -633,18 +649,7 @@ extension SignUpViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case emailTextField:
-            pwTextField.becomeFirstResponder()
-        case pwTextField:
-            confirmPwTextField.becomeFirstResponder()
-        case confirmPwTextField:
-            nameTextField.becomeFirstResponder()
-        case nameTextField:
-            birthTextField.becomeFirstResponder()
-        default:
-            break
-        }
+        self.view.endEditing(true)
         
         return true
     }
@@ -712,17 +717,17 @@ extension SignUpViewController {
         let centerYConstraint = NSLayoutConstraint(
             item: emailConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: emailTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: emailConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: emailTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: emailConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: emailTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: emailConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: emailTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: emailTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: emailConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: emailTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func emailConditionLabelConstraints() -> [NSLayoutConstraint] {
@@ -740,17 +745,17 @@ extension SignUpViewController {
         let centerYConstraint = NSLayoutConstraint(
             item: pwConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: pwTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: pwConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: pwTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: pwConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: pwTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: pwConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: pwTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: pwTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: pwConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: pwTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func pwConditionLabelConstraints() -> [NSLayoutConstraint] {
@@ -768,17 +773,17 @@ extension SignUpViewController {
         let centerYConstraint = NSLayoutConstraint(
             item: confirmPwConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: confirmPwTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: confirmPwConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: confirmPwTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: confirmPwConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: confirmPwTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: confirmPwConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: confirmPwTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: confirmPwTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: confirmPwConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: confirmPwTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func confirmPwConditionLabelConstraints() -> [NSLayoutConstraint] {
@@ -796,17 +801,17 @@ extension SignUpViewController {
         let centerYConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: nameTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: nameConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: nameTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: nameConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: nameTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: nameTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: nameTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: nameTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func nameConditionLabelConstraints() -> [NSLayoutConstraint] {
@@ -824,17 +829,17 @@ extension SignUpViewController {
         let centerYConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .centerY, relatedBy: .equal,
             toItem: birthTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: birthConditionImageView, attribute: .trailing, relatedBy: .equal,
-            toItem: birthTextField, attribute: .trailing, multiplier: 335.0/345.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: birthConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: birthTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: birthTextField, attribute: .width, multiplier: 20.0/345.0, constant: 0.0)
+            toItem: birthTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: birthConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: birthTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
         
-        return [centerYConstraint, trailingConstraint, widthConstraint, heightConstraint]
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func birthConditionLabelConstraints() -> [NSLayoutConstraint] {
