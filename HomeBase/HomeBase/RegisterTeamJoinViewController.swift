@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
+import Alamofire
 
 class RegisterTeamJoinViewController: UIViewController {
     
@@ -19,11 +23,11 @@ class RegisterTeamJoinViewController: UIViewController {
     
     // MARK: Methods
     
-    @IBAction func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
+    @IBAction private func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
-    @IBAction func backButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func backButtonDidTapped(_ sender: UIButton) {
         if let navigation = self.navigationController {
             navigation.popViewController(animated: true)
         } else {
@@ -33,7 +37,58 @@ class RegisterTeamJoinViewController: UIViewController {
     
     
     @IBAction private func doneButtonDidTapped(_ sender: UIButton) {
+        spinnerStartAnimating(spinner)
         
+        let parameterDictionary = ["teamCode": teamCodeTextField.text ?? ""]
+        
+        Alamofire.request(
+            CloudFunction.methodURL(method: Method.getTeam),
+            method: .get,
+            parameters: parameterDictionary).responseJSON {
+                (response) -> Void in
+                
+                if response.result.isSuccess {
+                    if let value = response.result.value as? [String: Any] {
+                        if let teamLogo = value["logo"] as? String,
+                            let teamName = value["name"] as? String,
+                            let members = value["members"] as? [String] {
+                            let teamCode = self.teamCodeTextField.text ?? "default"
+                            var teamLogoImage:UIImage = UIImage()
+                            
+                            let storageRef = Storage.storage().reference()
+                            let imageRef = storageRef.child(teamLogo)
+                            
+                            imageRef.getData(maxSize: 4 * 1024 * 10240) {
+                                (data, error) in
+                                
+                                if let error = error {
+                                    print(error)
+                                } else {
+                                    teamLogoImage = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                                    
+                                    if let registerTeamJoinEnterViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinEnterViewController") as? RegisterTeamJoinEnterViewController {
+                                        
+                                        registerTeamJoinEnterViewController.teamLogoImage = teamLogoImage
+                                        registerTeamJoinEnterViewController.teamCode = teamCode
+                                        registerTeamJoinEnterViewController.teamName = teamName
+                                        registerTeamJoinEnterViewController.members = members
+                                        registerTeamJoinEnterViewController.modalPresentationStyle = .overCurrentContext
+                                        self.spinnerStopAnimating(self.spinner)
+                                        self.present(registerTeamJoinEnterViewController, animated: false, completion: nil)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if let registerTeamJoinErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinErrorViewController") as? RegisterTeamJoinErrorViewController {
+                        
+                        registerTeamJoinErrorViewController.modalPresentationStyle = .overCurrentContext
+                        self.spinnerStopAnimating(self.spinner)
+                        self.present(registerTeamJoinErrorViewController, animated: false, completion: nil)
+                    }
+                }
+        }
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

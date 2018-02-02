@@ -7,13 +7,67 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
+import Alamofire
 
 class RegisterTeamJoinEnterViewController: UIViewController {
-
+    
+    // MARK: Properties
+    
+    var teamName:String = ""
+    var teamCode:String = ""
+    var members:[String] = []
+    var teamLogoImage:UIImage = UIImage()
+    
+    @IBOutlet private var teamLogoImageView: UIImageView!
+    @IBOutlet private var teamNameLabel: UILabel!
+    
+    @IBOutlet private var spinner: UIActivityIndicatorView!
+    
+    // MARK: Methods
+    
+    @IBAction private func doneButtonDidTapped(_ sender: UIButton) {
+        spinnerStartAnimating(spinner)
+        let databaseRef = Database.database().reference()
+        
+        if let currentUser = Auth.auth().currentUser {
+            let hasTeam:Bool = true
+            members.append(currentUser.uid)
+            
+            databaseRef.child("users").child(currentUser.uid).updateChildValues(
+                ["hasTeam": hasTeam])
+            databaseRef.child("teams").child(teamCode).updateChildValues(
+                ["members": members])
+            
+            if let registerUserNavigation = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
+                
+                spinnerStopAnimating(spinner)
+                self.present(registerUserNavigation, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    @IBAction func cancelButtonDidTapped(_ sender: UIButton) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    // MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
         self.view.isOpaque = false
+       
+        teamLogoImageView.image = teamLogoImage
+        teamNameLabel.text = "\(teamName) 팀으로\n 입장하시겠습니까?"
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
     }
 }

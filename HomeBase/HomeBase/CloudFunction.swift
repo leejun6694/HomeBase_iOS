@@ -15,6 +15,7 @@ enum Method:String {
     case findPassword = "checkEmailByName"
     case getUser = "getUser"
     case getPlayer = "getPlayer"
+    case getTeam = "getTeam"
 }
 
 struct CloudFunction {

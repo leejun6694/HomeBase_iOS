@@ -176,7 +176,7 @@ class RegisterUserInfoViewController: UIViewController {
                                 self.birthTextField.text = birth
                                 
                                 self.nameTextFieldCondition(true)
-                                self.birthTextFieldCondition(true)
+                                self.birthTextFieldCondition(self.birthChecked(self.birthTextField))
                             }
                         }
                     }
@@ -244,17 +244,13 @@ class RegisterUserInfoViewController: UIViewController {
             object: nil
         )
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         spinnerStartAnimating(spinner)
         autoCompleteTextField()
         spinnerStopAnimating(spinner)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
         currentOriginY = self.view.frame.origin.y
     }
@@ -566,7 +562,21 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        switch textField {
+        case nameTextField:
+            nameTextField.resignFirstResponder()
+            birthTextField.becomeFirstResponder()
+        case birthTextField:
+            birthTextField.resignFirstResponder()
+            heightTextField.becomeFirstResponder()
+        case heightTextField:
+            heightTextField.resignFirstResponder()
+            weightTextField.becomeFirstResponder()
+        case weightTextField:
+            weightTextField.resignFirstResponder()
+        default:
+            break
+        }
         
         return true
     }

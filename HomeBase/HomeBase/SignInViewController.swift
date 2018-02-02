@@ -275,6 +275,12 @@ class SignInViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = true
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        currentOriginY = self.view.frame.origin.y
+    }
 }
 
 // MARK: Google Delegate
@@ -320,7 +326,15 @@ extension SignInViewController: GIDSignInDelegate, GIDSignInUIDelegate {
 // MARK: TextField Delegate
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        switch textField {
+        case emailTextField:
+            emailTextField.resignFirstResponder()
+            pwTextField.becomeFirstResponder()
+        case pwTextField:
+            pwTextField.becomeFirstResponder()
+        default:
+            break
+        }
         
         return true
     }

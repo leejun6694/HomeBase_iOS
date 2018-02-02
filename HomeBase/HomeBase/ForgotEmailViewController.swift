@@ -382,7 +382,15 @@ extension ForgotEmailViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        switch textField {
+        case nameTextField:
+            nameTextField.resignFirstResponder()
+            birthTextField.becomeFirstResponder()
+        case birthTextField:
+            birthTextField.resignFirstResponder()
+        default:
+            break
+        }
         
         return true
     }

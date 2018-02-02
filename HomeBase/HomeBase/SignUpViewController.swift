@@ -649,7 +649,24 @@ extension SignUpViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        switch textField {
+        case emailTextField:
+            emailTextField.resignFirstResponder()
+            pwTextField.becomeFirstResponder()
+        case pwTextField:
+            pwTextField.resignFirstResponder()
+            confirmPwTextField.becomeFirstResponder()
+        case confirmPwTextField:
+            confirmPwTextField.resignFirstResponder()
+            nameTextField.becomeFirstResponder()
+        case nameTextField:
+            nameTextField.resignFirstResponder()
+            birthTextField.becomeFirstResponder()
+        case birthTextField:
+            birthTextField.resignFirstResponder()
+        default:
+            break
+        }
         
         return true
     }
