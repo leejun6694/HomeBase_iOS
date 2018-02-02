@@ -153,13 +153,16 @@ class RegisterTeamCreateViewController: UIViewController {
                         ["hasTeam": hasTeam])
                 }
                 
+                let admin:[String] = ["\(currentUser.uid)"]
+                let members:[String] = ["\(currentUser.uid)"]
+                
                 databaseRef.child("teams").child(teamCode).setValue(
                     ["name": teamName,
                      "logo": logoRef.fullPath,
                      "description": teamIntro,
                      "homeStadium": teamHome,
-                     "admin": currentUser.uid,
-                     "members": currentUser.uid])
+                     "admin": admin,
+                     "members": members])
             }
             
             if let registerTeamCompleteViewController =
