@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,15 +50,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Sol-gd-uSg">
-                                <rect key="frame" x="110" y="260.5" width="154" height="120.5"/>
+                                <rect key="frame" x="110" y="260.5" width="154" height="121"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Sol-gd-uSg" secondAttribute="height" multiplier="170/133.2" id="fWD-df-U3O"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="f9a-97-JdQ" firstAttribute="bottom" secondItem="Us8-bL-Xch" secondAttribute="bottom" id="0ai-St-u5d"/>
+                            <constraint firstAttribute="bottom" secondItem="Us8-bL-Xch" secondAttribute="bottom" id="0ai-St-u5d"/>
                             <constraint firstItem="Sol-gd-uSg" firstAttribute="centerY" secondItem="Us8-bL-Xch" secondAttribute="centerY" multiplier="354.6/368" id="1xR-lI-Bcp"/>
                             <constraint firstItem="Sol-gd-uSg" firstAttribute="centerX" secondItem="Us8-bL-Xch" secondAttribute="centerX" id="85P-5u-KtF"/>
-                            <constraint firstItem="Sol-gd-uSg" firstAttribute="height" secondItem="Us8-bL-Xch" secondAttribute="height" multiplier="133.2/736" id="OdO-Xv-uwg"/>
                             <constraint firstItem="Sol-gd-uSg" firstAttribute="width" secondItem="Us8-bL-Xch" secondAttribute="width" multiplier="170/414" id="Y2x-B9-PK6"/>
                             <constraint firstItem="Us8-bL-Xch" firstAttribute="leading" secondItem="f9a-97-JdQ" secondAttribute="leading" id="cKB-hl-zmK"/>
                             <constraint firstItem="Us8-bL-Xch" firstAttribute="trailing" secondItem="f9a-97-JdQ" secondAttribute="trailing" id="dzX-a8-dNC"/>

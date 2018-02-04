@@ -22,21 +22,20 @@ class SignInViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField! {
         didSet { emailTextField.delegate = self }
     }
+    
     @IBOutlet private weak var pwTextField: UITextField! {
         didSet { pwTextField.delegate = self }
     }
+    @IBOutlet private var pwTextFieldBorder: UIView!
+    
+    @IBOutlet var signInButton: UIButton!
     
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
     
     @IBAction private func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
-        for subview in self.view.subviews {
-            if subview.isFirstResponder {
-                subview.resignFirstResponder()
-                break
-            }
-        }
+        self.view.endEditing(true)
     }
     
     private func userConnected() {
@@ -232,13 +231,19 @@ class SignInViewController: UIViewController {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
-            for subview in self.view.subviews {
-                if subview.isFirstResponder {
-                    if bottomLocationOf(subview) < keyboardHeight {
-                        currentOriginY = self.view.frame.origin.y
-                        self.view.frame.origin.y = bottomLocationOf(subview)
-                    }
-                    break
+            if emailTextField.isFirstResponder {
+                let bottomLocationOfNextView = bottomLocationOf(pwTextFieldBorder)
+                if bottomLocationOfNextView < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOfNextView
+                            - keyboardHeight)
+                }
+            } else if pwTextField.isFirstResponder {
+                let bottomLocationOfNextView = bottomLocationOf(signInButton)
+                if bottomLocationOfNextView < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOfNextView
+                            - keyboardHeight)
                 }
             }
         }

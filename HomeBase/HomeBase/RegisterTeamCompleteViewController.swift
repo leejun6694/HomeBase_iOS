@@ -12,6 +12,7 @@ class RegisterTeamCompleteViewController: UIViewController {
 
     // MARK: Properties
     
+    var teamLogo:UIImage = UIImage()
     var teamName:String = "홈베이스"
     var teamCode:String = ""
     
@@ -52,6 +53,7 @@ class RegisterTeamCompleteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        teamLogoImageView.image = teamLogo
         teamNameLabel.text = "\(teamName)의 팀 코드는"
         teamCodeLabel.text = teamCode
     }
@@ -66,5 +68,10 @@ class RegisterTeamCompleteViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
+        teamLogoImageView.layer.borderColor = UIColor(red: 44.0/255.0,
+                                                      green: 44.0/255.0,
+                                                      blue: 44.0/255.0,
+                                                      alpha: 1.0).cgColor
+        teamLogoImageView.layer.borderWidth = 1.0
     }
 }

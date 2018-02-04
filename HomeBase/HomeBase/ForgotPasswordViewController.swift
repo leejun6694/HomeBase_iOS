@@ -156,13 +156,18 @@ class ForgotPasswordViewController: UIViewController {
             
             self.view.frame.origin.y = currentOriginY
             
-            for subview in self.view.subviews {
-                if subview.isFirstResponder {
-                    if bottomLocationOf(subview) < keyboardHeight {
-                        self.view.frame.origin.y +=
-                            (bottomLocationOf(subview) - keyboardHeight)
-                    }
-                    break
+            if nameTextField.isFirstResponder {
+                let bottomLocationOfNextView = bottomLocationOf(emailTextFieldBorder)
+                if bottomLocationOfNextView < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOfNextView
+                            - keyboardHeight)
+                }
+            } else if emailTextField.isFirstResponder {
+                if bottomLocationOf(emailTextFieldBorder) < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOf(emailTextFieldBorder)
+                            - keyboardHeight)
                 }
             }
         }
@@ -171,7 +176,7 @@ class ForgotPasswordViewController: UIViewController {
     @objc private func keyboardWillHide(_ notification:NSNotification) {
         doneButton.removeFromSuperview()
         self.view.addSubview(doneButton)
-        self.view.addConstraints(doneButtonConstraints())
+        doneButtonConstraints()
         
         self.view.frame.origin.y = currentOriginY
     }
@@ -188,7 +193,7 @@ class ForgotPasswordViewController: UIViewController {
         self.navigationItem.titleView = titleLabel
         
         self.view.addSubview(doneButton)
-        self.view.addConstraints(doneButtonConstraints())
+        doneButtonConstraints()
         buttonDisabled(doneButton)
         
         NotificationCenter.default.addObserver(
@@ -379,7 +384,7 @@ extension ForgotPasswordViewController {
             toItem: nameTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: nameConditionImageView, attribute: .height, relatedBy: .equal,
-            toItem: nameTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
+            toItem: nameConditionImageView, attribute: .width, multiplier: 18.0/20.0, constant: 0.0)
         
         return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
@@ -396,26 +401,33 @@ extension ForgotPasswordViewController {
             toItem: emailTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: emailConditionImageView, attribute: .height, relatedBy: .equal,
-            toItem: emailTextField, attribute: .height, multiplier: 18.0/35.0, constant: 0.0)
+            toItem: emailConditionImageView, attribute: .width, multiplier: 18.0/20.0, constant: 0.0)
         
         return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
-    private func doneButtonConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = NSLayoutConstraint(
-            item: doneButton, attribute: .top, relatedBy: .equal,
-            toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: -45.0)
-        let leadingConstraint = NSLayoutConstraint(
-            item: doneButton, attribute: .leading, relatedBy: .equal,
-            toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 0.0)
-        let trailingConstraint = NSLayoutConstraint(
-            item: doneButton, attribute: .trailing, relatedBy: .equal,
-            toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-        let bottomConstraint = NSLayoutConstraint(
-            item: doneButton, attribute: .bottom, relatedBy: .equal,
-            toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-        
-        return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
+    private func doneButtonConstraints() {
+        if #available(iOS 11, *) {
+            let guide = self.view.safeAreaLayoutGuide
+            doneButton.topAnchor.constraint(
+                equalTo: guide.bottomAnchor, constant: -45.0).isActive = true
+            doneButton.leadingAnchor.constraint(
+                equalTo: guide.leadingAnchor, constant: 0.0).isActive = true
+            doneButton.trailingAnchor.constraint(
+                equalTo: guide.trailingAnchor, constant: 0.0).isActive = true
+            doneButton.bottomAnchor.constraint(
+                equalTo: guide.bottomAnchor, constant: 0.0).isActive = true
+        } else {
+            let guide = self.bottomLayoutGuide
+            doneButton.topAnchor.constraint(
+                equalTo: guide.bottomAnchor, constant: -45.0).isActive = true
+            doneButton.leadingAnchor.constraint(
+                equalTo: self.view.leadingAnchor, constant: 0.0).isActive = true
+            doneButton.trailingAnchor.constraint(
+                equalTo: self.view.trailingAnchor, constant: 0.0).isActive = true
+            doneButton.bottomAnchor.constraint(
+                equalTo: guide.bottomAnchor, constant: 0.0).isActive = true
+        }
     }
     
     private func doneButtonKeyboardConstraints() -> [NSLayoutConstraint] {
