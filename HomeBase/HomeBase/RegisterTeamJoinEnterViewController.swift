@@ -69,5 +69,10 @@ class RegisterTeamJoinEnterViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
+        teamLogoImageView.layer.borderColor = UIColor(red: 44.0/255.0,
+                                                      green: 44.0/255.0,
+                                                      blue: 44.0/255.0,
+                                                      alpha: 1.0).cgColor
+        teamLogoImageView.layer.borderWidth = 1.0
     }
 }
