@@ -135,7 +135,7 @@ class RegisterTeamCreateViewController: UIViewController {
             teamLogo = #imageLiteral(resourceName: "team_logo")
         }
         if let logoData = UIImagePNGRepresentation(teamLogo) {
-            let logoRef = storageRef.child(teamCode).child("teamLogo.png")
+            let logoRef = storageRef.child(teamCode).child("teamLogo")
             logoRef.putData(logoData)
             
             if let currentUser = Auth.auth().currentUser {
@@ -153,16 +153,19 @@ class RegisterTeamCreateViewController: UIViewController {
                         ["hasTeam": hasTeam])
                 }
                 
-                let admin:[String] = ["\(currentUser.uid)"]
-                let members:[String] = ["\(currentUser.uid)"]
+                let admin:String = currentUser.uid
+                let member:String = currentUser.uid
                 
                 databaseRef.child("teams").child(teamCode).setValue(
                     ["name": teamName,
                      "logo": logoRef.fullPath,
                      "description": teamIntro,
-                     "homeStadium": teamHome,
-                     "admin": admin,
-                     "members": members])
+                     "homeStadium": teamHome])
+                
+                databaseRef.child("teams").child(teamCode).child(
+                    "admin").childByAutoId().setValue(admin)
+                databaseRef.child("teams").child(teamCode).child(
+                    "members").childByAutoId().setValue(member)
             }
             
             if let registerTeamCompleteViewController =
