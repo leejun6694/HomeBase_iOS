@@ -18,7 +18,6 @@ class RegisterTeamJoinEnterViewController: UIViewController {
     
     var teamName:String = ""
     var teamCode:String = ""
-    var members:[String] = []
     var teamLogoImage:UIImage = UIImage()
     
     @IBOutlet private var teamLogoImageView: UIImageView!
@@ -34,12 +33,12 @@ class RegisterTeamJoinEnterViewController: UIViewController {
         
         if let currentUser = Auth.auth().currentUser {
             let hasTeam:Bool = true
-            members.append(currentUser.uid)
+            let member = currentUser.uid
             
             databaseRef.child("users").child(currentUser.uid).updateChildValues(
                 ["hasTeam": hasTeam])
-            databaseRef.child("teams").child(teamCode).updateChildValues(
-                ["members": members])
+            databaseRef.child("teams").child(teamCode).child(
+                "members").childByAutoId().setValue(member)
             
             if let registerUserNavigation = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
                 

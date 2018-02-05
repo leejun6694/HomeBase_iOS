@@ -58,7 +58,6 @@ class SignUpViewController: UIViewController {
         return doneButton
     }()
     
-    
     @IBOutlet private weak var titleView: UIView!
     @IBOutlet private weak var contentsView: UIView!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!

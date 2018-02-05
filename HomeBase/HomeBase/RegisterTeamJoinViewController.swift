@@ -80,15 +80,14 @@ class RegisterTeamJoinViewController: UIViewController {
                 if response.result.isSuccess {
                     if let value = response.result.value as? [String: Any] {
                         if let teamLogo = value["logo"] as? String,
-                            let teamName = value["name"] as? String,
-                            let members = value["members"] as? [String] {
+                            let teamName = value["name"] as? String {
                             let teamCode = self.teamCodeTextField.text ?? "default"
                             var teamLogoImage:UIImage = UIImage()
                             
                             let storageRef = Storage.storage().reference()
                             let imageRef = storageRef.child(teamLogo)
                             
-                            imageRef.getData(maxSize: 4 * 1024 * 10240) {
+                            imageRef.getData(maxSize: 4 * 1024 * 1024) {
                                 (data, error) in
                                 
                                 if let error = error {
@@ -101,7 +100,6 @@ class RegisterTeamJoinViewController: UIViewController {
                                         registerTeamJoinEnterViewController.teamLogoImage = teamLogoImage
                                         registerTeamJoinEnterViewController.teamCode = teamCode
                                         registerTeamJoinEnterViewController.teamName = teamName
-                                        registerTeamJoinEnterViewController.members = members
                                         registerTeamJoinEnterViewController.modalPresentationStyle = .overCurrentContext
                                         self.spinnerStopAnimating(self.spinner)
                                         self.present(registerTeamJoinEnterViewController, animated: false, completion: nil)
