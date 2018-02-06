@@ -14,6 +14,8 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
 
         self.tabBar.unselectedItemTintColor = .white
+        self.tabBar.isTranslucent = false
+        self.extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewDidLayoutSubviews() {

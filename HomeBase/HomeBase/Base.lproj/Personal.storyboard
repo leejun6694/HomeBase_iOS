@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Gq-PG-8gn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Zf-dJ-AAu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,32 +11,35 @@
     </dependencies>
     <scenes>
         <!--개인-->
-        <scene sceneID="4mY-tp-GcC">
+        <scene sceneID="TNf-0G-sdp">
             <objects>
-                <viewController id="2Gq-PG-8gn" customClass="UserViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Auq-Ax-tZh">
+                <viewController id="7Zf-dJ-AAu" customClass="PersonalViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ibr-1b-B4Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wb-Lf-MHp">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2Y-Xj-Coj">
                                 <rect key="frame" x="109" y="299" width="156" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="Sign Out"/>
                                 <connections>
-                                    <action selector="signOutButtonDidTapped:" destination="2Gq-PG-8gn" eventType="touchUpInside" id="Eyz-h0-gWs"/>
+                                    <action selector="signOutButtonDidTapped:" destination="7Zf-dJ-AAu" eventType="touchUpInside" id="8XW-8y-LgG"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="aJx-15-ikK"/>
+                        <viewLayoutGuide key="safeArea" id="Py2-0C-90A"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="개인" id="7ux-VV-yfS"/>
+                    <tabBarItem key="tabBarItem" title="개인" image="personalIcon" id="nOQ-qo-lp1"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ay5-rx-7m2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O8T-Br-2or" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2613" y="984"/>
+            <point key="canvasLocation" x="2044" y="880"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="personalIcon" width="27" height="27"/>
+    </resources>
 </document>

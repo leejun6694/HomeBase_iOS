@@ -57,7 +57,7 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            let teamInfoViewHeight = self.view.frame.height * 636/736
+            let teamInfoViewHeight = self.view.frame.height * 642/736
             return teamInfoViewHeight
         default:
             break

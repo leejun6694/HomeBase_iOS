@@ -35,7 +35,7 @@
                             <outlet property="delegate" destination="fo8-2m-weI" id="Bki-mr-iE2"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="메인" id="qvu-jj-bfs"/>
+                    <tabBarItem key="tabBarItem" title="메인" image="mainIcon" id="qvu-jj-bfs"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGY-mO-fd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -86,12 +86,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.0" green="0.70588235294117641" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.0" green="0.70588235290000001" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="fo8-2m-weI" kind="relationship" relationship="viewControllers" id="hQb-2q-M07"/>
                         <segue destination="VYV-xf-0c7" kind="relationship" relationship="viewControllers" id="zXG-ls-V6R"/>
                         <segue destination="GVQ-45-wgc" kind="relationship" relationship="viewControllers" id="Bnk-bv-cv2"/>
-                        <segue destination="wq3-NJ-PdL" kind="relationship" relationship="viewControllers" id="j8J-o3-5Ce"/>
+                        <segue destination="bXl-6i-YE3" kind="relationship" relationship="viewControllers" id="zcI-xb-GM7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNq-6T-fhe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -102,7 +103,7 @@
         <scene sceneID="fR8-I5-dMb">
             <objects>
                 <viewControllerPlaceholder storyboardName="Schedule" id="VYV-xf-0c7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="일정" id="S1l-GW-sec"/>
+                    <tabBarItem key="tabBarItem" title="일정" image="scheduleIcon" id="S1l-GW-sec"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6xc-Y9-dGL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -112,25 +113,29 @@
         <scene sceneID="7o2-B8-kOv">
             <objects>
                 <viewControllerPlaceholder storyboardName="Team" id="GVQ-45-wgc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="팀" id="ThP-7b-88w"/>
+                    <tabBarItem key="tabBarItem" title="팀" image="teamIcon" id="ThP-7b-88w"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ygf-qR-aA0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1500" y="657"/>
         </scene>
-        <!--User-->
-        <scene sceneID="kXA-g4-wub">
+        <!--Personal-->
+        <scene sceneID="ejo-Lg-Ezb">
             <objects>
-                <viewControllerPlaceholder storyboardName="User" id="wq3-NJ-PdL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="개인" id="zwt-tS-ftx"/>
+                <viewControllerPlaceholder storyboardName="Personal" id="bXl-6i-YE3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="개인" image="personalIcon" id="Jdc-u8-Rsr"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pkU-Hk-lao" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h1S-t1-NGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1682" y="657"/>
+            <point key="canvasLocation" x="1732" y="657"/>
         </scene>
     </scenes>
     <resources>
         <image name="logo" width="208" height="163"/>
+        <image name="mainIcon" width="27" height="27"/>
+        <image name="personalIcon" width="27" height="27"/>
+        <image name="scheduleIcon" width="27" height="27"/>
         <image name="splash" width="414" height="736"/>
+        <image name="teamIcon" width="27" height="27"/>
     </resources>
 </document>

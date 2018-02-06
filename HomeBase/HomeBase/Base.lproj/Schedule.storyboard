@@ -20,7 +20,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="PU5-Vo-GXu"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="일정" id="raZ-3H-pkg"/>
+                    <tabBarItem key="tabBarItem" title="일정" image="scheduleIcon" id="raZ-3H-pkg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Yf-fI-2Wr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -28,4 +28,7 @@
             <point key="canvasLocation" x="1023" y="863"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="scheduleIcon" width="27" height="27"/>
+    </resources>
 </document>

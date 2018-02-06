@@ -1,5 +1,5 @@
 //
-//  UserViewController.swift
+//  PersonalViewController.swift
 //  HomeBase
 //
 //  Created by JUN LEE on 2018. 2. 6..
@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class UserViewController: UIViewController {
+class PersonalViewController: UIViewController {
     @IBAction func signOutButtonDidTapped(_ sender: UIButton) {
         if let user = Auth.auth().currentUser {
             do {

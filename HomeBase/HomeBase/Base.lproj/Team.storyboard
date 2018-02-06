@@ -20,7 +20,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Nun-o9-AOV"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="팀" id="k5a-LH-eN4"/>
+                    <tabBarItem key="tabBarItem" title="팀" image="teamIcon" id="k5a-LH-eN4"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTe-Dh-xL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -28,4 +28,7 @@
             <point key="canvasLocation" x="1771" y="975"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="teamIcon" width="27" height="27"/>
+    </resources>
 </document>
