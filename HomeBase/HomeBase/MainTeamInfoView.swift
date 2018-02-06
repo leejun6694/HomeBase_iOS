@@ -38,6 +38,18 @@ class MainTeamInfoView: UIView {
         return teamLogoImageView
     }()
     
+    private lazy var teamNameLabel:UILabel = {
+        let teamNameLabel = UILabel()
+        teamNameLabel.text = "HomeBase"
+        teamNameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 25.0)
+        teamNameLabel.textAlignment = .center
+        teamNameLabel.adjustsFontSizeToFitWidth = true
+        teamNameLabel.minimumScaleFactor = 0.5
+        teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return teamNameLabel
+    }()
+    
     // MARK: Draw
 
     override func draw(_ rect: CGRect) {
@@ -49,6 +61,8 @@ class MainTeamInfoView: UIView {
         self.addConstraints(contentViewConstraints())
         self.addSubview(teamLogoImageView)
         self.addConstraints(teamLogoImageViewConstraints())
+        contentView.addSubview(teamNameLabel)
+        contentView.addConstraints(teamNameLabelConstraints())
     }
 }
 
@@ -102,5 +116,22 @@ extension MainTeamInfoView {
             toItem: teamLogoImageView, attribute: .width, multiplier: 1.0, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func teamNameLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: teamNameLabel, attribute: .top, relatedBy: .equal,
+            toItem: contentView, attribute: .centerY, multiplier: 70/178, constant: 0.0)
+        let centerXConstraint = NSLayoutConstraint(
+            item: teamNameLabel, attribute: .centerX, relatedBy: .equal,
+            toItem: contentView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: teamNameLabel, attribute: .width, relatedBy: .equal,
+            toItem: contentView, attribute: .width, multiplier: 200/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: teamNameLabel, attribute: .height, relatedBy: .equal,
+            toItem: contentView, attribute: .height, multiplier: 30/356, constant: 0.0)
+        
+        return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
 }
