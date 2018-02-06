@@ -51,10 +51,10 @@ class MainTeamInfoView: UIView {
     
     private lazy var teamIntroLabel:UILabel = {
         let teamIntroLabel = UILabel()
-        teamIntroLabel.text = "우주최강 사회인 야구팀, 홈베이스"
+        teamIntroLabel.text = "우주최강 사회인 야구팀, 홈베이스. 저희 팀 짱이에요 얍얍"
         teamIntroLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14.0)
         teamIntroLabel.textAlignment = .center
-        teamIntroLabel.numberOfLines = 5
+        teamIntroLabel.numberOfLines = 2
         teamIntroLabel.adjustsFontSizeToFitWidth = true
         teamIntroLabel.minimumScaleFactor = 0.5
         teamIntroLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +68,7 @@ class MainTeamInfoView: UIView {
                                                 green: 180.0/255.0,
                                                 blue: 223.0/255.0,
                                                 alpha: 1.0)
-        teamSinceView.layer.cornerRadius = 13.0
+        teamSinceView.layer.cornerRadius = 10.0
         teamSinceView.clipsToBounds = true
         teamSinceView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -100,7 +100,7 @@ class MainTeamInfoView: UIView {
                                                  green: 44.0/255.0,
                                                  blue: 44.0/255.0,
                                                  alpha: 1.0)
-        teamHomeStadiumLabel.layer.cornerRadius = 13.0
+        teamHomeStadiumLabel.layer.cornerRadius = 10.0
         teamHomeStadiumLabel.clipsToBounds = true
         teamHomeStadiumLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -113,7 +113,7 @@ class MainTeamInfoView: UIView {
                                                  green: 44.0/255.0,
                                                  blue: 44.0/255.0,
                                                  alpha: 1.0)
-        teamRecordBaseView.layer.cornerRadius = 13.0
+        teamRecordBaseView.layer.cornerRadius = 10.0
         teamRecordBaseView.clipsToBounds = true
         teamRecordBaseView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -198,7 +198,7 @@ class MainTeamInfoView: UIView {
                                                      green: 44.0/255.0,
                                                      blue: 44.0/255.0,
                                                      alpha: 1.0)
-        teamAverageBaseView.layer.cornerRadius = 13.0
+        teamAverageBaseView.layer.cornerRadius = 10.0
         teamAverageBaseView.clipsToBounds = true
         teamAverageBaseView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -388,7 +388,7 @@ extension MainTeamInfoView {
             toItem: contentView, attribute: .width, multiplier: 200/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: teamIntroLabel, attribute: .height, relatedBy: .equal,
-            toItem: contentView, attribute: .height, multiplier: 17/362, constant: 0.0)
+            toItem: contentView, attribute: .height, multiplier: 36/362, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -487,7 +487,7 @@ extension MainTeamInfoView {
             toItem: teamRecordBaseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: winRecordLabel, attribute: .width, relatedBy: .equal,
-            toItem: teamRecordBaseView, attribute: .width, multiplier: 75/373, constant: 0.0)
+            toItem: teamRecordBaseView, attribute: .width, multiplier: 32/373, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: winRecordLabel, attribute: .height, relatedBy: .equal,
             toItem: teamRecordBaseView, attribute: .height, multiplier: 27/50, constant: 0.0)
@@ -521,7 +521,7 @@ extension MainTeamInfoView {
             toItem: teamRecordBaseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: drawRecordLabel, attribute: .width, relatedBy: .equal,
-            toItem: teamRecordBaseView, attribute: .width, multiplier: 75/373, constant: 0.0)
+            toItem: teamRecordBaseView, attribute: .width, multiplier: 32/373, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: drawRecordLabel, attribute: .height, relatedBy: .equal,
             toItem: teamRecordBaseView, attribute: .height, multiplier: 27/50, constant: 0.0)
@@ -555,7 +555,7 @@ extension MainTeamInfoView {
             toItem: teamRecordBaseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: loseRecordLabel, attribute: .width, relatedBy: .equal,
-            toItem: teamRecordBaseView, attribute: .width, multiplier: 75/373, constant: 0.0)
+            toItem: teamRecordBaseView, attribute: .width, multiplier: 32/373, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: loseRecordLabel, attribute: .height, relatedBy: .equal,
             toItem: teamRecordBaseView, attribute: .height, multiplier: 27/50, constant: 0.0)
@@ -606,7 +606,7 @@ extension MainTeamInfoView {
             toItem: teamAverageBaseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: teamERAverageRecordLabel, attribute: .width, relatedBy: .equal,
-            toItem: teamAverageBaseView, attribute: .width, multiplier: 75/373, constant: 0.0)
+            toItem: teamAverageBaseView, attribute: .width, multiplier: 50/373, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: teamERAverageRecordLabel, attribute: .height, relatedBy: .equal,
             toItem: teamAverageBaseView, attribute: .height, multiplier: 27/50, constant: 0.0)
@@ -640,7 +640,7 @@ extension MainTeamInfoView {
             toItem: teamAverageBaseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: teamBattingAverageRecordLabel, attribute: .width, relatedBy: .equal,
-            toItem: teamAverageBaseView, attribute: .width, multiplier: 75/373, constant: 0.0)
+            toItem: teamAverageBaseView, attribute: .width, multiplier: 65/373, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: teamBattingAverageRecordLabel, attribute: .height, relatedBy: .equal,
             toItem: teamAverageBaseView, attribute: .height, multiplier: 27/50, constant: 0.0)
