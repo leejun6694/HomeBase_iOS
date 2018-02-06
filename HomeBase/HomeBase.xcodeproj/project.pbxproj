@@ -11,7 +11,6 @@
 		7213D76D2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */; };
 		7213D7712021BBE000FB028C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D7702021BBE000FB028C /* Models.swift */; };
 		7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D7722021C74A00FB028C /* RegisterUserNavigation.swift */; };
-		721A6199200E8EA4000A5646 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A6198200E8EA4000A5646 /* MainViewController.swift */; };
 		721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */; };
 		7231C9272018F3AD004FE531 /* CloudFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C9262018F3AD004FE531 /* CloudFunction.swift */; };
 		7231C929201905F7004FE531 /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C928201905F7004FE531 /* FindEmailViewController.swift */; };
@@ -30,6 +29,13 @@
 		72976272201EFB8A00A2CE4A /* ForgotErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */; };
 		729AC644201F2ED800F5FED2 /* SignInErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729AC643201F2ED800F5FED2 /* SignInErrorViewController.swift */; };
 		729AC646201F34DE00F5FED2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729AC645201F34DE00F5FED2 /* SignInViewController.swift */; };
+		72ABA1CF2029865A00635927 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72ABA1CD2029865A00635927 /* Schedule.storyboard */; };
+		72ABA1D2202986DB00635927 /* Team.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72ABA1D0202986DB00635927 /* Team.storyboard */; };
+		72ABA1D5202986F800635927 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72ABA1D3202986F800635927 /* User.storyboard */; };
+		72B6F2E620298ADE00CA0755 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B6F2E520298ADE00CA0755 /* MainTableViewController.swift */; };
+		72B6F2EA20299CE300CA0755 /* MainTeamInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */; };
+		72C5755020297C4D000432DB /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5754F20297C4D000432DB /* UserViewController.swift */; };
+		72C5755220297E94000432DB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5755120297E94000432DB /* MainTabBarController.swift */; };
 		72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */; };
 		72D9322220239B33003F3889 /* RegisterTeamJoinEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9322120239B32003F3889 /* RegisterTeamJoinEnterViewController.swift */; };
 		72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */; };
@@ -61,7 +67,6 @@
 		7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteViewController.swift; sourceTree = "<group>"; };
 		7213D7702021BBE000FB028C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		7213D7722021C74A00FB028C /* RegisterUserNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserNavigation.swift; sourceTree = "<group>"; };
-		721A6198200E8EA4000A5646 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompleteViewController.swift; sourceTree = "<group>"; };
 		7231C9262018F3AD004FE531 /* CloudFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunction.swift; sourceTree = "<group>"; };
 		7231C928201905F7004FE531 /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +90,13 @@
 		72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotErrorViewController.swift; sourceTree = "<group>"; };
 		729AC643201F2ED800F5FED2 /* SignInErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInErrorViewController.swift; sourceTree = "<group>"; };
 		729AC645201F34DE00F5FED2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		72ABA1CE2029865A00635927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Schedule.storyboard; sourceTree = "<group>"; };
+		72ABA1D1202986DB00635927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Team.storyboard; sourceTree = "<group>"; };
+		72ABA1D4202986F800635927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/User.storyboard; sourceTree = "<group>"; };
+		72B6F2E520298ADE00CA0755 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTeamInfoView.swift; sourceTree = "<group>"; };
+		72C5754F20297C4D000432DB /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		72C5755120297E94000432DB /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinErrorViewController.swift; sourceTree = "<group>"; };
 		72D9322120239B32003F3889 /* RegisterTeamJoinEnterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinEnterViewController.swift; sourceTree = "<group>"; };
 		72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteCopyViewController.swift; sourceTree = "<group>"; };
@@ -160,11 +172,15 @@
 				72881E7A1FFA8579009D23C2 /* AppDelegate.swift */,
 				729AC647201F362300F5FED2 /* SignIn */,
 				721A619E20189F09000A5646 /* SignUp */,
-				72F07C04200C6E94004C83F6 /* Forgot */,
-				72FA574B200DD3A900A838B0 /* Register */,
-				721A6198200E8EA4000A5646 /* MainViewController.swift */,
+				72B6F2E320298A1A00CA0755 /* Forgot */,
+				72B6F2E420298A2B00CA0755 /* Register */,
+				72C5755320297EA3000432DB /* Main */,
+				72C5754F20297C4D000432DB /* UserViewController.swift */,
 				72881E9C1FFB3291009D23C2 /* Start.storyboard */,
 				72881EA11FFB3B98009D23C2 /* Main.storyboard */,
+				72ABA1CD2029865A00635927 /* Schedule.storyboard */,
+				72ABA1D0202986DB00635927 /* Team.storyboard */,
+				72ABA1D3202986F800635927 /* User.storyboard */,
 				72881E831FFA8579009D23C2 /* LaunchScreen.storyboard */,
 				72881E861FFA8579009D23C2 /* Info.plist */,
 				72881E9A1FFB2E0F009D23C2 /* GoogleService-Info.plist */,
@@ -191,7 +207,7 @@
 			name = SignIn;
 			sourceTree = "<group>";
 		};
-		72F07C04200C6E94004C83F6 /* Forgot */ = {
+		72B6F2E320298A1A00CA0755 /* Forgot */ = {
 			isa = PBXGroup;
 			children = (
 				72F07C0A200C77FC004C83F6 /* ForgotSelectNavigation.swift */,
@@ -205,7 +221,7 @@
 			name = Forgot;
 			sourceTree = "<group>";
 		};
-		72FA574B200DD3A900A838B0 /* Register */ = {
+		72B6F2E420298A2B00CA0755 /* Register */ = {
 			isa = PBXGroup;
 			children = (
 				72E96C9B200607D000B68F29 /* RegisterTeamNavigation.swift */,
@@ -221,6 +237,16 @@
 				725B8507200180D90024588D /* RegisterPlayerInfoViewController.swift */,
 			);
 			name = Register;
+			sourceTree = "<group>";
+		};
+		72C5755320297EA3000432DB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				72C5755120297E94000432DB /* MainTabBarController.swift */,
+				72B6F2E520298ADE00CA0755 /* MainTableViewController.swift */,
+				72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 		F34A4FAEB3520F2A1C92E813 /* Frameworks */ = {
@@ -338,10 +364,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				72881E851FFA8579009D23C2 /* LaunchScreen.storyboard in Resources */,
+				72ABA1D2202986DB00635927 /* Team.storyboard in Resources */,
 				72881EA31FFB3B98009D23C2 /* Main.storyboard in Resources */,
 				72881E9B1FFB2E0F009D23C2 /* GoogleService-Info.plist in Resources */,
 				72881E821FFA8579009D23C2 /* Assets.xcassets in Resources */,
+				72ABA1D5202986F800635927 /* User.storyboard in Resources */,
 				72881E9E1FFB3291009D23C2 /* Start.storyboard in Resources */,
+				72ABA1CF2029865A00635927 /* Schedule.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,12 +515,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72C5755220297E94000432DB /* MainTabBarController.swift in Sources */,
 				729AC646201F34DE00F5FED2 /* SignInViewController.swift in Sources */,
 				72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */,
 				72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */,
+				72B6F2EA20299CE300CA0755 /* MainTeamInfoView.swift in Sources */,
 				72976272201EFB8A00A2CE4A /* ForgotErrorViewController.swift in Sources */,
 				72F07BFF200C6B9B004C83F6 /* ForgotSelectViewController.swift in Sources */,
 				7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */,
+				72B6F2E620298ADE00CA0755 /* MainTableViewController.swift in Sources */,
 				72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */,
 				72D9322220239B33003F3889 /* RegisterTeamJoinEnterViewController.swift in Sources */,
 				725B850A200181350024588D /* RegisterUserInfoViewController.swift in Sources */,
@@ -504,9 +536,9 @@
 				7213D7712021BBE000FB028C /* Models.swift in Sources */,
 				72378A7020081BC0007ED442 /* CustomMethods.swift in Sources */,
 				725B8508200180D90024588D /* RegisterPlayerInfoViewController.swift in Sources */,
-				721A6199200E8EA4000A5646 /* MainViewController.swift in Sources */,
 				725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */,
 				721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */,
+				72C5755020297C4D000432DB /* UserViewController.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
 				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,
 				72F07C01200C6BB0004C83F6 /* ForgotEmailViewController.swift in Sources */,
@@ -557,6 +589,30 @@
 				72881EA21FFB3B98009D23C2 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		72ABA1CD2029865A00635927 /* Schedule.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72ABA1CE2029865A00635927 /* Base */,
+			);
+			name = Schedule.storyboard;
+			sourceTree = "<group>";
+		};
+		72ABA1D0202986DB00635927 /* Team.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72ABA1D1202986DB00635927 /* Base */,
+			);
+			name = Team.storyboard;
+			sourceTree = "<group>";
+		};
+		72ABA1D3202986F800635927 /* User.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72ABA1D4202986F800635927 /* Base */,
+			);
+			name = User.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

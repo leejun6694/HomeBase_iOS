@@ -38,9 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if response.result.isSuccess {
                         let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-                        if let mainViewController = mainStoryBoard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+                        if let mainTabBarController = mainStoryBoard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
                             
-                            self.window?.rootViewController = mainViewController
+                            self.window?.rootViewController = mainTabBarController
                         }
                     }
                     else {
