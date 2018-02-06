@@ -60,10 +60,10 @@ class SignInViewController: UIViewController {
                                             
                                             if response.result.isSuccess {
                                                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                                if let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+                                                if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
                                                     
                                                     self.spinnerStopAnimating(self.spinner)
-                                                    UIApplication.shared.keyWindow?.rootViewController = mainViewController
+                                                    UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
                                                 }
                                             } else {
                                                 if let registerUserNavigation =

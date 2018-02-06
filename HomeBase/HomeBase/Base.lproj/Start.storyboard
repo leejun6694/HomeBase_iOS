@@ -841,7 +841,10 @@
                                 <rect key="frame" x="35" y="524" width="345" height="41.333333333333371"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="2Ue-Aw-rgV">
-                                        <rect key="frame" x="27" y="6.333333333333373" width="33" height="29.666666666666671"/>
+                                        <rect key="frame" x="27" y="4.3333333333333712" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="2Ue-Aw-rgV" secondAttribute="height" multiplier="1:1" id="ifg-bc-10W"/>
+                                        </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOl-SA-OA5" userLabel="Google Border">
                                         <rect key="frame" x="81" y="10.333333333333369" width="0.6666666666666714" height="21.333333333333329"/>
@@ -868,10 +871,9 @@
                                     <constraint firstItem="2Ue-Aw-rgV" firstAttribute="leading" secondItem="YHO-cT-9kX" secondAttribute="centerX" multiplier="27/172.5" id="6xW-rk-477"/>
                                     <constraint firstItem="RXP-u7-Xke" firstAttribute="width" secondItem="YHO-cT-9kX" secondAttribute="width" multiplier="170/345" id="Atr-hc-Y6d"/>
                                     <constraint firstItem="RXP-u7-Xke" firstAttribute="top" secondItem="YHO-cT-9kX" secondAttribute="centerY" multiplier="13/22.5" id="C69-7v-yQD"/>
-                                    <constraint firstItem="2Ue-Aw-rgV" firstAttribute="top" secondItem="YHO-cT-9kX" secondAttribute="centerY" multiplier="6/22.5" id="Sm3-oQ-6Wb"/>
+                                    <constraint firstItem="2Ue-Aw-rgV" firstAttribute="centerY" secondItem="YHO-cT-9kX" secondAttribute="centerY" id="Sm3-oQ-6Wb"/>
                                     <constraint firstItem="cOl-SA-OA5" firstAttribute="top" secondItem="YHO-cT-9kX" secondAttribute="centerY" multiplier="11/22.5" id="Yx1-JD-lOj"/>
                                     <constraint firstItem="2Ue-Aw-rgV" firstAttribute="width" secondItem="YHO-cT-9kX" secondAttribute="width" multiplier="33/345" id="nK5-uk-xce"/>
-                                    <constraint firstItem="2Ue-Aw-rgV" firstAttribute="height" secondItem="YHO-cT-9kX" secondAttribute="height" multiplier="33/45" id="nhV-m3-UHy"/>
                                     <constraint firstItem="RXP-u7-Xke" firstAttribute="leading" secondItem="YHO-cT-9kX" secondAttribute="centerX" multiplier="122/172.5" id="o6N-Vy-1N1"/>
                                     <constraint firstItem="cOl-SA-OA5" firstAttribute="height" secondItem="YHO-cT-9kX" secondAttribute="height" multiplier="23/45" id="ysT-8t-qtY"/>
                                     <constraint firstItem="RXP-u7-Xke" firstAttribute="height" secondItem="YHO-cT-9kX" secondAttribute="height" multiplier="19/45" id="zTi-dY-W5Y"/>
@@ -886,7 +888,10 @@
                                 <rect key="frame" x="35" y="578" width="345" height="41.333333333333371"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="Flk-S4-5VK">
-                                        <rect key="frame" x="27" y="5.3333333333333712" width="33" height="30"/>
+                                        <rect key="frame" x="27" y="4.3333333333333712" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Flk-S4-5VK" secondAttribute="height" multiplier="1:1" id="xNG-nB-XKZ"/>
+                                        </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KbF-Ko-2Gn" userLabel="Facebook Border">
                                         <rect key="frame" x="81" y="10.666666666666627" width="0.6666666666666714" height="20.333333333333329"/>
@@ -911,12 +916,11 @@
                                     <constraint firstItem="KbF-Ko-2Gn" firstAttribute="top" secondItem="y3i-yT-NEd" secondAttribute="centerY" multiplier="12/22.5" id="0ih-mm-7a5"/>
                                     <constraint firstItem="Flk-S4-5VK" firstAttribute="width" secondItem="y3i-yT-NEd" secondAttribute="width" multiplier="33/345" id="33c-jx-Sdd"/>
                                     <constraint firstItem="e5f-Vw-1c3" firstAttribute="top" secondItem="y3i-yT-NEd" secondAttribute="centerY" multiplier="13/22.5" id="7je-JT-GuL"/>
-                                    <constraint firstItem="Flk-S4-5VK" firstAttribute="top" secondItem="y3i-yT-NEd" secondAttribute="centerY" multiplier="6/22.5" id="EHW-op-XLQ"/>
+                                    <constraint firstItem="Flk-S4-5VK" firstAttribute="centerY" secondItem="y3i-yT-NEd" secondAttribute="centerY" id="EHW-op-XLQ"/>
                                     <constraint firstItem="KbF-Ko-2Gn" firstAttribute="height" secondItem="y3i-yT-NEd" secondAttribute="height" multiplier="23/45" id="QDF-Rb-pyd"/>
                                     <constraint firstItem="e5f-Vw-1c3" firstAttribute="width" secondItem="y3i-yT-NEd" secondAttribute="width" multiplier="190/345" id="W7m-4q-FS7"/>
                                     <constraint firstItem="Flk-S4-5VK" firstAttribute="leading" secondItem="y3i-yT-NEd" secondAttribute="centerX" multiplier="27/172.5" id="aVq-e9-1sS"/>
                                     <constraint firstItem="KbF-Ko-2Gn" firstAttribute="width" secondItem="y3i-yT-NEd" secondAttribute="width" multiplier="0.6/345" id="cz1-96-b3u"/>
-                                    <constraint firstItem="Flk-S4-5VK" firstAttribute="height" secondItem="y3i-yT-NEd" secondAttribute="height" multiplier="33/45" id="e1K-iw-3SB"/>
                                     <constraint firstItem="KbF-Ko-2Gn" firstAttribute="leading" secondItem="y3i-yT-NEd" secondAttribute="centerX" multiplier="81/172.5" id="jKv-t9-sYn"/>
                                     <constraint firstItem="e5f-Vw-1c3" firstAttribute="leading" secondItem="y3i-yT-NEd" secondAttribute="centerX" multiplier="122/172.5" id="sa9-w1-7CZ"/>
                                     <constraint firstItem="e5f-Vw-1c3" firstAttribute="height" secondItem="y3i-yT-NEd" secondAttribute="height" multiplier="19/45" id="yVS-Ju-Jwx"/>
