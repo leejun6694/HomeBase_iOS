@@ -50,6 +50,19 @@ class MainTeamInfoView: UIView {
         return teamNameLabel
     }()
     
+    private lazy var teamIntroLabel:UILabel = {
+        let teamIntroLabel = UILabel()
+        teamIntroLabel.text = "우주최강 사회인 야구팀, 홈베이스"
+        teamIntroLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14.0)
+        teamIntroLabel.textAlignment = .center
+        teamIntroLabel.numberOfLines = 5
+        teamIntroLabel.adjustsFontSizeToFitWidth = true
+        teamIntroLabel.minimumScaleFactor = 0.5
+        teamIntroLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return teamIntroLabel
+    }()
+    
     // MARK: Draw
 
     override func draw(_ rect: CGRect) {
@@ -63,6 +76,8 @@ class MainTeamInfoView: UIView {
         self.addConstraints(teamLogoImageViewConstraints())
         contentView.addSubview(teamNameLabel)
         contentView.addConstraints(teamNameLabelConstraints())
+        contentView.addSubview(teamIntroLabel)
+        contentView.addConstraints(teamIntroLabelConstraints())
     }
 }
 
@@ -131,6 +146,23 @@ extension MainTeamInfoView {
         let heightConstraint = NSLayoutConstraint(
             item: teamNameLabel, attribute: .height, relatedBy: .equal,
             toItem: contentView, attribute: .height, multiplier: 30/356, constant: 0.0)
+        
+        return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func teamIntroLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: teamIntroLabel, attribute: .top, relatedBy: .equal,
+            toItem: contentView, attribute: .centerY, multiplier: 104/178, constant: 0.0)
+        let centerXConstraint = NSLayoutConstraint(
+            item: teamIntroLabel, attribute: .centerX, relatedBy: .equal,
+            toItem: contentView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: teamIntroLabel, attribute: .width, relatedBy: .equal,
+            toItem: contentView, attribute: .width, multiplier: 200/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: teamIntroLabel, attribute: .height, relatedBy: .equal,
+            toItem: contentView, attribute: .height, multiplier: 17/356, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
