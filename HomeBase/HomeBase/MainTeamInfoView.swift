@@ -63,6 +63,25 @@ class MainTeamInfoView: UIView {
         return teamIntroLabel
     }()
     
+    private lazy var teamSinceLabel:UILabel = {
+        let teamSinceLabel = UILabel()
+        teamSinceLabel.text = "Since 2002"
+        teamSinceLabel.textColor = .white
+        teamSinceLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)
+        teamSinceLabel.textAlignment = .center
+        teamSinceLabel.adjustsFontSizeToFitWidth = true
+        teamSinceLabel.minimumScaleFactor = 0.5
+        teamSinceLabel.backgroundColor = UIColor(red: 0.0,
+                                             green: 180.0/255.0,
+                                             blue: 223.0/255.0,
+                                             alpha: 1.0)
+        teamSinceLabel.layer.cornerRadius = 13.0
+        teamSinceLabel.clipsToBounds = true
+        teamSinceLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return teamSinceLabel
+    }()
+    
     // MARK: Draw
 
     override func draw(_ rect: CGRect) {
@@ -78,6 +97,8 @@ class MainTeamInfoView: UIView {
         contentView.addConstraints(teamNameLabelConstraints())
         contentView.addSubview(teamIntroLabel)
         contentView.addConstraints(teamIntroLabelConstraints())
+        contentView.addSubview(teamSinceLabel)
+        contentView.addConstraints(teamSinceLabelConstraints())
     }
 }
 
@@ -165,5 +186,22 @@ extension MainTeamInfoView {
             toItem: contentView, attribute: .height, multiplier: 17/356, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func teamSinceLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: teamSinceLabel, attribute: .top, relatedBy: .equal,
+            toItem: contentView, attribute: .centerY, multiplier: 143/178, constant: 0.0)
+        let centerXConstrinat = NSLayoutConstraint(
+            item: teamSinceLabel, attribute: .centerX, relatedBy: .equal,
+            toItem: contentView, attribute: .centerX, multiplier: 271.5/207, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: teamSinceLabel, attribute: .width, relatedBy: .equal,
+            toItem: contentView, attribute: .width, multiplier: 157/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: teamSinceLabel, attribute: .height, relatedBy: .equal,
+            toItem: contentView, attribute: .height, multiplier: 30/356, constant: 0.0)
+        
+        return [topConstraint, centerXConstrinat, widthConstraint, heightConstraint]
     }
 }
