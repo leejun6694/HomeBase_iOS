@@ -143,14 +143,13 @@ class RegisterTeamCreateViewController: UIViewController {
                 for profile in currentUser.providerData {
                     provider = profile.providerID
                 }
-                let hasTeam:Bool = true
                 
                 if provider == "password" {
                     databaseRef.child("users").child(currentUser.uid).updateChildValues(
-                        ["hasTeam": hasTeam])
+                        ["teamCode": teamCode])
                 } else {
                     databaseRef.child("users").child(currentUser.uid).setValue(
-                        ["hasTeam": hasTeam])
+                        ["teamCode": teamCode])
                 }
                 
                 let admin:String = currentUser.uid
