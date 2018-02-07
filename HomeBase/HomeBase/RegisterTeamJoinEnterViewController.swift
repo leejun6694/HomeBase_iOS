@@ -32,11 +32,10 @@ class RegisterTeamJoinEnterViewController: UIViewController {
         let databaseRef = Database.database().reference()
         
         if let currentUser = Auth.auth().currentUser {
-            let hasTeam:Bool = true
             let member = currentUser.uid
             
             databaseRef.child("users").child(currentUser.uid).updateChildValues(
-                ["hasTeam": hasTeam])
+                ["teamCode": teamCode])
             databaseRef.child("teams").child(teamCode).child(
                 "members").childByAutoId().setValue(member)
             

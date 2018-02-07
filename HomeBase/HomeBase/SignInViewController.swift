@@ -50,8 +50,8 @@ class SignInViewController: UIViewController {
                     
                     if response.result.isSuccess {
                         if let value = response.result.value as? [String: Any] {
-                            if let hasTeam = value["hasTeam"] as? Bool {
-                                if hasTeam {
+                            if let teamCode = value["teamCode"] as? String {
+                                if teamCode != "default" {
                                     Alamofire.request(
                                         CloudFunction.methodURL(method: Method.getPlayer),
                                         method: .get,
