@@ -10,6 +10,18 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
 
+    // MARK: Properties
+    
+    let mainTeamInfoView = MainTeamInfoView()
+    
+    private var spinner = UIActivityIndicatorView() {
+        didSet {
+            spinner.translatesAutoresizingMaskIntoConstraints = false
+            spinner.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            spinner.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        }
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -68,7 +80,6 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            let mainTeamInfoView = MainTeamInfoView()
             return mainTeamInfoView
         default:
             break

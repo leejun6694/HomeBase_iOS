@@ -10,7 +10,6 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
-import Alamofire
 
 class RegisterTeamJoinEnterViewController: UIViewController {
     

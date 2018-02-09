@@ -28,27 +28,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions)
         
         if let currentUser = Auth.auth().currentUser {
-            let parameterDictionary = ["uid": currentUser.uid]
-            
-            Alamofire.request(
-                CloudFunction.methodURL(method: Method.getPlayer),
-                method: .get,
-                parameters: parameterDictionary).responseJSON {
-                    (response) -> Void in
-                    
-                    if response.result.isSuccess {
-                        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-                        if let mainTabBarController = mainStoryBoard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
-                            
-                            self.window?.rootViewController = mainTabBarController
-                        }
-                    }
-                    else {
-                        let startStoryBoard = UIStoryboard(name: "Start", bundle: nil)
-                        let signInViewController = startStoryBoard.instantiateInitialViewController()
+            CloudFunction.getPlayerDataWith(currentUser) {
+                (player, error) -> Void in
+                
+                if let _ = player {
+                    let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+                    if let mainTabBarController = mainStoryBoard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
                         
-                        self.window?.rootViewController = signInViewController
+                        self.window?.rootViewController = mainTabBarController
                     }
+                } else {
+                    let startStoryBoard = UIStoryboard(name: "Start", bundle: nil)
+                    let signInViewController = startStoryBoard.instantiateInitialViewController()
+                    
+                    self.window?.rootViewController = signInViewController
+                }
             }
         } else {
             let startStoryBoard = UIStoryboard(name: "Start", bundle: nil)

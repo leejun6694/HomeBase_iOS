@@ -40,47 +40,27 @@ class SignInViewController: UIViewController {
     
     private func userConnected() {
         if let currentUser = Auth.auth().currentUser {
-            let parameterDictionary = ["uid": currentUser.uid]
-            
-            Alamofire.request(
-                CloudFunction.methodURL(method: Method.getUser),
-                method: .get,
-                parameters: parameterDictionary).responseJSON {
-                    (response) -> Void in
-                    
-                    if response.result.isSuccess {
-                        if let value = response.result.value as? [String: Any] {
-                            if let teamCode = value["teamCode"] as? String {
-                                if teamCode != "default" {
-                                    Alamofire.request(
-                                        CloudFunction.methodURL(method: Method.getPlayer),
-                                        method: .get,
-                                        parameters: parameterDictionary).responseJSON {
-                                            (response) -> Void in
-                                            
-                                            if response.result.isSuccess {
-                                                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                                if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
-                                                    
-                                                    self.spinnerStopAnimating(self.spinner)
-                                                    UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
-                                                }
-                                            } else {
-                                                if let registerUserNavigation =
-                                                    self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
-                                                    
-                                                    self.spinnerStopAnimating(self.spinner)
-                                                    UIApplication.shared.keyWindow?.rootViewController = registerUserNavigation
-                                                }
-                                            }
-                                    }
-                                } else {
-                                    if let registerTeamNavigation =
-                                        self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation {
-                                        
-                                        self.spinnerStopAnimating(self.spinner)
-                                        UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
-                                    }
+            CloudFunction.getUserDataWith(currentUser) {
+                (user, error) -> Void in
+                
+                if let teamCode = user?.teamCode {
+                    if teamCode != "default" {
+                        CloudFunction.getPlayerDataWith(currentUser) {
+                            (player, error) -> Void in
+                            
+                            if let _ = player {
+                                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                                    
+                                    self.spinnerStopAnimating(self.spinner)
+                                    UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                }
+                            } else {
+                                if let registerUserNavigation =
+                                    self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
+                                    
+                                    self.spinnerStopAnimating(self.spinner)
+                                    UIApplication.shared.keyWindow?.rootViewController = registerUserNavigation
                                 }
                             }
                         }
@@ -92,6 +72,14 @@ class SignInViewController: UIViewController {
                             UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
                         }
                     }
+                } else {
+                    if let registerTeamNavigation =
+                        self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation {
+                        
+                        self.spinnerStopAnimating(self.spinner)
+                        UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
+                    }
+                }
             }
         }
     }

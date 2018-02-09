@@ -27,43 +27,98 @@ struct CloudFunction {
         return url
     }
     
-//    static func hasTeamTo(_ currentUser: User) -> Bool {
-//        let parameterDictionary = ["uid": currentUser.uid]
-//        var result: Bool = false
-//
-//        Alamofire.request(
-//            CloudFunction.methodURL(method: Method.getUser),
-//            method: .get,
-//            parameters: parameterDictionary).responseJSON {
-//                (response) -> Void in
-//
-//                if response.result.isSuccess {
-//                    if let value = response.result.value as? [String: Any] {
-//                        if let hasTeam = value["hasTeam"] as? Bool {
-//                            if hasTeam { result = true }
-//                            else { result = false }
-//                        }
-//                    }
-//                }
-//        }
-//
-//        return result
-//    }
-//
-//    static func hasPlayerInfoTo(_ currentUser: User) -> Bool {
-//        let parameterDictionary = ["uid": currentUser.uid]
-//        var result:Bool = false
-//
-//        Alamofire.request(
-//            CloudFunction.methodURL(method: Method.getPlayer),
-//            method: .get,
-//            parameters: parameterDictionary).responseJSON {
-//                (response) -> Void in
-//
-//                if response.result.isSuccess { result = true }
-//                else { result = false }
-//        }
-//        
-//        return result
-//    }
+    static func getUserDataWith(_ currentUser:User, completion: @escaping(_ user:HBUser?, _ error: Error?) ->()) {
+        let parameterDictionary = ["uid": currentUser.uid]
+        
+        Alamofire.request(
+            CloudFunction.methodURL(method: Method.getUser),
+            method: .get,
+            parameters: parameterDictionary).responseJSON{
+                (response) -> Void in
+                
+                if response.result.isSuccess {
+                    if let value = response.result.value as? [String:Any] {
+                        if let email = value["email"] as? String,
+                            let name = value["name"] as? String,
+                            let birth = value["birth"] as? String,
+                            let teamCode = value["teamCode"] as? String,
+                            let provider = value["provider"] as? String {
+                            
+                            let user = HBUser(email: email, name: name, birth: birth, teamCode: teamCode, provider: provider)
+                            completion(user, nil)
+                        }
+                    }
+                } else {
+                    let error = response.result.error
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func getPlayerDataWith(_ currentUser:User, completion: @escaping(_ player:HBPlayer?, _ error: Error?) ->()) {
+        let parameterDictionary = ["uid": currentUser.uid]
+        
+        Alamofire.request(
+            CloudFunction.methodURL(method: Method.getPlayer),
+            method: .get,
+            parameters: parameterDictionary).responseJSON{
+                (response) -> Void in
+                
+                if response.result.isSuccess {
+                    if let value = response.result.value as? [String:Any] {
+                        if let name = value["name"] as? String,
+                            let position = value["position"] as? String,
+                            let backNumber = value["backNumber"] as? Int,
+                            let height = value["height"] as? Int,
+                            let weight = value["weight"] as? Int,
+                            let batPosition = value["batPosition"] as? String,
+                            let pitchPosition = value["pitchPosition"] as? String {
+                            
+                            let player = HBPlayer(name: name,
+                                                position: position,
+                                                backNumber: backNumber,
+                                                height: height,
+                                                weight: weight,
+                                                batPoition: batPosition,
+                                                pitchPosition: pitchPosition)
+                            
+                            completion(player, nil)
+                        }
+                    }
+                } else {
+                    let error = response.result.error
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func getTeamDataWith(_ teamCode:String, completion: @escaping(_ team:HBTeam?, _ error: Error?) ->()) {
+        let parameterDictionary = ["teamCode": teamCode]
+        
+        Alamofire.request(
+            CloudFunction.methodURL(method: Method.getTeam),
+            method: .get,
+            parameters: parameterDictionary).responseJSON{
+                (response) -> Void in
+                
+                if response.result.isSuccess {
+                    if let value = response.result.value as? [String:Any] {
+                        if let name = value["name"] as? String,
+                            let logo = value["logo"] as? String,
+                            let description = value["description"] as? String,
+                            let homeStadium = value["homeStadium"] as? String {
+                            
+                            let team = HBTeam(name: name,
+                                              logo: logo,
+                                              description: description,
+                                              homeStadium: homeStadium)
+                            completion(team, nil)
+                        }
+                    }
+                } else {
+                    let error = response.result.error
+                    completion(nil, error)
+                }
+        }
+    }
 }

@@ -69,53 +69,42 @@ class RegisterTeamJoinViewController: UIViewController {
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
         spinnerStartAnimating(spinner)
         
-        let parameterDictionary = ["teamCode": teamCodeTextField.text ?? ""]
-        
-        Alamofire.request(
-            CloudFunction.methodURL(method: Method.getTeam),
-            method: .get,
-            parameters: parameterDictionary).responseJSON {
-                (response) -> Void in
+        let teamCode = teamCodeTextField.text ?? ""
+        CloudFunction.getTeamDataWith(teamCode) {
+            (team, error) -> Void in
+            
+            if let team = team {
+                var teamLogoImage:UIImage = #imageLiteral(resourceName: "team_logo")
+                let storageRef = Storage.storage().reference()
+                let imageRef = storageRef.child(team.logo)
                 
-                if response.result.isSuccess {
-                    if let value = response.result.value as? [String: Any] {
-                        if let teamLogo = value["logo"] as? String,
-                            let teamName = value["name"] as? String {
-                            let teamCode = self.teamCodeTextField.text ?? "default"
-                            var teamLogoImage:UIImage = UIImage()
+                imageRef.getData(maxSize: 4 * 1024 * 1024) {
+                    (data, error) in
+                    
+                    if let error = error {
+                        print(error)
+                    } else {
+                        teamLogoImage = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                        
+                        if let registerTeamJoinEnterViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinEnterViewController") as? RegisterTeamJoinEnterViewController {
                             
-                            let storageRef = Storage.storage().reference()
-                            let imageRef = storageRef.child(teamLogo)
-                            
-                            imageRef.getData(maxSize: 4 * 1024 * 1024) {
-                                (data, error) in
-                                
-                                if let error = error {
-                                    print(error)
-                                } else {
-                                    teamLogoImage = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                                    
-                                    if let registerTeamJoinEnterViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinEnterViewController") as? RegisterTeamJoinEnterViewController {
-                                        
-                                        registerTeamJoinEnterViewController.teamLogoImage = teamLogoImage
-                                        registerTeamJoinEnterViewController.teamCode = teamCode
-                                        registerTeamJoinEnterViewController.teamName = teamName
-                                        registerTeamJoinEnterViewController.modalPresentationStyle = .overCurrentContext
-                                        self.spinnerStopAnimating(self.spinner)
-                                        self.present(registerTeamJoinEnterViewController, animated: false, completion: nil)
-                                    }
-                                }
-                            }
+                            registerTeamJoinEnterViewController.teamLogoImage = teamLogoImage
+                            registerTeamJoinEnterViewController.teamCode = teamCode
+                            registerTeamJoinEnterViewController.teamName = team.name
+                            registerTeamJoinEnterViewController.modalPresentationStyle = .overCurrentContext
+                            self.spinnerStopAnimating(self.spinner)
+                            self.present(registerTeamJoinEnterViewController, animated: false, completion: nil)
                         }
                     }
-                } else {
-                    if let registerTeamJoinErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinErrorViewController") as? RegisterTeamJoinErrorViewController {
-                        
-                        registerTeamJoinErrorViewController.modalPresentationStyle = .overCurrentContext
-                        self.spinnerStopAnimating(self.spinner)
-                        self.present(registerTeamJoinErrorViewController, animated: false, completion: nil)
-                    }
                 }
+            } else {
+                if let registerTeamJoinErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinErrorViewController") as? RegisterTeamJoinErrorViewController {
+                    
+                    registerTeamJoinErrorViewController.modalPresentationStyle = .overCurrentContext
+                    self.spinnerStopAnimating(self.spinner)
+                    self.present(registerTeamJoinErrorViewController, animated: false, completion: nil)
+                }
+            }
         }
     }
     

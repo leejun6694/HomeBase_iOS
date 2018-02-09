@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class MainTeamInfoView: UIView {
     
@@ -27,7 +30,7 @@ class MainTeamInfoView: UIView {
         return contentView
     }()
     
-    lazy var teamLogoImageView:UIImageView = {
+    private lazy var teamLogoImageView:UIImageView = {
         let teamLogoImageView = UIImageView(image: #imageLiteral(resourceName: "team_logo"))
         teamLogoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
         teamLogoImageView.layer.borderWidth = 1.0
@@ -253,10 +256,53 @@ class MainTeamInfoView: UIView {
         return teamBattingAverageRecordLabel
     }()
     
+    // MARK: Methods
+    
+    private func fetchTeamInfo() {
+        if let currentUser = Auth.auth().currentUser {
+            CloudFunction.getUserDataWith(currentUser) {
+                (user, error) -> Void in
+                
+                if let teamCode = user?.teamCode {
+                    CloudFunction.getTeamDataWith(teamCode) {
+                        (team, error) -> Void in
+                        
+                        if let teamName = team?.name,
+                            let teamLogo = team?.logo,
+                            let description = team?.description,
+                            let homeStadium = team?.homeStadium {
+                            
+                            let storageRef = Storage.storage().reference()
+                            let imageRef = storageRef.child(teamLogo)
+                            
+                            imageRef.getData(maxSize: 4 * 1024 * 1024) {
+                                (data, error) in
+                                
+                                if let error = error {
+                                    print(error)
+                                } else {
+                                    self.teamLogoImageView.image = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                                    self.teamNameLabel.text = teamName
+                                    self.teamIntroLabel.text = description
+                                    self.teamHomeStadiumLabel.text = homeStadium
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: Draw
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
         self.addSubview(teamPhotoImageView)
         self.addConstraints(teamPhotoImageViewConstraints())
@@ -298,10 +344,8 @@ class MainTeamInfoView: UIView {
         teamAverageBaseView.addConstraints(teamBattingAverageLabelConstraints())
         teamAverageBaseView.addSubview(teamBattingAverageRecordLabel)
         teamAverageBaseView.addConstraints(teamBattingAverageRecordLabelConstraints())
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        
+        fetchTeamInfo()
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
     }
