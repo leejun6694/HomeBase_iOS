@@ -25,6 +25,7 @@
 		72881E9B1FFB2E0F009D23C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72881E9A1FFB2E0F009D23C2 /* GoogleService-Info.plist */; };
 		72881E9E1FFB3291009D23C2 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881E9C1FFB3291009D23C2 /* Start.storyboard */; };
 		72881EA31FFB3B98009D23C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881EA11FFB3B98009D23C2 /* Main.storyboard */; };
+		728EE776202FAD95006108F9 /* MainNextScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728EE775202FAD95006108F9 /* MainNextScheduleView.swift */; };
 		7297626E201EF91000A2CE4A /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297626D201EF91000A2CE4A /* FindPasswordViewController.swift */; };
 		72976272201EFB8A00A2CE4A /* ForgotErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */; };
 		729AC644201F2ED800F5FED2 /* SignInErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729AC643201F2ED800F5FED2 /* SignInErrorViewController.swift */; };
@@ -86,6 +87,7 @@
 		72881E9A1FFB2E0F009D23C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		72881E9D1FFB3291009D23C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Start.storyboard; sourceTree = "<group>"; };
 		72881EA21FFB3B98009D23C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		728EE775202FAD95006108F9 /* MainNextScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNextScheduleView.swift; sourceTree = "<group>"; };
 		7297626D201EF91000A2CE4A /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotErrorViewController.swift; sourceTree = "<group>"; };
 		729AC643201F2ED800F5FED2 /* SignInErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInErrorViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				72C5755120297E94000432DB /* MainTabBarController.swift */,
 				72B6F2E520298ADE00CA0755 /* MainTableViewController.swift */,
 				72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */,
+				728EE775202FAD95006108F9 /* MainNextScheduleView.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72C5755220297E94000432DB /* MainTabBarController.swift in Sources */,
+				728EE776202FAD95006108F9 /* MainNextScheduleView.swift in Sources */,
 				729AC646201F34DE00F5FED2 /* SignInViewController.swift in Sources */,
 				72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */,
 				72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */,

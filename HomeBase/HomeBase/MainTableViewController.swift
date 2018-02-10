@@ -13,6 +13,7 @@ class MainTableViewController: UITableViewController {
     // MARK: Properties
     
     let mainTeamInfoView = MainTeamInfoView()
+    let mainNextScheduleView = MainNextScheduleView()
     
     private var spinner = UIActivityIndicatorView() {
         didSet {
@@ -53,10 +54,6 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0:
-            return "팀 정보"
-        case 1:
-            return "타자 top3"
         case 2:
             return "투수 top3"
         default:
@@ -71,6 +68,9 @@ class MainTableViewController: UITableViewController {
         case 0:
             let teamInfoViewHeight = self.view.frame.height * 642/736
             return teamInfoViewHeight
+        case 1:
+            let nextScheduleViewHeight = self.view.frame.height * 122/736
+            return nextScheduleViewHeight
         default:
             break
         }
@@ -81,6 +81,8 @@ class MainTableViewController: UITableViewController {
         switch section {
         case 0:
             return mainTeamInfoView
+        case 1:
+            return mainNextScheduleView
         default:
             break
         }

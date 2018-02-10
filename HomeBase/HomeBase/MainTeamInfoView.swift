@@ -137,7 +137,7 @@ class MainTeamInfoView: UIView {
     
     private lazy var winRecordLabel:UILabel = {
         let winRecordLabel = UILabel()
-        winRecordLabel.text = "20"
+        winRecordLabel.text = "999"
         winRecordLabel.textColor = .white
         winRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
         winRecordLabel.adjustsFontSizeToFitWidth = true
@@ -161,7 +161,7 @@ class MainTeamInfoView: UIView {
     
     private lazy var drawRecordLabel:UILabel = {
         let drawRecordLabel = UILabel()
-        drawRecordLabel.text = "20"
+        drawRecordLabel.text = "555"
         drawRecordLabel.textColor = .white
         drawRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
         drawRecordLabel.adjustsFontSizeToFitWidth = true
@@ -185,7 +185,7 @@ class MainTeamInfoView: UIView {
     
     private lazy var loseRecordLabel:UILabel = {
         let loseRecordLabel = UILabel()
-        loseRecordLabel.text = "20"
+        loseRecordLabel.text = "120"
         loseRecordLabel.textColor = .white
         loseRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
         loseRecordLabel.adjustsFontSizeToFitWidth = true
@@ -222,11 +222,11 @@ class MainTeamInfoView: UIView {
     
     private lazy var teamERAverageRecordLabel:UILabel = {
         let teamERAverageRecordLabel = UILabel()
-        teamERAverageRecordLabel.text = "3.66"
+        teamERAverageRecordLabel.text = "13.66"
         teamERAverageRecordLabel.textColor = .white
         teamERAverageRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
         teamERAverageRecordLabel.adjustsFontSizeToFitWidth = true
-        teamERAverageRecordLabel.minimumScaleFactor = 0.5
+        teamERAverageRecordLabel.minimumScaleFactor = 0.3
         teamERAverageRecordLabel.translatesAutoresizingMaskIntoConstraints = false
         
         return teamERAverageRecordLabel
@@ -250,7 +250,7 @@ class MainTeamInfoView: UIView {
         teamBattingAverageRecordLabel.textColor = .white
         teamBattingAverageRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
         teamBattingAverageRecordLabel.adjustsFontSizeToFitWidth = true
-        teamBattingAverageRecordLabel.minimumScaleFactor = 0.5
+        teamBattingAverageRecordLabel.minimumScaleFactor = 0.3
         teamBattingAverageRecordLabel.translatesAutoresizingMaskIntoConstraints = false
         
         return teamBattingAverageRecordLabel
@@ -525,13 +525,13 @@ extension MainTeamInfoView {
     private func winRecordLabelConstraints() -> [NSLayoutConstraint] {
         let leadingConstraint = NSLayoutConstraint(
             item: winRecordLabel, attribute: .leading, relatedBy: .equal,
-            toItem: teamRecordBaseView, attribute: .centerX, multiplier: 86/186.5, constant: 0.0)
+            toItem: teamRecordBaseView, attribute: .centerX, multiplier: 82/186.5, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: winRecordLabel, attribute: .centerY, relatedBy: .equal,
             toItem: teamRecordBaseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: winRecordLabel, attribute: .width, relatedBy: .equal,
-            toItem: teamRecordBaseView, attribute: .width, multiplier: 32/373, constant: 0.0)
+            toItem: teamRecordBaseView, attribute: .width, multiplier: 44/373, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: winRecordLabel, attribute: .height, relatedBy: .equal,
             toItem: teamRecordBaseView, attribute: .height, multiplier: 27/50, constant: 0.0)
@@ -559,13 +559,13 @@ extension MainTeamInfoView {
     private func drawRecordLabelConstraints() -> [NSLayoutConstraint] {
         let leadingConstraint = NSLayoutConstraint(
             item: drawRecordLabel, attribute: .leading, relatedBy: .equal,
-            toItem: teamRecordBaseView, attribute: .centerX, multiplier: 182/186.5, constant: 0.0)
+            toItem: teamRecordBaseView, attribute: .centerX, multiplier: 180/186.5, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: drawRecordLabel, attribute: .centerY, relatedBy: .equal,
             toItem: teamRecordBaseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: drawRecordLabel, attribute: .width, relatedBy: .equal,
-            toItem: teamRecordBaseView, attribute: .width, multiplier: 32/373, constant: 0.0)
+            toItem: teamRecordBaseView, attribute: .width, multiplier: 44/373, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: drawRecordLabel, attribute: .height, relatedBy: .equal,
             toItem: teamRecordBaseView, attribute: .height, multiplier: 27/50, constant: 0.0)
@@ -593,13 +593,13 @@ extension MainTeamInfoView {
     private func loseRecordLabelConstraints() -> [NSLayoutConstraint] {
         let leadingConstraint = NSLayoutConstraint(
             item: loseRecordLabel, attribute: .leading, relatedBy: .equal,
-            toItem: teamRecordBaseView, attribute: .centerX, multiplier: 285/186.5, constant: 0.0)
+            toItem: teamRecordBaseView, attribute: .centerX, multiplier: 283/186.5, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: loseRecordLabel, attribute: .centerY, relatedBy: .equal,
             toItem: teamRecordBaseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: loseRecordLabel, attribute: .width, relatedBy: .equal,
-            toItem: teamRecordBaseView, attribute: .width, multiplier: 32/373, constant: 0.0)
+            toItem: teamRecordBaseView, attribute: .width, multiplier: 44/373, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: loseRecordLabel, attribute: .height, relatedBy: .equal,
             toItem: teamRecordBaseView, attribute: .height, multiplier: 27/50, constant: 0.0)
@@ -650,7 +650,7 @@ extension MainTeamInfoView {
             toItem: teamAverageBaseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: teamERAverageRecordLabel, attribute: .width, relatedBy: .equal,
-            toItem: teamAverageBaseView, attribute: .width, multiplier: 50/373, constant: 0.0)
+            toItem: teamAverageBaseView, attribute: .width, multiplier: 65/373, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: teamERAverageRecordLabel, attribute: .height, relatedBy: .equal,
             toItem: teamAverageBaseView, attribute: .height, multiplier: 27/50, constant: 0.0)
