@@ -105,13 +105,11 @@ struct CloudFunction {
                     if let value = response.result.value as? [String:Any] {
                         if let name = value["name"] as? String,
                             let logo = value["logo"] as? String,
-                            let description = value["description"] as? String,
-                            let homeStadium = value["homeStadium"] as? String {
+                            let description = value["description"] as? String {
                             
                             let team = HBTeam(name: name,
                                               logo: logo,
-                                              description: description,
-                                              homeStadium: homeStadium)
+                                              description: description)
                             completion(team, nil)
                         }
                     }

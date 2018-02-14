@@ -50,12 +50,10 @@ class HBTeam {
     var name:String
     var logo:String
     var description:String
-    var homeStadium:String
     
-    init(name:String, logo:String, description:String, homeStadium:String) {
+    init(name:String, logo:String, description:String) {
         self.name = name
         self.logo = logo
         self.description = description
-        self.homeStadium = homeStadium
     }
 }
