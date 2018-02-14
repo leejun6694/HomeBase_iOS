@@ -299,11 +299,6 @@ class MainTeamInfoView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
         self.addSubview(teamPhotoImageView)
         self.addConstraints(teamPhotoImageViewConstraints())
         self.addSubview(contentView)
@@ -346,6 +341,11 @@ class MainTeamInfoView: UIView {
         teamAverageBaseView.addConstraints(teamBattingAverageRecordLabelConstraints())
         
         fetchTeamInfo()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
     }

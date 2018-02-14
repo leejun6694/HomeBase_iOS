@@ -26,6 +26,8 @@
 		72881E9E1FFB3291009D23C2 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881E9C1FFB3291009D23C2 /* Start.storyboard */; };
 		72881EA31FFB3B98009D23C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881EA11FFB3B98009D23C2 /* Main.storyboard */; };
 		728EE776202FAD95006108F9 /* MainNextScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728EE775202FAD95006108F9 /* MainNextScheduleView.swift */; };
+		728EE7782033689B006108F9 /* MainTopSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728EE7772033689B006108F9 /* MainTopSectionView.swift */; };
+		728EE77A203369F2006108F9 /* MainBlankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728EE779203369F2006108F9 /* MainBlankView.swift */; };
 		7297626E201EF91000A2CE4A /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297626D201EF91000A2CE4A /* FindPasswordViewController.swift */; };
 		72976272201EFB8A00A2CE4A /* ForgotErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */; };
 		729AC644201F2ED800F5FED2 /* SignInErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729AC643201F2ED800F5FED2 /* SignInErrorViewController.swift */; };
@@ -88,6 +90,8 @@
 		72881E9D1FFB3291009D23C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Start.storyboard; sourceTree = "<group>"; };
 		72881EA21FFB3B98009D23C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		728EE775202FAD95006108F9 /* MainNextScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNextScheduleView.swift; sourceTree = "<group>"; };
+		728EE7772033689B006108F9 /* MainTopSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopSectionView.swift; sourceTree = "<group>"; };
+		728EE779203369F2006108F9 /* MainBlankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBlankView.swift; sourceTree = "<group>"; };
 		7297626D201EF91000A2CE4A /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotErrorViewController.swift; sourceTree = "<group>"; };
 		729AC643201F2ED800F5FED2 /* SignInErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInErrorViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 				72B6F2E520298ADE00CA0755 /* MainTableViewController.swift */,
 				72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */,
 				728EE775202FAD95006108F9 /* MainNextScheduleView.swift */,
+				728EE779203369F2006108F9 /* MainBlankView.swift */,
+				728EE7772033689B006108F9 /* MainTopSectionView.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -529,6 +535,7 @@
 				7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */,
 				72B6F2E620298ADE00CA0755 /* MainTableViewController.swift in Sources */,
 				72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */,
+				728EE77A203369F2006108F9 /* MainBlankView.swift in Sources */,
 				72D9322220239B33003F3889 /* RegisterTeamJoinEnterViewController.swift in Sources */,
 				725B850A200181350024588D /* RegisterUserInfoViewController.swift in Sources */,
 				72F07C0B200C77FC004C83F6 /* ForgotSelectNavigation.swift in Sources */,
@@ -545,6 +552,7 @@
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
 				72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */,
 				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,
+				728EE7782033689B006108F9 /* MainTopSectionView.swift in Sources */,
 				72F07C01200C6BB0004C83F6 /* ForgotEmailViewController.swift in Sources */,
 				7297626E201EF91000A2CE4A /* FindPasswordViewController.swift in Sources */,
 				7231C929201905F7004FE531 /* FindEmailViewController.swift in Sources */,
