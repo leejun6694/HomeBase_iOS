@@ -14,14 +14,7 @@ class MainTableViewController: UITableViewController {
     
     let mainTeamInfoView = MainTeamInfoView()
     let mainNextScheduleView = MainNextScheduleView()
-    
-    private var spinner = UIActivityIndicatorView() {
-        didSet {
-            spinner.translatesAutoresizingMaskIntoConstraints = false
-            spinner.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            spinner.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        }
-    }
+    let mainBlankView = MainBlankView()
     
     // MARK: Life Cycle
     
@@ -29,62 +22,46 @@ class MainTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
+        self.tableView.showsVerticalScrollIndicator = false
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
-            return 0
-        case 1:
-            return 0
-        case 2:
-            return 0
-        default:
-            break
+        case 0: return 0
+        case 1: return 0
+        case 2: return 0
+        default: break
         }
         
         return 0
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 2:
-            return "투수 top3"
-        default:
-            break
-        }
-        
-        return "없음"
-    }
-    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let teamInfoViewHeight = self.view.frame.height * 642/736
+        let nextScheduleViewHeight = self.view.frame.height * 107/736
+        let mainBlankViewHeight = self.view.frame.height * 15/736
+        
         switch section {
-        case 0:
-            let teamInfoViewHeight = self.view.frame.height * 642/736
-            return teamInfoViewHeight
-        case 1:
-            let nextScheduleViewHeight = self.view.frame.height * 122/736
-            return nextScheduleViewHeight
-        default:
-            break
+        case 0: return teamInfoViewHeight
+        case 1: return nextScheduleViewHeight
+        case 2: return mainBlankViewHeight
+        default: break
         }
         return 30.0
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 0:
-            return mainTeamInfoView
-        case 1:
-            return mainNextScheduleView
-        default:
-            break
+        case 0: return mainTeamInfoView
+        case 1: return mainNextScheduleView
+        case 2: return mainBlankView
+        default: break
         }
         
         return nil

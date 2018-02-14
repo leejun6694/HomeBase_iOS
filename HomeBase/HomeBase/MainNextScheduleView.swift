@@ -12,14 +12,6 @@ class MainNextScheduleView: UIView {
 
     // MARK: Properties
     
-    private lazy var baseView:UIView = {
-        let baseView = UIView()
-        baseView.backgroundColor = .white
-        baseView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return baseView
-    }()
-    
     private lazy var contentView:UIView = {
         let contentView = UIView()
         contentView.backgroundColor = UIColor(red: 239.0/255.0,
@@ -147,10 +139,8 @@ class MainNextScheduleView: UIView {
     // MARK: Draw
     
     override func layoutSubviews() {
-        self.addSubview(baseView)
-        self.addConstraints(baseViewConstraints())
-        baseView.addSubview(contentView)
-        baseView.addConstraints(contentViewConstraints())
+        self.addSubview(contentView)
+        self.addConstraints(contentViewConstraints())
         contentView.addSubview(nextScheduleLabel)
         contentView.addConstraints(nextScheduleLabelConstraints())
         contentView.addSubview(dayLabel)
@@ -171,38 +161,21 @@ class MainNextScheduleView: UIView {
 }
 
 extension MainNextScheduleView {
-    private func baseViewConstraints() -> [NSLayoutConstraint] {
-        let centerXConstraint = NSLayoutConstraint(
-            item: baseView, attribute: .centerX, relatedBy: .equal,
-            toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-        let centerYConstraint = NSLayoutConstraint(
-            item: baseView, attribute: .centerY, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let widthConstrinat = NSLayoutConstraint(
-            item: baseView, attribute: .width, relatedBy: .equal,
-            toItem: self, attribute: .width, multiplier: 1.0, constant: 0.0)
-        let heightConstraint = NSLayoutConstraint(
-            item: baseView, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 1.0, constant: 0.0)
-        
-        return [centerXConstraint, centerYConstraint, widthConstrinat, heightConstraint]
-    }
-    
     private func contentViewConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
             item: contentView, attribute: .centerX, relatedBy: .equal,
-            toItem: baseView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-        let topConstraint = NSLayoutConstraint(
-            item: contentView, attribute: .top, relatedBy: .equal,
-            toItem: baseView, attribute: .top, multiplier: 1.0, constant: 0.0)
-        let widthConstraint = NSLayoutConstraint(
+            toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let centerYConstraint = NSLayoutConstraint(
+            item: contentView, attribute: .centerY, relatedBy: .equal,
+            toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let widthConstrinat = NSLayoutConstraint(
             item: contentView, attribute: .width, relatedBy: .equal,
-            toItem: baseView, attribute: .width, multiplier: 1.0, constant: 0.0)
+            toItem: self, attribute: .width, multiplier: 1.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: contentView, attribute: .height, relatedBy: .equal,
-            toItem: baseView, attribute: .height, multiplier: 107/122, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 1.0, constant: 0.0)
         
-        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+        return [centerXConstraint, centerYConstraint, widthConstrinat, heightConstraint]
     }
     
     private func nextScheduleLabelConstraints() -> [NSLayoutConstraint] {
@@ -285,7 +258,7 @@ extension MainNextScheduleView {
             toItem: contentView, attribute: .width, multiplier: 160/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: opponentTeamLabel, attribute: .height, relatedBy: .equal,
-            toItem: contentView, attribute: .height, multiplier: 21/107, constant: 0.0)
+            toItem: contentView, attribute: .height, multiplier: 25/107, constant: 0.0)
         
         return [topConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
