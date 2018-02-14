@@ -269,8 +269,7 @@ class MainTeamInfoView: UIView {
                         
                         if let teamName = team?.name,
                             let teamLogo = team?.logo,
-                            let description = team?.description,
-                            let homeStadium = team?.homeStadium {
+                            let description = team?.description {
                             
                             let storageRef = Storage.storage().reference()
                             let imageRef = storageRef.child(teamLogo)
@@ -284,7 +283,6 @@ class MainTeamInfoView: UIView {
                                     self.teamLogoImageView.image = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
                                     self.teamNameLabel.text = teamName
                                     self.teamIntroLabel.text = description
-                                    self.teamHomeStadiumLabel.text = homeStadium
                                 }
                             }
                         }
@@ -345,7 +343,6 @@ class MainTeamInfoView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
     }

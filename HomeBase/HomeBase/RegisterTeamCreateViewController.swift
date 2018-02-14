@@ -21,11 +21,9 @@ class RegisterTeamCreateViewController: UIViewController {
     private var isTeamLogoChanged:Bool = false
     private var teamName:String = ""
     private var teamIntro:String = ""
-    private var teamHome:String = ""
     
     private var teamNameCondition = false
     private var teamIntroCondition = false
-    private var teamHomeCondition = false
     
     private let correctColor = UIColor(red: 0.0,
                                        green: 180.0/255.0,
@@ -95,18 +93,6 @@ class RegisterTeamCreateViewController: UIViewController {
         didSet { teamIntroTextView.delegate = self }
     }
     
-    @IBOutlet private weak var teamHomeLabel: UILabel!
-    @IBOutlet private weak var teamHomeTextField: UITextField! {
-        didSet { teamHomeTextField.delegate = self }
-    }
-    @IBOutlet private weak var teamHomeTextFieldBorder: UIView!
-    private lazy var teamHomeConditionImageView: UIImageView = {
-        let teamHomeConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
-        teamHomeConditionImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return teamHomeConditionImageView
-    }()
-    
     // MARK: Methods
     
     @IBAction private func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
@@ -158,8 +144,7 @@ class RegisterTeamCreateViewController: UIViewController {
                 databaseRef.child("teams").child(teamCode).setValue(
                     ["name": teamName,
                      "logo": logoRef.fullPath,
-                     "description": teamIntro,
-                     "homeStadium": teamHome])
+                     "description": teamIntro])
                 
                 databaseRef.child("teams").child(teamCode).child(
                     "admin").childByAutoId().setValue(admin)
@@ -201,16 +186,9 @@ class RegisterTeamCreateViewController: UIViewController {
                             - keyboardHeight)
                 }
             } else if teamIntroTextView.isFirstResponder {
-                let bottomLocationOfNextView = bottomLocationOf(teamHomeTextFieldBorder)
-                if bottomLocationOfNextView < keyboardHeight {
+                if bottomLocationOf(teamIntroTextView) < keyboardHeight {
                     self.view.frame.origin.y += (
-                        bottomLocationOfNextView
-                            - keyboardHeight)
-                }
-            } else if teamHomeTextField.isFirstResponder {
-                if bottomLocationOf(teamHomeTextFieldBorder) < keyboardHeight {
-                    self.view.frame.origin.y += (
-                        bottomLocationOf(teamHomeTextFieldBorder)
+                        bottomLocationOf(teamIntroTextView)
                             - keyboardHeight)
                 }
             }
@@ -299,7 +277,7 @@ extension RegisterTeamCreateViewController: UITextFieldDelegate {
     // MARK: Custom Methods
     
     private func textFieldConditionChecked() {
-        if teamNameCondition, teamIntroCondition, teamHomeCondition {
+        if teamNameCondition, teamIntroCondition {
             buttonEnabled(doneButton)
         } else {
             buttonDisabled(doneButton)
@@ -333,33 +311,6 @@ extension RegisterTeamCreateViewController: UITextFieldDelegate {
         textFieldConditionChecked()
     }
     
-    private func teamHomeTextFieldCondition(_ state: Bool) {
-        if state {
-            teamHomeCondition = true
-            teamHome = teamHomeTextField.text ?? "default"
-            teamHomeLabel.textColor = correctColor
-            teamHomeTextField.textColor = correctColor
-            teamHomeTextField.tintColor = correctColor
-            teamHomeTextFieldBorder.backgroundColor = correctColor
-            
-            if !teamHomeConditionImageView.isDescendant(of: self.view) {
-                self.view.addSubview(teamHomeConditionImageView)
-                self.view.addConstraints(teamHomeConditionImageViewConstraints())
-            }
-        } else {
-            teamHomeCondition = false
-            teamHomeLabel.textColor = .white
-            teamHomeTextField.textColor = .white
-            teamHomeTextField.tintColor = .white
-            teamHomeTextFieldBorder.backgroundColor = .white
-            
-            if teamHomeConditionImageView.isDescendant(of: self.view) {
-                teamHomeConditionImageView.removeFromSuperview()
-            }
-        }
-        textFieldConditionChecked()
-    }
-    
     // MARK: TextField Delegates
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -372,12 +323,6 @@ extension RegisterTeamCreateViewController: UITextFieldDelegate {
             else { teamNameTextFieldCondition(true) }
             
             teamNameTextField.inputAccessoryView = accessoryView
-        case teamHomeTextField:
-            if textCount < 2 { teamHomeTextFieldCondition(false) }
-            else if textCount > 25 { teamHomeTextFieldCondition(false) }
-            else { teamHomeTextFieldCondition(true) }
-            
-            teamHomeTextField.inputAccessoryView = accessoryView
         default:
             break
         }
@@ -393,13 +338,6 @@ extension RegisterTeamCreateViewController: UITextFieldDelegate {
             if currentCount < 2 { teamNameTextFieldCondition(false) }
             else if currentCount > 25 { teamNameTextFieldCondition(false) }
             else { teamNameTextFieldCondition(true) }
-            
-            if replacementCount < 26 { return true }
-            else { return false }
-        case teamHomeTextField:
-            if currentCount < 2 { teamHomeTextFieldCondition(false) }
-            else if currentCount > 25 { teamHomeTextFieldCondition(false) }
-            else { teamHomeTextFieldCondition(true) }
             
             if replacementCount < 26 { return true }
             else { return false }
@@ -424,10 +362,6 @@ extension RegisterTeamCreateViewController: UITextFieldDelegate {
             if textCount < 2 { teamNameTextFieldCondition(false) }
             else if textCount > 25 { teamNameTextFieldCondition(false) }
             else { teamNameTextFieldCondition(true) }
-        case teamHomeTextField:
-            if textCount < 2 { teamHomeTextFieldCondition(false) }
-            else if textCount > 25 { teamHomeTextFieldCondition(false) }
-            else { teamHomeTextFieldCondition(true) }
         default:
             break
         }
@@ -503,23 +437,6 @@ extension RegisterTeamCreateViewController {
         let heightConstraint = NSLayoutConstraint(
             item: teamNameConditionImageView, attribute: .height, relatedBy: .equal,
             toItem: teamNameConditionImageView, attribute: .width, multiplier: 18.0/20.0, constant: 0.0)
-        
-        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
-    }
-    
-    private func teamHomeConditionImageViewConstraints() -> [NSLayoutConstraint] {
-        let centerYConstraint = NSLayoutConstraint(
-            item: teamHomeConditionImageView, attribute: .centerY, relatedBy: .equal,
-            toItem: teamHomeTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        let leadingConstraint = NSLayoutConstraint(
-            item: teamHomeConditionImageView, attribute: .leading, relatedBy: .equal,
-            toItem: teamHomeTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
-        let widthConstraint = NSLayoutConstraint(
-            item: teamHomeConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: teamHomeTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
-        let heightConstraint = NSLayoutConstraint(
-            item: teamHomeConditionImageView, attribute: .height, relatedBy: .equal,
-            toItem: teamHomeConditionImageView, attribute: .width, multiplier: 18.0/20.0, constant: 0.0)
         
         return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
