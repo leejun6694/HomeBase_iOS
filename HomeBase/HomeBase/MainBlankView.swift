@@ -28,6 +28,12 @@ class MainBlankView: UIView {
         self.addSubview(backgroundView)
         self.addConstraints(backgroundViewConstraints())
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.backgroundColor = .white
+    }
 }
 
 extension MainBlankView {

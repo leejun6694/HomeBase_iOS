@@ -8,16 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		357810D13BFC4CBDA544F959 /* Pods_HomeBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DBCC19726630941F5990CD6 /* Pods_HomeBase.framework */; };
+		72134FC2203D9300007B7FCB /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72134FC1203D9300007B7FCB /* MainTableViewController.swift */; };
 		7213D76D2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */; };
 		7213D7712021BBE000FB028C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D7702021BBE000FB028C /* Models.swift */; };
 		7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D7722021C74A00FB028C /* RegisterUserNavigation.swift */; };
 		721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */; };
+		7220479F2034B7B40088BEE4 /* MainTopSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220479E2034B7B40088BEE4 /* MainTopSectionCell.swift */; };
 		7231C9272018F3AD004FE531 /* CloudFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C9262018F3AD004FE531 /* CloudFunction.swift */; };
 		7231C929201905F7004FE531 /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C928201905F7004FE531 /* FindEmailViewController.swift */; };
 		72378A7020081BC0007ED442 /* CustomMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72378A6F20081BC0007ED442 /* CustomMethods.swift */; };
 		725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B84FF1FFE326B0024588D /* SignUpViewController.swift */; };
 		725B8508200180D90024588D /* RegisterPlayerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B8507200180D90024588D /* RegisterPlayerInfoViewController.swift */; };
 		725B850A200181350024588D /* RegisterUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B8509200181350024588D /* RegisterUserInfoViewController.swift */; };
+		72637663203E875000388939 /* MainTopSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72637662203E875000388939 /* MainTopSectionHeaderCell.swift */; };
 		72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72881E7A1FFA8579009D23C2 /* AppDelegate.swift */; };
 		72881E821FFA8579009D23C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72881E811FFA8579009D23C2 /* Assets.xcassets */; };
 		72881E851FFA8579009D23C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881E831FFA8579009D23C2 /* LaunchScreen.storyboard */; };
@@ -26,7 +29,6 @@
 		72881E9E1FFB3291009D23C2 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881E9C1FFB3291009D23C2 /* Start.storyboard */; };
 		72881EA31FFB3B98009D23C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881EA11FFB3B98009D23C2 /* Main.storyboard */; };
 		728EE776202FAD95006108F9 /* MainNextScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728EE775202FAD95006108F9 /* MainNextScheduleView.swift */; };
-		728EE7782033689B006108F9 /* MainTopSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728EE7772033689B006108F9 /* MainTopSectionView.swift */; };
 		728EE77A203369F2006108F9 /* MainBlankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728EE779203369F2006108F9 /* MainBlankView.swift */; };
 		7297626E201EF91000A2CE4A /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297626D201EF91000A2CE4A /* FindPasswordViewController.swift */; };
 		72976272201EFB8A00A2CE4A /* ForgotErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */; };
@@ -34,7 +36,6 @@
 		729AC646201F34DE00F5FED2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729AC645201F34DE00F5FED2 /* SignInViewController.swift */; };
 		72ABA1CF2029865A00635927 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72ABA1CD2029865A00635927 /* Schedule.storyboard */; };
 		72ABA1D2202986DB00635927 /* Team.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72ABA1D0202986DB00635927 /* Team.storyboard */; };
-		72B6F2E620298ADE00CA0755 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B6F2E520298ADE00CA0755 /* MainTableViewController.swift */; };
 		72B6F2EA20299CE300CA0755 /* MainTeamInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */; };
 		72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B6F2EB2029D6BE00CA0755 /* PersonalViewController.swift */; };
 		72B6F2EF2029D6F200CA0755 /* Personal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72B6F2ED2029D6F200CA0755 /* Personal.storyboard */; };
@@ -42,6 +43,7 @@
 		72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */; };
 		72D9322220239B33003F3889 /* RegisterTeamJoinEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9322120239B32003F3889 /* RegisterTeamJoinEnterViewController.swift */; };
 		72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */; };
+		72E15E7E203D6C0B00ECA9A3 /* MainTopRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E15E7D203D6C0B00ECA9A3 /* MainTopRankingView.swift */; };
 		72E96C96200600E000B68F29 /* RegisterTeamCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C95200600E000B68F29 /* RegisterTeamCreateViewController.swift */; };
 		72E96C982006026200B68F29 /* RegisterTeamChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C972006026200B68F29 /* RegisterTeamChoiceViewController.swift */; };
 		72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C99200603A000B68F29 /* RegisterTeamJoinViewController.swift */; };
@@ -67,10 +69,12 @@
 		273D17BEBADC7FEBF4893D36 /* Pods-HomeBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeBase.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeBase/Pods-HomeBase.release.xcconfig"; sourceTree = "<group>"; };
 		365E131BF0132C671D3B24D8 /* Pods_HomeBaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeBaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBCC19726630941F5990CD6 /* Pods_HomeBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72134FC1203D9300007B7FCB /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteViewController.swift; sourceTree = "<group>"; };
 		7213D7702021BBE000FB028C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		7213D7722021C74A00FB028C /* RegisterUserNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserNavigation.swift; sourceTree = "<group>"; };
 		721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompleteViewController.swift; sourceTree = "<group>"; };
+		7220479E2034B7B40088BEE4 /* MainTopSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopSectionCell.swift; sourceTree = "<group>"; };
 		7231C9262018F3AD004FE531 /* CloudFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunction.swift; sourceTree = "<group>"; };
 		7231C928201905F7004FE531 /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
 		72378A6F20081BC0007ED442 /* CustomMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMethods.swift; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 		725B8507200180D90024588D /* RegisterPlayerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPlayerInfoViewController.swift; sourceTree = "<group>"; };
 		725B8509200181350024588D /* RegisterUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserInfoViewController.swift; sourceTree = "<group>"; };
 		726101131FFD1B2D003068A4 /* HomeBase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HomeBase.entitlements; sourceTree = "<group>"; };
+		72637662203E875000388939 /* MainTopSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopSectionHeaderCell.swift; sourceTree = "<group>"; };
 		72881E771FFA8579009D23C2 /* HomeBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72881E7A1FFA8579009D23C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72881E811FFA8579009D23C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,7 +95,6 @@
 		72881E9D1FFB3291009D23C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Start.storyboard; sourceTree = "<group>"; };
 		72881EA21FFB3B98009D23C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		728EE775202FAD95006108F9 /* MainNextScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNextScheduleView.swift; sourceTree = "<group>"; };
-		728EE7772033689B006108F9 /* MainTopSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopSectionView.swift; sourceTree = "<group>"; };
 		728EE779203369F2006108F9 /* MainBlankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBlankView.swift; sourceTree = "<group>"; };
 		7297626D201EF91000A2CE4A /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		72976271201EFB8A00A2CE4A /* ForgotErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotErrorViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +102,6 @@
 		729AC645201F34DE00F5FED2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		72ABA1CE2029865A00635927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Schedule.storyboard; sourceTree = "<group>"; };
 		72ABA1D1202986DB00635927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Team.storyboard; sourceTree = "<group>"; };
-		72B6F2E520298ADE00CA0755 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTeamInfoView.swift; sourceTree = "<group>"; };
 		72B6F2EB2029D6BE00CA0755 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		72B6F2EE2029D6F200CA0755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Personal.storyboard; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 		72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinErrorViewController.swift; sourceTree = "<group>"; };
 		72D9322120239B32003F3889 /* RegisterTeamJoinEnterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinEnterViewController.swift; sourceTree = "<group>"; };
 		72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteCopyViewController.swift; sourceTree = "<group>"; };
+		72E15E7D203D6C0B00ECA9A3 /* MainTopRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopRankingView.swift; sourceTree = "<group>"; };
 		72E96C95200600E000B68F29 /* RegisterTeamCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCreateViewController.swift; sourceTree = "<group>"; };
 		72E96C972006026200B68F29 /* RegisterTeamChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamChoiceViewController.swift; sourceTree = "<group>"; };
 		72E96C99200603A000B68F29 /* RegisterTeamJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinViewController.swift; sourceTree = "<group>"; };
@@ -249,11 +253,13 @@
 			isa = PBXGroup;
 			children = (
 				72C5755120297E94000432DB /* MainTabBarController.swift */,
-				72B6F2E520298ADE00CA0755 /* MainTableViewController.swift */,
+				72134FC1203D9300007B7FCB /* MainTableViewController.swift */,
 				72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */,
 				728EE775202FAD95006108F9 /* MainNextScheduleView.swift */,
 				728EE779203369F2006108F9 /* MainBlankView.swift */,
-				728EE7772033689B006108F9 /* MainTopSectionView.swift */,
+				72637662203E875000388939 /* MainTopSectionHeaderCell.swift */,
+				7220479E2034B7B40088BEE4 /* MainTopSectionCell.swift */,
+				72E15E7D203D6C0B00ECA9A3 /* MainTopRankingView.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -526,16 +532,19 @@
 			files = (
 				72C5755220297E94000432DB /* MainTabBarController.swift in Sources */,
 				728EE776202FAD95006108F9 /* MainNextScheduleView.swift in Sources */,
+				72E15E7E203D6C0B00ECA9A3 /* MainTopRankingView.swift in Sources */,
 				729AC646201F34DE00F5FED2 /* SignInViewController.swift in Sources */,
 				72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */,
 				72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */,
 				72B6F2EA20299CE300CA0755 /* MainTeamInfoView.swift in Sources */,
+				72637663203E875000388939 /* MainTopSectionHeaderCell.swift in Sources */,
 				72976272201EFB8A00A2CE4A /* ForgotErrorViewController.swift in Sources */,
 				72F07BFF200C6B9B004C83F6 /* ForgotSelectViewController.swift in Sources */,
 				7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */,
-				72B6F2E620298ADE00CA0755 /* MainTableViewController.swift in Sources */,
+				7220479F2034B7B40088BEE4 /* MainTopSectionCell.swift in Sources */,
 				72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */,
 				728EE77A203369F2006108F9 /* MainBlankView.swift in Sources */,
+				72134FC2203D9300007B7FCB /* MainTableViewController.swift in Sources */,
 				72D9322220239B33003F3889 /* RegisterTeamJoinEnterViewController.swift in Sources */,
 				725B850A200181350024588D /* RegisterUserInfoViewController.swift in Sources */,
 				72F07C0B200C77FC004C83F6 /* ForgotSelectNavigation.swift in Sources */,
@@ -552,7 +561,6 @@
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
 				72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */,
 				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,
-				728EE7782033689B006108F9 /* MainTopSectionView.swift in Sources */,
 				72F07C01200C6BB0004C83F6 /* ForgotEmailViewController.swift in Sources */,
 				7297626E201EF91000A2CE4A /* FindPasswordViewController.swift in Sources */,
 				7231C929201905F7004FE531 /* FindEmailViewController.swift in Sources */,
