@@ -130,7 +130,7 @@ extension MainTopRankingView {
             toItem: baseView, attribute: .width, multiplier: 14/120, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: rankingLabel, attribute: .height, relatedBy: .equal,
-            toItem: baseView, attribute: .height, multiplier: 25/147, constant: 0.0)
+            toItem: baseView, attribute: .height, multiplier: 27/147, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
@@ -141,7 +141,7 @@ extension MainTopRankingView {
             toItem: baseView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .centerY, relatedBy: .equal,
-            toItem: baseView, attribute: .centerY, multiplier: 59/73.5, constant: 0.0)
+            toItem: baseView, attribute: .centerY, multiplier: 61/73.5, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .width, relatedBy: .equal,
             toItem: baseView, attribute: .width, multiplier: 37/120, constant: 0.0)
@@ -164,7 +164,7 @@ extension MainTopRankingView {
             toItem: baseView, attribute: .width, multiplier: 67/120, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: recordLabel, attribute: .height, relatedBy: .equal,
-            toItem: baseView, attribute: .height, multiplier: 27/147, constant: 0.0)
+            toItem: baseView, attribute: .height, multiplier: 30/147, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }

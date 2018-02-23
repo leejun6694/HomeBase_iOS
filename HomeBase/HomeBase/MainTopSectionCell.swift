@@ -18,9 +18,19 @@ class MainTopSectionCell: UITableViewCell {
         }
     }
     
+    var sectionImage:UIImage = UIImage() {
+        didSet {
+            sectionImageView.image = sectionImage
+        }
+    }
+    
     private lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "default"
+        titleLabel.textColor = UIColor(red: 44.0/255.0,
+                                          green: 44.0/255.0,
+                                          blue: 44.0/255.0,
+                                          alpha: 1.0)
         titleLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.5
@@ -68,6 +78,13 @@ class MainTopSectionCell: UITableViewCell {
         return thirdPlaceView
     }()
     
+    private lazy var sectionImageView:UIImageView = {
+        let sectionImageView = UIImageView()
+        sectionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return sectionImageView
+    }()
+    
     // MARK: Init
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -101,6 +118,8 @@ class MainTopSectionCell: UITableViewCell {
         self.addConstraints(secondPlaceViewConstraints())
         self.addSubview(thirdPlaceView)
         self.addConstraints(thirdPlaceViewConstraints())
+        self.addSubview(sectionImageView)
+        self.addConstraints(sectionImageViewConstraints())
     }
 }
 
@@ -171,5 +190,22 @@ extension MainTopSectionCell {
             toItem: self, attribute: .height, multiplier: 147/223, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func sectionImageViewConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: sectionImageView, attribute: .centerX, relatedBy: .equal,
+            toItem: self, attribute: .centerX, multiplier: 337.5/207, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: sectionImageView, attribute: .top, relatedBy: .equal,
+            toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: sectionImageView, attribute: .width, relatedBy: .equal,
+            toItem: self, attribute: .width, multiplier: 87/414, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: sectionImageView, attribute: .bottom, relatedBy: .equal,
+            toItem: self, attribute: .bottom, multiplier: 36/223, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, bottomConstraint]
     }
 }
