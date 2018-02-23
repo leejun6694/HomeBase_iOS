@@ -89,25 +89,28 @@ class MainTableViewController: UITableViewController {
                     withIdentifier: headerCellReuseIdendifier,
                     for: indexPath) as! MainTopSectionHeaderCell
                 headerCell.sectionTitle = "타자 TOP 3"
-                headerCell.sectionImage = #imageLiteral(resourceName: "batterImage")
+                headerCell.sectionImage = #imageLiteral(resourceName: "batterImage1")
                 return headerCell
             case 1:
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: cellReuseIdendifier,
                     for: indexPath) as! MainTopSectionCell
                 cell.cellTitle = "타율"
+                cell.sectionImage = #imageLiteral(resourceName: "batterImage2")
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: cellReuseIdendifier,
                     for: indexPath) as! MainTopSectionCell
                 cell.cellTitle = "홈런"
+                cell.sectionImage = #imageLiteral(resourceName: "image2")
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: cellReuseIdendifier,
                     for: indexPath) as! MainTopSectionCell
                 cell.cellTitle = "도루"
+                cell.sectionImage = #imageLiteral(resourceName: "image2")
                 return cell
             default: break
             }
@@ -118,25 +121,28 @@ class MainTableViewController: UITableViewController {
                     withIdentifier: headerCellReuseIdendifier,
                     for: indexPath) as! MainTopSectionHeaderCell
                 headerCell.sectionTitle = "투수 TOP 3"
-                headerCell.sectionImage = #imageLiteral(resourceName: "pitcherImage")
+                headerCell.sectionImage = #imageLiteral(resourceName: "pitcherImage1")
                 return headerCell
             case 1:
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: cellReuseIdendifier,
                     for: indexPath) as! MainTopSectionCell
                 cell.cellTitle = "방어율"
+                cell.sectionImage = #imageLiteral(resourceName: "pitcherImage2")
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: cellReuseIdendifier,
                     for: indexPath) as! MainTopSectionCell
                 cell.cellTitle = "승리"
+                cell.sectionImage = #imageLiteral(resourceName: "image2")
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: cellReuseIdendifier,
                     for: indexPath) as! MainTopSectionCell
                 cell.cellTitle = "탈삼진"
+                cell.sectionImage = #imageLiteral(resourceName: "image2")
                 return cell
             default: break
             }

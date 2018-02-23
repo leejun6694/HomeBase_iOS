@@ -43,6 +43,10 @@ class MainTeamInfoView: UIView {
     private lazy var teamNameLabel:UILabel = {
         let teamNameLabel = UILabel()
         teamNameLabel.text = "HomeBase"
+        teamNameLabel.textColor = UIColor(red: 44.0/255.0,
+                                          green: 44.0/255.0,
+                                          blue: 44.0/255.0,
+                                          alpha: 1.0)
         teamNameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 25.0)
         teamNameLabel.textAlignment = .center
         teamNameLabel.adjustsFontSizeToFitWidth = true
@@ -55,6 +59,10 @@ class MainTeamInfoView: UIView {
     private lazy var teamIntroLabel:UILabel = {
         let teamIntroLabel = UILabel()
         teamIntroLabel.text = "우주최강 사회인 야구팀, 홈베이스. 저희 팀 짱이에요 얍얍"
+        teamIntroLabel.textColor = UIColor(red: 44.0/255.0,
+                                          green: 44.0/255.0,
+                                          blue: 44.0/255.0,
+                                          alpha: 1.0)
         teamIntroLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14.0)
         teamIntroLabel.textAlignment = .center
         teamIntroLabel.numberOfLines = 2
@@ -389,7 +397,7 @@ extension MainTeamInfoView {
             toItem: teamPhotoImageView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: teamLogoImageView, attribute: .centerY, relatedBy: .equal,
-            toItem: teamPhotoImageView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            toItem: teamPhotoImageView, attribute: .centerY, multiplier: 276/140, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: teamLogoImageView, attribute: .width, relatedBy: .equal,
             toItem: teamPhotoImageView, attribute: .width, multiplier: 120/414, constant: 1.0)

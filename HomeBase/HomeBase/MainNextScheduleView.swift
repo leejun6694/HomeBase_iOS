@@ -26,6 +26,10 @@ class MainNextScheduleView: UIView {
     private lazy var nextScheduleLabel:UILabel = {
         let nextScheduleLabel = UILabel()
         nextScheduleLabel.text = "다음\n일정"
+        nextScheduleLabel.textColor = UIColor(red: 44.0/255.0,
+                                          green: 44.0/255.0,
+                                          blue: 44.0/255.0,
+                                          alpha: 1.0)
         nextScheduleLabel.numberOfLines = 2
         nextScheduleLabel.textAlignment = .center
         nextScheduleLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 25.0)

@@ -38,6 +38,10 @@ class MainTopSectionHeaderCell: UITableViewCell {
     private lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "default"
+        titleLabel.textColor = UIColor(red: 44.0/255.0,
+                                          green: 44.0/255.0,
+                                          blue: 44.0/255.0,
+                                          alpha: 1.0)
         titleLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 25.0)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.5
@@ -131,10 +135,10 @@ extension MainTopSectionHeaderCell {
         let widthConstraint = NSLayoutConstraint(
             item: sectionImageView, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 87/414, constant: 0.0)
-        let heightConstraint = NSLayoutConstraint(
-            item: sectionImageView, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 121/97, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: sectionImageView, attribute: .bottom, relatedBy: .equal,
+            toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         
-        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+        return [centerXConstraint, topConstraint, widthConstraint, bottomConstraint]
     }
 }
