@@ -15,15 +15,67 @@ class ScheduleTableViewController: UITableViewController {
     let scheduleRecentView = ScheduleRecentView()
     let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
     
+    let cellReuseIdendifier = "monthlySectionCell"
+    
+    private lazy var addButtonView:UIView = {
+        let addButton = UIView()
+        addButton.backgroundColor = UIColor(red: 44.0/255.0,
+                                          green: 44.0/255.0,
+                                          blue: 44.0/255.0,
+                                          alpha: 1.0)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return addButton
+    }()
+    
+    private lazy var addButton:UIButton = {
+        let addButton = UIButton(type: .system)
+        addButton.setImage(#imageLiteral(resourceName: "iconPlus"), for: .normal)
+        addButton.tintColor = UIColor.white
+        addButton.backgroundColor = UIColor.clear
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return addButton
+    }()
+    
+    private lazy var footerView:UIView = {
+        let footerView = UIView(frame: CGRect(x: 0.0,
+                                              y: 0.0,
+                                              width: self.view.frame.size.width,
+                                              height: self.view.frame.size.height * 80/736))
+        footerView.backgroundColor = UIColor(red: 192.0/255.0,
+                                             green: 222.0/255.0,
+                                             blue: 229.0/255.0,
+                                             alpha: 1.0)
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return footerView
+    }()
+    
     // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = true
 
+        self.tableView.register(ScheduleMonthlySectionCell.self,
+                                forCellReuseIdentifier: cellReuseIdendifier)
         self.tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
         self.tableView.allowsSelection = false
         self.tableView.bounces = false
+        self.tableView.tableFooterView = footerView
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
+        addButtonView.layer.cornerRadius = addButtonView.frame.size.width / 2
+        
+        self.navigationController?.view.addSubview(addButtonView)
+        self.navigationController?.view.addConstraints(addButtonViewConstraints())
+        addButtonView.addSubview(addButton)
+        addButtonView.addConstraints(addButtonConstraints())
     }
 
     // MARK: - Table view data source
@@ -33,7 +85,10 @@ class ScheduleTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        switch section {
+        case 0: return 0
+        default: return 4
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -53,4 +108,80 @@ class ScheduleTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellReuseIdendifier, for: indexPath) as! ScheduleMonthlySectionCell
+        
+        switch indexPath.row {
+        case 0:
+            cell.day = "20"
+            cell.dayOfWeek = "토요일"
+            cell.opponentTeam = "HomeBase"
+            cell.matchDate = "2월 20일 토요일 오전 9:00"
+            cell.matchPlace = "홈베이스 야구장"
+        case 1:
+            cell.day = "13"
+            cell.dayOfWeek = "토요일"
+            cell.opponentTeam = "INHA university"
+            cell.matchDate = "2월 13일 토요일 오전 8:00"
+            cell.matchPlace = "인하대"
+        case 2:
+            cell.day = "7"
+            cell.dayOfWeek = "일요일"
+            cell.opponentTeam = "홈베이스 야구팀"
+            cell.matchDate = "2월 7일 토요일 오전 9:00"
+            cell.matchPlace = "홈베이스 야구장"
+        case 3:
+            cell.day = "6"
+            cell.dayOfWeek = "토요일"
+            cell.opponentTeam = "opponent team"
+            cell.matchDate = "2월 6일 토요일 오전 10:00"
+            cell.matchPlace = "홈베이스 야구장"
+        default: break
+        }
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(self.view.frame.size.height * 111/736).rounded()
+    }
+}
+
+extension ScheduleTableViewController {
+    private func addButtonViewConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: addButtonView, attribute: .centerX, relatedBy: .equal,
+            toItem: self.navigationController?.view,
+            attribute: .centerX, multiplier: 351.5/207, constant: 0.0)
+        let centerYConstraint = NSLayoutConstraint(
+            item: addButtonView, attribute: .centerY, relatedBy: .equal,
+            toItem: self.navigationController?.view,
+            attribute: .centerY, multiplier: 617.5/368, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: addButtonView, attribute: .width, relatedBy: .equal,
+            toItem: self.navigationController?.view,
+            attribute: .width, multiplier: 75/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: addButtonView, attribute: .height, relatedBy: .equal,
+            toItem: addButtonView, attribute: .width, multiplier: 1.0, constant: 0.0)
+        
+        return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func addButtonConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: addButton, attribute: .centerX, relatedBy: .equal,
+            toItem: addButtonView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let centerYConstraint = NSLayoutConstraint(
+            item: addButton, attribute: .centerY, relatedBy: .equal,
+            toItem: addButtonView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: addButton, attribute: .width, relatedBy: .equal,
+            toItem: addButtonView, attribute: .width, multiplier: 30/75, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: addButton, attribute: .height, relatedBy: .equal,
+            toItem: addButton, attribute: .width, multiplier: 1.0, constant: 0.0)
+        
+        return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
 }
