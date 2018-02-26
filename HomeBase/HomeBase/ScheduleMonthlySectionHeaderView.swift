@@ -42,6 +42,44 @@ class ScheduleMonthlySectionHeaderView: UIView {
         return yearLabel
     }()
     
+    private lazy var monthlyRecordLabel:UILabel = {
+        let monthlyRecordLabel = UILabel()
+        monthlyRecordLabel.textAlignment = .right
+        
+        let numberAttr = [NSAttributedStringKey.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0),
+                          NSAttributedStringKey.foregroundColor: UIColor(red: 44.0/255.0,
+                                                                         green: 44.0/255.0,
+                                                                         blue: 44.0/255.0,
+                                                                         alpha: 1.0)]
+        let charAttr = [NSAttributedStringKey.font: UIFont(name: "AppleSDGothicNeo-Light", size: 15.0),
+                        NSAttributedStringKey.foregroundColor: UIColor(red: 44.0/255.0,
+                                                                         green: 44.0/255.0,
+                                                                         blue: 44.0/255.0,
+                                                                         alpha: 1.0)]
+        
+        var monthlyRecordText = NSMutableAttributedString(string: "")
+        let winNumber = NSMutableAttributedString(string: "10", attributes: numberAttr)
+        let winChar = NSMutableAttributedString(string: "승 ", attributes: charAttr)
+        let drawNumber = NSMutableAttributedString(string: "10", attributes: numberAttr)
+        let drawChar = NSMutableAttributedString(string: "무 ", attributes: charAttr)
+        let loseNumber = NSMutableAttributedString(string: "10", attributes: numberAttr)
+        let loseChar = NSMutableAttributedString(string: "패 ", attributes: charAttr)
+        
+        monthlyRecordText.append(winNumber)
+        monthlyRecordText.append(winChar)
+        monthlyRecordText.append(drawNumber)
+        monthlyRecordText.append(drawChar)
+        monthlyRecordText.append(loseNumber)
+        monthlyRecordText.append(loseChar)
+        
+        monthlyRecordLabel.attributedText = monthlyRecordText
+        monthlyRecordLabel.adjustsFontSizeToFitWidth = true
+        monthlyRecordLabel.minimumScaleFactor = 0.5
+        monthlyRecordLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return monthlyRecordLabel
+    }()
+    
     // MARK: Draw
     
     override func layoutSubviews() {
@@ -60,6 +98,8 @@ class ScheduleMonthlySectionHeaderView: UIView {
         self.addConstraints(monthLabelConstraints())
         self.addSubview(yearLabel)
         self.addConstraints(yearLabelConstraints())
+        self.addSubview(monthlyRecordLabel)
+        self.addConstraints(monthlyRecordLabelConstraints())
     }
 }
 
@@ -96,5 +136,22 @@ extension ScheduleMonthlySectionHeaderView {
             toItem: self, attribute: .height, multiplier: 15/57, constant: 0.0)
         
         return [topConstraint, leadingConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func monthlyRecordLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: monthlyRecordLabel, attribute: .top, relatedBy: .equal,
+            toItem: self, attribute: .centerY, multiplier: 21/28.5, constant: 0.0)
+        let trailingConstraint = NSLayoutConstraint(
+            item: monthlyRecordLabel, attribute: .trailing, relatedBy: .equal,
+            toItem: self, attribute: .trailing, multiplier: 391/414, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: monthlyRecordLabel, attribute: .width, relatedBy: .equal,
+            toItem: self, attribute: .width, multiplier: 100/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: monthlyRecordLabel, attribute: .height, relatedBy: .equal,
+            toItem: self, attribute: .height, multiplier: 29/57, constant: 0.0)
+        
+        return [topConstraint, trailingConstraint, widthConstraint, heightConstraint]
     }
 }
