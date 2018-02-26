@@ -54,9 +54,9 @@ class MainTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let teamInfoViewHeight = self.view.frame.height * 642/736
-        let nextScheduleViewHeight = self.view.frame.height * 107/736
-        let mainBlankViewHeight = self.view.frame.height * 15/736
+        let teamInfoViewHeight = CGFloat(self.view.frame.height * 642/736).rounded()
+        let nextScheduleViewHeight = CGFloat(self.view.frame.height * 107/736).rounded()
+        let mainBlankViewHeight = CGFloat(self.view.frame.height * 15/736).rounded()
         
         switch section {
         case 0: return teamInfoViewHeight
@@ -157,11 +157,11 @@ class MainTableViewController: UITableViewController {
         switch indexPath.section {
         case 3, 5:
             switch indexPath.row {
-            case 0: return self.view.frame.size.height * 97/736
-            default: return self.view.frame.size.height * 223/736
+            case 0: return CGFloat(self.view.frame.size.height * 97/736).rounded()
+            default: return CGFloat(self.view.frame.size.height * 223/736).rounded()
             }
         default: break
         }
-        return self.view.frame.size.height * 223/736
+        return CGFloat(self.view.frame.size.height * 223/736).rounded()
     }
 }

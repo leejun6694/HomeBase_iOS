@@ -144,10 +144,9 @@ class RegisterTeamCreateViewController: UIViewController {
                 databaseRef.child("teams").child(teamCode).setValue(
                     ["name": teamName,
                      "logo": logoRef.fullPath,
-                     "description": teamIntro])
+                     "description": teamIntro,
+                     "admin": admin])
                 
-                databaseRef.child("teams").child(teamCode).child(
-                    "admin").childByAutoId().setValue(admin)
                 databaseRef.child("teams").child(teamCode).child(
                     "members").childByAutoId().setValue(member)
             }
