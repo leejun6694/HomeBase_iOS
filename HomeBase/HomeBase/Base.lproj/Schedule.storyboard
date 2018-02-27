@@ -106,8 +106,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MNr-oZ-9zN">
+                                <rect key="frame" x="177" y="333.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MNr-oZ-9zN" firstAttribute="centerX" secondItem="TBU-cs-ybU" secondAttribute="centerX" id="FOB-m8-n5f"/>
+                            <constraint firstItem="MNr-oZ-9zN" firstAttribute="centerY" secondItem="TBU-cs-ybU" secondAttribute="centerY" id="hYM-Hp-IXB"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="TBU-cs-ybU"/>
                     </view>
                     <connections>
@@ -117,6 +124,7 @@
                         <outlet property="matchPlaceTextField" destination="50Y-9z-bCN" id="ZXW-K9-MuJ"/>
                         <outlet property="opponentTeamLabel" destination="Vr8-hW-C2z" id="WHt-yZ-sDI"/>
                         <outlet property="opponentTeamTextField" destination="BQt-h7-KoV" id="z0B-wj-p4R"/>
+                        <outlet property="spinner" destination="MNr-oZ-9zN" id="oU8-1U-JKw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SzM-gQ-ZOi" userLabel="First Responder" sceneMemberID="firstResponder"/>
