@@ -76,6 +76,8 @@ class ScheduleCreateViewController: UIViewController {
         return toolBar
     }()
     
+    @IBOutlet private var spinner: UIActivityIndicatorView!
+    
     // MARK: Methods
     
     @objc private func matchDateDoneButtonDidTapped(_ sender: UIButton) {
@@ -109,14 +111,35 @@ class ScheduleCreateViewController: UIViewController {
     @IBAction func doneButtonDidTapped(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        
+        spinnerStartAnimating(spinner)
+        if let currnetUser = Auth.auth().currentUser {
+            let ref = Database.database().reference()
+            
+            CloudFunction.getUserDataWith(currnetUser) {
+                (user, error) -> Void in
+                
+                if let user = user {
+                    if let opponentTeam = self.opponentTeamTextField.text,
+                        let matchPlace = self.matchPlaceTextField.text,
+                        let matchDate = self.matchDateTextField.text {
+                        
+                        ref.child("schedules").child(user.teamCode).childByAutoId().setValue(
+                            ["opponentTeam": opponentTeam,
+                             "matchPlace": matchPlace,
+                             "matchDate": matchDate])
+                        
+                        self.spinnerStopAnimating(self.spinner)
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
     }
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 }
 
