@@ -24,7 +24,7 @@ class MainTopSectionCell: UITableViewCell {
         }
     }
     
-    private lazy var titleLabel:UILabel = {
+    private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "default"
         titleLabel.textColor = UIColor(red: 44.0/255.0,
@@ -39,7 +39,7 @@ class MainTopSectionCell: UITableViewCell {
         return titleLabel
     }()
     
-    private lazy var firstPlaceView:MainTopRankingView = {
+    private lazy var firstPlaceView: MainTopRankingView = {
         let firstPlaceView = MainTopRankingView()
         firstPlaceView.layer.cornerRadius = 10.0
         firstPlaceView.baseViewColor = UIColor(red: 44.0/255.0,
@@ -52,7 +52,7 @@ class MainTopSectionCell: UITableViewCell {
         return firstPlaceView
     }()
     
-    private lazy var secondPlaceView:MainTopRankingView = {
+    private lazy var secondPlaceView: MainTopRankingView = {
         let secondPlaceView = MainTopRankingView()
         secondPlaceView.layer.cornerRadius = 10.0
         secondPlaceView.baseViewColor = UIColor(red: 5.0/255.0,
@@ -65,7 +65,7 @@ class MainTopSectionCell: UITableViewCell {
         return secondPlaceView
     }()
     
-    private lazy var thirdPlaceView:MainTopRankingView = {
+    private lazy var thirdPlaceView: MainTopRankingView = {
         let thirdPlaceView = MainTopRankingView()
         thirdPlaceView.layer.cornerRadius = 10.0
         thirdPlaceView.baseViewColor = UIColor(red: 0.0/255.0,
@@ -78,7 +78,7 @@ class MainTopSectionCell: UITableViewCell {
         return thirdPlaceView
     }()
     
-    private lazy var sectionImageView:UIImageView = {
+    private lazy var sectionImageView: UIImageView = {
         let sectionImageView = UIImageView()
         sectionImageView.translatesAutoresizingMaskIntoConstraints = false
         

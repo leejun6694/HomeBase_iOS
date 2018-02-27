@@ -24,7 +24,7 @@ class MainTopSectionHeaderCell: UITableViewCell {
         }
     }
     
-    private lazy var titleView:UIView = {
+    private lazy var titleView: UIView = {
         let titleView = UIView()
         titleView.backgroundColor = UIColor(red: 44.0/255.0,
                                             green: 44.0/255.0,
@@ -35,7 +35,7 @@ class MainTopSectionHeaderCell: UITableViewCell {
         return titleView
     }()
     
-    private lazy var titleLabel:UILabel = {
+    private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "default"
         titleLabel.textColor = UIColor(red: 44.0/255.0,
@@ -50,7 +50,7 @@ class MainTopSectionHeaderCell: UITableViewCell {
         return titleLabel
     }()
     
-    private lazy var sectionImageView:UIImageView = {
+    private lazy var sectionImageView: UIImageView = {
         let sectionImageView = UIImageView()
         sectionImageView.translatesAutoresizingMaskIntoConstraints = false
         

@@ -40,7 +40,7 @@ class ScheduleRecordView:UIView {
         }
     }
     
-    private lazy var recordView:UIView = {
+    private lazy var recordView: UIView = {
         let recordView = UIView()
         recordView.backgroundColor = UIColor(red: 44.0/255.0,
                                              green: 44.0/255.0,
@@ -51,7 +51,7 @@ class ScheduleRecordView:UIView {
         return recordView
     }()
     
-    private lazy var recordLabel:UILabel = {
+    private lazy var recordLabel: UILabel = {
         let recordLabel = UILabel()
         recordLabel.text = "승"
         recordLabel.textColor = UIColor(red: 106.0/255.0,
@@ -67,7 +67,7 @@ class ScheduleRecordView:UIView {
         return recordLabel
     }()
     
-    private lazy var dateLabel:UILabel = {
+    private lazy var dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.text = "00.00"
         dateLabel.textColor = UIColor(red: 44.0/255.0,

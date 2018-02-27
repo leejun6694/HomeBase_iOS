@@ -27,6 +27,7 @@
 		726376732040090300388939 /* ScheduleRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726376722040090300388939 /* ScheduleRecordView.swift */; };
 		726376752043F41B00388939 /* ScheduleMonthlySectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726376742043F41B00388939 /* ScheduleMonthlySectionHeaderView.swift */; };
 		726376772044222400388939 /* ScheduleMonthlySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726376762044222400388939 /* ScheduleMonthlySectionCell.swift */; };
+		726376792045248000388939 /* ScheduleCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726376782045248000388939 /* ScheduleCreateViewController.swift */; };
 		72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72881E7A1FFA8579009D23C2 /* AppDelegate.swift */; };
 		72881E821FFA8579009D23C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72881E811FFA8579009D23C2 /* Assets.xcassets */; };
 		72881E851FFA8579009D23C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881E831FFA8579009D23C2 /* LaunchScreen.storyboard */; };
@@ -94,6 +95,7 @@
 		726376722040090300388939 /* ScheduleRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRecordView.swift; sourceTree = "<group>"; };
 		726376742043F41B00388939 /* ScheduleMonthlySectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleMonthlySectionHeaderView.swift; sourceTree = "<group>"; };
 		726376762044222400388939 /* ScheduleMonthlySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleMonthlySectionCell.swift; sourceTree = "<group>"; };
+		726376782045248000388939 /* ScheduleCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreateViewController.swift; sourceTree = "<group>"; };
 		72881E771FFA8579009D23C2 /* HomeBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72881E7A1FFA8579009D23C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72881E811FFA8579009D23C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				726376722040090300388939 /* ScheduleRecordView.swift */,
 				726376742043F41B00388939 /* ScheduleMonthlySectionHeaderView.swift */,
 				726376762044222400388939 /* ScheduleMonthlySectionCell.swift */,
+				726376782045248000388939 /* ScheduleCreateViewController.swift */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				72976272201EFB8A00A2CE4A /* ForgotErrorViewController.swift in Sources */,
 				72F07BFF200C6B9B004C83F6 /* ForgotSelectViewController.swift in Sources */,
 				7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */,
+				726376792045248000388939 /* ScheduleCreateViewController.swift in Sources */,
 				7220479F2034B7B40088BEE4 /* MainTopSectionCell.swift in Sources */,
 				72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */,
 				728EE77A203369F2006108F9 /* MainBlankView.swift in Sources */,

@@ -17,7 +17,7 @@ class ScheduleTableViewController: UITableViewController {
     
     let cellReuseIdendifier = "monthlySectionCell"
     
-    private lazy var addButtonView:UIView = {
+    private lazy var addButtonView: UIView = {
         let addButton = UIView()
         addButton.backgroundColor = UIColor(red: 44.0/255.0,
                                           green: 44.0/255.0,
@@ -28,9 +28,12 @@ class ScheduleTableViewController: UITableViewController {
         return addButton
     }()
     
-    private lazy var addButton:UIButton = {
+    private lazy var addButton: UIButton = {
         let addButton = UIButton(type: .system)
         addButton.setImage(#imageLiteral(resourceName: "iconPlus"), for: .normal)
+        addButton.addTarget(self,
+                            action: #selector(addButtonDidTapped(_:)),
+                            for: .touchUpInside)
         addButton.tintColor = UIColor.white
         addButton.backgroundColor = UIColor.clear
         addButton.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +41,7 @@ class ScheduleTableViewController: UITableViewController {
         return addButton
     }()
     
-    private lazy var footerView:UIView = {
+    private lazy var footerView: UIView = {
         let footerView = UIView(frame: CGRect(x: 0.0,
                                               y: 0.0,
                                               width: self.view.frame.size.width,
@@ -51,6 +54,15 @@ class ScheduleTableViewController: UITableViewController {
         
         return footerView
     }()
+    
+    // MARK: Methods
+    
+    @objc private func addButtonDidTapped(_ sender: UIButton) {
+        if let scheduleCreateViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleCreateViewController") as? ScheduleCreateViewController {
+            
+            self.present(scheduleCreateViewController, animated: true, completion: nil)
+        }
+    }
     
     // MARK: Life Cycle
 

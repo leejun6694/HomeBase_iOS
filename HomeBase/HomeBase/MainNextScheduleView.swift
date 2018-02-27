@@ -12,7 +12,7 @@ class MainNextScheduleView: UIView {
 
     // MARK: Properties
     
-    private lazy var contentView:UIView = {
+    private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.backgroundColor = UIColor(red: 239.0/255.0,
                                               green: 239.0/255.0,
@@ -23,7 +23,7 @@ class MainNextScheduleView: UIView {
         return contentView
     }()
     
-    private lazy var nextScheduleLabel:UILabel = {
+    private lazy var nextScheduleLabel: UILabel = {
         let nextScheduleLabel = UILabel()
         nextScheduleLabel.text = "다음\n일정"
         nextScheduleLabel.textColor = UIColor(red: 44.0/255.0,
@@ -40,7 +40,7 @@ class MainNextScheduleView: UIView {
         return nextScheduleLabel
     }()
     
-    private lazy var dayLabel:UILabel = {
+    private lazy var dayLabel: UILabel = {
         let dayLabel = UILabel()
         dayLabel.text = "20"
         dayLabel.textColor = UIColor(red: 44.0/255.0,
@@ -57,7 +57,7 @@ class MainNextScheduleView: UIView {
         return dayLabel
     }()
     
-    private lazy var dayOfWeekLabel:UILabel = {
+    private lazy var dayOfWeekLabel: UILabel = {
         let dayOfWeekLabel = UILabel()
         dayOfWeekLabel.text = "토요일"
         dayOfWeekLabel.textColor = UIColor(red: 44.0/255.0,
@@ -73,7 +73,7 @@ class MainNextScheduleView: UIView {
         return dayOfWeekLabel
     }()
     
-    private lazy var divisionView:UIView = {
+    private lazy var divisionView: UIView = {
         let divisionView = UIView()
         divisionView.backgroundColor = UIColor(red: 151.0/255.0,
                                                green: 151.0/255.0,
@@ -84,7 +84,7 @@ class MainNextScheduleView: UIView {
         return divisionView
     }()
     
-    private lazy var opponentTeamLabel:UILabel = {
+    private lazy var opponentTeamLabel: UILabel = {
         let opponentTeamLabel = UILabel()
         opponentTeamLabel.text = "HomeBase"
         opponentTeamLabel.textColor = UIColor(red: 44.0/255.0,
@@ -100,7 +100,7 @@ class MainNextScheduleView: UIView {
         return opponentTeamLabel
     }()
     
-    private lazy var matchDateLabel:UILabel = {
+    private lazy var matchDateLabel: UILabel = {
         let matchDateLabel = UILabel()
         matchDateLabel.text = "2월 20일 토요일 오전 9:00"
         matchDateLabel.textColor = UIColor(red: 44.0/255.0,
@@ -116,7 +116,7 @@ class MainNextScheduleView: UIView {
         return matchDateLabel
     }()
     
-    private lazy var matchPlaceLabel:UILabel = {
+    private lazy var matchPlaceLabel: UILabel = {
         let matchPlaceLabel = UILabel()
         matchPlaceLabel.text = "홈베이스 야구장"
         matchPlaceLabel.textColor = UIColor(red: 44.0/255.0,
@@ -132,7 +132,7 @@ class MainNextScheduleView: UIView {
         return matchPlaceLabel
     }()
     
-    private lazy var nextButton:UIButton = {
+    private lazy var nextButton: UIButton = {
         let nextButtom = UIButton()
         nextButtom.setImage(#imageLiteral(resourceName: "nextIcon"), for: .normal)
         nextButtom.translatesAutoresizingMaskIntoConstraints = false

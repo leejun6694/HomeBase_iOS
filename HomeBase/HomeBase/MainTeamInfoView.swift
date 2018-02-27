@@ -15,14 +15,14 @@ class MainTeamInfoView: UIView {
     
     // MARK: Properties
     
-    private lazy var teamPhotoImageView:UIImageView =  {
+    private lazy var teamPhotoImageView: UIImageView =  {
         let teamPhotoImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundMain"))
         teamPhotoImageView.translatesAutoresizingMaskIntoConstraints = false
         
         return teamPhotoImageView
     }()
     
-    private lazy var contentView:UIView = {
+    private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.backgroundColor = .white
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +30,7 @@ class MainTeamInfoView: UIView {
         return contentView
     }()
     
-    private lazy var teamLogoImageView:UIImageView = {
+    private lazy var teamLogoImageView: UIImageView = {
         let teamLogoImageView = UIImageView(image: #imageLiteral(resourceName: "team_logo"))
         teamLogoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
         teamLogoImageView.layer.borderWidth = 1.0
@@ -40,7 +40,7 @@ class MainTeamInfoView: UIView {
         return teamLogoImageView
     }()
     
-    private lazy var teamNameLabel:UILabel = {
+    private lazy var teamNameLabel: UILabel = {
         let teamNameLabel = UILabel()
         teamNameLabel.text = "HomeBase"
         teamNameLabel.textColor = UIColor(red: 44.0/255.0,
@@ -56,7 +56,7 @@ class MainTeamInfoView: UIView {
         return teamNameLabel
     }()
     
-    private lazy var teamIntroLabel:UILabel = {
+    private lazy var teamIntroLabel: UILabel = {
         let teamIntroLabel = UILabel()
         teamIntroLabel.text = "우주최강 사회인 야구팀, 홈베이스. 저희 팀 짱이에요 얍얍"
         teamIntroLabel.textColor = UIColor(red: 44.0/255.0,
@@ -73,7 +73,7 @@ class MainTeamInfoView: UIView {
         return teamIntroLabel
     }()
     
-    private lazy var teamSinceView:UIView = {
+    private lazy var teamSinceView: UIView = {
         let teamSinceView = UIView()
         teamSinceView.backgroundColor = UIColor(red: 0.0,
                                                 green: 180.0/255.0,
@@ -86,7 +86,7 @@ class MainTeamInfoView: UIView {
         return teamSinceView
     }()
     
-    private lazy var teamSinceLabel:UILabel = {
+    private lazy var teamSinceLabel: UILabel = {
         let teamSinceLabel = UILabel()
         teamSinceLabel.text = "Since 2002"
         teamSinceLabel.textColor = .white
@@ -99,7 +99,7 @@ class MainTeamInfoView: UIView {
         return teamSinceLabel
     }()
     
-    private lazy var teamHomeStadiumLabel:UILabel = {
+    private lazy var teamHomeStadiumLabel: UILabel = {
         let teamHomeStadiumLabel = UILabel()
         teamHomeStadiumLabel.text = "홈베이스 야구장"
         teamHomeStadiumLabel.textColor = .white
@@ -118,7 +118,7 @@ class MainTeamInfoView: UIView {
         return teamHomeStadiumLabel
     }()
     
-    private lazy var teamRecordBaseView:UIView = {
+    private lazy var teamRecordBaseView: UIView = {
         let teamRecordBaseView = UIView()
         teamRecordBaseView.backgroundColor = UIColor(red: 44.0/255.0,
                                                  green: 44.0/255.0,
@@ -131,7 +131,7 @@ class MainTeamInfoView: UIView {
         return teamRecordBaseView
     }()
     
-    private lazy var winLabel:UILabel = {
+    private lazy var winLabel: UILabel = {
         let winLabel = UILabel()
         winLabel.text = "승"
         winLabel.textColor = .white
@@ -143,7 +143,7 @@ class MainTeamInfoView: UIView {
         return winLabel
     }()
     
-    private lazy var winRecordLabel:UILabel = {
+    private lazy var winRecordLabel: UILabel = {
         let winRecordLabel = UILabel()
         winRecordLabel.text = "999"
         winRecordLabel.textColor = .white
@@ -155,7 +155,7 @@ class MainTeamInfoView: UIView {
         return winRecordLabel
     }()
     
-    private lazy var drawLabel:UILabel = {
+    private lazy var drawLabel: UILabel = {
         let drawLabel = UILabel()
         drawLabel.text = "무"
         drawLabel.textColor = .white
@@ -167,7 +167,7 @@ class MainTeamInfoView: UIView {
         return drawLabel
     }()
     
-    private lazy var drawRecordLabel:UILabel = {
+    private lazy var drawRecordLabel: UILabel = {
         let drawRecordLabel = UILabel()
         drawRecordLabel.text = "555"
         drawRecordLabel.textColor = .white
@@ -179,7 +179,7 @@ class MainTeamInfoView: UIView {
         return drawRecordLabel
     }()
     
-    private lazy var loseLabel:UILabel = {
+    private lazy var loseLabel: UILabel = {
         let loseLabel = UILabel()
         loseLabel.text = "패"
         loseLabel.textColor = .white
@@ -191,7 +191,7 @@ class MainTeamInfoView: UIView {
         return loseLabel
     }()
     
-    private lazy var loseRecordLabel:UILabel = {
+    private lazy var loseRecordLabel: UILabel = {
         let loseRecordLabel = UILabel()
         loseRecordLabel.text = "120"
         loseRecordLabel.textColor = .white
@@ -203,7 +203,7 @@ class MainTeamInfoView: UIView {
         return loseRecordLabel
     }()
     
-    private lazy var teamAverageBaseView:UIView = {
+    private lazy var teamAverageBaseView: UIView = {
         let teamAverageBaseView = UIView()
         teamAverageBaseView.backgroundColor = UIColor(red: 44.0/255.0,
                                                      green: 44.0/255.0,
@@ -216,7 +216,7 @@ class MainTeamInfoView: UIView {
         return teamAverageBaseView
     }()
     
-    private lazy var teamERAverageLabel:UILabel = {
+    private lazy var teamERAverageLabel: UILabel = {
         let teamERAverageLabel = UILabel()
         teamERAverageLabel.text = "방어율"
         teamERAverageLabel.textColor = .white
@@ -228,7 +228,7 @@ class MainTeamInfoView: UIView {
         return teamERAverageLabel
     }()
     
-    private lazy var teamERAverageRecordLabel:UILabel = {
+    private lazy var teamERAverageRecordLabel: UILabel = {
         let teamERAverageRecordLabel = UILabel()
         teamERAverageRecordLabel.text = "13.66"
         teamERAverageRecordLabel.textColor = .white
@@ -240,7 +240,7 @@ class MainTeamInfoView: UIView {
         return teamERAverageRecordLabel
     }()
     
-    private lazy var teamBattingAverageLabel:UILabel = {
+    private lazy var teamBattingAverageLabel: UILabel = {
         let teamBattingAverageLabel = UILabel()
         teamBattingAverageLabel.text = "타율"
         teamBattingAverageLabel.textColor = .white
@@ -252,7 +252,7 @@ class MainTeamInfoView: UIView {
         return teamBattingAverageLabel
     }()
     
-    private lazy var teamBattingAverageRecordLabel:UILabel = {
+    private lazy var teamBattingAverageRecordLabel: UILabel = {
         let teamBattingAverageRecordLabel = UILabel()
         teamBattingAverageRecordLabel.text = "0.365"
         teamBattingAverageRecordLabel.textColor = .white
