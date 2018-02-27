@@ -11,7 +11,6 @@ import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
-import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,13 +28,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let currentUser = Auth.auth().currentUser {
             CloudFunction.getPlayerDataWith(currentUser) {
-                (player, error) -> Void in
+                (playerData, error) -> Void in
                 
-                if let _ = player {
-                    let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-                    if let mainTabBarController = mainStoryBoard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                if let _ = playerData {
+                    CloudFunction.getUserDataWith(currentUser) {
+                        (userData, error) -> Void in
                         
-                        self.window?.rootViewController = mainTabBarController
+                        if let userData = userData {
+                            CloudFunction.getTeamDataWith(userData.teamCode) {
+                                (teamData, error) -> Void in
+                                
+                                if let teamData = teamData {
+                                    let storageRef = Storage.storage().reference()
+                                    let imageRef = storageRef.child(teamData.logo)
+                                    
+                                    imageRef.getData(maxSize: 4 * 1024 * 1024) {
+                                        (data, error) in
+                                        
+                                        if let error = error {
+                                            print(error)
+                                        } else {
+                                            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                            if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                                                
+                                                mainTabBarController.teamData = teamData
+                                                mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                                                UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 } else {
                     let startStoryBoard = UIStoryboard(name: "Start", bundle: nil)

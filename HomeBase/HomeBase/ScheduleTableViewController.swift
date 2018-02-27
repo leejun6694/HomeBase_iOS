@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ScheduleTableViewController: UITableViewController {
     
     // MARK: Properties
     
-    let scheduleRecentView = ScheduleRecentView()
-    let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
+    var teamData: HBTeam!
+    var teamLogo: UIImage!
     
-    let cellReuseIdendifier = "monthlySectionCell"
+    private let scheduleRecentView = ScheduleRecentView()
+    private let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
+    
+    private let cellReuseIdendifier = "monthlySectionCell"
     
     private lazy var addButtonView: UIView = {
         let addButton = UIView()
@@ -57,6 +61,15 @@ class ScheduleTableViewController: UITableViewController {
     
     // MARK: Methods
     
+    private func fetchTeamData() {
+        if let mainTabBarController = self.tabBarController as? MainTabBarController {
+            teamData = mainTabBarController.teamData
+            teamLogo = mainTabBarController.teamLogo
+            scheduleRecentView.teamData = teamData
+            scheduleRecentView.teamLogo = teamLogo
+        }
+    }
+    
     @objc private func addButtonDidTapped(_ sender: UIButton) {
         if let scheduleCreateViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleCreateViewController") as? ScheduleCreateViewController {
             
@@ -68,6 +81,8 @@ class ScheduleTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchTeamData()
         
         self.navigationController?.isNavigationBarHidden = true
 
@@ -84,10 +99,14 @@ class ScheduleTableViewController: UITableViewController {
         
         addButtonView.layer.cornerRadius = addButtonView.frame.size.width / 2
         
-        self.navigationController?.view.addSubview(addButtonView)
-        self.navigationController?.view.addConstraints(addButtonViewConstraints())
-        addButtonView.addSubview(addButton)
-        addButtonView.addConstraints(addButtonConstraints())
+        if let currentUser = Auth.auth().currentUser {
+            if teamData.admin == currentUser.uid {
+                self.navigationController?.view.addSubview(addButtonView)
+                self.navigationController?.view.addConstraints(addButtonViewConstraints())
+                addButtonView.addSubview(addButton)
+                addButtonView.addConstraints(addButtonConstraints())
+            }
+        }
     }
 
     // MARK: - Table view data source

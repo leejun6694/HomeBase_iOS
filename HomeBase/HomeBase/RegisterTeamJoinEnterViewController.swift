@@ -40,6 +40,7 @@ class RegisterTeamJoinEnterViewController: UIViewController {
             
             if let registerUserNavigation = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
                 
+                registerUserNavigation.teamCode = teamCode
                 spinnerStopAnimating(spinner)
                 self.present(registerUserNavigation, animated: true, completion: nil)
             }

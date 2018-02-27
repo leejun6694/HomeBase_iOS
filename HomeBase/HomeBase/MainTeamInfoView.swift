@@ -15,6 +15,9 @@ class MainTeamInfoView: UIView {
     
     // MARK: Properties
     
+    var teamData: HBTeam!
+    var teamLogo: UIImage!
+    
     private lazy var teamPhotoImageView: UIImageView =  {
         let teamPhotoImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundMain"))
         teamPhotoImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +34,7 @@ class MainTeamInfoView: UIView {
     }()
     
     private lazy var teamLogoImageView: UIImageView = {
-        let teamLogoImageView = UIImageView(image: #imageLiteral(resourceName: "team_logo"))
+        let teamLogoImageView = UIImageView(image: teamLogo)
         teamLogoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
         teamLogoImageView.layer.borderWidth = 1.0
         teamLogoImageView.clipsToBounds = true
@@ -267,41 +270,32 @@ class MainTeamInfoView: UIView {
     // MARK: Methods
     
     private func fetchTeamInfo() {
-        if let currentUser = Auth.auth().currentUser {
-            CloudFunction.getUserDataWith(currentUser) {
-                (user, error) -> Void in
-                
-                if let teamCode = user?.teamCode {
-                    CloudFunction.getTeamDataWith(teamCode) {
-                        (team, error) -> Void in
-                        
-                        if let teamName = team?.name,
-                            let teamLogo = team?.logo,
-                            let description = team?.description {
-                            
-                            let storageRef = Storage.storage().reference()
-                            let imageRef = storageRef.child(teamLogo)
-                            
-                            imageRef.getData(maxSize: 4 * 1024 * 1024) {
-                                (data, error) in
-                                
-                                if let error = error {
-                                    print(error)
-                                } else {
-                                    self.teamLogoImageView.image = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                                    self.teamNameLabel.text = teamName
-                                    self.teamIntroLabel.text = description
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        let storageRef = Storage.storage().reference()
+//        let imageRef = storageRef.child(teamData.logo)
+//
+//        imageRef.getData(maxSize: 4 * 1024 * 1024) {
+//            (data, error) in
+//
+//            if let error = error {
+//                print(error)
+//            } else {
+//                self.teamLogoImageView.image = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                self.teamNameLabel.text = self.teamData.name
+                self.teamIntroLabel.text = self.teamData.description
+//            }
+//        }
     }
     
     // MARK: Draw
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        fetchTeamInfo()
+        
+        teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
+    }
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -346,13 +340,7 @@ class MainTeamInfoView: UIView {
         teamAverageBaseView.addSubview(teamBattingAverageRecordLabel)
         teamAverageBaseView.addConstraints(teamBattingAverageRecordLabelConstraints())
         
-        fetchTeamInfo()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
+//        fetchTeamInfo()
     }
 }
 

@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class ScheduleRecentView: UIView {
 
     // MARK: Properties
+    
+    var teamData: HBTeam!
+    var teamLogo: UIImage!
     
     private lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundSchedule"))
@@ -20,7 +24,7 @@ class ScheduleRecentView: UIView {
     }()
     
     private lazy var teamLogoImageView: UIImageView = {
-        let teamLogoImageView = UIImageView(image: #imageLiteral(resourceName: "team_logo"))
+        let teamLogoImageView = UIImageView(image: teamLogo)
         teamLogoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
         teamLogoImageView.layer.borderWidth = 1.0
         teamLogoImageView.clipsToBounds = true

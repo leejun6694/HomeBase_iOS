@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class ScheduleCreateViewController: UIViewController {
 
@@ -100,6 +102,16 @@ class ScheduleCreateViewController: UIViewController {
         matchDateTextField.text = "\(month)월 \(day)일 \(dayOfWeek) \(time)"
     }
     
+    @IBAction func cancelButtonDidTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func doneButtonDidTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
+        
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -111,12 +123,28 @@ class ScheduleCreateViewController: UIViewController {
 extension ScheduleCreateViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
-//        case opponentTeamTextField:
-//        case matchPlaceTextField:
         case matchDateTextField:
             matchDateTextField.inputView = matchDatePicker
             matchDateTextField.inputAccessoryView = pickerToolBar
         default: break
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentCount = textField.text?.count ?? 0
+        let replacementCount = currentCount + string.count - range.length
+        
+        switch textField {
+        case opponentTeamTextField:
+            if replacementCount < 26 { return true }
+            else { return false }
+        case matchPlaceTextField:
+            if replacementCount < 26 { return true }
+            else { return false }
+        default: break
+        }
+        
+        return true
     }
 }

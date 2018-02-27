@@ -10,6 +10,8 @@ import UIKit
 
 class RegisterUserNavigation: UINavigationController {
 
+    var teamCode: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

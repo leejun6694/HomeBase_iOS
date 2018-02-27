@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseStorage
 
 class MainTabBarController: UITabBarController {
     
+    // MARK: Properties
+    
+    var teamData: HBTeam!
+    var teamLogo: UIImage!
+    
+    // MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.tabBar.unselectedItemTintColor = .white
         self.tabBar.isTranslucent = false
         self.extendedLayoutIncludesOpaqueBars = true
