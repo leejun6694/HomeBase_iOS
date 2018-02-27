@@ -36,7 +36,7 @@ class MainTopRankingView: UIView {
         }
     }
     
-    private lazy var baseView:UIView = {
+    private lazy var baseView: UIView = {
         let baseView = UIView()
         baseView.backgroundColor = UIColor.white
         baseView.layer.cornerRadius = 10.0
@@ -45,7 +45,7 @@ class MainTopRankingView: UIView {
         return baseView
     }()
     
-    private lazy var rankingLabel:UILabel = {
+    private lazy var rankingLabel: UILabel = {
         let rankingLabel = UILabel()
         rankingLabel.text = "default"
         rankingLabel.textColor = .white
@@ -58,7 +58,7 @@ class MainTopRankingView: UIView {
         return rankingLabel
     }()
     
-    private lazy var nameLabel:UILabel = {
+    private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "default"
         nameLabel.textColor = .white
@@ -71,7 +71,7 @@ class MainTopRankingView: UIView {
         return nameLabel
     }()
     
-    private lazy var recordLabel:UILabel = {
+    private lazy var recordLabel: UILabel = {
         let recordLabel = UILabel()
         recordLabel.text = "0"
         recordLabel.textColor = .white

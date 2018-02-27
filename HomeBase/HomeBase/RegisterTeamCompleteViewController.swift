@@ -44,6 +44,7 @@ class RegisterTeamCompleteViewController: UIViewController {
     @IBAction private func doneButtonDidTapped(_ sender: UIButton) {
         if let registerUserNavigation = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
             
+            registerUserNavigation.teamCode = teamCode
             self.present(registerUserNavigation, animated: true, completion: nil)
         }
     }

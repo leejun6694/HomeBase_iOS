@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ScheduleTableViewController: UITableViewController {
     
     // MARK: Properties
     
-    let scheduleRecentView = ScheduleRecentView()
-    let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
+    var teamData: HBTeam!
+    var teamLogo: UIImage!
     
-    let cellReuseIdendifier = "monthlySectionCell"
+    private let scheduleRecentView = ScheduleRecentView()
+    private let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
     
-    private lazy var addButtonView:UIView = {
+    private let cellReuseIdendifier = "monthlySectionCell"
+    
+    private lazy var addButtonView: UIView = {
         let addButton = UIView()
         addButton.backgroundColor = UIColor(red: 44.0/255.0,
                                           green: 44.0/255.0,
@@ -28,9 +32,12 @@ class ScheduleTableViewController: UITableViewController {
         return addButton
     }()
     
-    private lazy var addButton:UIButton = {
+    private lazy var addButton: UIButton = {
         let addButton = UIButton(type: .system)
         addButton.setImage(#imageLiteral(resourceName: "iconPlus"), for: .normal)
+        addButton.addTarget(self,
+                            action: #selector(addButtonDidTapped(_:)),
+                            for: .touchUpInside)
         addButton.tintColor = UIColor.white
         addButton.backgroundColor = UIColor.clear
         addButton.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +45,7 @@ class ScheduleTableViewController: UITableViewController {
         return addButton
     }()
     
-    private lazy var footerView:UIView = {
+    private lazy var footerView: UIView = {
         let footerView = UIView(frame: CGRect(x: 0.0,
                                               y: 0.0,
                                               width: self.view.frame.size.width,
@@ -52,10 +59,30 @@ class ScheduleTableViewController: UITableViewController {
         return footerView
     }()
     
+    // MARK: Methods
+    
+    private func fetchTeamData() {
+        if let mainTabBarController = self.tabBarController as? MainTabBarController {
+            teamData = mainTabBarController.teamData
+            teamLogo = mainTabBarController.teamLogo
+            scheduleRecentView.teamData = teamData
+            scheduleRecentView.teamLogo = teamLogo
+        }
+    }
+    
+    @objc private func addButtonDidTapped(_ sender: UIButton) {
+        if let scheduleCreateViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleCreateViewController") as? ScheduleCreateViewController {
+            
+            self.present(scheduleCreateViewController, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchTeamData()
         
         self.navigationController?.isNavigationBarHidden = true
 
@@ -72,10 +99,14 @@ class ScheduleTableViewController: UITableViewController {
         
         addButtonView.layer.cornerRadius = addButtonView.frame.size.width / 2
         
-        self.navigationController?.view.addSubview(addButtonView)
-        self.navigationController?.view.addConstraints(addButtonViewConstraints())
-        addButtonView.addSubview(addButton)
-        addButtonView.addConstraints(addButtonConstraints())
+        if let currentUser = Auth.auth().currentUser {
+            if teamData.admin == currentUser.uid {
+                self.navigationController?.view.addSubview(addButtonView)
+                self.navigationController?.view.addConstraints(addButtonViewConstraints())
+                addButtonView.addSubview(addButton)
+                addButtonView.addConstraints(addButtonConstraints())
+            }
+        }
     }
 
     // MARK: - Table view data source

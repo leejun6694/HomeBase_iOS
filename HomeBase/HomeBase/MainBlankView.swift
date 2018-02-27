@@ -12,7 +12,7 @@ class MainBlankView: UIView {
 
     // MARK: Properties
     
-    private lazy var backgroundView:UIView = {
+    private lazy var backgroundView: UIView = {
         let backgroundView = UIView()
         backgroundView.backgroundColor = .white
         backgroundView.translatesAutoresizingMaskIntoConstraints = false

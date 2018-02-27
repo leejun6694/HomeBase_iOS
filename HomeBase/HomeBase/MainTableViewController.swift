@@ -12,17 +12,33 @@ class MainTableViewController: UITableViewController {
 
     // MARK: Properties
     
-    let mainTeamInfoView = MainTeamInfoView()
-    let mainNextScheduleView = MainNextScheduleView()
-    let mainBlankView = MainBlankView()
+    var teamData: HBTeam!
+    var teamLogo: UIImage!
     
-    let headerCellReuseIdendifier = "topSectionHeaderCell"
-    let cellReuseIdendifier = "topSectionCell"
+    private let mainTeamInfoView = MainTeamInfoView()
+    private let mainNextScheduleView = MainNextScheduleView()
+    private let mainBlankView = MainBlankView()
+    
+    private let headerCellReuseIdendifier = "topSectionHeaderCell"
+    private let cellReuseIdendifier = "topSectionCell"
+    
+    // MARK: Methods
+    
+    private func fetchTeamData() {
+        if let mainTabBarController = self.tabBarController as? MainTabBarController {
+            teamData = mainTabBarController.teamData
+            teamLogo = mainTabBarController.teamLogo
+            mainTeamInfoView.teamData = teamData
+            mainTeamInfoView.teamLogo = teamLogo
+        }
+    }
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchTeamData()
         
         self.tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
         self.tableView.register(MainTopSectionHeaderCell.self,

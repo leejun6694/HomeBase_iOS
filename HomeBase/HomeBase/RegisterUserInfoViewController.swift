@@ -14,6 +14,8 @@ class RegisterUserInfoViewController: UIViewController {
 
     // MARK: Properties
     
+    var teamCode: String!
+    
     private var currentOriginY:CGFloat = 0.0
     
     private var name: String = ""
@@ -147,6 +149,7 @@ class RegisterUserInfoViewController: UIViewController {
             registerPlayerInfoViewController.height = self.height
             registerPlayerInfoViewController.weight = self.weight
             
+            registerPlayerInfoViewController.teamCode = self.teamCode
             self.navigationController?.pushViewController(registerPlayerInfoViewController, animated: true)
         }
     }
@@ -233,6 +236,11 @@ class RegisterUserInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let registerUserNavigation = self.navigationController as? RegisterUserNavigation {
+            
+            self.teamCode = registerUserNavigation.teamCode
+        }
         
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.shadowImage = UIImage()

@@ -7,20 +7,24 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class ScheduleRecentView: UIView {
 
     // MARK: Properties
     
-    private lazy var backgroundImageView:UIImageView = {
+    var teamData: HBTeam!
+    var teamLogo: UIImage!
+    
+    private lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundSchedule"))
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         
         return backgroundImageView
     }()
     
-    private lazy var teamLogoImageView:UIImageView = {
-        let teamLogoImageView = UIImageView(image: #imageLiteral(resourceName: "team_logo"))
+    private lazy var teamLogoImageView: UIImageView = {
+        let teamLogoImageView = UIImageView(image: teamLogo)
         teamLogoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
         teamLogoImageView.layer.borderWidth = 1.0
         teamLogoImageView.clipsToBounds = true
@@ -29,7 +33,7 @@ class ScheduleRecentView: UIView {
         return teamLogoImageView
     }()
     
-    private lazy var recordLabel:UILabel = {
+    private lazy var recordLabel: UILabel = {
         let recordLabel = UILabel()
         recordLabel.text = "최근 5경기 기록"
         recordLabel.textColor = UIColor(red: 44.0/255.0,
@@ -45,7 +49,7 @@ class ScheduleRecentView: UIView {
         return recordLabel
     }()
     
-    private lazy var firstRecordView:ScheduleRecordView = {
+    private lazy var firstRecordView: ScheduleRecordView = {
         let firstRecordView = ScheduleRecordView()
         firstRecordView.recordText = "승"
         firstRecordView.dateText = "1.20"
@@ -54,7 +58,7 @@ class ScheduleRecentView: UIView {
         return firstRecordView
     }()
     
-    private lazy var secondRecordView:ScheduleRecordView = {
+    private lazy var secondRecordView: ScheduleRecordView = {
         let secondRecordView = ScheduleRecordView()
         secondRecordView.recordText = "패"
         secondRecordView.dateText = "1.13"
@@ -63,7 +67,7 @@ class ScheduleRecentView: UIView {
         return secondRecordView
     }()
     
-    private lazy var thirdRecordView:ScheduleRecordView = {
+    private lazy var thirdRecordView: ScheduleRecordView = {
         let thirdRecordView = ScheduleRecordView()
         thirdRecordView.recordText = "무"
         thirdRecordView.dateText = "1.6"
@@ -72,7 +76,7 @@ class ScheduleRecentView: UIView {
         return thirdRecordView
     }()
     
-    private lazy var fourthRecordView:ScheduleRecordView = {
+    private lazy var fourthRecordView: ScheduleRecordView = {
         let fourthRecordView = ScheduleRecordView()
         fourthRecordView.recordText = "패"
         fourthRecordView.dateText = "12.27"
@@ -81,7 +85,7 @@ class ScheduleRecentView: UIView {
         return fourthRecordView
     }()
     
-    private lazy var fifthRecordView:ScheduleRecordView = {
+    private lazy var fifthRecordView: ScheduleRecordView = {
         let fifthRecordView = ScheduleRecordView()
         fifthRecordView.recordText = "승"
         fifthRecordView.dateText = "12.20"
@@ -90,7 +94,7 @@ class ScheduleRecentView: UIView {
         return fifthRecordView
     }()
     
-    private lazy var recordStackView:UIStackView = {
+    private lazy var recordStackView: UIStackView = {
         let recordStackView = UIStackView()
         recordStackView.axis = .horizontal
         recordStackView.distribution = .fillEqually

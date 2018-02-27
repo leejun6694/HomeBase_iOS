@@ -28,7 +28,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         didSet { matchPlaceLabel.text = matchPlace }
     }
     
-    private lazy var baseView:UIView = {
+    private lazy var baseView: UIView = {
         let baseView = UIView()
         baseView.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         baseView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +36,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         return baseView
     }()
     
-    private lazy var dayLabel:UILabel = {
+    private lazy var dayLabel: UILabel = {
         let dayLabel = UILabel()
         dayLabel.text = "22"
         dayLabel.textColor = UIColor(red: 44.0/255.0,
@@ -52,7 +52,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         return dayLabel
     }()
     
-    private lazy var dayOfWeekLabel:UILabel = {
+    private lazy var dayOfWeekLabel: UILabel = {
         let dayOfWeekLabel = UILabel()
         dayOfWeekLabel.text = "토요일"
         dayOfWeekLabel.textColor = UIColor(red: 44.0/255.0,
@@ -68,7 +68,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         return dayOfWeekLabel
     }()
     
-    private lazy var opponentTeamLabel:UILabel = {
+    private lazy var opponentTeamLabel: UILabel = {
         let opponentTeamLabel = UILabel()
         opponentTeamLabel.text = "HomeBase"
         opponentTeamLabel.textColor = UIColor(red: 44.0/255.0,
@@ -84,7 +84,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         return opponentTeamLabel
     }()
     
-    private lazy var matchDateLabel:UILabel = {
+    private lazy var matchDateLabel: UILabel = {
         let matchDateLabel = UILabel()
         matchDateLabel.text = "2월 20일 토요일 오전 9:00"
         matchDateLabel.textColor = UIColor(red: 44.0/255.0,
@@ -100,7 +100,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         return matchDateLabel
     }()
     
-    private lazy var matchPlaceLabel:UILabel = {
+    private lazy var matchPlaceLabel: UILabel = {
         let matchPlaceLabel = UILabel()
         matchPlaceLabel.text = "홈베이스 야구장"
         matchPlaceLabel.textColor = UIColor(red: 44.0/255.0,
@@ -116,7 +116,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         return matchPlaceLabel
     }()
     
-    private lazy var divisionView:UIView = {
+    private lazy var divisionView: UIView = {
         let divisionView = UIView()
         divisionView.backgroundColor = UIColor(red: 151.0/255.0,
                                                green: 151.0/255.0,
@@ -127,7 +127,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         return divisionView
     }()
     
-    private lazy var recordButton:UIButton = {
+    private lazy var recordButton: UIButton = {
         let recordButton = UIButton(type: .system)
         recordButton.setTitle("기록하기", for: .normal)
         recordButton.setTitleColor(UIColor(red: 44.0/255.0,

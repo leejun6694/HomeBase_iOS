@@ -49,11 +49,30 @@ class SignInViewController: UIViewController {
                             (player, error) -> Void in
                             
                             if let _ = player {
-                                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                                CloudFunction.getTeamDataWith(teamCode) {
+                                    (teamData, error) -> Void in
                                     
-                                    self.spinnerStopAnimating(self.spinner)
-                                    UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                    if let teamData = teamData {
+                                        let storageRef = Storage.storage().reference()
+                                        let imageRef = storageRef.child(teamData.logo)
+                                        
+                                        imageRef.getData(maxSize: 4 * 1024 * 1024) {
+                                            (data, error) in
+                                            
+                                            if let error = error {
+                                                print(error)
+                                            } else {
+                                                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                                if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                                                    
+                                                    mainTabBarController.teamData = teamData
+                                                    mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                                                    self.spinnerStopAnimating(self.spinner)
+                                                    UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             } else {
                                 if let registerUserNavigation =

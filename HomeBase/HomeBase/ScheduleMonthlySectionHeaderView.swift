@@ -12,7 +12,7 @@ class ScheduleMonthlySectionHeaderView: UIView {
 
     // MARK: Properties
     
-    private lazy var monthLabel:UILabel = {
+    private lazy var monthLabel: UILabel = {
         let monthLabel = UILabel()
         monthLabel.text = "01월,"
         monthLabel.textColor = UIColor(red: 44.0/255.0,
@@ -27,7 +27,7 @@ class ScheduleMonthlySectionHeaderView: UIView {
         return monthLabel
     }()
     
-    private lazy var yearLabel:UILabel = {
+    private lazy var yearLabel: UILabel = {
         let yearLabel = UILabel()
         yearLabel.text = "2018"
         yearLabel.textColor = UIColor(red: 44.0/255.0,
@@ -42,7 +42,7 @@ class ScheduleMonthlySectionHeaderView: UIView {
         return yearLabel
     }()
     
-    private lazy var monthlyRecordLabel:UILabel = {
+    private lazy var monthlyRecordLabel: UILabel = {
         let monthlyRecordLabel = UILabel()
         monthlyRecordLabel.textAlignment = .right
         
