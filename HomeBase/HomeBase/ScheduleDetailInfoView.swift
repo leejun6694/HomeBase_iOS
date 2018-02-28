@@ -12,7 +12,7 @@ class ScheduleDetailInfoView: UIView {
 
     // MARK: Properties
     
-    var teamData: HBTeam!
+//    var teamData: HBTeam!
     
     var homeTeamScore = 0
     var opponentTeamScore = 0
@@ -61,11 +61,10 @@ class ScheduleDetailInfoView: UIView {
     
     private lazy var homeTeamButton: UIButton = {
         let homeTeamButton = UIButton(type: .system)
-        homeTeamButton.setTitle("\(teamData.name)", for: .normal)
+        homeTeamButton.setTitle("home", for: .normal)
         homeTeamButton.setTitleColor(UIColor.white, for: .normal)
         homeTeamButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Regular",
                                                  size: 28.0)
-        homeTeamButton.titleLabel?.textAlignment = .right
         homeTeamButton.titleLabel?.adjustsFontSizeToFitWidth = true
         homeTeamButton.titleLabel?.minimumScaleFactor = 0.3
         homeTeamButton.backgroundColor = UIColor.clear
@@ -93,7 +92,6 @@ class ScheduleDetailInfoView: UIView {
         opponentTeamButton.setTitleColor(UIColor.white, for: .normal)
         opponentTeamButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Regular",
                                                      size: 28.0)
-        opponentTeamButton.titleLabel?.textAlignment = .left
         opponentTeamButton.titleLabel?.adjustsFontSizeToFitWidth = true
         opponentTeamButton.titleLabel?.minimumScaleFactor = 0.3
         opponentTeamButton.backgroundColor = UIColor.clear
