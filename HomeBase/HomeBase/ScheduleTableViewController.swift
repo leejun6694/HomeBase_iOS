@@ -80,6 +80,7 @@ class ScheduleTableViewController: UITableViewController {
     @objc private func recordButtonDidTapped(_ sender: UIButton) {
         if let scheduleDetailTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleDetailTableViewController") as? ScheduleDetailTableViewController {
             
+            scheduleDetailTableViewController.teamData = teamData
             self.navigationController?.pushViewController(scheduleDetailTableViewController, animated: true)
         }
     }

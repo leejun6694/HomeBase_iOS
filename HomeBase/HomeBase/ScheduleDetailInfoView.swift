@@ -12,6 +12,11 @@ class ScheduleDetailInfoView: UIView {
 
     // MARK: Properties
     
+    var teamData: HBTeam!
+    
+    var homeTeamScore = 0
+    var opponentTeamScore = 0
+    
     private lazy var opponentTeamLabel: UILabel = {
         let opponentTeamLabel = UILabel()
         opponentTeamLabel.text = "HomeBase"
@@ -54,6 +59,49 @@ class ScheduleDetailInfoView: UIView {
         return matchPlaceLabel
     }()
     
+    private lazy var homeTeamButton: UIButton = {
+        let homeTeamButton = UIButton(type: .system)
+        homeTeamButton.setTitle("\(teamData.name)", for: .normal)
+        homeTeamButton.setTitleColor(UIColor.white, for: .normal)
+        homeTeamButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Regular",
+                                                 size: 28.0)
+        homeTeamButton.titleLabel?.textAlignment = .right
+        homeTeamButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        homeTeamButton.titleLabel?.minimumScaleFactor = 0.3
+        homeTeamButton.backgroundColor = UIColor.clear
+        homeTeamButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return homeTeamButton
+    }()
+    
+    private lazy var versusLabel: UILabel = {
+        let versusLabel = UILabel()
+        versusLabel.text = "vs"
+        versusLabel.textColor = .white
+        versusLabel.textAlignment = .center
+        versusLabel.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 28.0)
+        versusLabel.adjustsFontSizeToFitWidth = true
+        versusLabel.minimumScaleFactor = 0.5
+        versusLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return versusLabel
+    }()
+    
+    private lazy var opponentTeamButton: UIButton = {
+        let opponentTeamButton = UIButton(type: .system)
+        opponentTeamButton.setTitle("opponent", for: .normal)
+        opponentTeamButton.setTitleColor(UIColor.white, for: .normal)
+        opponentTeamButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Regular",
+                                                     size: 28.0)
+        opponentTeamButton.titleLabel?.textAlignment = .left
+        opponentTeamButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        opponentTeamButton.titleLabel?.minimumScaleFactor = 0.3
+        opponentTeamButton.backgroundColor = UIColor.clear
+        opponentTeamButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return opponentTeamButton
+    }()
+    
     // MARK: Life Cycle
     
     override func layoutSubviews() {
@@ -71,6 +119,12 @@ class ScheduleDetailInfoView: UIView {
         self.addConstraints(matchDateLabelConstraints())
         self.addSubview(matchPlaceLabel)
         self.addConstraints(matchPlaceLabelConstraints())
+        self.addSubview(homeTeamButton)
+        self.addConstraints(homeTeamButtonConstraints())
+        self.addSubview(versusLabel)
+        self.addConstraints(versusLabelConstraints())
+        self.addSubview(opponentTeamButton)
+        self.addConstraints(opponentTeamButtonConstraints())
     }
 }
 
@@ -124,5 +178,56 @@ extension ScheduleDetailInfoView {
             toItem: self, attribute: .height, multiplier: 16/238, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func homeTeamButtonConstraints() -> [NSLayoutConstraint] {
+        let trailingConstraint = NSLayoutConstraint(
+            item: homeTeamButton, attribute: .trailing, relatedBy: .equal,
+            toItem: self, attribute: .centerX, multiplier: 169/207, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: homeTeamButton, attribute: .top, relatedBy: .equal,
+            toItem: self, attribute: .centerY, multiplier: 143/119, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: homeTeamButton, attribute: .width, relatedBy: .equal,
+            toItem: self, attribute: .width, multiplier: 139/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: homeTeamButton, attribute: .height, relatedBy: .equal,
+            toItem: self, attribute: .height, multiplier: 50/238, constant: 0.0)
+        
+        return [trailingConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func versusLabelConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: versusLabel, attribute: .centerX, relatedBy: .equal,
+            toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let centerYConstraint = NSLayoutConstraint(
+            item: versusLabel, attribute: .centerY, relatedBy: .equal,
+            toItem: self, attribute: .centerY, multiplier: 169.5/119, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: versusLabel, attribute: .width, relatedBy: .equal,
+            toItem: self, attribute: .width, multiplier: 25/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: versusLabel, attribute: .height, relatedBy: .equal,
+            toItem: self, attribute: .height, multiplier: 28/238, constant: 0.0)
+        
+        return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func opponentTeamButtonConstraints() -> [NSLayoutConstraint] {
+        let leadingConstraint = NSLayoutConstraint(
+            item: opponentTeamButton, attribute: .leading, relatedBy: .equal,
+            toItem: self, attribute: .centerX, multiplier: 246/207, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: opponentTeamButton, attribute: .top, relatedBy: .equal,
+            toItem: self, attribute: .centerY, multiplier: 143/119, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: opponentTeamButton, attribute: .width, relatedBy: .equal,
+            toItem: self, attribute: .width, multiplier: 139/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: opponentTeamButton, attribute: .height, relatedBy: .equal,
+            toItem: self, attribute: .height, multiplier: 50/238, constant: 0.0)
+        
+        return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
     }
 }

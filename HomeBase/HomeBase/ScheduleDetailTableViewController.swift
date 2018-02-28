@@ -12,6 +12,8 @@ class ScheduleDetailTableViewController: UITableViewController {
 
     // MARK: Properties
     
+    var teamData: HBTeam!
+    
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "기록 입력"
@@ -29,6 +31,7 @@ class ScheduleDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scheduleDetailInfoView.teamData = teamData
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
