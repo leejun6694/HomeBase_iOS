@@ -48,7 +48,6 @@
 		72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B6F2EB2029D6BE00CA0755 /* PersonalViewController.swift */; };
 		72B6F2EF2029D6F200CA0755 /* Personal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72B6F2ED2029D6F200CA0755 /* Personal.storyboard */; };
 		72C5755220297E94000432DB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5755120297E94000432DB /* MainTabBarController.swift */; };
-		72CC2A032046E00C0030FE3F /* ScheduleDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CC2A022046E00C0030FE3F /* ScheduleDetailTableViewController.swift */; };
 		72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */; };
 		72D9322220239B33003F3889 /* RegisterTeamJoinEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9322120239B32003F3889 /* RegisterTeamJoinEnterViewController.swift */; };
 		72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */; };
@@ -62,6 +61,8 @@
 		72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F07C02200C6BBD004C83F6 /* ForgotPasswordViewController.swift */; };
 		72F07C0B200C77FC004C83F6 /* ForgotSelectNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F07C0A200C77FC004C83F6 /* ForgotSelectNavigation.swift */; };
 		72F5ECF42046E44B00C7B594 /* ScheduleDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5ECF32046E44B00C7B594 /* ScheduleDetailInfoView.swift */; };
+		72F5ECF720473AE400C7B594 /* ScheduleDetailPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5ECF620473AE400C7B594 /* ScheduleDetailPlayerCell.swift */; };
+		72F5ECF9204745EE00C7B594 /* ScheduleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5ECF8204745EE00C7B594 /* ScheduleDetailViewController.swift */; };
 		CADF9380625219F89F8972A3 /* Pods_HomeBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365E131BF0132C671D3B24D8 /* Pods_HomeBaseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -124,7 +125,6 @@
 		72B6F2EB2029D6BE00CA0755 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		72B6F2EE2029D6F200CA0755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Personal.storyboard; sourceTree = "<group>"; };
 		72C5755120297E94000432DB /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		72CC2A022046E00C0030FE3F /* ScheduleDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailTableViewController.swift; sourceTree = "<group>"; };
 		72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinErrorViewController.swift; sourceTree = "<group>"; };
 		72D9322120239B32003F3889 /* RegisterTeamJoinEnterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinEnterViewController.swift; sourceTree = "<group>"; };
 		72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteCopyViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +138,8 @@
 		72F07C02200C6BBD004C83F6 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		72F07C0A200C77FC004C83F6 /* ForgotSelectNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotSelectNavigation.swift; sourceTree = "<group>"; };
 		72F5ECF32046E44B00C7B594 /* ScheduleDetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailInfoView.swift; sourceTree = "<group>"; };
+		72F5ECF620473AE400C7B594 /* ScheduleDetailPlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailPlayerCell.swift; sourceTree = "<group>"; };
+		72F5ECF8204745EE00C7B594 /* ScheduleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailViewController.swift; sourceTree = "<group>"; };
 		85D28CE54F7FB2CB3B7FE2D2 /* Pods-HomeBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeBase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeBase/Pods-HomeBase.debug.xcconfig"; sourceTree = "<group>"; };
 		A196C76AF66304FEA028D6BC /* Pods-HomeBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeBaseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeBaseTests/Pods-HomeBaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		B1610B1C17C0264F1B7B9E0A /* Pods-HomeBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeBaseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeBaseTests/Pods-HomeBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -182,8 +184,7 @@
 				726376742043F41B00388939 /* ScheduleMonthlySectionHeaderView.swift */,
 				726376762044222400388939 /* ScheduleMonthlySectionCell.swift */,
 				726376782045248000388939 /* ScheduleCreateViewController.swift */,
-				72CC2A022046E00C0030FE3F /* ScheduleDetailTableViewController.swift */,
-				72F5ECF32046E44B00C7B594 /* ScheduleDetailInfoView.swift */,
+				72F5ECF520473ABA00C7B594 /* Detail */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -300,6 +301,16 @@
 				72E15E7D203D6C0B00ECA9A3 /* MainTopRankingView.swift */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		72F5ECF520473ABA00C7B594 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				72F5ECF8204745EE00C7B594 /* ScheduleDetailViewController.swift */,
+				72F5ECF32046E44B00C7B594 /* ScheduleDetailInfoView.swift */,
+				72F5ECF620473AE400C7B594 /* ScheduleDetailPlayerCell.swift */,
+			);
+			name = Detail;
 			sourceTree = "<group>";
 		};
 		F34A4FAEB3520F2A1C92E813 /* Frameworks */ = {
@@ -582,8 +593,10 @@
 				7263767F2045CE3F00388939 /* MainViewController.swift in Sources */,
 				72F07BFF200C6B9B004C83F6 /* ForgotSelectViewController.swift in Sources */,
 				7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */,
+				72F5ECF9204745EE00C7B594 /* ScheduleDetailViewController.swift in Sources */,
 				726376792045248000388939 /* ScheduleCreateViewController.swift in Sources */,
 				7220479F2034B7B40088BEE4 /* MainTopSectionCell.swift in Sources */,
+				72F5ECF720473AE400C7B594 /* ScheduleDetailPlayerCell.swift in Sources */,
 				72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */,
 				728EE77A203369F2006108F9 /* MainBlankView.swift in Sources */,
 				72134FC2203D9300007B7FCB /* MainTableViewController.swift in Sources */,
@@ -606,7 +619,6 @@
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
 				72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */,
 				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,
-				72CC2A032046E00C0030FE3F /* ScheduleDetailTableViewController.swift in Sources */,
 				72F07C01200C6BB0004C83F6 /* ForgotEmailViewController.swift in Sources */,
 				726376732040090300388939 /* ScheduleRecordView.swift in Sources */,
 				726376752043F41B00388939 /* ScheduleMonthlySectionHeaderView.swift in Sources */,
