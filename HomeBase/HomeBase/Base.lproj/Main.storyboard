@@ -41,10 +41,10 @@
             </objects>
             <point key="canvasLocation" x="2334" y="142"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="qs0-f3-31J">
             <objects>
-                <viewController id="oIP-qw-dDw" sceneMemberID="viewController">
+                <viewController id="oIP-qw-dDw" customClass="MainViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vap-KM-GrN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fxa-Lq-bnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="423" y="142"/>
+            <point key="canvasLocation" x="421.60000000000002" y="141.67916041979012"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="AKv-DC-7au">

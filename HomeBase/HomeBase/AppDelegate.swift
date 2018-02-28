@@ -30,18 +30,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             CloudFunction.getPlayerDataWith(currentUser) {
                 (playerData, error) -> Void in
                 
+                MainViewController.progressView.animate(value: 0.25)
                 if let _ = playerData {
                     CloudFunction.getUserDataWith(currentUser) {
                         (userData, error) -> Void in
                         
+                        MainViewController.progressView.animate(value: 0.5)
                         if let userData = userData {
                             CloudFunction.getTeamDataWith(userData.teamCode) {
                                 (teamData, error) -> Void in
                                 
+                                MainViewController.progressView.animate(value: 0.75)
                                 if let teamData = teamData {
                                     let storageRef = Storage.storage().reference()
                                     let imageRef = storageRef.child(teamData.logo)
                                     
+                                    MainViewController.progressView.animate(value: 1.0)
                                     imageRef.getData(maxSize: 4 * 1024 * 1024) {
                                         (data, error) in
                                         
@@ -62,6 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                     }
                 } else {
+                    MainViewController.progressView.animate(value: 1.0)
+                    
                     let startStoryBoard = UIStoryboard(name: "Start", bundle: nil)
                     let signInViewController = startStoryBoard.instantiateInitialViewController()
                     
@@ -69,6 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         } else {
+            MainViewController.progressView.animate(value: 1.0)
+            
             let startStoryBoard = UIStoryboard(name: "Start", bundle: nil)
             let signInViewController = startStoryBoard.instantiateInitialViewController()
             
