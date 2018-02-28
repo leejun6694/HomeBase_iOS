@@ -127,7 +127,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         return divisionView
     }()
     
-    private lazy var recordButton: UIButton = {
+    lazy var recordButton: UIButton = {
         let recordButton = UIButton(type: .system)
         recordButton.setTitle("기록하기", for: .normal)
         recordButton.setTitleColor(UIColor(red: 44.0/255.0,

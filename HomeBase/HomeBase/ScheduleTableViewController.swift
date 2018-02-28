@@ -77,14 +77,20 @@ class ScheduleTableViewController: UITableViewController {
         }
     }
     
+    @objc private func recordButtonDidTapped(_ sender: UIButton) {
+        if let scheduleDetailTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleDetailTableViewController") as? ScheduleDetailTableViewController {
+            
+            scheduleDetailTableViewController.teamData = teamData
+            self.navigationController?.pushViewController(scheduleDetailTableViewController, animated: true)
+        }
+    }
+    
     // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fetchTeamData()
-        
-        self.navigationController?.isNavigationBarHidden = true
 
         self.tableView.register(ScheduleMonthlySectionCell.self,
                                 forCellReuseIdentifier: cellReuseIdendifier)
@@ -94,10 +100,10 @@ class ScheduleTableViewController: UITableViewController {
         self.tableView.tableFooterView = footerView
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        addButtonView.layer.cornerRadius = addButtonView.frame.size.width / 2
+        self.navigationController?.isNavigationBarHidden = true
         
         if let currentUser = Auth.auth().currentUser {
             if teamData.admin == currentUser.uid {
@@ -105,6 +111,23 @@ class ScheduleTableViewController: UITableViewController {
                 self.navigationController?.view.addConstraints(addButtonViewConstraints())
                 addButtonView.addSubview(addButton)
                 addButtonView.addConstraints(addButtonConstraints())
+            }
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        addButtonView.layer.cornerRadius = addButtonView.frame.size.width / 2
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let currentUser = Auth.auth().currentUser {
+            if teamData.admin == currentUser.uid {
+                addButton.removeFromSuperview()
+                addButtonView.removeFromSuperview()
             }
         }
     }
@@ -142,6 +165,10 @@ class ScheduleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: cellReuseIdendifier, for: indexPath) as! ScheduleMonthlySectionCell
+        
+        cell.recordButton.addTarget(self,
+                                    action: #selector(recordButtonDidTapped(_:)),
+                                    for: .touchUpInside)
         
         switch indexPath.row {
         case 0:
