@@ -78,11 +78,11 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     @objc private func recordButtonDidTapped(_ sender: UIButton) {
-        if let scheduleDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleDetailViewController") as? ScheduleDetailViewController {
+        if let scheduleDetailTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleDetailTableViewController") as? ScheduleDetailTableViewController {
             
-            scheduleDetailViewController.teamData = teamData
+            scheduleDetailTableViewController.teamData = teamData
             self.navigationController?.pushViewController(
-                scheduleDetailViewController,
+                scheduleDetailTableViewController,
                 animated: true)
         }
     }
@@ -133,9 +133,9 @@ class ScheduleTableViewController: UITableViewController {
             }
         }
     }
+}
 
-    // MARK: - Table view data source
-
+extension ScheduleTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
