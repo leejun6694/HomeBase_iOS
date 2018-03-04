@@ -133,13 +133,13 @@ extension ScheduleDetailInfoView {
             toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: opponentTeamLabel, attribute: .centerY, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 50.5/119, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 48/119, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: opponentTeamLabel, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 250/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: opponentTeamLabel, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 30/238, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 35/238, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }

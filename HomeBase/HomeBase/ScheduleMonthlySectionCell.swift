@@ -212,10 +212,10 @@ extension ScheduleMonthlySectionCell {
             toItem: baseView, attribute: .centerX, multiplier: 52/207, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: dayLabel, attribute: .width, relatedBy: .equal,
-            toItem: baseView, attribute: .width, multiplier: 33/414, constant: 0.0)
+            toItem: baseView, attribute: .width, multiplier: 35/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: dayLabel, attribute: .height, relatedBy: .equal,
-            toItem: baseView, attribute: .height, multiplier: 29/103, constant: 0.0)
+            toItem: baseView, attribute: .height, multiplier: 35/103, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -314,7 +314,7 @@ extension ScheduleMonthlySectionCell {
             toItem: baseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: recordButton, attribute: .width, relatedBy: .equal,
-            toItem: baseView, attribute: .width, multiplier: 58/414, constant: 0.0)
+            toItem: baseView, attribute: .width, multiplier: 70/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: recordButton, attribute: .height, relatedBy: .equal,
             toItem: baseView, attribute: .height, multiplier: 20/103, constant: 0.0)

@@ -22,6 +22,8 @@ extension UIViewController {
         button.isEnabled = false
     }
     
+    // MARK: Spinner
+    
     func spinnerStartAnimating(_ spinner: UIActivityIndicatorView) {
         self.view.isUserInteractionEnabled = false
         spinner.startAnimating()
@@ -31,6 +33,8 @@ extension UIViewController {
         self.view.isUserInteractionEnabled = true
         spinner.stopAnimating()
     }
+    
+    // MARK: Location
     
     func bottomLocationOf(_ view: UIView) -> CGFloat {
         var bottomLocation:CGFloat = 0.0
@@ -42,3 +46,11 @@ extension UIViewController {
     }
 }
 
+extension UIView {
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
+}

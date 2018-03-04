@@ -63,20 +63,20 @@ class ScheduleDetailPlayerCell: UITableViewCell {
         return divisionView
     }()
     
-    private lazy var recordButton: UIButton = {
-        let recordButton = UIButton(type: .system)
-        recordButton.setTitle("결과 입력", for: .normal)
-        recordButton.setTitleColor(UIColor(red: 44.0/255.0,
+    lazy var recordPlayerButton: UIButton = {
+        let recordPlayerButton = UIButton(type: .system)
+        recordPlayerButton.setTitle("결과 입력", for: .normal)
+        recordPlayerButton.setTitleColor(UIColor(red: 44.0/255.0,
                                            green: 44.0/255.0,
                                            blue: 44.0/255.0,
                                            alpha: 1.0), for: .normal)
-        recordButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
-        recordButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        recordButton.titleLabel?.minimumScaleFactor = 0.5
-        recordButton.backgroundColor = UIColor.clear
-        recordButton.translatesAutoresizingMaskIntoConstraints = false
+        recordPlayerButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
+        recordPlayerButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        recordPlayerButton.titleLabel?.minimumScaleFactor = 0.5
+        recordPlayerButton.backgroundColor = UIColor.clear
+        recordPlayerButton.translatesAutoresizingMaskIntoConstraints = false
         
-        return recordButton
+        return recordPlayerButton
     }()
     
     // MARK: Init
@@ -109,8 +109,8 @@ class ScheduleDetailPlayerCell: UITableViewCell {
         baseView.addConstraints(nameLabelConstraints())
         baseView.addSubview(divisionView)
         baseView.addConstraints(divisionViewConstraints())
-        baseView.addSubview(recordButton)
-        baseView.addConstraints(recordButtonConstraints())
+        baseView.addSubview(recordPlayerButton)
+        baseView.addConstraints(recordPlayerButtonConstraints())
     }
 }
 
@@ -144,7 +144,7 @@ extension ScheduleDetailPlayerCell {
             toItem: baseView, attribute: .width, multiplier: 90/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: playerNumberLabel, attribute: .height, relatedBy: .equal,
-            toItem: baseView, attribute: .height, multiplier: 30/68, constant: 0.0)
+            toItem: baseView, attribute: .height, multiplier: 36/68, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
@@ -183,18 +183,18 @@ extension ScheduleDetailPlayerCell {
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
     
-    private func recordButtonConstraints() -> [NSLayoutConstraint] {
+    private func recordPlayerButtonConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
-            item: recordButton, attribute: .centerX, relatedBy: .equal,
+            item: recordPlayerButton, attribute: .centerX, relatedBy: .equal,
             toItem: baseView, attribute: .centerX, multiplier: 365/207, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
-            item: recordButton, attribute: .centerY, relatedBy: .equal,
+            item: recordPlayerButton, attribute: .centerY, relatedBy: .equal,
             toItem: baseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: recordButton, attribute: .width, relatedBy: .equal,
+            item: recordPlayerButton, attribute: .width, relatedBy: .equal,
             toItem: baseView, attribute: .width, multiplier: 58/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: recordButton, attribute: .height, relatedBy: .equal,
+            item: recordPlayerButton, attribute: .height, relatedBy: .equal,
             toItem: baseView, attribute: .height, multiplier: 16/68, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
