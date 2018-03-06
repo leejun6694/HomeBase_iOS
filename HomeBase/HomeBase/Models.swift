@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 class HBUser {
-    var email:String
-    var name:String
-    var birth:String
-    var teamCode:String
-    var provider:String
+    var email: String
+    var name: String
+    var birth: String
+    var teamCode: String
+    var provider: String
     
-    init(email:String, name:String, birth:String, teamCode:String, provider:String) {
+    init(email: String, name: String, birth: String, teamCode: String, provider: String) {
         self.email = email
         self.name = name
         self.birth = birth
@@ -26,15 +26,15 @@ class HBUser {
 }
 
 class HBPlayer {
-    var name:String
-    var position:String
-    var backNumber:Int
-    var height:Int
-    var weight:Int
-    var batPosition:String
-    var pitchPosition:String
+    var name: String
+    var position: String
+    var backNumber: Int
+    var height: Int
+    var weight: Int
+    var batPosition: String
+    var pitchPosition: String
     
-    init(name:String, position:String, backNumber:Int, height:Int, weight:Int, batPoition:String, pitchPosition:String) {
+    init(name: String, position: String, backNumber: Int, height: Int, weight: Int, batPoition: String, pitchPosition: String) {
         
         self.name = name
         self.position = position
@@ -47,17 +47,29 @@ class HBPlayer {
 }
 
 class HBTeam {
-    var name:String
-    var logo:String
-    var description:String
-    var admin:String
-    var members:[String]
+    var name: String
+    var logo: String
+    var description: String
+    var admin: String
+    var members: [String]
     
-    init(name:String, logo:String, description:String, admin:String, members:[String]) {
+    init(name: String, logo: String, description: String, admin: String, members: [String]) {
         self.name = name
         self.logo = logo
         self.description = description
         self.admin = admin
         self.members = members
+    }
+}
+
+class HBSchedule {
+    var opponentTeam: String
+    var matchDate: Date
+    var matchPlace: String
+    
+    init(opponentTeam: String, matchDate: Date, matchPlace: String) {
+        self.opponentTeam = opponentTeam
+        self.matchDate = matchDate
+        self.matchPlace = matchPlace
     }
 }

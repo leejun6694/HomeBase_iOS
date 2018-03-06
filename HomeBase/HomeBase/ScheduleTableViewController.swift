@@ -15,18 +15,22 @@ class ScheduleTableViewController: UITableViewController {
     
     var teamData: HBTeam!
     var teamLogo: UIImage!
+    var schedules: [HBSchedule] = [HBSchedule]()
+    
+    let dateFormatter = DateFormatter()
+    
+    var sectionCount = 0
+    var sectionInTable = [String]()
     
     private let scheduleRecentView = ScheduleRecentView()
-    private let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
-    
     private let cellReuseIdendifier = "monthlySectionCell"
     
     private lazy var addButtonView: UIView = {
         let addButton = UIView()
         addButton.backgroundColor = UIColor(red: 44.0/255.0,
-                                          green: 44.0/255.0,
-                                          blue: 44.0/255.0,
-                                          alpha: 1.0)
+                                            green: 44.0/255.0,
+                                            blue: 44.0/255.0,
+                                            alpha: 1.0)
         addButton.translatesAutoresizingMaskIntoConstraints = false
         
         return addButton
@@ -57,7 +61,7 @@ class ScheduleTableViewController: UITableViewController {
         footerView.translatesAutoresizingMaskIntoConstraints = false
         
         return footerView
-    }()
+    }()    
     
     // MARK: Methods
     
@@ -70,8 +74,63 @@ class ScheduleTableViewController: UITableViewController {
         }
     }
     
+    private func sectionSorted() {
+        var savedDate = ""
+        sectionCount = 0
+        sectionInTable = [String]()
+        
+        dateFormatter.locale = Locale(identifier: "ko-KR")
+        dateFormatter.dateFormat = "yyyy-MM"
+        
+        for schedule in schedules {
+            let currentDate = dateFormatter.string(from: schedule.matchDate)
+            if savedDate != currentDate {
+                savedDate = currentDate
+                sectionCount += 1
+                sectionInTable.append(savedDate)
+            }
+        }
+    }
+    
+    private func scheduleSorted(by section: Int) -> [HBSchedule] {
+        var cellSchedules = [HBSchedule]()
+        
+        for schedule in schedules {
+            dateFormatter.locale = Locale(identifier: "ko-KR")
+            dateFormatter.dateFormat = "yyyy-MM"
+            let currentDate = dateFormatter.string(from: schedule.matchDate)
+            
+            if sectionInTable[section] == currentDate {
+                cellSchedules.append(schedule)
+            }
+        }
+        
+        return cellSchedules
+    }
+    
+    private func tableViewReloadData() {
+        if let currentUser = Auth.auth().currentUser {
+            CloudFunction.getUserDataWith(currentUser) {
+                (user, error) in
+                
+                if let user = user {
+                    CloudFunction.getSchedulesDataWith(user.teamCode) {
+                        (schedules, error) in
+                        
+                        if let schedules = schedules {
+                            self.schedules = schedules
+                            self.sectionSorted()
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     @objc private func addButtonDidTapped(_ sender: UIButton) {
-        if let scheduleCreateViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleCreateViewController") as? ScheduleCreateViewController {
+        if let scheduleCreateViewController = self.storyboard?.instantiateViewController(withIdentifier:
+            "ScheduleCreateViewController") as? ScheduleCreateViewController {
             
             self.present(scheduleCreateViewController, animated: true, completion: nil)
         }
@@ -100,6 +159,8 @@ class ScheduleTableViewController: UITableViewController {
         self.tableView.allowsSelection = false
         self.tableView.bounces = false
         self.tableView.tableFooterView = footerView
+        
+        tableViewReloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,6 +181,10 @@ class ScheduleTableViewController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        self.tableView.backgroundColor = UIColor(red: 192.0/255.0,
+                                                 green: 222.0/255.0,
+                                                 blue: 229.0/255.0,
+                                                 alpha: 1.0)
         addButtonView.layer.cornerRadius = addButtonView.frame.size.width / 2
     }
     
@@ -137,13 +202,15 @@ class ScheduleTableViewController: UITableViewController {
 
 extension ScheduleTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return sectionCount + 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 0
-        default: return 4
+        default:
+            let cellSchedules = scheduleSorted(by: section - 1)
+            return cellSchedules.count
         }
     }
     
@@ -160,7 +227,15 @@ extension ScheduleTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0: return scheduleRecentView
-        default: return monthlySectionHeaderView
+        default:
+            let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
+            dateFormatter.locale = Locale(identifier: "ko-KR")
+            dateFormatter.dateFormat = "yyyy-MM"
+            if let date = dateFormatter.date(from: sectionInTable[section - 1]) {
+                monthlySectionHeaderView.matchDate = date
+            }
+            
+            return monthlySectionHeaderView
         }
     }
     
@@ -168,37 +243,15 @@ extension ScheduleTableViewController {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: cellReuseIdendifier, for: indexPath) as! ScheduleMonthlySectionCell
         
+        let cellSchedules = scheduleSorted(by: indexPath.section - 1)
+        
         cell.recordButton.addTarget(self,
                                     action: #selector(recordButtonDidTapped(_:)),
                                     for: .touchUpInside)
+        cell.opponentTeam = cellSchedules[indexPath.row].opponentTeam
+        cell.matchPlace = cellSchedules[indexPath.row].matchPlace
+        cell.matchDate = cellSchedules[indexPath.row].matchDate
         
-        switch indexPath.row {
-        case 0:
-            cell.day = "20"
-            cell.dayOfWeek = "토요일"
-            cell.opponentTeam = "HomeBase"
-            cell.matchDate = "2월 20일 토요일 오전 9:00"
-            cell.matchPlace = "홈베이스 야구장"
-        case 1:
-            cell.day = "13"
-            cell.dayOfWeek = "토요일"
-            cell.opponentTeam = "INHA university"
-            cell.matchDate = "2월 13일 토요일 오전 8:00"
-            cell.matchPlace = "인하대"
-        case 2:
-            cell.day = "7"
-            cell.dayOfWeek = "일요일"
-            cell.opponentTeam = "홈베이스 야구팀"
-            cell.matchDate = "2월 7일 토요일 오전 9:00"
-            cell.matchPlace = "홈베이스 야구장"
-        case 3:
-            cell.day = "6"
-            cell.dayOfWeek = "토요일"
-            cell.opponentTeam = "opponent team"
-            cell.matchDate = "2월 6일 토요일 오전 10:00"
-            cell.matchPlace = "홈베이스 야구장"
-        default: break
-        }
         return cell
     }
     

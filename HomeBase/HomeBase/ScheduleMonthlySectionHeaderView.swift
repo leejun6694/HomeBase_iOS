@@ -12,6 +12,20 @@ class ScheduleMonthlySectionHeaderView: UIView {
 
     // MARK: Properties
     
+    var matchDate = Date() {
+        didSet {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ko-KR")
+            dateFormatter.dateFormat = "yyyy"
+            let year = dateFormatter.string(from: matchDate)
+            dateFormatter.dateFormat = "MM"
+            let month = dateFormatter.string(from: matchDate)
+                
+            monthLabel.text = "\(month)월,"
+            yearLabel.text = "\(year)"
+        }
+    }
+    
     private lazy var monthLabel: UILabel = {
         let monthLabel = UILabel()
         monthLabel.text = "01월,"

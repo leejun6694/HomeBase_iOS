@@ -12,17 +12,26 @@ class ScheduleMonthlySectionCell: UITableViewCell {
 
     // MARK: Properties
     
-    var day = "0" {
-        didSet { dayLabel.text = day }
-    }
-    var dayOfWeek = "일요일" {
-        didSet { dayOfWeekLabel.text = dayOfWeek }
-    }
     var opponentTeam = "HomeBase" {
         didSet { opponentTeamLabel.text = opponentTeam}
     }
-    var matchDate = "" {
-        didSet { matchDateLabel.text = matchDate }
+    var matchDate: Date = Date() {
+        didSet {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ko-KR")
+            dateFormatter.dateFormat = "MM"
+            let month = dateFormatter.string(from: matchDate)
+            dateFormatter.dateFormat = "dd"
+            let day = dateFormatter.string(from: matchDate)
+            dateFormatter.dateFormat = "EEEE"
+            let dayOfWeek = dateFormatter.string(from: matchDate)
+            dateFormatter.dateFormat = "a hh:mm"
+            let time = dateFormatter.string(from: matchDate)
+            
+            dayLabel.text = day
+            dayOfWeekLabel.text = dayOfWeek
+            matchDateLabel.text = "\(month)월 \(day)일 \(dayOfWeek) \(time)"
+        }
     }
     var matchPlace = "" {
         didSet { matchPlaceLabel.text = matchPlace }
@@ -40,9 +49,9 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         let dayLabel = UILabel()
         dayLabel.text = "22"
         dayLabel.textColor = UIColor(red: 44.0/255.0,
-                                      green: 44.0/255.0,
-                                      blue: 44.0/255.0,
-                                      alpha: 1.0)
+                                     green: 44.0/255.0,
+                                     blue: 44.0/255.0,
+                                     alpha: 1.0)
         dayLabel.textAlignment = .center
         dayLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 28.0)
         dayLabel.adjustsFontSizeToFitWidth = true
@@ -56,9 +65,9 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         let dayOfWeekLabel = UILabel()
         dayOfWeekLabel.text = "토요일"
         dayOfWeekLabel.textColor = UIColor(red: 44.0/255.0,
-                                     green: 44.0/255.0,
-                                     blue: 44.0/255.0,
-                                     alpha: 1.0)
+                                           green: 44.0/255.0,
+                                           blue: 44.0/255.0,
+                                           alpha: 1.0)
         dayOfWeekLabel.textAlignment = .center
         dayOfWeekLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13.0)
         dayOfWeekLabel.adjustsFontSizeToFitWidth = true
