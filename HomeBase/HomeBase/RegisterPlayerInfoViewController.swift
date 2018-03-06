@@ -17,7 +17,7 @@ class RegisterPlayerInfoViewController: UIViewController {
     
     var teamCode: String!
     
-    private var currentOriginY:CGFloat = 0.0
+    private var currentOriginY: CGFloat = 0.0
     
     var name: String = ""
     var year: String = ""

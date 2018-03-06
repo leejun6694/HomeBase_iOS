@@ -21,6 +21,9 @@ class ScheduleCreateViewController: UIViewController {
     private let systemFont = UIFont.systemFont(ofSize: 13.0)
     private let barButtonFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 17.0)
     
+    private var matchDate = ""
+    private let dateFormatter = DateFormatter()
+    
     @IBOutlet private var opponentTeamLabel: UILabel!
     @IBOutlet private var opponentTeamTextField: UITextField! {
         didSet { opponentTeamTextField.delegate = self }
@@ -90,8 +93,10 @@ class ScheduleCreateViewController: UIViewController {
     }
     
     @objc private func matchDatePickerDidChanged(_ sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko-KR")
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        matchDate = dateFormatter.string(from: matchDatePicker.date)
+        
         dateFormatter.dateFormat = "MM"
         let month = dateFormatter.string(from: matchDatePicker.date)
         dateFormatter.dateFormat = "dd"
@@ -120,13 +125,12 @@ class ScheduleCreateViewController: UIViewController {
                 
                 if let user = user {
                     if let opponentTeam = self.opponentTeamTextField.text,
-                        let matchPlace = self.matchPlaceTextField.text,
-                        let matchDate = self.matchDateTextField.text {
+                        let matchPlace = self.matchPlaceTextField.text {
                         
                         ref.child("schedules").child(user.teamCode).childByAutoId().setValue(
                             ["opponentTeam": opponentTeam,
                              "matchPlace": matchPlace,
-                             "matchDate": matchDate])
+                             "matchDate": self.matchDate])
                         
                         self.spinnerStopAnimating(self.spinner)
                         self.dismiss(animated: true, completion: nil)
@@ -140,6 +144,10 @@ class ScheduleCreateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dateFormatter.locale = Locale(identifier: "ko-KR")
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        matchDate = dateFormatter.string(from: matchDatePicker.date)
     }
 }
 

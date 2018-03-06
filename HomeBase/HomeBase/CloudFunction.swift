@@ -16,6 +16,7 @@ enum Method:String {
     case getUser = "getUser"
     case getPlayer = "getPlayer"
     case getTeam = "getTeam"
+    case getSchedule = "getSchedule"
 }
 
 struct CloudFunction {
@@ -27,7 +28,7 @@ struct CloudFunction {
         return url
     }
     
-    static func getUserDataWith(_ currentUser:User, completion: @escaping(_ user:HBUser?, _ error: Error?) ->()) {
+    static func getUserDataWith(_ currentUser: User, completion: @escaping(_ user: HBUser?, _ error: Error?) ->()) {
         let parameterDictionary = ["uid": currentUser.uid]
         
         Alamofire.request(
@@ -44,7 +45,11 @@ struct CloudFunction {
                             let teamCode = value["teamCode"] as? String,
                             let provider = value["provider"] as? String {
                             
-                            let user = HBUser(email: email, name: name, birth: birth, teamCode: teamCode, provider: provider)
+                            let user = HBUser(email: email,
+                                              name: name,
+                                              birth: birth,
+                                              teamCode: teamCode,
+                                              provider: provider)
                             completion(user, nil)
                         }
                     }
@@ -55,7 +60,7 @@ struct CloudFunction {
         }
     }
     
-    static func getPlayerDataWith(_ currentUser:User, completion: @escaping(_ player:HBPlayer?, _ error: Error?) ->()) {
+    static func getPlayerDataWith(_ currentUser: User, completion: @escaping(_ player: HBPlayer?, _ error: Error?) ->()) {
         let parameterDictionary = ["uid": currentUser.uid]
         
         Alamofire.request(
@@ -75,12 +80,12 @@ struct CloudFunction {
                             let pitchPosition = value["pitchPosition"] as? String {
                             
                             let player = HBPlayer(name: name,
-                                                position: position,
-                                                backNumber: backNumber,
-                                                height: height,
-                                                weight: weight,
-                                                batPoition: batPosition,
-                                                pitchPosition: pitchPosition)
+                                                  position: position,
+                                                  backNumber: backNumber,
+                                                  height: height,
+                                                  weight: weight,
+                                                  batPoition: batPosition,
+                                                  pitchPosition: pitchPosition)
                             
                             completion(player, nil)
                         }
@@ -92,7 +97,7 @@ struct CloudFunction {
         }
     }
     
-    static func getTeamDataWith(_ teamCode:String, completion: @escaping(_ team:HBTeam?, _ error: Error?) ->()) {
+    static func getTeamDataWith(_ teamCode: String, completion: @escaping(_ team: HBTeam?, _ error: Error?) ->()) {
         let parameterDictionary = ["teamCode": teamCode]
         
         Alamofire.request(
@@ -121,6 +126,47 @@ struct CloudFunction {
                                               members: members)
                             completion(team, nil)
                         }
+                    }
+                } else {
+                    let error = response.result.error
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func getSchedulesDataWith(_ teamCode:String, completion: @escaping(_ schedules: [HBSchedule]?, _ error: Error?) ->()) {
+        let parameterDictionary = ["teamCode": teamCode]
+        
+        Alamofire.request(
+            CloudFunction.methodURL(method: Method.getSchedule),
+            method: .get,
+            parameters: parameterDictionary).responseJSON{
+                (response) -> Void in
+                
+                if response.result.isSuccess {
+                    if let values = response.result.value as? [[String: String]] {
+                        var schedules = [HBSchedule]()
+                        
+                        for value in values {
+                            if let opponentTeam = value["opponentTeam"],
+                                let matchPlace = value["matchPlace"],
+                                let matchDate = value["matchDate"] {
+                                
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.locale = Locale(identifier: "ko-KR")
+                                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                                if let date = dateFormatter.date(from: matchDate) {
+                                    let schedule = HBSchedule(opponentTeam: opponentTeam,
+                                                              matchDate: date,
+                                                              matchPlace: matchPlace)
+                                    schedules.append(schedule)
+                                }
+                            }
+                        }
+                        schedules.sort(by: {
+                            $0.matchDate.compare($1.matchDate) == .orderedDescending })
+                        
+                        completion(schedules, nil)
                     }
                 } else {
                     let error = response.result.error
