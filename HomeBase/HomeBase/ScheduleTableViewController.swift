@@ -53,11 +53,9 @@ class ScheduleTableViewController: UITableViewController {
         let footerView = UIView(frame: CGRect(x: 0.0,
                                               y: 0.0,
                                               width: self.view.frame.size.width,
-                                              height: self.view.frame.size.height * 80/736))
-        footerView.backgroundColor = UIColor(red: 192.0/255.0,
-                                             green: 222.0/255.0,
-                                             blue: 229.0/255.0,
-                                             alpha: 1.0)
+                                              height: self.view.frame.size.height * 191/736))
+        let footerImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundSchedule2"))
+        footerView.addSubview(footerImageView)
         footerView.translatesAutoresizingMaskIntoConstraints = false
         
         return footerView
@@ -128,6 +126,19 @@ class ScheduleTableViewController: UITableViewController {
         }
     }
     
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self,
+                                 action: #selector(refreshControlDidChanged(_:)),
+                                 for: .valueChanged)
+
+        if #available(iOS 10.0, *) {
+            self.tableView.refreshControl = refreshControl
+        } else {
+            self.tableView.addSubview(refreshControl)
+        }
+    }
+    
     @objc private func addButtonDidTapped(_ sender: UIButton) {
         if let scheduleCreateViewController = self.storyboard?.instantiateViewController(withIdentifier:
             "ScheduleCreateViewController") as? ScheduleCreateViewController {
@@ -146,21 +157,26 @@ class ScheduleTableViewController: UITableViewController {
         }
     }
     
+    @objc private func refreshControlDidChanged(_ sender: UIRefreshControl) {
+        tableViewReloadData()
+        sender.endRefreshing()
+    }
+    
     // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fetchTeamData()
+        tableViewReloadData()
 
         self.tableView.register(ScheduleMonthlySectionCell.self,
                                 forCellReuseIdentifier: cellReuseIdendifier)
         self.tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
         self.tableView.allowsSelection = false
-        self.tableView.bounces = false
         self.tableView.tableFooterView = footerView
         
-        tableViewReloadData()
+        setupRefreshControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -181,10 +197,11 @@ class ScheduleTableViewController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.tableView.backgroundColor = UIColor(red: 192.0/255.0,
-                                                 green: 222.0/255.0,
-                                                 blue: 229.0/255.0,
+        self.tableView.backgroundColor = UIColor(red: 51.0/255.0,
+                                                 green: 215.0/255.0,
+                                                 blue: 253.0/255.0,
                                                  alpha: 1.0)
+        
         addButtonView.layer.cornerRadius = addButtonView.frame.size.width / 2
     }
     

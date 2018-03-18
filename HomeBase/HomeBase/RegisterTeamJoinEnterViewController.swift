@@ -30,13 +30,9 @@ class RegisterTeamJoinEnterViewController: UIViewController {
         spinnerStartAnimating(spinner)
         let databaseRef = Database.database().reference()
         
-        if let currentUser = Auth.auth().currentUser {
-            let member = currentUser.uid
-            
+        if let currentUser = Auth.auth().currentUser {            
             databaseRef.child("users").child(currentUser.uid).updateChildValues(
                 ["teamCode": teamCode])
-            databaseRef.child("teams").child(teamCode).child(
-                "members").childByAutoId().setValue(member)
             
             if let registerUserNavigation = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
                 

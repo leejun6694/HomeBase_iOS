@@ -12,7 +12,39 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
 
     // MARK: Properties
     
-    var batterButtonState = true
+    var batterButtonState = true {
+        didSet {
+            if batterButtonState {
+                if buttonUnderView.isDescendant(of: self) {
+                    buttonUnderView.removeFromSuperview()
+                }
+                self.addSubview(buttonUnderView)
+                self.addConstraints(batterButtonUnderViewConstraints())
+                batterButton.setTitleColor(UIColor(red: 44.0/255.0,
+                                                   green: 44.0/255.0,
+                                                   blue: 44.0/255.0,
+                                                   alpha: 1.0), for: .normal)
+                pitcherButton.setTitleColor(UIColor(red: 44.0/255.0,
+                                                    green: 44.0/255.0,
+                                                    blue: 44.0/255.0,
+                                                    alpha: 0.6), for: .normal)
+            } else {
+                if buttonUnderView.isDescendant(of: self) {
+                    buttonUnderView.removeFromSuperview()
+                }
+                self.addSubview(buttonUnderView)
+                self.addConstraints(pitcherButtonUnderViewConstraints())
+                batterButton.setTitleColor(UIColor(red: 44.0/255.0,
+                                                   green: 44.0/255.0,
+                                                   blue: 44.0/255.0,
+                                                   alpha: 0.6), for: .normal)
+                pitcherButton.setTitleColor(UIColor(red: 44.0/255.0,
+                                                    green: 44.0/255.0,
+                                                    blue: 44.0/255.0,
+                                                    alpha: 1.0), for: .normal)
+            }
+        }
+    }
     
     lazy var cancelButton: UIButton = {
         let cancelButton = UIButton(type: .system)
@@ -59,7 +91,7 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
         return doneButton
     }()
     
-    private lazy var batterButton: UIButton = {
+    lazy var batterButton: UIButton = {
         let batterButton = UIButton(type: .system)
         batterButton.setTitle("타자", for: .normal)
         batterButton.setTitleColor(UIColor(red: 44.0/255.0,
@@ -69,16 +101,13 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
         batterButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17.0)
         batterButton.titleLabel?.adjustsFontSizeToFitWidth = true
         batterButton.titleLabel?.minimumScaleFactor = 0.5
-        batterButton.addTarget(self,
-                               action: #selector(batterButtonDidTapped(_:)),
-                               for: .touchUpInside)
         batterButton.backgroundColor = UIColor.clear
         batterButton.translatesAutoresizingMaskIntoConstraints = false
         
         return batterButton
     }()
     
-    private lazy var pitcherButton: UIButton = {
+    lazy var pitcherButton: UIButton = {
         let pitcherButton = UIButton(type: .system)
         pitcherButton.setTitle("투수", for: .normal)
         pitcherButton.setTitleColor(UIColor(red: 44.0/255.0,
@@ -88,9 +117,6 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
         pitcherButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17.0)
         pitcherButton.titleLabel?.adjustsFontSizeToFitWidth = true
         pitcherButton.titleLabel?.minimumScaleFactor = 0.5
-        pitcherButton.addTarget(self,
-                                action: #selector(pitcherButtonDidTapped(_:)),
-                                for: .touchUpInside)
         pitcherButton.backgroundColor = UIColor.clear
         pitcherButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -107,44 +133,6 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
         
         return buttonUnderView
     }()
-    
-    // MARK: Methods
-    
-    @objc private func batterButtonDidTapped(_ sender: UIButton) {
-        batterButtonState = true
-
-        if buttonUnderView.isDescendant(of: self) {
-            buttonUnderView.removeFromSuperview()
-        }
-        self.addSubview(buttonUnderView)
-        self.addConstraints(batterButtonUnderViewConstraints())
-        batterButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0), for: .normal)
-        pitcherButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                            green: 44.0/255.0,
-                                            blue: 44.0/255.0,
-                                            alpha: 0.6), for: .normal)
-    }
-    
-    @objc private func pitcherButtonDidTapped(_ sender: UIButton) {
-        batterButtonState = false
-        
-        if buttonUnderView.isDescendant(of: self) {
-            buttonUnderView.removeFromSuperview()
-        }
-        self.addSubview(buttonUnderView)
-        self.addConstraints(pitcherButtonUnderViewConstraints())
-        batterButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 0.6), for: .normal)
-        pitcherButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                            green: 44.0/255.0,
-                                            blue: 44.0/255.0,
-                                            alpha: 1.0), for: .normal)
-    }
     
     // MARK: Life Cycle
     

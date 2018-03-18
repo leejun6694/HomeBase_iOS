@@ -112,11 +112,28 @@ struct CloudFunction {
                             let logo = value["logo"] as? String,
                             let description = value["description"] as? String,
                             let admin = value["admin"] as? String,
-                            let memberList = value["members"] as? [String: String]  {
+                            let memberList = value["members"] as? [String: [String: Any]]  {
                             
-                            var members = [String]()
-                            for (_, member) in memberList {
-                                members.append(member)
+                            var members = [String: HBPlayer]()
+                            for (uid, member) in memberList {
+                                if let name = member["name"] as? String,
+                                    let position = member["position"] as? String,
+                                    let backNumber = member["backNumber"] as? Int,
+                                    let height = member["height"] as? Int,
+                                    let weight = member["weight"] as? Int,
+                                    let batPosition = member["batPosition"] as? String,
+                                    let pitchPosition = member["pitchPosition"] as? String {
+                                    
+                                    let player = HBPlayer(name: name,
+                                                          position: position,
+                                                          backNumber: backNumber,
+                                                          height: height,
+                                                          weight: weight,
+                                                          batPoition: batPosition,
+                                                          pitchPosition: pitchPosition)
+                                    
+                                    members[uid] = player
+                                }
                             }
                             
                             let team = HBTeam(name: name,
