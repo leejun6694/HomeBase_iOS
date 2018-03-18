@@ -59,7 +59,7 @@ class ScheduleTableViewController: UITableViewController {
         footerView.translatesAutoresizingMaskIntoConstraints = false
         
         return footerView
-    }()    
+    }()
     
     // MARK: Methods
     
@@ -169,10 +169,10 @@ class ScheduleTableViewController: UITableViewController {
         
         fetchTeamData()
         tableViewReloadData()
-
+        
+        self.tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
         self.tableView.register(ScheduleMonthlySectionCell.self,
                                 forCellReuseIdentifier: cellReuseIdendifier)
-        self.tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
         self.tableView.allowsSelection = false
         self.tableView.tableFooterView = footerView
         

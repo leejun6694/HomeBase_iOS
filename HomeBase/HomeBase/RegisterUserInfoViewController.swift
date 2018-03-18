@@ -602,27 +602,25 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        let textCount = textField.text?.count ?? 0
+        
         switch textField {
         case nameTextField:
-            let nameTextCount = nameTextField.text?.count ?? 0
-            
-            if nameTextCount < 2 { nameTextFieldCondition(false) }
-            else if nameTextCount > 10 { nameTextFieldCondition(false) }
+            if textCount < 2 { nameTextFieldCondition(false) }
+            else if textCount > 10 { nameTextFieldCondition(false) }
             else { nameTextFieldCondition(true) }
         case birthTextField:
             birthTextFieldCondition(birthChecked(birthTextField))
             
             heightTextField.becomeFirstResponder()
         case heightTextField:
-            let heightTextCount = heightTextField.text?.count ?? 0
-            if heightTextCount != 0 { heightTextField.text?.append(" cm") }
+            if textCount != 0 { heightTextField.text?.append(" cm") }
             
             heightTextFieldCondition(bodyChecked(heightTextField))
             
             weightTextField.becomeFirstResponder()
         case weightTextField:
-            let weightTextCount = weightTextField.text?.count ?? 0
-            if weightTextCount != 0 { weightTextField.text?.append(" kg") }
+            if textCount != 0 { weightTextField.text?.append(" kg") }
             
             weightTextFieldCondition(bodyChecked(weightTextField))
             

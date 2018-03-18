@@ -493,7 +493,6 @@ extension RegisterPlayerInfoViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
-//        case positionTextField:
         case playerNumberTextField:
             let playerNumberText = playerNumberTextField.text ?? ""
             if playerNumberText.count > 0, playerNumberText.count < 4 {
