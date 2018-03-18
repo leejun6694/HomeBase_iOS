@@ -12,6 +12,14 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
 
     // MARK: Properties
     
+    var headText = "" {
+        didSet { headLabel.text = headText }
+    }
+    
+    var record: Int = 0 {
+        didSet { recordLabel.text = "\(record)" }
+    }
+    
     private lazy var headLabel: UILabel = {
         let headLabel = UILabel()
         headLabel.text = "1루타"
@@ -28,17 +36,21 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
         return headLabel
     }()
     
-    private lazy var minusButton: UIButton = {
-        let minusButton = UIButton(type: .system)
-        minusButton.setImage(#imageLiteral(resourceName: "iconMinus"), for: .normal)
-        minusButton.tintColor = UIColor(red: 44.0/255.0,
+    private lazy var minusImageView: UIImageView = {
+        let minusImageView = UIImageView(image: #imageLiteral(resourceName: "iconMinus"))
+        minusImageView.tintColor = UIColor(red: 44.0/255.0,
                                         green: 44.0/255.0,
                                         blue: 44.0/255.0,
                                         alpha: 1.0)
-        minusButton.backgroundColor = UIColor.clear
-        minusButton.translatesAutoresizingMaskIntoConstraints = false
+        minusImageView.backgroundColor = UIColor.clear
+        minusImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        return minusButton
+        let tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer.addTarget(self, action: #selector(minusImageViewDidTapped(_:)))
+        minusImageView.isUserInteractionEnabled = true
+        minusImageView.addGestureRecognizer(tapRecognizer)
+        
+        return minusImageView
     }()
     
     private lazy var recordLabel: UILabel = {
@@ -57,17 +69,21 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
         return recordLabel
     }()
     
-    private lazy var plusButton: UIButton = {
-        let plusButton = UIButton(type: .system)
-        plusButton.setImage(#imageLiteral(resourceName: "iconPlus"), for: .normal)
-        plusButton.tintColor = UIColor(red: 44.0/255.0,
-                                       green: 44.0/255.0,
-                                       blue: 44.0/255.0,
-                                       alpha: 1.0)
-        plusButton.backgroundColor = UIColor.clear
-        plusButton.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var plusImageView: UIImageView = {
+        let plusImageView = UIImageView(image: #imageLiteral(resourceName: "iconPlus"))
+        plusImageView.tintColor = UIColor(red: 44.0/255.0,
+                                           green: 44.0/255.0,
+                                           blue: 44.0/255.0,
+                                           alpha: 1.0)
+        plusImageView.backgroundColor = UIColor.clear
+        plusImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        return plusButton
+        let tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer.addTarget(self, action: #selector(plusImageViewDidTapped(_:)))
+        plusImageView.isUserInteractionEnabled = true
+        plusImageView.addGestureRecognizer(tapRecognizer)
+        
+        return plusImageView
     }()
     
     private lazy var divisionView: UIView = {
@@ -81,6 +97,18 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
         return divisionView
     }()
 
+    // MARK: Methods
+    
+    @objc private func minusImageViewDidTapped(_ sender: UITapGestureRecognizer) {
+        if record != 0 {
+            record -= 1
+        }
+    }
+    
+    @objc private func plusImageViewDidTapped(_ sender: UITapGestureRecognizer) {
+        record += 1
+    }
+    
     // MARK: Init
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -97,12 +125,12 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
         
         self.addSubview(headLabel)
         self.addConstraints(headLabelConstraints())
-        self.addSubview(minusButton)
-        self.addConstraints(minusButtonConstraints())
+        self.addSubview(minusImageView)
+        self.addConstraints(minusImageViewConstraints())
         self.addSubview(recordLabel)
         self.addConstraints(recordLabelConstraints())
-        self.addSubview(plusButton)
-        self.addConstraints(plusButtonConstraints())
+        self.addSubview(plusImageView)
+        self.addConstraints(plusImageViewConstraints())
         self.addSubview(divisionView)
         self.addConstraints(divisionViewConstraints())
     }
@@ -126,19 +154,19 @@ extension ScheduleDetailRecordPlayerTableViewCell {
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
     
-    private func minusButtonConstraints() -> [NSLayoutConstraint] {
+    private func minusImageViewConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
-            item: minusButton, attribute: .centerX, relatedBy: .equal,
+            item: minusImageView, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 58/207, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
-            item: minusButton, attribute: .centerY, relatedBy: .equal,
+            item: minusImageView, attribute: .centerY, relatedBy: .equal,
             toItem: self, attribute: .centerY, multiplier: 62.5/52.25, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: minusButton, attribute: .width, relatedBy: .equal,
+            item: minusImageView, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 40/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: minusButton, attribute: .height, relatedBy: .equal,
-            toItem: minusButton, attribute: .width, multiplier: 1.0, constant: 0.0)
+            item: minusImageView, attribute: .height, relatedBy: .equal,
+            toItem: minusImageView, attribute: .width, multiplier: 1.0, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
@@ -160,19 +188,19 @@ extension ScheduleDetailRecordPlayerTableViewCell {
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
     
-    private func plusButtonConstraints() -> [NSLayoutConstraint] {
+    private func plusImageViewConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
-            item: plusButton, attribute: .centerX, relatedBy: .equal,
+            item: plusImageView, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 354/207, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
-            item: plusButton, attribute: .centerY, relatedBy: .equal,
+            item: plusImageView, attribute: .centerY, relatedBy: .equal,
             toItem: self, attribute: .centerY, multiplier: 62.5/52.25, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: plusButton, attribute: .width, relatedBy: .equal,
+            item: plusImageView, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 40/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: plusButton, attribute: .height, relatedBy: .equal,
-            toItem: minusButton, attribute: .width, multiplier: 1.0, constant: 0.0)
+            item: plusImageView, attribute: .height, relatedBy: .equal,
+            toItem: plusImageView, attribute: .width, multiplier: 1.0, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }

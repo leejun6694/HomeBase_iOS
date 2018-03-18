@@ -78,6 +78,7 @@ class SignInViewController: UIViewController {
                                 if let registerUserNavigation =
                                     self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
                                     
+                                    registerUserNavigation.teamCode = teamCode
                                     self.spinnerStopAnimating(self.spinner)
                                     UIApplication.shared.keyWindow?.rootViewController = registerUserNavigation
                                 }

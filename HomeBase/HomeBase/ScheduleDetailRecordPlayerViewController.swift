@@ -34,6 +34,18 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
         self.performSegue(withIdentifier: "unwindToDetailView", sender: self)
     }
     
+    @objc private func batterButtonDidTapped(_ sender: UIButton) {
+        scheduleDetailRecordPlayerHeaderView.batterButtonState = true
+        
+        self.tableView.reloadData()
+    }
+    
+    @objc private func pitcherButtonDidTapped(_ sender: UIButton) {
+        scheduleDetailRecordPlayerHeaderView.batterButtonState = false
+        
+        self.tableView.reloadData()
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -49,6 +61,11 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
         
         scheduleDetailRecordPlayerHeaderView.cancelButton.addTarget(
             self, action: #selector(cancelButtonDidTapped(_:)), for: .touchUpInside)
+        
+        scheduleDetailRecordPlayerHeaderView.batterButton.addTarget(
+            self, action: #selector(batterButtonDidTapped(_:)), for: .touchUpInside)
+        scheduleDetailRecordPlayerHeaderView.pitcherButton.addTarget(
+            self, action: #selector(pitcherButtonDidTapped(_:)), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,13 +82,51 @@ extension ScheduleDetailRecordPlayerViewController: UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if scheduleDetailRecordPlayerHeaderView.batterButtonState {
+            return 13
+        } else {
+            return 11
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: cellReuseIdendifier,
             for: indexPath) as! ScheduleDetailRecordPlayerTableViewCell
+        
+        if scheduleDetailRecordPlayerHeaderView.batterButtonState {
+            switch indexPath.row {
+            case 0: cell.headText = "1루타"
+            case 1: cell.headText = "2루타"
+            case 2: cell.headText = "3루타"
+            case 3: cell.headText = "홈런"
+            case 4: cell.headText = "볼넷"
+            case 5: cell.headText = "사구"
+            case 6: cell.headText = "희생타"
+            case 7: cell.headText = "도루"
+            case 8: cell.headText = "삼진"
+            case 9: cell.headText = "땅볼"
+            case 10: cell.headText = "뜬공"
+            case 11: cell.headText = "득점"
+            case 12: cell.headText = "타점"
+            default: break
+            }
+        } else {
+            switch indexPath.row {
+            case 0: cell.headText = "승리"
+            case 1: cell.headText = "패배"
+            case 2: cell.headText = "홀드"
+            case 3: cell.headText = "세이브"
+            case 4: cell.headText = "이닝"
+            case 5: cell.headText = "삼진"
+            case 6: cell.headText = "자책점"
+            case 7: cell.headText = "피안타"
+            case 8: cell.headText = "피홈런"
+            case 9: cell.headText = "볼넷"
+            case 10: cell.headText = "사구"
+            default: break
+            }
+        }
         
         return cell
     }

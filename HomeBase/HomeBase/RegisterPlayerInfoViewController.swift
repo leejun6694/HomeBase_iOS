@@ -214,32 +214,36 @@ class RegisterPlayerInfoViewController: UIViewController {
                  "backNumber": playerNumber,
                  "batPosition": batPosition,
                  "pitchPosition": pitchPosition,
-                 "joinedAt": joinedAt])
-            
-            CloudFunction.getTeamDataWith(teamCode) {
-                (teamData, error) -> Void in
-                
-                if let teamData = teamData {
-                    let storageRef = Storage.storage().reference()
-                    let imageRef = storageRef.child(teamData.logo)
+                 "teamCode": teamCode,
+                 "joinedAt": joinedAt]) {
+                    (error, ref) -> Void in
                     
-                    imageRef.getData(maxSize: 4 * 1024 * 1024) {
-                        (data, error) in
+                    CloudFunction.getTeamDataWith(self.teamCode) {
+                        (teamData, error) -> Void in
                         
-                        if let error = error {
-                            print(error)
-                        } else {
-                            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                        if let teamData = teamData {
+                            let storageRef = Storage.storage().reference()
+                            let imageRef = storageRef.child(teamData.logo)
+                            
+                            imageRef.getData(maxSize: 4 * 1024 * 1024) {
+                                (data, error) in
                                 
-                                mainTabBarController.teamData = teamData
-                                mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                                self.spinnerStopAnimating(self.spinner)
-                                UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                if let error = error {
+                                    print(error)
+                                } else {
+                                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                    if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                                        
+                                        mainTabBarController.teamData = teamData
+                                        mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                                        self.spinnerStopAnimating(self.spinner)
+                                        UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                    }
+                                }
                             }
                         }
                     }
-                }
+                    
             }
         } else {
             spinnerStopAnimating(spinner)

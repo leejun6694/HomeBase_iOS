@@ -139,16 +139,12 @@ class RegisterTeamCreateViewController: UIViewController {
                 }
                 
                 let admin:String = currentUser.uid
-                let member:String = currentUser.uid
                 
                 databaseRef.child("teams").child(teamCode).setValue(
                     ["name": teamName,
                      "logo": logoRef.fullPath,
                      "description": teamIntro,
                      "admin": admin])
-                
-                databaseRef.child("teams").child(teamCode).child(
-                    "members").childByAutoId().setValue(member)
             }
             
             if let registerTeamCompleteViewController =
