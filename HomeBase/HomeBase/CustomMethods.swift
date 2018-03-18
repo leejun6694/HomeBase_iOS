@@ -54,3 +54,9 @@ extension UIView {
         self.layer.mask = mask
     }
 }
+
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+}
