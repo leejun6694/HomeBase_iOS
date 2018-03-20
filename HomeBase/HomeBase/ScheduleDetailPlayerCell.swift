@@ -12,6 +12,18 @@ class ScheduleDetailPlayerCell: UITableViewCell {
 
     // MARK: Properties
     
+    var backNumber: Int = 0 {
+        didSet {
+            backNumberLabel.text = "\(backNumber)"
+        }
+    }
+    
+    var name = "" {
+        didSet {
+            nameLabel.text = name
+        }
+    }
+    
     private lazy var baseView: UIView = {
         let baseView = UIView()
         baseView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
@@ -20,20 +32,20 @@ class ScheduleDetailPlayerCell: UITableViewCell {
         return baseView
     }()
     
-    private lazy var playerNumberLabel: UILabel = {
-        let playerNumberLabel = UILabel()
-        playerNumberLabel.text = "14"
-        playerNumberLabel.textColor = UIColor(red: 44.0/255.0,
+    private lazy var backNumberLabel: UILabel = {
+        let backNumberLabel = UILabel()
+        backNumberLabel.text = "14"
+        backNumberLabel.textColor = UIColor(red: 44.0/255.0,
                                               green: 44.0/255.0,
                                               blue: 44.0/255.0,
                                               alpha: 1.0)
-        playerNumberLabel.textAlignment = .center
-        playerNumberLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 26.0)
-        playerNumberLabel.adjustsFontSizeToFitWidth = true
-        playerNumberLabel.minimumScaleFactor = 0.5
-        playerNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        backNumberLabel.textAlignment = .center
+        backNumberLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 26.0)
+        backNumberLabel.adjustsFontSizeToFitWidth = true
+        backNumberLabel.minimumScaleFactor = 0.5
+        backNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        return playerNumberLabel
+        return backNumberLabel
     }()
     
     private lazy var nameLabel: UILabel = {
@@ -103,8 +115,8 @@ class ScheduleDetailPlayerCell: UITableViewCell {
         
         self.addSubview(baseView)
         self.addConstraints(baseViewConstraints())
-        baseView.addSubview(playerNumberLabel)
-        baseView.addConstraints(playerNumberLabelConstraints())
+        baseView.addSubview(backNumberLabel)
+        baseView.addConstraints(backNumberLabelConstraints())
         baseView.addSubview(nameLabel)
         baseView.addConstraints(nameLabelConstraints())
         baseView.addSubview(divisionView)
@@ -132,18 +144,18 @@ extension ScheduleDetailPlayerCell {
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
     
-    private func playerNumberLabelConstraints() -> [NSLayoutConstraint] {
+    private func backNumberLabelConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
-            item: playerNumberLabel, attribute: .centerX, relatedBy: .equal,
+            item: backNumberLabel, attribute: .centerX, relatedBy: .equal,
             toItem: baseView, attribute: .centerX, multiplier: 52.5/207, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
-            item: playerNumberLabel, attribute: .centerY, relatedBy: .equal,
+            item: backNumberLabel, attribute: .centerY, relatedBy: .equal,
             toItem: baseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: playerNumberLabel, attribute: .width, relatedBy: .equal,
+            item: backNumberLabel, attribute: .width, relatedBy: .equal,
             toItem: baseView, attribute: .width, multiplier: 90/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: playerNumberLabel, attribute: .height, relatedBy: .equal,
+            item: backNumberLabel, attribute: .height, relatedBy: .equal,
             toItem: baseView, attribute: .height, multiplier: 36/68, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]

@@ -150,7 +150,14 @@ class ScheduleTableViewController: UITableViewController {
     @objc private func recordButtonDidTapped(_ sender: UIButton) {
         if let scheduleDetailTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleDetailTableViewController") as? ScheduleDetailTableViewController {
             
+            let section = sender.tag / 10000
+            let row = sender.tag % 10000
+            
+            let cellSchedules = scheduleSorted(by: section - 1)
+            let cellSchedule = cellSchedules[row]
+            
             scheduleDetailTableViewController.teamData = teamData
+            scheduleDetailTableViewController.cellSchedule = cellSchedule
             self.navigationController?.pushViewController(
                 scheduleDetailTableViewController,
                 animated: true)
@@ -261,13 +268,15 @@ extension ScheduleTableViewController {
             withIdentifier: cellReuseIdendifier, for: indexPath) as! ScheduleMonthlySectionCell
         
         let cellSchedules = scheduleSorted(by: indexPath.section - 1)
+        let cellSchedule = cellSchedules[indexPath.row]
         
+        cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
         cell.recordButton.addTarget(self,
                                     action: #selector(recordButtonDidTapped(_:)),
                                     for: .touchUpInside)
-        cell.opponentTeam = cellSchedules[indexPath.row].opponentTeam
-        cell.matchPlace = cellSchedules[indexPath.row].matchPlace
-        cell.matchDate = cellSchedules[indexPath.row].matchDate
+        cell.opponentTeam = cellSchedule.opponentTeam
+        cell.matchPlace = cellSchedule.matchPlace
+        cell.matchDate = cellSchedule.matchDate
         
         return cell
     }

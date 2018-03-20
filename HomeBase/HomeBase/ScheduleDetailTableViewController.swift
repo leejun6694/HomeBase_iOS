@@ -13,6 +13,8 @@ class ScheduleDetailTableViewController: UITableViewController {
     // MARK: Properties
     
     var teamData: HBTeam!
+    var cellSchedule: HBSchedule!
+    var arrayOfKeys = [String]()
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -61,6 +63,8 @@ class ScheduleDetailTableViewController: UITableViewController {
                                 forCellReuseIdentifier: cellReuseIdendifier)
         self.tableView.allowsSelection = false
         self.tableView.bounces = false
+        
+        arrayOfKeys = Array(teamData.members.keys)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +82,7 @@ extension ScheduleDetailTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 0
-        default: return 10
+        default: return teamData.members.count
         }
     }
     
@@ -92,12 +96,23 @@ extension ScheduleDetailTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        scheduleDetailInfoView.opponentTeam = cellSchedule.opponentTeam
+        scheduleDetailInfoView.matchDate = cellSchedule.matchDate
+        scheduleDetailInfoView.matchPlace = cellSchedule.matchPlace
+        
         return scheduleDetailInfoView
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdendifier,
                                                  for: indexPath) as! ScheduleDetailPlayerCell
+        
+        let key = arrayOfKeys[indexPath.row]
+        if let player = teamData.members[key] {
+            cell.backNumber = player.backNumber
+            cell.name = player.name
+        }
+        
         cell.recordPlayerButton.addTarget(self,
                                           action: #selector(recordPlayerButtonDidTapped(_:)),
                                           for: .touchUpInside)

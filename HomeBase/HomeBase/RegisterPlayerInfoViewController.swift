@@ -241,9 +241,10 @@ class RegisterPlayerInfoViewController: UIViewController {
                                     }
                                 }
                             }
+                        } else {
+                            print("no team data")
                         }
                     }
-                    
             }
         } else {
             spinnerStopAnimating(spinner)
