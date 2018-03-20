@@ -136,6 +136,17 @@ struct CloudFunction {
                                 }
                             }
                             
+                            // enhancement
+                            // [String: HBPlayer] -> sorted -> [(key: String, value: HBPlayer)]
+                            // double loop
+                            let sortedMembers = members.sorted(by: {
+                                $0.value.backNumber < $1.value.backNumber })
+                            
+                            members.removeAll()
+                            for (key, value) in sortedMembers {
+                                members[key] = value
+                            }
+                            
                             let team = HBTeam(name: name,
                                               logo: logo,
                                               description: description,

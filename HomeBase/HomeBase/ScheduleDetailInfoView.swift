@@ -12,10 +12,37 @@ class ScheduleDetailInfoView: UIView {
 
     // MARK: Properties
     
-//    var teamData: HBTeam!
-    
     var homeTeamScore = 0
     var opponentTeamScore = 0
+    
+    var opponentTeam: String = "" {
+        didSet {
+            opponentTeamLabel.text = opponentTeam
+        }
+    }
+    
+    var matchDate: Date = Date() {
+        didSet {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ko-KR")
+            dateFormatter.dateFormat = "MM"
+            let month = dateFormatter.string(from: matchDate)
+            dateFormatter.dateFormat = "dd"
+            let day = dateFormatter.string(from: matchDate)
+            dateFormatter.dateFormat = "EEEE"
+            let dayOfWeek = dateFormatter.string(from: matchDate)
+            dateFormatter.dateFormat = "a hh:mm"
+            let time = dateFormatter.string(from: matchDate)
+            
+            matchDateLabel.text = "\(month)월 \(day)일 \(dayOfWeek) \(time)"
+        }
+    }
+    
+    var matchPlace: String = "" {
+        didSet {
+            matchPlaceLabel.text = matchPlace
+        }
+    }
     
     private lazy var opponentTeamLabel: UILabel = {
         let opponentTeamLabel = UILabel()
