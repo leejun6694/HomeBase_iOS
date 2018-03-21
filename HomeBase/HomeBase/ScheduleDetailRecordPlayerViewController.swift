@@ -12,6 +12,8 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
 
     // MARK: Properites
     
+    var player: HBPlayer!
+    
     @IBOutlet private var scheduleDetailRecordPlayerHeaderView: ScheduleDetailRecordPlayerHeaderView!
     private let cellReuseIdendifier = "recordPlayerCell"
     
@@ -38,11 +40,13 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
         scheduleDetailRecordPlayerHeaderView.batterButtonState = true
         
         self.tableView.reloadData()
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     @objc private func pitcherButtonDidTapped(_ sender: UIButton) {
         scheduleDetailRecordPlayerHeaderView.batterButtonState = false
         
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         self.tableView.reloadData()
     }
     
@@ -58,6 +62,8 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
         self.tableView.tableFooterView = footerView
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        scheduleDetailRecordPlayerHeaderView.name = player.name
         
         scheduleDetailRecordPlayerHeaderView.cancelButton.addTarget(
             self, action: #selector(cancelButtonDidTapped(_:)), for: .touchUpInside)
