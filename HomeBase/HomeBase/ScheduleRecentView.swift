@@ -32,6 +32,7 @@ class ScheduleRecentView: UIView {
                 
                 self.addSubview(recordStackView)
                 self.addConstraints(recordStackViewConstraints())
+                recordStackView.spacing = self.frame.size.width * 14/414
             }
         }
     }
@@ -118,7 +119,6 @@ class ScheduleRecentView: UIView {
         let recordStackView = UIStackView()
         recordStackView.axis = .horizontal
         recordStackView.distribution = .fillEqually
-        recordStackView.spacing = self.frame.size.width * 14/414
         recordStackView.addArrangedSubview(firstRecordView)
         recordStackView.addArrangedSubview(secondRecordView)
         recordStackView.addArrangedSubview(thirdRecordView)
