@@ -119,7 +119,6 @@ class ScheduleCreateViewController: UIViewController {
     }
     
     @objc private func matchDateDoneButtonDidTapped(_ sender: UIButton) {
-        matchDateFieldCondition(true)
         matchDateTextField.resignFirstResponder()
     }
     

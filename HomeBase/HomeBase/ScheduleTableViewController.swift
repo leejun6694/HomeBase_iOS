@@ -109,6 +109,8 @@ class ScheduleTableViewController: UITableViewController {
     private func tableViewReloadData() {
         viewDisabled(self.view)
         
+        scheduleRecentView.scheduleCount = schedules.count
+        
         if let currentUser = Auth.auth().currentUser {
             CloudFunction.getUserDataWith(currentUser) {
                 (user, error) in
@@ -230,40 +232,64 @@ class ScheduleTableViewController: UITableViewController {
 
 extension ScheduleTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionCount + 1
+        if schedules.count == 0 {
+            return 2
+        } else {
+            return sectionCount + 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 0
         default:
-            let cellSchedules = scheduleSorted(by: section - 1)
-            return cellSchedules.count
+            if schedules.count == 0 {
+                return 0
+            } else {
+                let cellSchedules = scheduleSorted(by: section - 1)
+                return cellSchedules.count
+            }
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let recentViewHeight = CGFloat(self.view.frame.size.height * 346/736).rounded()
-        let monthlySectionHeaderViewHeight = CGFloat(self.view.frame.size.height * 57/736).rounded()
+        let recentViewHeight =
+            CGFloat(self.view.frame.size.height * 346/736).rounded()
+        let monthlySectionHeaderViewHeight =
+            CGFloat(self.view.frame.size.height * 57/736).rounded()
+        let noDataSectionHeaderViewHeight =
+            CGFloat(self.view.frame.size.height * 127/736).rounded()
         
         switch section {
         case 0: return recentViewHeight
-        default: return monthlySectionHeaderViewHeight
+        default:
+            if schedules.count == 0 {
+                return noDataSectionHeaderViewHeight
+            } else {
+                return monthlySectionHeaderViewHeight
+            }
         }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 0: return scheduleRecentView
+        case 0:
+            scheduleRecentView.scheduleCount = schedules.count
+            return scheduleRecentView
         default:
-            let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
-            dateFormatter.locale = Locale(identifier: "ko-KR")
-            dateFormatter.dateFormat = "yyyy-MM"
-            if let date = dateFormatter.date(from: sectionInTable[section - 1]) {
-                monthlySectionHeaderView.matchDate = date
+            if schedules.count == 0 {
+                let noDataSectionHeaderView = ScheduleNoDataView()
+                return noDataSectionHeaderView
+            } else {
+                let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
+                dateFormatter.locale = Locale(identifier: "ko-KR")
+                dateFormatter.dateFormat = "yyyy-MM"
+                if let date = dateFormatter.date(from: sectionInTable[section - 1]) {
+                    monthlySectionHeaderView.matchDate = date
+                }
+                
+                return monthlySectionHeaderView
             }
-            
-            return monthlySectionHeaderView
         }
     }
     
