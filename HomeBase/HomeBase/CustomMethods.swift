@@ -10,6 +10,18 @@ import UIKit
 
 extension UIViewController {
     
+    // MARK: View
+    
+    func viewEnabled(_ view: UIView) {
+        view.alpha = 1.0
+        view.isUserInteractionEnabled = true
+    }
+    
+    func viewDisabled(_ view: UIView) {
+        view.alpha = 0.5
+        view.isUserInteractionEnabled = false
+    }
+    
     // MARK: UIButton
     
     func buttonEnabled(_ button: UIButton) {

@@ -107,6 +107,8 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     private func tableViewReloadData() {
+        viewDisabled(self.view)
+        
         if let currentUser = Auth.auth().currentUser {
             CloudFunction.getUserDataWith(currentUser) {
                 (user, error) in
@@ -119,6 +121,8 @@ class ScheduleTableViewController: UITableViewController {
                             self.schedules = schedules
                             self.sectionSorted()
                             self.tableView.reloadData()
+                            
+                            self.viewEnabled(self.view)
                         }
                     }
                 }

@@ -39,6 +39,11 @@ class ScheduleDetailTableViewController: UITableViewController {
             
             self.tabBarController?.definesPresentationContext = false
             scheduleDetailRecordPlayerViewController.modalPresentationStyle = .overFullScreen
+            
+            let key = arrayOfKeys[sender.tag]
+            let player = teamData.members[key]
+            
+            scheduleDetailRecordPlayerViewController.player = player
             self.present(scheduleDetailRecordPlayerViewController,
                          animated: true,
                          completion: nil)
@@ -113,6 +118,7 @@ extension ScheduleDetailTableViewController {
             cell.name = player.name
         }
         
+        cell.recordPlayerButton.tag = indexPath.row
         cell.recordPlayerButton.addTarget(self,
                                           action: #selector(recordPlayerButtonDidTapped(_:)),
                                           for: .touchUpInside)

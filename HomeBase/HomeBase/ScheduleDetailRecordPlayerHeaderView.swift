@@ -12,6 +12,12 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
 
     // MARK: Properties
     
+    var name = "" {
+        didSet {
+            nameLabel.text = name
+        }
+    }
+    
     var batterButtonState = true {
         didSet {
             if batterButtonState {
