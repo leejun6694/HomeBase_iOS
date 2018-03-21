@@ -109,6 +109,8 @@ class ScheduleTableViewController: UITableViewController {
     private func tableViewReloadData() {
         viewDisabled(self.view)
         
+        scheduleRecentView.scheduleCount = schedules.count
+        
         if let currentUser = Auth.auth().currentUser {
             CloudFunction.getUserDataWith(currentUser) {
                 (user, error) in
@@ -254,7 +256,9 @@ extension ScheduleTableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 0: return scheduleRecentView
+        case 0:
+            scheduleRecentView.scheduleCount = schedules.count
+            return scheduleRecentView
         default:
             let monthlySectionHeaderView = ScheduleMonthlySectionHeaderView()
             dateFormatter.locale = Locale(identifier: "ko-KR")

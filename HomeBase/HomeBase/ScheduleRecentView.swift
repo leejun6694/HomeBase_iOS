@@ -16,6 +16,26 @@ class ScheduleRecentView: UIView {
     var teamData: HBTeam!
     var teamLogo: UIImage!
     
+    var scheduleCount: Int = 0 {
+        didSet {
+            if scheduleCount == 0 {
+                if recordStackView.isDescendant(of: self) {
+                    recordStackView.removeFromSuperview()
+                }
+                
+                self.addSubview(noDataLabel)
+                self.addConstraints(noDataLabelConstraints())
+            } else {
+                if noDataLabel.isDescendant(of: self) {
+                    noDataLabel.removeFromSuperview()
+                }
+                
+                self.addSubview(recordStackView)
+                self.addConstraints(recordStackViewConstraints())
+            }
+        }
+    }
+    
     private lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundSchedule"))
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,6 +129,29 @@ class ScheduleRecentView: UIView {
         return recordStackView
     }()
     
+    private lazy var noDataLabel: UILabel = {
+        let noDataLabel = UILabel()
+        noDataLabel.text = "기록이 없습니다"
+        noDataLabel.textColor = UIColor(red: 44.0/255.0,
+                                        green: 44.0/255.0,
+                                        blue: 44.0/255.0,
+                                        alpha: 1.0)
+        noDataLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15.0)
+        noDataLabel.textAlignment = .center
+        noDataLabel.adjustsFontSizeToFitWidth = true
+        noDataLabel.minimumScaleFactor = 0.5
+        noDataLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        noDataLabel.layer.borderColor = UIColor(red: 44.0/255.0,
+                                                green: 44.0/255.0,
+                                                blue: 44.0/255.0,
+                                                alpha: 1.0).cgColor
+        noDataLabel.layer.borderWidth = 0.5
+        noDataLabel.layer.cornerRadius = 8.0
+        
+        return noDataLabel
+    }()
+    
     // MARK: Draw
     
     override func layoutSubviews() {
@@ -126,8 +169,6 @@ class ScheduleRecentView: UIView {
         self.addConstraints(teamLogoImageViewConstraints())
         self.addSubview(recordLabel)
         self.addConstraints(recordLabelConstraints())
-        self.addSubview(recordStackView)
-        self.addConstraints(recordStackViewConstraints())
     }
 }
 
@@ -196,6 +237,23 @@ extension ScheduleRecentView {
         let heightConstraint = NSLayoutConstraint(
             item: recordStackView, attribute: .height, relatedBy: .equal,
             toItem: self, attribute: .height, multiplier: 76/346, constant: 6.0)
+        
+        return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func noDataLabelConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: noDataLabel, attribute: .top, relatedBy: .equal,
+            toItem: self, attribute: .centerY, multiplier: 251/173, constant: 0.0)
+        let centerXConstraint = NSLayoutConstraint(
+            item: noDataLabel, attribute: .centerX, relatedBy: .equal,
+            toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: noDataLabel, attribute: .width, relatedBy: .equal,
+            toItem: self, attribute: .width, multiplier: 187/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: noDataLabel, attribute: .height, relatedBy: .equal,
+            toItem: self, attribute: .height, multiplier: 37/346, constant: 6.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
