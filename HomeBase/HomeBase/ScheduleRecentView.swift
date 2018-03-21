@@ -169,6 +169,8 @@ class ScheduleRecentView: UIView {
         self.addConstraints(teamLogoImageViewConstraints())
         self.addSubview(recordLabel)
         self.addConstraints(recordLabelConstraints())
+        self.addSubview(noDataLabel)
+        self.addConstraints(noDataLabelConstraints())
     }
 }
 
