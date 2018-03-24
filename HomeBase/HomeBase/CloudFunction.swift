@@ -172,19 +172,20 @@ struct CloudFunction {
                 (response) -> Void in
                 
                 if response.result.isSuccess {
-                    if let values = response.result.value as? [[String: String]] {
+                    if let values = response.result.value as? [String: [String: Any]] {
                         var schedules = [HBSchedule]()
                         
-                        for value in values {
-                            if let opponentTeam = value["opponentTeam"],
-                                let matchPlace = value["matchPlace"],
-                                let matchDate = value["matchDate"] {
+                        for (key, value) in values {
+                            if let opponentTeam = value["opponentTeam"] as? String,
+                                let matchPlace = value["matchPlace"] as? String,
+                                let matchDate = value["matchDate"] as? String {
                                 
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.locale = Locale(identifier: "ko-KR")
                                 dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
                                 if let date = dateFormatter.date(from: matchDate) {
-                                    let schedule = HBSchedule(opponentTeam: opponentTeam,
+                                    let schedule = HBSchedule(sid: key,
+                                                              opponentTeam: opponentTeam,
                                                               matchDate: date,
                                                               matchPlace: matchPlace)
                                     schedules.append(schedule)

@@ -16,13 +16,9 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
         didSet { headLabel.text = headText }
     }
     
-    var record: Int = 0 {
-        didSet { recordLabel.text = "\(record)" }
-    }
-    
     private lazy var headLabel: UILabel = {
         let headLabel = UILabel()
-        headLabel.text = "1루타"
+        headLabel.text = "\(headText)"
         headLabel.textColor = UIColor(red: 44.0/255.0,
                                       green: 44.0/255.0,
                                       blue: 44.0/255.0,
@@ -36,7 +32,7 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
         return headLabel
     }()
     
-    private lazy var minusImageView: UIImageView = {
+    lazy var minusImageView: UIImageView = {
         let minusImageView = UIImageView(image: #imageLiteral(resourceName: "iconMinus"))
         minusImageView.tintColor = UIColor(red: 44.0/255.0,
                                         green: 44.0/255.0,
@@ -45,15 +41,10 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
         minusImageView.backgroundColor = UIColor.clear
         minusImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        let tapRecognizer = UITapGestureRecognizer()
-        tapRecognizer.addTarget(self, action: #selector(minusImageViewDidTapped(_:)))
-        minusImageView.isUserInteractionEnabled = true
-        minusImageView.addGestureRecognizer(tapRecognizer)
-        
         return minusImageView
     }()
     
-    private lazy var recordLabel: UILabel = {
+    lazy var recordLabel: UILabel = {
         let recordLabel = UILabel()
         recordLabel.text = "0"
         recordLabel.textColor = UIColor(red: 0.0,
@@ -69,7 +60,7 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
         return recordLabel
     }()
     
-    private lazy var plusImageView: UIImageView = {
+    lazy var plusImageView: UIImageView = {
         let plusImageView = UIImageView(image: #imageLiteral(resourceName: "iconPlus"))
         plusImageView.tintColor = UIColor(red: 44.0/255.0,
                                            green: 44.0/255.0,
@@ -77,11 +68,6 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
                                            alpha: 1.0)
         plusImageView.backgroundColor = UIColor.clear
         plusImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let tapRecognizer = UITapGestureRecognizer()
-        tapRecognizer.addTarget(self, action: #selector(plusImageViewDidTapped(_:)))
-        plusImageView.isUserInteractionEnabled = true
-        plusImageView.addGestureRecognizer(tapRecognizer)
         
         return plusImageView
     }()
@@ -96,17 +82,25 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
         
         return divisionView
     }()
-
+    
     // MARK: Methods
     
-    @objc private func minusImageViewDidTapped(_ sender: UITapGestureRecognizer) {
-        if record != 0 {
-            record -= 1
-        }
+    func imageViewEnabled() {
+        headLabel.alpha = 1.0
+        recordLabel.alpha = 1.0
+        minusImageView.alpha = 1.0
+        minusImageView.isUserInteractionEnabled = true
+        plusImageView.alpha = 1.0
+        plusImageView.isUserInteractionEnabled = true
     }
     
-    @objc private func plusImageViewDidTapped(_ sender: UITapGestureRecognizer) {
-        record += 1
+    func imageViewDisabled() {
+        headLabel.alpha = 0.5
+        recordLabel.alpha = 0.5
+        minusImageView.alpha = 0.5
+        minusImageView.isUserInteractionEnabled = false
+        plusImageView.alpha = 0.5
+        plusImageView.isUserInteractionEnabled = false
     }
     
     // MARK: Init
