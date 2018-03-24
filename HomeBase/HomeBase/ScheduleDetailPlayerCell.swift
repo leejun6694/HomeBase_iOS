@@ -24,9 +24,9 @@ class ScheduleDetailPlayerCell: UITableViewCell {
         }
     }
     
-    private lazy var baseView: UIView = {
+    lazy var baseView: UIView = {
         let baseView = UIView()
-        baseView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        baseView.backgroundColor = UIColor.white
         baseView.translatesAutoresizingMaskIntoConstraints = false
         
         return baseView
@@ -136,10 +136,10 @@ extension ScheduleDetailPlayerCell {
             toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: baseView, attribute: .width, relatedBy: .equal,
-            toItem: self, attribute: .width, multiplier: 1.0, constant: 0.0)
+            toItem: self, attribute: .width, multiplier: 393/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: baseView, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 68/75, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 80/82, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -147,16 +147,16 @@ extension ScheduleDetailPlayerCell {
     private func backNumberLabelConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
             item: backNumberLabel, attribute: .centerX, relatedBy: .equal,
-            toItem: baseView, attribute: .centerX, multiplier: 52.5/207, constant: 0.0)
+            toItem: baseView, attribute: .centerX, multiplier: 65.5/195.5, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: backNumberLabel, attribute: .centerY, relatedBy: .equal,
             toItem: baseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: backNumberLabel, attribute: .width, relatedBy: .equal,
-            toItem: baseView, attribute: .width, multiplier: 90/414, constant: 0.0)
+            toItem: baseView, attribute: .width, multiplier: 90/393, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: backNumberLabel, attribute: .height, relatedBy: .equal,
-            toItem: baseView, attribute: .height, multiplier: 36/68, constant: 0.0)
+            toItem: baseView, attribute: .height, multiplier: 33/82, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
@@ -164,16 +164,16 @@ extension ScheduleDetailPlayerCell {
     private func nameLabelConstraints() -> [NSLayoutConstraint] {
         let leadingConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .leading, relatedBy: .equal,
-            toItem: baseView, attribute: .centerX, multiplier: 99/207, constant: 0.0)
+            toItem: baseView, attribute: .centerX, multiplier: 104/196.5, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .centerY, relatedBy: .equal,
             toItem: baseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .width, relatedBy: .equal,
-            toItem: baseView, attribute: .width, multiplier: 150/414, constant: 0.0)
+            toItem: baseView, attribute: .width, multiplier: 150/393, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .height, relatedBy: .equal,
-            toItem: baseView, attribute: .height, multiplier: 18/68, constant: 0.0)
+            toItem: baseView, attribute: .height, multiplier: 20/82, constant: 0.0)
         
         return [leadingConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
@@ -181,16 +181,16 @@ extension ScheduleDetailPlayerCell {
     private func divisionViewConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
             item: divisionView, attribute: .centerX, relatedBy: .equal,
-            toItem: baseView, attribute: .centerX, multiplier: 316.5/207, constant: 0.0)
+            toItem: baseView, attribute: .centerX, multiplier: 279/196.5, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: divisionView, attribute: .centerY, relatedBy: .equal,
             toItem: baseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: divisionView, attribute: .width, relatedBy: .equal,
-            toItem: baseView, attribute: .width, multiplier: 1/414, constant: 0.0)
+            toItem: baseView, attribute: .width, multiplier: 1/393, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: divisionView, attribute: .height, relatedBy: .equal,
-            toItem: baseView, attribute: .height, multiplier: 37/68, constant: 0.0)
+            toItem: baseView, attribute: .height, multiplier: 43.4/82, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
@@ -198,16 +198,16 @@ extension ScheduleDetailPlayerCell {
     private func recordPlayerButtonConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
             item: recordPlayerButton, attribute: .centerX, relatedBy: .equal,
-            toItem: baseView, attribute: .centerX, multiplier: 365/207, constant: 0.0)
+            toItem: baseView, attribute: .centerX, multiplier: 333/196.5, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
             item: recordPlayerButton, attribute: .centerY, relatedBy: .equal,
             toItem: baseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: recordPlayerButton, attribute: .width, relatedBy: .equal,
-            toItem: baseView, attribute: .width, multiplier: 58/414, constant: 0.0)
+            toItem: baseView, attribute: .width, multiplier: 74/393, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: recordPlayerButton, attribute: .height, relatedBy: .equal,
-            toItem: baseView, attribute: .height, multiplier: 16/68, constant: 0.0)
+            toItem: baseView, attribute: .height, multiplier: 20/82, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }

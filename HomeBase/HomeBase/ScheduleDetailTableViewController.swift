@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ScheduleDetailTableViewController: UITableViewController {
     
@@ -108,12 +109,25 @@ extension ScheduleDetailTableViewController {
         scheduleDetailInfoView.matchDate = cellSchedule.matchDate
         scheduleDetailInfoView.matchPlace = cellSchedule.matchPlace
         
+        if let currentUser = Auth.auth().currentUser {
+            if currentUser.uid == teamData.admin {
+                
+            } else {
+                scheduleDetailInfoView.homeTeamButton.isEnabled = false
+                scheduleDetailInfoView.opponentTeamButton.isEnabled = false
+            }
+        }
+        
         return scheduleDetailInfoView
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdendifier,
                                                  for: indexPath) as! ScheduleDetailPlayerCell
+        
+        if indexPath.row % 2 == 0 {
+            cell.baseView.backgroundColor = UIColor.white.withAlphaComponent(0.95)
+        }
         
         let key = arrayOfKeys[indexPath.row]
         if let player = teamData.members[key] {
@@ -122,14 +136,20 @@ extension ScheduleDetailTableViewController {
         }
         
         cell.recordPlayerButton.tag = indexPath.row
-        cell.recordPlayerButton.addTarget(self,
-                                          action: #selector(recordPlayerButtonDidTapped(_:)),
-                                          for: .touchUpInside)
+        if let currentUser = Auth.auth().currentUser {
+            if currentUser.uid == teamData.admin {
+                cell.recordPlayerButton.addTarget(self,
+                                                  action: #selector(recordPlayerButtonDidTapped(_:)),
+                                                  for: .touchUpInside)
+            } else {
+                cell.recordPlayerButton.setTitle("결과 보기", for: .normal)
+            }
+        }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(self.view.frame.size.height * 75/736).rounded()
+        return CGFloat(self.view.frame.size.height * 82/736).rounded()
     }
 }
