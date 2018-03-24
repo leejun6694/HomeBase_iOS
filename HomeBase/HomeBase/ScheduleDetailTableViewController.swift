@@ -109,6 +109,15 @@ extension ScheduleDetailTableViewController {
         scheduleDetailInfoView.matchDate = cellSchedule.matchDate
         scheduleDetailInfoView.matchPlace = cellSchedule.matchPlace
         
+        if let currentUser = Auth.auth().currentUser {
+            if currentUser.uid == teamData.admin {
+                
+            } else {
+                scheduleDetailInfoView.homeTeamButton.isEnabled = false
+                scheduleDetailInfoView.opponentTeamButton.isEnabled = false
+            }
+        }
+        
         return scheduleDetailInfoView
     }
     
