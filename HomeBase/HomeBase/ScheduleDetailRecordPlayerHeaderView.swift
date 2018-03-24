@@ -81,7 +81,7 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
         return nameLabel
     }()
     
-    private lazy var doneButton: UIButton = {
+    lazy var doneButton: UIButton = {
         let doneButton = UIButton(type: .system)
         doneButton.setTitle("완료", for: .normal)
         doneButton.setTitleColor(UIColor(red: 44.0/255.0,

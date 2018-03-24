@@ -40,9 +40,12 @@ class ScheduleDetailTableViewController: UITableViewController {
             self.tabBarController?.definesPresentationContext = false
             scheduleDetailRecordPlayerViewController.modalPresentationStyle = .overFullScreen
             
-            let key = arrayOfKeys[sender.tag]
-            let player = teamData.members[key]
+            let sid = cellSchedule.sid
+            let pid = arrayOfKeys[sender.tag]
+            let player = teamData.members[pid]
             
+            scheduleDetailRecordPlayerViewController.sid = sid
+            scheduleDetailRecordPlayerViewController.pid = pid
             scheduleDetailRecordPlayerViewController.player = player
             self.present(scheduleDetailRecordPlayerViewController,
                          animated: true,
