@@ -21,6 +21,7 @@
 		7231C9272018F3AD004FE531 /* CloudFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C9262018F3AD004FE531 /* CloudFunction.swift */; };
 		7231C929201905F7004FE531 /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C928201905F7004FE531 /* FindEmailViewController.swift */; };
 		72378A7020081BC0007ED442 /* CustomMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72378A6F20081BC0007ED442 /* CustomMethods.swift */; };
+		7244A943206924150032F8B8 /* ScheduleDetailRecordMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7244A942206924150032F8B8 /* ScheduleDetailRecordMatchViewController.swift */; };
 		725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B84FF1FFE326B0024588D /* SignUpViewController.swift */; };
 		725B8508200180D90024588D /* RegisterPlayerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B8507200180D90024588D /* RegisterPlayerInfoViewController.swift */; };
 		725B850A200181350024588D /* RegisterUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B8509200181350024588D /* RegisterUserInfoViewController.swift */; };
@@ -97,6 +98,7 @@
 		7231C9262018F3AD004FE531 /* CloudFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunction.swift; sourceTree = "<group>"; };
 		7231C928201905F7004FE531 /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
 		72378A6F20081BC0007ED442 /* CustomMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMethods.swift; sourceTree = "<group>"; };
+		7244A942206924150032F8B8 /* ScheduleDetailRecordMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailRecordMatchViewController.swift; sourceTree = "<group>"; };
 		725B84FF1FFE326B0024588D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		725B8507200180D90024588D /* RegisterPlayerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPlayerInfoViewController.swift; sourceTree = "<group>"; };
 		725B8509200181350024588D /* RegisterUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserInfoViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				720DFFDE204BFEDD0098C473 /* ScheduleDetailTableViewController.swift */,
 				72F5ECF32046E44B00C7B594 /* ScheduleDetailInfoView.swift */,
 				72F5ECF620473AE400C7B594 /* ScheduleDetailPlayerCell.swift */,
+				7244A942206924150032F8B8 /* ScheduleDetailRecordMatchViewController.swift */,
 				720DFFE6204C6EA10098C473 /* ScheduleDetailRecordPlayerViewController.swift */,
 				720DFFE2204C2C980098C473 /* ScheduleDetailRecordPlayerHeaderView.swift */,
 				720DFFE4204C64FF0098C473 /* ScheduleDetailRecordPlayerTableViewCell.swift */,
@@ -606,6 +609,7 @@
 				720DFFE7204C6EA10098C473 /* ScheduleDetailRecordPlayerViewController.swift in Sources */,
 				72F07BFF200C6B9B004C83F6 /* ForgotSelectViewController.swift in Sources */,
 				7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */,
+				7244A943206924150032F8B8 /* ScheduleDetailRecordMatchViewController.swift in Sources */,
 				726376792045248000388939 /* ScheduleCreateViewController.swift in Sources */,
 				7220479F2034B7B40088BEE4 /* MainTopSectionCell.swift in Sources */,
 				72F5ECF720473AE400C7B594 /* ScheduleDetailPlayerCell.swift in Sources */,

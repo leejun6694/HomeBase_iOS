@@ -32,6 +32,21 @@ class ScheduleDetailTableViewController: UITableViewController {
     
     // MARK: Methods
     
+    @objc private func matchResultButtonDidTapped(_ sender: UIButton) {
+        if let scheduleDetailRecordMatchViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleDetailRecordMatchViewController") as? ScheduleDetailRecordMatchViewController {
+            
+            self.navigationController?.navigationBar.alpha = 0.5
+            self.tableView.alpha = 0.5
+            
+            self.tabBarController?.definesPresentationContext = false
+            scheduleDetailRecordMatchViewController.modalPresentationStyle = .overFullScreen
+            
+            self.present(scheduleDetailRecordMatchViewController,
+                         animated: true,
+                         completion: nil)
+        }
+    }
+    
     @objc private func recordPlayerButtonDidTapped(_ sender: UIButton) {
         if let scheduleDetailRecordPlayerViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleDetailRecordPlayerViewController") as? ScheduleDetailRecordPlayerViewController {
             
@@ -74,6 +89,15 @@ class ScheduleDetailTableViewController: UITableViewController {
         self.tableView.bounces = false
         
         arrayOfKeys = Array(teamData.members.keys)
+        
+        scheduleDetailInfoView.homeTeamButton.addTarget(
+            self,
+            action: #selector(matchResultButtonDidTapped(_:)),
+            for: .touchUpInside)
+        scheduleDetailInfoView.opponentTeamButton.addTarget(
+            self,
+            action: #selector(matchResultButtonDidTapped(_:)),
+            for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {

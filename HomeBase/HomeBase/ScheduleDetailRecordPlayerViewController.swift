@@ -295,10 +295,18 @@ extension ScheduleDetailRecordPlayerViewController: UITableViewDataSource, UITab
             cell.recordLabel.text = "\(batterRecords[indexPath.row])"
             
             switch indexPath.row {
-            case 0: cell.headText = "1루타"
-            case 1: cell.headText = "2루타"
-            case 2: cell.headText = "3루타"
-            case 3: cell.headText = "홈런"
+            case 0:
+                cell.headText = "1루타"
+                cell.imageViewEnabled()
+            case 1:
+                cell.headText = "2루타"
+                cell.imageViewEnabled()
+            case 2:
+                cell.headText = "3루타"
+                cell.imageViewEnabled()
+            case 3:
+                cell.headText = "홈런"
+                cell.imageViewEnabled()
             case 4: cell.headText = "볼넷"
             case 5: cell.headText = "사구"
             case 6: cell.headText = "희생타"

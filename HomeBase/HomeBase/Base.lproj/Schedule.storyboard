@@ -128,7 +128,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHO-bO-EPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="QAL-Gg-B6c" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2980" y="1124.8875562218891"/>
+            <point key="canvasLocation" x="2980" y="1273"/>
+        </scene>
+        <!--Schedule Detail Record Match View Controller-->
+        <scene sceneID="SKw-WR-NGE">
+            <objects>
+                <viewController storyboardIdentifier="ScheduleDetailRecordMatchViewController" id="D3c-hz-eH8" customClass="ScheduleDetailRecordMatchViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iD8-Ts-shs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="iUU-JH-Gls"/>
+                    </view>
+                    <connections>
+                        <segue destination="sXv-Fc-5Ga" kind="unwind" identifier="unwindToDetailView" unwindAction="unwindToDetailViewWithSegue:" id="UI2-mS-lAG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qME-8s-GQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="sXv-Fc-5Ga" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2980" y="577"/>
         </scene>
         <!--Schedule Create View Controller-->
         <scene sceneID="lxH-Xg-Lmy">
