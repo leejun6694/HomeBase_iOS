@@ -79,7 +79,10 @@ class ScheduleDetailTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 44.0/255.0,
+                                                                        green: 44.0/255.0,
+                                                                        blue: 44.0/255.0,
+                                                                        alpha: 1.0)
     }
 }
 
