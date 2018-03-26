@@ -183,7 +183,6 @@ class ScheduleTableViewController: UITableViewController {
         fetchTeamData()
         tableViewReloadData()
         
-        self.tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
         self.tableView.register(ScheduleMonthlySectionCell.self,
                                 forCellReuseIdentifier: cellReuseIdendifier)
         self.tableView.allowsSelection = false
@@ -195,7 +194,12 @@ class ScheduleTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 51.0/255.0,
+                                                                        green: 215.0/255.0,
+                                                                        blue: 253.0/255.0,
+                                                                        alpha: 1.0)
         
         if let currentUser = Auth.auth().currentUser {
             if teamData.admin == currentUser.uid {

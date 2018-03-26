@@ -15,11 +15,15 @@ extension UIViewController {
     func viewEnabled(_ view: UIView) {
         view.alpha = 1.0
         view.isUserInteractionEnabled = true
+        
+        self.navigationController?.view.alpha = 1.0
     }
     
     func viewDisabled(_ view: UIView) {
         view.alpha = 0.5
         view.isUserInteractionEnabled = false
+        
+        self.navigationController?.view.alpha = 0.5
     }
     
     // MARK: UIButton
