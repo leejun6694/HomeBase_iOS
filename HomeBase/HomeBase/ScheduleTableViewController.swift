@@ -23,6 +23,7 @@ class ScheduleTableViewController: UITableViewController {
     var sectionInTable = [String]()
     
     private let scheduleRecentView = ScheduleRecentView()
+    private let headerCellReuseIdendifier = "monthlyHeaderSectionCell"
     private let cellReuseIdendifier = "monthlySectionCell"
     
     private lazy var addButtonView: UIView = {
@@ -160,7 +161,7 @@ class ScheduleTableViewController: UITableViewController {
             let row = sender.tag % 10000
             
             let cellSchedules = scheduleSorted(by: section - 1)
-            let cellSchedule = cellSchedules[row]
+            let cellSchedule = cellSchedules[row - 1]
             
             scheduleDetailTableViewController.teamData = teamData
             scheduleDetailTableViewController.cellSchedule = cellSchedule
@@ -187,6 +188,8 @@ class ScheduleTableViewController: UITableViewController {
         fetchTeamData()
         tableViewReloadData()
         
+        self.tableView.register(ScheduleMonthlySectionHeaderCell.self,
+                                forCellReuseIdentifier: headerCellReuseIdendifier)
         self.tableView.register(ScheduleMonthlySectionCell.self,
                                 forCellReuseIdentifier: cellReuseIdendifier)
         self.tableView.allowsSelection = false
@@ -255,7 +258,7 @@ extension ScheduleTableViewController {
                 return 0
             } else {
                 let cellSchedules = scheduleSorted(by: section - 1)
-                return cellSchedules.count
+                return cellSchedules.count + 1
             }
         }
     }
@@ -263,8 +266,8 @@ extension ScheduleTableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let recentViewHeight =
             CGFloat(self.view.frame.size.height * 346/736).rounded()
-        let monthlySectionHeaderViewHeight =
-            CGFloat(self.view.frame.size.height * 57/736).rounded()
+//        let monthlySectionHeaderViewHeight =
+//            CGFloat(self.view.frame.size.height * 57/736).rounded()
         let noDataSectionHeaderViewHeight =
             CGFloat(self.view.frame.size.height * 127/736).rounded()
         
@@ -274,7 +277,8 @@ extension ScheduleTableViewController {
             if schedules.count == 0 {
                 return noDataSectionHeaderViewHeight
             } else {
-                return monthlySectionHeaderViewHeight
+//                return monthlySectionHeaderViewHeight
+                return 0.0
             }
         }
     }
@@ -302,25 +306,42 @@ extension ScheduleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: cellReuseIdendifier, for: indexPath) as! ScheduleMonthlySectionCell
         
-        let cellSchedules = scheduleSorted(by: indexPath.section - 1)
-        let cellSchedule = cellSchedules[indexPath.row]
-        
-        cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
-        cell.recordButton.addTarget(self,
-                                    action: #selector(recordButtonDidTapped(_:)),
-                                    for: .touchUpInside)
-        cell.opponentTeam = cellSchedule.opponentTeam
-        cell.matchPlace = cellSchedule.matchPlace
-        cell.matchDate = cellSchedule.matchDate
-        
-        return cell
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: headerCellReuseIdendifier, for: indexPath) as! ScheduleMonthlySectionHeaderCell
+            
+            dateFormatter.locale = Locale(identifier: "ko-KR")
+            dateFormatter.dateFormat = "yyyy-MM"
+            if let date = dateFormatter.date(from: sectionInTable[indexPath.section - 1]) {
+                cell.matchDate = date
+            }
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: cellReuseIdendifier, for: indexPath) as! ScheduleMonthlySectionCell
+            
+            let cellSchedules = scheduleSorted(by: indexPath.section - 1)
+            let cellSchedule = cellSchedules[indexPath.row - 1]
+            
+            cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
+            cell.recordButton.addTarget(self,
+                                        action: #selector(recordButtonDidTapped(_:)),
+                                        for: .touchUpInside)
+            cell.opponentTeam = cellSchedule.opponentTeam
+            cell.matchPlace = cellSchedule.matchPlace
+            cell.matchDate = cellSchedule.matchDate
+            
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(self.view.frame.size.height * 111/736).rounded()
+        if indexPath.row == 0 {
+            return CGFloat(self.view.frame.size.height * 57/736).rounded()
+        } else {
+            return CGFloat(self.view.frame.size.height * 111/736).rounded()
+        }
     }
 }
 
