@@ -12,8 +12,16 @@ class ScheduleDetailInfoView: UIView {
 
     // MARK: Properties
     
-    var homeTeamScore = 0
-    var opponentTeamScore = 0
+    var homeTeamScore = -1 {
+        didSet {
+            homeTeamButton.setTitle("\(homeTeamScore)", for: .normal)
+        }
+    }
+    var opponentTeamScore = -1 {
+        didSet {
+            opponentTeamButton.setTitle("\(opponentTeamScore)", for: .normal)
+        }
+    }
     
     var opponentTeam: String = "" {
         didSet {

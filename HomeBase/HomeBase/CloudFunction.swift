@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseDatabase
 import Alamofire
 
 enum Method:String {
@@ -162,7 +163,7 @@ struct CloudFunction {
         }
     }
     
-    static func getSchedulesDataWith(_ teamCode:String, completion: @escaping(_ schedules: [HBSchedule]?, _ error: Error?) ->()) {
+    static func getTeamSchedulesDataWith(_ teamCode:String, completion: @escaping(_ schedules: [HBSchedule]?, _ error: Error?) ->()) {
         let parameterDictionary = ["teamCode": teamCode]
         
         Alamofire.request(
@@ -178,7 +179,9 @@ struct CloudFunction {
                         for (key, value) in values {
                             if let opponentTeam = value["opponentTeam"] as? String,
                                 let matchPlace = value["matchPlace"] as? String,
-                                let matchDate = value["matchDate"] as? String {
+                                let matchDate = value["matchDate"] as? String,
+                                let homeScore = value["homeScore"] as? Int,
+                                let opponentScore = value["opponentScore"] as? Int {
                                 
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.locale = Locale(identifier: "ko-KR")
@@ -187,7 +190,9 @@ struct CloudFunction {
                                     let schedule = HBSchedule(sid: key,
                                                               opponentTeam: opponentTeam,
                                                               matchDate: date,
-                                                              matchPlace: matchPlace)
+                                                              matchPlace: matchPlace,
+                                                              homeScore: homeScore,
+                                                              opponentScore: opponentScore)
                                     schedules.append(schedule)
                                 }
                             }
@@ -198,9 +203,45 @@ struct CloudFunction {
                         completion(schedules, nil)
                     }
                 } else {
-                    let error = response.result.error
-                    completion(nil, error)
+                    let schedules = [HBSchedule]()
+                    completion(schedules, nil)
                 }
+        }
+    }
+    
+    static func getSchedulesDataWith(_ sid: String, teamCode: String, completion: @escaping(_ schedules: HBSchedule?, _ error: String?) ->()) {
+        let ref = Database.database().reference()
+        let scheduleRef = ref.child("schedules").child(teamCode).child(sid)
+        
+        scheduleRef.observeSingleEvent(of: .value) {
+            (snapshot, error) in
+            
+            if let error = error {
+                completion(nil, error)
+            } else {
+                if let value = snapshot.value as? NSDictionary {
+                    if let opponentTeam = value["opponentTeam"] as? String,
+                        let matchDate = value["matchDate"] as? String,
+                        let matchPlace = value["matchPlace"] as? String,
+                        let homeScore = value["homeScore"] as? Int,
+                        let opponentScore = value["opponentScore"] as? Int {
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.locale = Locale(identifier: "ko-KR")
+                        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                        if let date = dateFormatter.date(from: matchDate) {
+                            let schedule = HBSchedule(sid: sid,
+                                                      opponentTeam: opponentTeam,
+                                                      matchDate: date,
+                                                      matchPlace: matchPlace,
+                                                      homeScore: homeScore,
+                                                      opponentScore: opponentScore)
+                            
+                            completion(schedule, nil)
+                        }
+                    }
+                }
+            }
         }
     }
 }

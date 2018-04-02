@@ -27,10 +27,57 @@ class ScheduleDetailTableViewController: UITableViewController {
         return titleLabel
     }()
     
-    private let scheduleDetailInfoView = ScheduleDetailInfoView()
+    let scheduleDetailInfoView = ScheduleDetailInfoView()
     private let cellReuseIdendifier = "playerCell"
     
     // MARK: Methods
+    
+    private func tableViewReloadData() {
+        viewDisabled(self.view)
+        
+        if let currentUser = Auth.auth().currentUser {
+            CloudFunction.getUserDataWith(currentUser) {
+                (user, error) in
+                
+                if let user = user {
+                    CloudFunction.getSchedulesDataWith(
+                    self.cellSchedule.sid,
+                    teamCode: user.teamCode) {
+                        (scheduleData, error) in
+                        
+                        if let scheduleData = scheduleData {
+                            self.cellSchedule = scheduleData
+                        }
+                        
+                        CloudFunction.getTeamDataWith(user.teamCode) {
+                            (teamData, error) in
+                            
+                            if let teamData = teamData {
+                                self.teamData = teamData
+                                self.arrayOfKeys = Array(teamData.members.keys)
+                                
+                                self.tableView.reloadData()
+                                self.viewEnabled(self.view)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self,
+                                 action: #selector(refreshControlDidChanged(_:)),
+                                 for: .valueChanged)
+        
+        if #available(iOS 10.0, *) {
+            self.tableView.refreshControl = refreshControl
+        } else {
+            self.tableView.addSubview(refreshControl)
+        }
+    }
     
     @objc private func matchResultButtonDidTapped(_ sender: UIButton) {
         if let scheduleDetailRecordMatchViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleDetailRecordMatchViewController") as? ScheduleDetailRecordMatchViewController {
@@ -40,6 +87,17 @@ class ScheduleDetailTableViewController: UITableViewController {
             
             self.tabBarController?.definesPresentationContext = false
             scheduleDetailRecordMatchViewController.modalPresentationStyle = .overFullScreen
+            
+            let sid = cellSchedule.sid
+            scheduleDetailRecordMatchViewController.sid = sid
+            
+            let infoHomeScore = scheduleDetailInfoView.homeTeamScore
+            let infoOpponentScore = scheduleDetailInfoView.opponentTeamScore
+            
+            if infoHomeScore != -1, infoOpponentScore != -1 {
+                scheduleDetailRecordMatchViewController.homeScore = infoHomeScore
+                scheduleDetailRecordMatchViewController.opponentScore = infoOpponentScore
+            }
             
             self.present(scheduleDetailRecordMatchViewController,
                          animated: true,
@@ -69,6 +127,11 @@ class ScheduleDetailTableViewController: UITableViewController {
         }
     }
     
+    @objc private func refreshControlDidChanged(_ sender: UIRefreshControl) {
+        tableViewReloadData()
+        sender.endRefreshing()
+    }
+    
     @IBAction func unwindToDetailView(segue: UIStoryboardSegue) {
         self.navigationController?.navigationBar.alpha = 1.0
         self.tableView.alpha = 1.0
@@ -86,8 +149,8 @@ class ScheduleDetailTableViewController: UITableViewController {
         self.tableView.register(ScheduleDetailPlayerCell.self,
                                 forCellReuseIdentifier: cellReuseIdendifier)
         self.tableView.allowsSelection = false
-        self.tableView.bounces = false
         
+        setupRefreshControl()
         arrayOfKeys = Array(teamData.members.keys)
         
         scheduleDetailInfoView.homeTeamButton.addTarget(
@@ -136,10 +199,13 @@ extension ScheduleDetailTableViewController {
         scheduleDetailInfoView.matchDate = cellSchedule.matchDate
         scheduleDetailInfoView.matchPlace = cellSchedule.matchPlace
         
+        if cellSchedule.homeScore != -1, cellSchedule.opponentScore != -1 {
+            scheduleDetailInfoView.homeTeamScore = cellSchedule.homeScore
+            scheduleDetailInfoView.opponentTeamScore = cellSchedule.opponentScore
+        }
+        
         if let currentUser = Auth.auth().currentUser {
-            if currentUser.uid == teamData.admin {
-                
-            } else {
+            if currentUser.uid != teamData.admin {
                 scheduleDetailInfoView.homeTeamButton.isEnabled = false
                 scheduleDetailInfoView.opponentTeamButton.isEnabled = false
             }

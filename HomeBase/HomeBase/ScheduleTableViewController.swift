@@ -116,7 +116,7 @@ class ScheduleTableViewController: UITableViewController {
                 (user, error) in
                 
                 if let user = user {
-                    CloudFunction.getSchedulesDataWith(user.teamCode) {
+                    CloudFunction.getTeamSchedulesDataWith(user.teamCode) {
                         (schedules, error) in
                         
                         if let schedules = schedules {
