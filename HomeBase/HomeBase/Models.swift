@@ -16,7 +16,12 @@ class HBUser {
     var teamCode: String
     var provider: String
     
-    init(email: String, name: String, birth: String, teamCode: String, provider: String) {
+    init(email: String,
+         name: String,
+         birth: String,
+         teamCode: String,
+         provider: String) {
+        
         self.email = email
         self.name = name
         self.birth = birth
@@ -34,7 +39,13 @@ class HBPlayer {
     var batPosition: String
     var pitchPosition: String
     
-    init(name: String, position: String, backNumber: Int, height: Int, weight: Int, batPoition: String, pitchPosition: String) {
+    init(name: String,
+         position: String,
+         backNumber: Int,
+         height: Int,
+         weight: Int,
+         batPoition: String,
+         pitchPosition: String) {
         
         self.name = name
         self.position = position
@@ -53,7 +64,12 @@ class HBTeam {
     var admin: String
     var members: [String: HBPlayer]
     
-    init(name: String, logo: String, description: String, admin: String, members: [String: HBPlayer]) {
+    init(name: String,
+         logo: String,
+         description: String,
+         admin: String,
+         members: [String: HBPlayer]) {
+        
         self.name = name
         self.logo = logo
         self.description = description
@@ -67,12 +83,22 @@ class HBSchedule {
     var opponentTeam: String
     var matchDate: Date
     var matchPlace: String
+    var homeScore: Int
+    var opponentScore: Int
     
-    init(sid: String, opponentTeam: String, matchDate: Date, matchPlace: String) {
+    init(sid: String,
+         opponentTeam: String,
+         matchDate: Date,
+         matchPlace: String,
+         homeScore: Int,
+         opponentScore: Int) {
+        
         self.sid = sid
         self.opponentTeam = opponentTeam
         self.matchDate = matchDate
         self.matchPlace = matchPlace
+        self.homeScore = homeScore
+        self.opponentScore = opponentScore
     }
 }
 

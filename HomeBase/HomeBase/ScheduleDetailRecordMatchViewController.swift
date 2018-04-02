@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class ScheduleDetailRecordMatchViewController: UIViewController {
 
     // MARK: Properties
+    
+    var sid: String!
+    
+    var homeScore: Int = -1
+    var opponentScore: Int = -1
     
     private lazy var topView: UIView = {
         let topView = UIView()
@@ -61,6 +68,9 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17.0)
         doneButton.titleLabel?.adjustsFontSizeToFitWidth = true
         doneButton.titleLabel?.minimumScaleFactor = 0.5
+        doneButton.addTarget(self,
+                             action: #selector(doneButtonDidTapped(_:)),
+                             for: .touchUpInside)
         doneButton.backgroundColor = UIColor.clear
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -86,6 +96,9 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     private lazy var homeTeamTextField: UITextField = {
         let homeTeamTextField = UITextField()
         homeTeamTextField.placeholder = "-"
+        if homeScore != -1 {
+            homeTeamTextField.text = "\(homeScore)"
+        }
         homeTeamTextField.textColor = UIColor(red: 44.0/255.0,
                                               green: 44.0/255.0,
                                               blue: 44.0/255.0,
@@ -101,6 +114,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         homeTeamTextField.minimumFontSize = 0.5
         homeTeamTextField.keyboardType = .numberPad
         homeTeamTextField.translatesAutoresizingMaskIntoConstraints = false
+        homeTeamTextField.delegate = self
         
         return homeTeamTextField
     }()
@@ -151,6 +165,9 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     private lazy var opponentTeamTextField: UITextField = {
         let opponentTeamTextField = UITextField()
         opponentTeamTextField.placeholder = "-"
+        if opponentScore != -1 {
+            opponentTeamTextField.text = "\(opponentScore)"
+        }
         opponentTeamTextField.textColor = UIColor(red: 44.0/255.0,
                                                   green: 44.0/255.0,
                                                   blue: 44.0/255.0,
@@ -166,6 +183,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         opponentTeamTextField.minimumFontSize = 0.5
         opponentTeamTextField.keyboardType = .numberPad
         opponentTeamTextField.translatesAutoresizingMaskIntoConstraints = false
+        opponentTeamTextField.delegate = self
         
         return opponentTeamTextField
     }()
@@ -185,6 +203,49 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     
     @objc private func cancelButtonDidTapped(_ sender: UIButton) {
         self.performSegue(withIdentifier: "unwindToDetailView", sender: self)
+    }
+    
+    @objc private func doneButtonDidTapped(_ sender: UIButton) {
+        if let homeText = homeTeamTextField.text {
+            guard let score = Int(homeText) else { return }
+            homeScore = score
+        }
+        if let opponentText = opponentTeamTextField.text {
+            guard let score = Int(opponentText) else { return }
+            opponentScore = score
+        }
+        
+        if homeScore != -1, opponentScore != -1 {
+            if let currnetUser = Auth.auth().currentUser {
+                let ref = Database.database().reference()
+                
+                CloudFunction.getUserDataWith(currnetUser) {
+                    (user, error) -> Void in
+                    
+                    if let user = user {
+                        let scheduleRef = ref.child("schedules").child(user.teamCode)
+                        scheduleRef.child(self.sid).updateChildValues([
+                            "homeScore": self.homeScore,
+                            "opponentScore": self.opponentScore])
+                    }
+                }
+            }
+        } else {
+            homeScore = -1
+            opponentScore = -1
+        }
+        
+        self.performSegue(withIdentifier: "unwindToDetailView", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "unwindToDetailView" {
+            if let scheduleDetailTableViewController = segue.destination as? ScheduleDetailTableViewController {
+                
+                scheduleDetailTableViewController.scheduleDetailInfoView.homeTeamScore = homeScore
+                scheduleDetailTableViewController.scheduleDetailInfoView.opponentTeamScore = opponentScore
+            }
+        }
     }
     
     // MARK: Life Cycle
@@ -224,6 +285,20 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         
         self.view.roundCorners([.topLeft, .topRight], radius: 15.0)
         self.view.backgroundColor = .white
+    }
+}
+
+extension ScheduleDetailRecordMatchViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentCount = textField.text?.count ?? 0
+        let replacementCount = currentCount + string.count - range.length
+        
+        if replacementCount > 2 {
+            return false
+        }
+        
+        return true
     }
 }
 

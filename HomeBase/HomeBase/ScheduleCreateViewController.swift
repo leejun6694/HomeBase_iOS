@@ -162,10 +162,15 @@ class ScheduleCreateViewController: UIViewController {
                 (user, error) -> Void in
                 
                 if let user = user {
+                    let homeScore: Int = -1
+                    let opponentScore: Int = -1
+                    
                     ref.child("schedules").child(user.teamCode).childByAutoId().setValue(
                         ["opponentTeam": self.opponentTeam,
                          "matchPlace": self.matchPlace,
-                         "matchDate": self.matchDate])
+                         "matchDate": self.matchDate,
+                         "homeScore": homeScore,
+                         "opponentScore": opponentScore])
                     
                     self.spinnerStopAnimating(self.spinner)
                     self.dismiss(animated: true, completion: nil)
