@@ -175,6 +175,10 @@ class ScheduleTableViewController: UITableViewController {
         sender.endRefreshing()
     }
     
+    @IBAction func unwindToDetailView(segue: UIStoryboardSegue) {
+        tableViewReloadData()
+    }
+    
     // MARK: Life Cycle
 
     override func viewDidLoad() {

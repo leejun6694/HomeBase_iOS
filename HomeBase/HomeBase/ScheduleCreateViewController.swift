@@ -173,7 +173,7 @@ class ScheduleCreateViewController: UIViewController {
                          "opponentScore": opponentScore])
                     
                     self.spinnerStopAnimating(self.spinner)
-                    self.dismiss(animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "unwindToScheduleView", sender: nil)
                 }
             }
         }
