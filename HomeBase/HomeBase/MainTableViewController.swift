@@ -41,10 +41,12 @@ class MainTableViewController: UITableViewController {
         fetchTeamData()
         
         self.tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
-        self.tableView.register(MainTopSectionHeaderCell.self,
-                                forCellReuseIdentifier: headerCellReuseIdendifier)
-        self.tableView.register(MainTopSectionCell.self,
-                                forCellReuseIdentifier: cellReuseIdendifier)
+        self.tableView.register(
+            MainTopSectionHeaderCell.self,
+            forCellReuseIdentifier: headerCellReuseIdendifier)
+        self.tableView.register(
+            MainTopSectionCell.self,
+            forCellReuseIdentifier: cellReuseIdendifier)
         self.tableView.allowsSelection = false
         self.tableView.bounces = false
     }
@@ -165,7 +167,10 @@ class MainTableViewController: UITableViewController {
         default: break
         }
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdendifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellReuseIdendifier,
+            for: indexPath)
+        
         return cell
     }
     

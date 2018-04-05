@@ -17,10 +17,12 @@ class ForgotErrorViewController: UIViewController {
     }
     
     @IBAction func signUpButtonDidTapped(_ sender: UIButton) {
-        if let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController {
+        guard let signUpViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "SignUpViewController")
+                as? SignUpViewController else { return }
             
-            self.present(signUpViewController, animated: true, completion: nil)
-        }
+        self.present(signUpViewController, animated: true, completion: nil)
     }
     
     // MARK: Life Cycle

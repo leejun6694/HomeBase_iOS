@@ -29,13 +29,11 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     private lazy var cancelButton: UIButton = {
         let cancelButton = UIButton(type: .system)
         cancelButton.setImage(#imageLiteral(resourceName: "iconExit"), for: .normal)
-        cancelButton.tintColor = UIColor(red: 44.0/255.0,
-                                         green: 44.0/255.0,
-                                         blue: 44.0/255.0,
-                                         alpha: 1.0)
-        cancelButton.addTarget(self,
-                               action: #selector(cancelButtonDidTapped(_:)),
-                               for: .touchUpInside)
+        cancelButton.tintColor = HBColor.lightGray
+        cancelButton.addTarget(
+            self,
+            action: #selector(cancelButtonDidTapped(_:)),
+            for: .touchUpInside)
         cancelButton.backgroundColor = UIColor.clear
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -45,10 +43,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "경기 결과"
-        titleLabel.textColor = UIColor(red: 44.0/255.0,
-                                       green: 44.0/255.0,
-                                       blue: 44.0/255.0,
-                                       alpha: 1.0)
+        titleLabel.textColor = HBColor.lightGray
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 21.0)
         titleLabel.adjustsFontSizeToFitWidth = true
@@ -61,16 +56,14 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     private lazy var doneButton: UIButton = {
         let doneButton = UIButton(type: .system)
         doneButton.setTitle("완료", for: .normal)
-        doneButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                         green: 44.0/255.0,
-                                         blue: 44.0/255.0,
-                                         alpha: 1.0), for: .normal)
+        doneButton.setTitleColor(HBColor.lightGray, for: .normal)
         doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17.0)
         doneButton.titleLabel?.adjustsFontSizeToFitWidth = true
         doneButton.titleLabel?.minimumScaleFactor = 0.5
-        doneButton.addTarget(self,
-                             action: #selector(doneButtonDidTapped(_:)),
-                             for: .touchUpInside)
+        doneButton.addTarget(
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
         doneButton.backgroundColor = UIColor.clear
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -80,10 +73,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     private lazy var homeTeamLabel: UILabel = {
         let homeTeamLabel = UILabel()
         homeTeamLabel.text = "우리팀"
-        homeTeamLabel.textColor = UIColor(red: 44.0/255.0,
-                                          green: 44.0/255.0,
-                                          blue: 44.0/255.0,
-                                          alpha: 1.0)
+        homeTeamLabel.textColor = HBColor.lightGray
         homeTeamLabel.textAlignment = .center
         homeTeamLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17.0)
         homeTeamLabel.adjustsFontSizeToFitWidth = true
@@ -99,14 +89,8 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         if homeScore != -1 {
             homeTeamTextField.text = "\(homeScore)"
         }
-        homeTeamTextField.textColor = UIColor(red: 44.0/255.0,
-                                              green: 44.0/255.0,
-                                              blue: 44.0/255.0,
-                                              alpha: 1.0)
-        homeTeamTextField.tintColor = UIColor(red: 44.0/255.0,
-                                              green: 44.0/255.0,
-                                              blue: 44.0/255.0,
-                                              alpha: 1.0)
+        homeTeamTextField.textColor = HBColor.lightGray
+        homeTeamTextField.tintColor = HBColor.lightGray
         homeTeamTextField.textAlignment = .center
         homeTeamTextField.contentVerticalAlignment = .center
         homeTeamTextField.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 50.0)
@@ -121,10 +105,11 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     
     private lazy var homeTeamTextFieldBorder: UIView = {
         let homeTeamTextFieldBorder = UIView()
-        homeTeamTextFieldBorder.backgroundColor = UIColor(red: 44.0/255.0,
-                                                          green: 44.0/255.0,
-                                                          blue: 44.0/255.0,
-                                                          alpha: 0.5)
+        homeTeamTextFieldBorder.backgroundColor = UIColor(
+            red: 44,
+            green: 44,
+            blue: 44,
+            alpha: 0.5)
         homeTeamTextFieldBorder.translatesAutoresizingMaskIntoConstraints = false
         
         return homeTeamTextFieldBorder
@@ -133,10 +118,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     private lazy var versusLabel: UILabel = {
         let versusLabel = UILabel()
         versusLabel.text = "vs"
-        versusLabel.textColor = UIColor(red: 44.0/255.0,
-                                        green: 44.0/255.0,
-                                        blue: 44.0/255.0,
-                                        alpha: 1.0)
+        versusLabel.textColor = HBColor.lightGray
         versusLabel.textAlignment = .center
         versusLabel.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 27.0)
         versusLabel.adjustsFontSizeToFitWidth = true
@@ -149,10 +131,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     private lazy var opponentTeamLabel: UILabel = {
         let opponentTeamLabel = UILabel()
         opponentTeamLabel.text = "상대팀"
-        opponentTeamLabel.textColor = UIColor(red: 44.0/255.0,
-                                              green: 44.0/255.0,
-                                              blue: 44.0/255.0,
-                                              alpha: 1.0)
+        opponentTeamLabel.textColor = HBColor.lightGray
         opponentTeamLabel.textAlignment = .center
         opponentTeamLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17.0)
         opponentTeamLabel.adjustsFontSizeToFitWidth = true
@@ -168,14 +147,8 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         if opponentScore != -1 {
             opponentTeamTextField.text = "\(opponentScore)"
         }
-        opponentTeamTextField.textColor = UIColor(red: 44.0/255.0,
-                                                  green: 44.0/255.0,
-                                                  blue: 44.0/255.0,
-                                                  alpha: 1.0)
-        opponentTeamTextField.tintColor = UIColor(red: 44.0/255.0,
-                                                  green: 44.0/255.0,
-                                                  blue: 44.0/255.0,
-                                                  alpha: 1.0)
+        opponentTeamTextField.textColor = HBColor.lightGray
+        opponentTeamTextField.tintColor = HBColor.lightGray
         opponentTeamTextField.textAlignment = .center
         opponentTeamTextField.contentVerticalAlignment = .center
         opponentTeamTextField.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 50.0)
@@ -190,10 +163,11 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     
     private lazy var opponentTeamTextFieldBorder: UIView = {
         let opponentTeamTextFieldBorder = UIView()
-        opponentTeamTextFieldBorder.backgroundColor = UIColor(red: 44.0/255.0,
-                                                              green: 44.0/255.0,
-                                                              blue: 44.0/255.0,
-                                                              alpha: 0.5)
+        opponentTeamTextFieldBorder.backgroundColor = UIColor(
+            red: 44,
+            green: 44,
+            blue: 44,
+            alpha: 0.5)
         opponentTeamTextFieldBorder.translatesAutoresizingMaskIntoConstraints = false
         
         return opponentTeamTextFieldBorder
@@ -216,18 +190,17 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         }
         
         if homeScore != -1, opponentScore != -1 {
-            if let currnetUser = Auth.auth().currentUser {
-                let ref = Database.database().reference()
+            guard let currnetUser = Auth.auth().currentUser else { return }
+            let ref = Database.database().reference()
+            
+            CloudFunction.getUserDataWith(currnetUser) {
+                (user, error) -> Void in
                 
-                CloudFunction.getUserDataWith(currnetUser) {
-                    (user, error) -> Void in
-                    
-                    if let user = user {
-                        let scheduleRef = ref.child("schedules").child(user.teamCode)
-                        scheduleRef.child(self.sid).updateChildValues([
-                            "homeScore": self.homeScore,
-                            "opponentScore": self.opponentScore])
-                    }
+                if let user = user {
+                    let scheduleRef = ref.child("schedules").child(user.teamCode)
+                    scheduleRef.child(self.sid).updateChildValues(
+                        ["homeScore": self.homeScore,
+                        "opponentScore": self.opponentScore])
                 }
             }
         } else {
@@ -240,11 +213,11 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "unwindToDetailView" {
-            if let scheduleDetailTableViewController = segue.destination as? ScheduleDetailTableViewController {
+            guard let scheduleDetailTableViewController =
+                segue.destination as? ScheduleDetailTableViewController else { return }
                 
-                scheduleDetailTableViewController.scheduleDetailInfoView.homeTeamScore = homeScore
-                scheduleDetailTableViewController.scheduleDetailInfoView.opponentTeamScore = opponentScore
-            }
+            scheduleDetailTableViewController.scheduleDetailInfoView.homeTeamScore = homeScore
+            scheduleDetailTableViewController.scheduleDetailInfoView.opponentTeamScore = opponentScore
         }
     }
     

@@ -55,10 +55,7 @@ class ScheduleDetailInfoView: UIView {
     private lazy var opponentTeamLabel: UILabel = {
         let opponentTeamLabel = UILabel()
         opponentTeamLabel.text = "HomeBase"
-        opponentTeamLabel.textColor = UIColor(red: 0.0,
-                                              green: 180.0/255.0,
-                                              blue: 223.0/255.0,
-                                              alpha: 1.0)
+        opponentTeamLabel.textColor = HBColor.correct
         opponentTeamLabel.textAlignment = .center
         opponentTeamLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26.0)
         opponentTeamLabel.adjustsFontSizeToFitWidth = true
@@ -98,8 +95,9 @@ class ScheduleDetailInfoView: UIView {
         let homeTeamButton = UIButton(type: .system)
         homeTeamButton.setTitle("-", for: .normal)
         homeTeamButton.setTitleColor(UIColor.white, for: .normal)
-        homeTeamButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium",
-                                                 size: 50.0)
+        homeTeamButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Medium",
+            size: 50.0)
         homeTeamButton.titleLabel?.adjustsFontSizeToFitWidth = true
         homeTeamButton.titleLabel?.minimumScaleFactor = 0.3
         homeTeamButton.backgroundColor = UIColor.clear
@@ -125,8 +123,9 @@ class ScheduleDetailInfoView: UIView {
         let opponentTeamButton = UIButton(type: .system)
         opponentTeamButton.setTitle("-", for: .normal)
         opponentTeamButton.setTitleColor(UIColor.white, for: .normal)
-        opponentTeamButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium",
-                                                     size: 50.0)
+        opponentTeamButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Medium",
+            size: 50.0)
         opponentTeamButton.titleLabel?.adjustsFontSizeToFitWidth = true
         opponentTeamButton.titleLabel?.minimumScaleFactor = 0.3
         opponentTeamButton.backgroundColor = UIColor.clear

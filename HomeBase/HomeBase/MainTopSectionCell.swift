@@ -27,10 +27,7 @@ class MainTopSectionCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "default"
-        titleLabel.textColor = UIColor(red: 44.0/255.0,
-                                          green: 44.0/255.0,
-                                          blue: 44.0/255.0,
-                                          alpha: 1.0)
+        titleLabel.textColor = HBColor.lightGray
         titleLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.5
@@ -42,10 +39,7 @@ class MainTopSectionCell: UITableViewCell {
     private lazy var firstPlaceView: MainTopRankingView = {
         let firstPlaceView = MainTopRankingView()
         firstPlaceView.layer.cornerRadius = 10.0
-        firstPlaceView.baseViewColor = UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0)
+        firstPlaceView.baseViewColor = HBColor.lightGray
         firstPlaceView.ranking = "1"
         firstPlaceView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -68,10 +62,7 @@ class MainTopSectionCell: UITableViewCell {
     private lazy var thirdPlaceView: MainTopRankingView = {
         let thirdPlaceView = MainTopRankingView()
         thirdPlaceView.layer.cornerRadius = 10.0
-        thirdPlaceView.baseViewColor = UIColor(red: 0.0/255.0,
-                                               green: 180.0/255.0,
-                                               blue: 223.0/255.0,
-                                               alpha: 1.0)
+        thirdPlaceView.baseViewColor = HBColor.correct
         thirdPlaceView.ranking = "3"
         thirdPlaceView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -101,10 +92,7 @@ class MainTopSectionCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor(red: 239.0/255.0,
-                                       green: 239.0/255.0,
-                                       blue: 239.0/255.0,
-                                       alpha: 1.0)
+        self.backgroundColor = HBColor.lightBlack
     }
     
     override func draw(_ rect: CGRect) {

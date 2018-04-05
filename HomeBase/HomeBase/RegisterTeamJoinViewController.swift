@@ -16,7 +16,7 @@ class RegisterTeamJoinViewController: UIViewController {
     
     // MARK: Properties
     
-    private var currentOriginY:CGFloat = 0.0
+    private var currentOriginY: CGFloat = 0.0
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -28,11 +28,15 @@ class RegisterTeamJoinViewController: UIViewController {
         return titleLabel
     }()
     
+    @IBOutlet private var teamCodeTextField: UITextField!
+    @IBOutlet private var teamCodeTextFieldBorder: UIView!
+    
     private lazy var accessoryView: UIView = {
-        let accessoryViewFrame = CGRect(x: 0.0,
-                                        y: 0.0,
-                                        width: self.view.frame.width,
-                                        height: 45.0)
+        let accessoryViewFrame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.view.frame.width,
+            height: 45.0)
         let accessoryView = UIView(frame: accessoryViewFrame)
         accessoryView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -43,22 +47,20 @@ class RegisterTeamJoinViewController: UIViewController {
         let doneButton = UIButton(type: .system)
         doneButton.setTitle("완료", for: .normal)
         doneButton.setTitleColor(.white, for: .normal)
-        doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18.0)
-        doneButton.addTarget(self, action: #selector(doneButtonDidTapped(_:)), for: .touchUpInside)
-        doneButton.backgroundColor = UIColor(red: 75.0/255.0,
-                                             green: 75.0/255.0,
-                                             blue: 75.0/255.0,
-                                             alpha: 1.0)
+        doneButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 18.0)
+        doneButton.addTarget(
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
+        doneButton.backgroundColor = HBColor.darkGray
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         
         return doneButton
     }()
     
     @IBOutlet private var spinner: UIActivityIndicatorView!
-    @IBOutlet private var teamCodeTextField: UITextField! {
-        didSet { teamCodeTextField.delegate = self }
-    }
-    @IBOutlet private var teamCodeTextFieldBorder: UIView!
     
     // MARK: Methods
     
@@ -86,24 +88,31 @@ class RegisterTeamJoinViewController: UIViewController {
                     } else {
                         teamLogoImage = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
                         
-                        if let registerTeamJoinEnterViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinEnterViewController") as? RegisterTeamJoinEnterViewController {
+                        guard let registerTeamJoinEnterViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinEnterViewController") as? RegisterTeamJoinEnterViewController else { return }
                             
-                            registerTeamJoinEnterViewController.teamLogoImage = teamLogoImage
-                            registerTeamJoinEnterViewController.teamCode = teamCode
-                            registerTeamJoinEnterViewController.teamName = team.name
-                            registerTeamJoinEnterViewController.modalPresentationStyle = .overCurrentContext
-                            self.spinnerStopAnimating(self.spinner)
-                            self.present(registerTeamJoinEnterViewController, animated: false, completion: nil)
-                        }
+                        registerTeamJoinEnterViewController.teamLogoImage = teamLogoImage
+                        registerTeamJoinEnterViewController.teamCode = teamCode
+                        registerTeamJoinEnterViewController.teamName = team.name
+                        registerTeamJoinEnterViewController.modalPresentationStyle = .overCurrentContext
+                        self.spinnerStopAnimating(self.spinner)
+                        self.present(
+                            registerTeamJoinEnterViewController,
+                            animated: false,
+                            completion: nil)
                     }
                 }
             } else {
-                if let registerTeamJoinErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinErrorViewController") as? RegisterTeamJoinErrorViewController {
+                guard let registerTeamJoinErrorViewController =
+                    self.storyboard?.instantiateViewController(
+                        withIdentifier: "RegisterTeamJoinErrorViewController")
+                        as? RegisterTeamJoinErrorViewController else { return }
                     
-                    registerTeamJoinErrorViewController.modalPresentationStyle = .overCurrentContext
-                    self.spinnerStopAnimating(self.spinner)
-                    self.present(registerTeamJoinErrorViewController, animated: false, completion: nil)
-                }
+                registerTeamJoinErrorViewController.modalPresentationStyle = .overCurrentContext
+                self.spinnerStopAnimating(self.spinner)
+                self.present(
+                    registerTeamJoinErrorViewController,
+                    animated: false,
+                    completion: nil)
             }
         }
     }
@@ -113,7 +122,9 @@ class RegisterTeamJoinViewController: UIViewController {
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
         
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height + 5.0
             
@@ -142,14 +153,19 @@ class RegisterTeamJoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.shadowImage = UIImage()
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        }
         self.navigationItem.titleView = titleLabel
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        self.navigationItem.backBarButtonItem =
+            UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         self.view.addSubview(doneButton)
         doneButtonConstraints()
         buttonDisabled(doneButton)
+        
+        teamCodeTextField.delegate = self
         
         NotificationCenter.default.addObserver(
             self,

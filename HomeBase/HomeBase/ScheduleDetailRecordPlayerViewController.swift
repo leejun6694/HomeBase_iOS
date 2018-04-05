@@ -42,10 +42,11 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     private lazy var footerView: UIView = {
-        let footerView = UIView(frame: CGRect(x: 0.0,
-                                              y: 0.0,
-                                              width: self.view.frame.size.width,
-                                              height: 50.0))
+        let footerView = UIView(frame: CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.view.frame.size.width,
+            height: 50.0))
         footerView.backgroundColor = .white
         footerView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -93,40 +94,39 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
         let record = createRecord()
         
-        if let currnetUser = Auth.auth().currentUser {
-            let ref = Database.database().reference()
+        guard let currnetUser = Auth.auth().currentUser else { return }
+        let ref = Database.database().reference()
 
-            CloudFunction.getUserDataWith(currnetUser) {
-                (user, error) -> Void in
+        CloudFunction.getUserDataWith(currnetUser) {
+            (user, error) -> Void in
 
-                if let user = user {
-                    let teamRef = ref.child("schedules").child(user.teamCode)
-                    teamRef.child(self.sid).child("record").child(self.pid).setValue(
-                        ["singleHit": record.batterRecord.singleHit,
-                         "doubleHit": record.batterRecord.doubleHit,
-                         "tripleHit": record.batterRecord.tripleHit,
-                         "homeRun": record.batterRecord.homeRun,
-                         "baseOnBalls": record.batterRecord.baseOnBalls,
-                         "hitByPitch": record.batterRecord.hitByPitch,
-                         "sacrificeHit": record.batterRecord.sacrificeHit,
-                         "stolenBase": record.batterRecord.stolenBase,
-                         "strikeOut": record.batterRecord.strikeOut,
-                         "groundBall": record.batterRecord.groundBall,
-                         "flyBall": record.batterRecord.flyBall,
-                         "run": record.batterRecord.run,
-                         "RBI": record.batterRecord.RBI,
-                         "win": record.pitcherRecord.win,
-                         "lose": record.pitcherRecord.lose,
-                         "hold": record.pitcherRecord.hold,
-                         "save": record.pitcherRecord.save,
-                         "inning": record.pitcherRecord.inning,
-                         "strikeOuts": record.pitcherRecord.strikeOuts,
-                         "ER": record.pitcherRecord.ER,
-                         "hits": record.pitcherRecord.hits,
-                         "homeRuns": record.pitcherRecord.homeRuns,
-                         "walks": record.pitcherRecord.walks,
-                         "hitBatters": record.pitcherRecord.hitBatters])
-                }
+            if let user = user {
+                let teamRef = ref.child("schedules").child(user.teamCode)
+                teamRef.child(self.sid).child("record").child(self.pid).setValue(
+                    ["singleHit": record.batterRecord.singleHit,
+                     "doubleHit": record.batterRecord.doubleHit,
+                     "tripleHit": record.batterRecord.tripleHit,
+                     "homeRun": record.batterRecord.homeRun,
+                     "baseOnBalls": record.batterRecord.baseOnBalls,
+                     "hitByPitch": record.batterRecord.hitByPitch,
+                     "sacrificeHit": record.batterRecord.sacrificeHit,
+                     "stolenBase": record.batterRecord.stolenBase,
+                     "strikeOut": record.batterRecord.strikeOut,
+                     "groundBall": record.batterRecord.groundBall,
+                     "flyBall": record.batterRecord.flyBall,
+                     "run": record.batterRecord.run,
+                     "RBI": record.batterRecord.RBI,
+                     "win": record.pitcherRecord.win,
+                     "lose": record.pitcherRecord.lose,
+                     "hold": record.pitcherRecord.hold,
+                     "save": record.pitcherRecord.save,
+                     "inning": record.pitcherRecord.inning,
+                     "strikeOuts": record.pitcherRecord.strikeOuts,
+                     "ER": record.pitcherRecord.ER,
+                     "hits": record.pitcherRecord.hits,
+                     "homeRuns": record.pitcherRecord.homeRuns,
+                     "walks": record.pitcherRecord.walks,
+                     "hitBatters": record.pitcherRecord.hitBatters])
             }
         }
         
@@ -137,50 +137,55 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
         scheduleDetailRecordPlayerHeaderView.batterButtonState = true
         
         self.tableView.reloadData()
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        self.tableView.scrollToRow(
+            at: IndexPath(row: 0, section: 0),
+            at: .top,
+            animated: true)
     }
     
     @objc private func pitcherButtonDidTapped(_ sender: UIButton) {
         scheduleDetailRecordPlayerHeaderView.batterButtonState = false
         
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        self.tableView.scrollToRow(
+            at: IndexPath(row: 0, section: 0),
+            at: .top,
+            animated: true)
         self.tableView.reloadData()
     }
     
     @objc private func minusImageViewDidTapped(_ sender: UITapGestureRecognizer) {
-        if let minusImageView = sender.view as? UIImageView {
-            if let cell = minusImageView.superview as? ScheduleDetailRecordPlayerTableViewCell {
-                let row = minusImageView.tag
-                
-                if scheduleDetailRecordPlayerHeaderView.batterButtonState {
-                    if batterRecords[row] > 0 {
-                        batterRecords[row] -= 1
-                    }
-                    cell.recordLabel.text = "\(batterRecords[row])"
-                } else {
-                    if row == 4 {
-                        if inning > 0.0 {
-                            inning -= 0.1
-                        }
-                        
-                        let inningReminder = Int(inning * 10.0) % 10
-                        if inningReminder == 0 {
-                            cell.recordLabel.text = "\(Int(inning))"
-                        } else {
-                            cell.recordLabel.text = "\(Int(inning)) \(inningReminder)/3"
-                        }
-                    } else {
-                        if pitcherRecords[row] > 0 {
-                            pitcherRecords[row] -= 1
-                        }
-                        cell.recordLabel.text = "\(pitcherRecords[row])"
+        guard let minusImageView = sender.view as? UIImageView else { return }
+        if let cell = minusImageView.superview as? ScheduleDetailRecordPlayerTableViewCell {
+            let row = minusImageView.tag
+            
+            if scheduleDetailRecordPlayerHeaderView.batterButtonState {
+                if batterRecords[row] > 0 {
+                    batterRecords[row] -= 1
+                }
+                cell.recordLabel.text = "\(batterRecords[row])"
+            } else {
+                if row == 4 {
+                    if inning > 0.0 {
+                        inning -= 0.1
                     }
                     
-                    for index in 0...3 {
-                        if index == row {
-                            buttonHold = false
-                            self.tableView.reloadData()
-                        }
+                    let inningReminder = Int(inning * 10.0) % 10
+                    if inningReminder == 0 {
+                        cell.recordLabel.text = "\(Int(inning))"
+                    } else {
+                        cell.recordLabel.text = "\(Int(inning)) \(inningReminder)/3"
+                    }
+                } else {
+                    if pitcherRecords[row] > 0 {
+                        pitcherRecords[row] -= 1
+                    }
+                    cell.recordLabel.text = "\(pitcherRecords[row])"
+                }
+                
+                for index in 0...3 {
+                    if index == row {
+                        buttonHold = false
+                        self.tableView.reloadData()
                     }
                 }
             }
@@ -188,34 +193,33 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
     }
     
     @objc private func plusImageViewDidTapped(_ sender: UITapGestureRecognizer) {
-        if let plusImageView = sender.view as? UIImageView {
-            if let cell = plusImageView.superview as? ScheduleDetailRecordPlayerTableViewCell {
-                let row = plusImageView.tag
+        guard let plusImageView = sender.view as? UIImageView else { return }
+        if let cell = plusImageView.superview as? ScheduleDetailRecordPlayerTableViewCell {
+            let row = plusImageView.tag
+            
+            if scheduleDetailRecordPlayerHeaderView.batterButtonState {
+                batterRecords[row] += 1
                 
-                if scheduleDetailRecordPlayerHeaderView.batterButtonState {
-                    batterRecords[row] += 1
+                cell.recordLabel.text = "\(batterRecords[row])"
+            } else {
+                if row == 4 {
+                    inning += 0.1
                     
-                    cell.recordLabel.text = "\(batterRecords[row])"
-                } else {
-                    if row == 4 {
-                        inning += 0.1
-                        
-                        let inningReminder = Int(inning * 10.0) % 10
-                        if inningReminder == 0 {
-                            cell.recordLabel.text = "\(Int(inning))"
-                        } else {
-                            cell.recordLabel.text = "\(Int(inning)) \(inningReminder)/3"
-                        }
+                    let inningReminder = Int(inning * 10.0) % 10
+                    if inningReminder == 0 {
+                        cell.recordLabel.text = "\(Int(inning))"
                     } else {
-                        pitcherRecords[row] += 1
-                        cell.recordLabel.text = "\(pitcherRecords[row])"
+                        cell.recordLabel.text = "\(Int(inning)) \(inningReminder)/3"
                     }
-                    
-                    for index in 0...3 {
-                        if index == row {
-                            buttonHold = true
-                            self.tableView.reloadData()
-                        }
+                } else {
+                    pitcherRecords[row] += 1
+                    cell.recordLabel.text = "\(pitcherRecords[row])"
+                }
+                
+                for index in 0...3 {
+                    if index == row {
+                        buttonHold = true
+                        self.tableView.reloadData()
                     }
                 }
             }
@@ -227,8 +231,9 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.register(ScheduleDetailRecordPlayerTableViewCell.self,
-                                forCellReuseIdentifier: cellReuseIdendifier)
+        self.tableView.register(
+            ScheduleDetailRecordPlayerTableViewCell.self,
+            forCellReuseIdentifier: cellReuseIdendifier)
         self.tableView.allowsSelection = false
         self.tableView.bounces = false
         self.tableView.tableFooterView = footerView
@@ -238,14 +243,22 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
         scheduleDetailRecordPlayerHeaderView.name = player.name
         
         scheduleDetailRecordPlayerHeaderView.cancelButton.addTarget(
-            self, action: #selector(cancelButtonDidTapped(_:)), for: .touchUpInside)
+            self,
+            action: #selector(cancelButtonDidTapped(_:)),
+            for: .touchUpInside)
         scheduleDetailRecordPlayerHeaderView.doneButton.addTarget(
-            self, action: #selector(doneButtonDidTapped(_:)), for: .touchUpInside)
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
         
         scheduleDetailRecordPlayerHeaderView.batterButton.addTarget(
-            self, action: #selector(batterButtonDidTapped(_:)), for: .touchUpInside)
+            self,
+            action: #selector(batterButtonDidTapped(_:)),
+            for: .touchUpInside)
         scheduleDetailRecordPlayerHeaderView.pitcherButton.addTarget(
-            self, action: #selector(pitcherButtonDidTapped(_:)), for: .touchUpInside)
+            self,
+            action: #selector(pitcherButtonDidTapped(_:)),
+            for: .touchUpInside)
         
         for _ in 0...11 {
             pitcherRecords.append(0)

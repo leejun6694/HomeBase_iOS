@@ -57,10 +57,7 @@ class ScheduleRecentView: UIView {
     private lazy var recordLabel: UILabel = {
         let recordLabel = UILabel()
         recordLabel.text = "최근 5경기 기록"
-        recordLabel.textColor = UIColor(red: 44.0/255.0,
-                                        green: 44.0/255.0,
-                                        blue: 44.0/255.0,
-                                        alpha: 1.0)
+        recordLabel.textColor = HBColor.lightGray
         recordLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
         recordLabel.textAlignment = .center
         recordLabel.adjustsFontSizeToFitWidth = true
@@ -132,20 +129,14 @@ class ScheduleRecentView: UIView {
     private lazy var noDataLabel: UILabel = {
         let noDataLabel = UILabel()
         noDataLabel.text = "기록이 없습니다"
-        noDataLabel.textColor = UIColor(red: 44.0/255.0,
-                                        green: 44.0/255.0,
-                                        blue: 44.0/255.0,
-                                        alpha: 1.0)
+        noDataLabel.textColor = HBColor.lightGray
         noDataLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15.0)
         noDataLabel.textAlignment = .center
         noDataLabel.adjustsFontSizeToFitWidth = true
         noDataLabel.minimumScaleFactor = 0.5
         noDataLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        noDataLabel.layer.borderColor = UIColor(red: 44.0/255.0,
-                                                green: 44.0/255.0,
-                                                blue: 44.0/255.0,
-                                                alpha: 1.0).cgColor
+        noDataLabel.layer.borderColor = HBColor.lightGray.cgColor
         noDataLabel.layer.borderWidth = 0.5
         noDataLabel.layer.cornerRadius = 8.0
         

@@ -22,19 +22,13 @@ class ScheduleCreateViewController: UIViewController {
     private var matchPlaceCondition = false
     private var matchDateCondition = false
     
-    private let correctColor = UIColor(red: 0.0,
-                                       green: 180.0/255.0,
-                                       blue: 223.0/255.0,
-                                       alpha: 1.0)
     private let systemFont = UIFont.systemFont(ofSize: 13.0)
     private let barButtonFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 17.0)
     
     private let dateFormatter = DateFormatter()
     
     @IBOutlet private var opponentTeamLabel: UILabel!
-    @IBOutlet private var opponentTeamTextField: UITextField! {
-        didSet { opponentTeamTextField.delegate = self }
-    }
+    @IBOutlet private var opponentTeamTextField: UITextField!
     @IBOutlet private var opponentTeamTextFieldBorder: UIView!
     private lazy var opponentTeamConditionImageView: UIImageView = {
         let opponentTeamConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
@@ -44,9 +38,7 @@ class ScheduleCreateViewController: UIViewController {
     }()
     
     @IBOutlet private var matchPlaceLabel: UILabel!
-    @IBOutlet private var matchPlaceTextField: UITextField! {
-        didSet { matchPlaceTextField.delegate = self }
-    }
+    @IBOutlet private var matchPlaceTextField: UITextField!
     @IBOutlet private var matchPlaceTextFieldBorder: UIView!
     private lazy var matchPlaceConditionImageView: UIImageView = {
         let matchPlaceConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
@@ -56,9 +48,7 @@ class ScheduleCreateViewController: UIViewController {
     }()
     
     @IBOutlet private var matchDateLabel: UILabel!
-    @IBOutlet private var matchDateTextField: UITextField! {
-        didSet { matchDateTextField.delegate = self }
-    }
+    @IBOutlet private var matchDateTextField: UITextField!
     @IBOutlet private var matchDateTextFieldBorder: UIView!
     private lazy var matchDateConditionImageView: UIImageView = {
         let matchDateConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
@@ -72,9 +62,10 @@ class ScheduleCreateViewController: UIViewController {
         matchDatePicker.locale = Locale(identifier: "ko-KR")
         matchDatePicker.backgroundColor = .white
         matchDatePicker.minuteInterval = 5
-        matchDatePicker.addTarget(self,
-                                  action: #selector(matchDatePickerDidChanged(_:)),
-                                  for: .valueChanged)
+        matchDatePicker.addTarget(
+            self,
+            action: #selector(matchDatePickerDidChanged(_:)),
+            for: .valueChanged)
         
         return matchDatePicker
     }()
@@ -84,32 +75,38 @@ class ScheduleCreateViewController: UIViewController {
         toolBar.isTranslucent = false
         toolBar.sizeToFit()
         
-        let matchDateDoneButton = UIBarButtonItem(title: "완료",
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(matchDateDoneButtonDidTapped(_:)))
+        let matchDateDoneButton = UIBarButtonItem(
+            title: "완료",
+            style: .plain,
+            target: self,
+            action: #selector(matchDateDoneButtonDidTapped(_:)))
         matchDateDoneButton.setTitleTextAttributes(
             [NSAttributedStringKey.font: barButtonFont ?? systemFont],
             for: .normal)
-        matchDateDoneButton.tintColor = correctColor
-        let positionSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                                target: nil,
-                                                action: nil)
-        let matchDateCancelButton = UIBarButtonItem(title: "취소",
-                                                   style: .plain,
-                                                   target: self,
-                                                   action: #selector(matchDateCancelButtonDidTapped(_:)))
+        matchDateDoneButton.tintColor = HBColor.correct
+        let positionSpaceItem = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil)
+        let matchDateCancelButton = UIBarButtonItem(
+            title: "취소",
+            style: .plain,
+            target: self,
+            action: #selector(matchDateCancelButtonDidTapped(_:)))
         matchDateCancelButton.setTitleTextAttributes(
             [NSAttributedStringKey.font: barButtonFont ?? systemFont],
             for: .normal)
-        matchDateCancelButton.tintColor = correctColor
-        toolBar.setItems([matchDateCancelButton, positionSpaceItem, matchDateDoneButton], animated: false)
+        matchDateCancelButton.tintColor = HBColor.correct
+        toolBar.setItems(
+            [matchDateCancelButton,
+             positionSpaceItem,
+             matchDateDoneButton],
+            animated: false)
         
         return toolBar
     }()
     
     @IBOutlet private var doneButton: UIButton!
-    
     @IBOutlet private var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
@@ -186,6 +183,10 @@ class ScheduleCreateViewController: UIViewController {
         
         buttonDisabled(doneButton)
         
+        opponentTeamTextField.delegate = self
+        matchPlaceTextField.delegate = self
+        matchDateTextField.delegate = self
+        
         dateFormatter.locale = Locale(identifier: "ko-KR")
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         matchDate = dateFormatter.string(from: matchDatePicker.date)
@@ -208,10 +209,10 @@ extension ScheduleCreateViewController: UITextFieldDelegate {
         if state {
             opponentTeamCondition = true
             opponentTeam = opponentTeamTextField.text ?? ""
-            opponentTeamLabel.textColor = correctColor
-            opponentTeamTextField.textColor = correctColor
-            opponentTeamTextField.tintColor = correctColor
-            opponentTeamTextFieldBorder.backgroundColor = correctColor
+            opponentTeamLabel.textColor = HBColor.correct
+            opponentTeamTextField.textColor = HBColor.correct
+            opponentTeamTextField.tintColor = HBColor.correct
+            opponentTeamTextFieldBorder.backgroundColor = HBColor.correct
             
             if !opponentTeamConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(opponentTeamConditionImageView)
@@ -236,10 +237,10 @@ extension ScheduleCreateViewController: UITextFieldDelegate {
         if state {
             matchPlaceCondition = true
             matchPlace = matchPlaceTextField.text ?? ""
-            matchPlaceLabel.textColor = correctColor
-            matchPlaceTextField.textColor = correctColor
-            matchPlaceTextField.tintColor = correctColor
-            matchPlaceTextFieldBorder.backgroundColor = correctColor
+            matchPlaceLabel.textColor = HBColor.correct
+            matchPlaceTextField.textColor = HBColor.correct
+            matchPlaceTextField.tintColor = HBColor.correct
+            matchPlaceTextFieldBorder.backgroundColor = HBColor.correct
             
             if !matchPlaceConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(matchPlaceConditionImageView)
@@ -345,10 +346,10 @@ extension ScheduleCreateViewController {
     private func matchDateFieldCondition(_ state: Bool) {
         if state {
             matchDateCondition = true
-            matchDateLabel.textColor = correctColor
-            matchDateTextField.textColor = correctColor
-            matchDateTextField.tintColor = correctColor
-            matchDateTextFieldBorder.backgroundColor = correctColor
+            matchDateLabel.textColor = HBColor.correct
+            matchDateTextField.textColor = HBColor.correct
+            matchDateTextField.tintColor = HBColor.correct
+            matchDateTextFieldBorder.backgroundColor = HBColor.correct
             
             if !matchDateConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(matchDateConditionImageView)

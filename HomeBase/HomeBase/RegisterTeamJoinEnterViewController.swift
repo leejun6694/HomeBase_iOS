@@ -15,8 +15,8 @@ class RegisterTeamJoinEnterViewController: UIViewController {
     
     // MARK: Properties
     
-    var teamName:String = ""
-    var teamCode:String = ""
+    var teamName: String = ""
+    var teamCode: String = ""
     var teamLogoImage:UIImage = UIImage()
     
     @IBOutlet private var teamLogoImageView: UIImageView!
@@ -30,17 +30,18 @@ class RegisterTeamJoinEnterViewController: UIViewController {
         spinnerStartAnimating(spinner)
         let databaseRef = Database.database().reference()
         
-        if let currentUser = Auth.auth().currentUser {            
-            databaseRef.child("users").child(currentUser.uid).updateChildValues(
-                ["teamCode": teamCode])
+        guard let currentUser = Auth.auth().currentUser else { return }
+        databaseRef.child("users").child(currentUser.uid).updateChildValues(
+            ["teamCode": teamCode])
             
-            if let registerUserNavigation = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
-                
-                registerUserNavigation.teamCode = teamCode
-                spinnerStopAnimating(spinner)
-                self.present(registerUserNavigation, animated: true, completion: nil)
-            }
-        }
+        guard let registerUserNavigation =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "RegisterUserNavigation")
+                as? RegisterUserNavigation else { return }
+            
+        registerUserNavigation.teamCode = teamCode
+        spinnerStopAnimating(spinner)
+        self.present(registerUserNavigation, animated: true, completion: nil)
     }
     
     @IBAction func cancelButtonDidTapped(_ sender: UIButton) {
@@ -63,10 +64,7 @@ class RegisterTeamJoinEnterViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
-        teamLogoImageView.layer.borderColor = UIColor(red: 44.0/255.0,
-                                                      green: 44.0/255.0,
-                                                      blue: 44.0/255.0,
-                                                      alpha: 1.0).cgColor
+        teamLogoImageView.layer.borderColor = HBColor.lightGray.cgColor
         teamLogoImageView.layer.borderWidth = 1.0
     }
 }

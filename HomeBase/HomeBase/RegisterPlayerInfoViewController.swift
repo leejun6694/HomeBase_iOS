@@ -34,11 +34,6 @@ class RegisterPlayerInfoViewController: UIViewController {
     private var positionCondition = false
     private var playerNumberCondition = false
     
-    private let correctColor = UIColor(red: 0.0,
-                                       green: 180.0/255.0,
-                                       blue: 223.0/255.0,
-                                       alpha: 1.0)
-    
     private let systemFont = UIFont.systemFont(ofSize: 13.0)
     private let barButtonFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 17.0)
     private let controlFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 13.0)
@@ -53,38 +48,8 @@ class RegisterPlayerInfoViewController: UIViewController {
         return titleLabel
     }()
     
-    private lazy var accessoryView: UIView = {
-        let accessoryViewFrame = CGRect(x: 0.0,
-                                        y: 0.0,
-                                        width: self.view.frame.width,
-                                        height: 45.0)
-        let accessoryView = UIView(frame: accessoryViewFrame)
-        accessoryView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return accessoryView
-    }()
-    
-    private lazy var doneButton: UIButton = {
-        let doneButton = UIButton(type: .system)
-        doneButton.setTitle("완료", for: .normal)
-        doneButton.setTitleColor(.white, for: .normal)
-        doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18.0)
-        doneButton.addTarget(self, action: #selector(doneButtonDidTapped(_:)), for: .touchUpInside)
-        doneButton.backgroundColor = UIColor(red: 75.0/255.0,
-                                             green: 75.0/255.0,
-                                             blue: 75.0/255.0,
-                                             alpha: 1.0)
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        return doneButton
-    }()
-    
-    @IBOutlet var spinner: UIActivityIndicatorView!
-    
     @IBOutlet weak var positionLabel: UILabel!
-    @IBOutlet private weak var positionTextField: UITextField! {
-        didSet { positionTextField.delegate = self }
-    }
+    @IBOutlet private weak var positionTextField: UITextField!
     @IBOutlet private weak var positionTextFieldBorder: UIView!
     private lazy var positionConditionImageView: UIImageView = {
         let positionConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
@@ -98,26 +63,33 @@ class RegisterPlayerInfoViewController: UIViewController {
         toolBar.isTranslucent = false
         toolBar.sizeToFit()
         
-        let positionDoneButton = UIBarButtonItem(title: "완료",
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(positionDoneButtonDidTapped(_:)))
+        let positionDoneButton = UIBarButtonItem(
+            title: "완료",
+            style: .plain,
+            target: self,
+            action: #selector(positionDoneButtonDidTapped(_:)))
         positionDoneButton.setTitleTextAttributes(
             [NSAttributedStringKey.font: barButtonFont ?? systemFont],
             for: .normal)
-        positionDoneButton.tintColor = correctColor
-        let positionSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                                target: nil,
-                                                action: nil)
-        let positionCancelButton = UIBarButtonItem(title: "취소",
-                                                   style: .plain,
-                                                   target: self,
-                                                   action: #selector(positionCancelButtondDidTapped(_:)))
+        positionDoneButton.tintColor = HBColor.correct
+        let positionSpaceItem = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil)
+        let positionCancelButton = UIBarButtonItem(
+            title: "취소",
+            style: .plain,
+            target: self,
+            action: #selector(positionCancelButtondDidTapped(_:)))
         positionCancelButton.setTitleTextAttributes(
             [NSAttributedStringKey.font: barButtonFont ?? systemFont],
             for: .normal)
-        positionCancelButton.tintColor = correctColor
-        toolBar.setItems([positionCancelButton, positionSpaceItem, positionDoneButton], animated: false)
+        positionCancelButton.tintColor = HBColor.correct
+        toolBar.setItems(
+            [positionCancelButton,
+             positionSpaceItem,
+             positionDoneButton],
+            animated: false)
         
         return toolBar
     }()
@@ -139,9 +111,7 @@ class RegisterPlayerInfoViewController: UIViewController {
     }()
     
     @IBOutlet weak var playerNumberLabel: UILabel!
-    @IBOutlet private weak var playerNumberTextField: UITextField! {
-        didSet { playerNumberTextField.delegate = self }
-    }
+    @IBOutlet private weak var playerNumberTextField: UITextField!
     @IBOutlet private weak var playerNumberTextFieldBorder: UIView!
     private lazy var playerNumberConditionImageView: UIImageView = {
         let playerNumberConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
@@ -151,22 +121,41 @@ class RegisterPlayerInfoViewController: UIViewController {
     }()
     
     @IBOutlet weak var pitcherLabel: UILabel!
-    @IBOutlet private weak var pitcherControl: UISegmentedControl! {
-        didSet {
-            pitcherControl.setTitleTextAttributes(
-                [NSAttributedStringKey.font: controlFont ?? systemFont],
-                for: .normal)
-        }
-    }
+    @IBOutlet private weak var pitcherControl: UISegmentedControl!
     
     @IBOutlet weak var hitterLabel: UILabel!
-    @IBOutlet private weak var hitterControl: UISegmentedControl! {
-        didSet {
-            hitterControl.setTitleTextAttributes(
-                [NSAttributedStringKey.font: controlFont ?? systemFont],
-                for: .normal)
-        }
-    }
+    @IBOutlet private weak var hitterControl: UISegmentedControl!
+    
+    private lazy var accessoryView: UIView = {
+        let accessoryViewFrame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.view.frame.width,
+            height: 45.0)
+        let accessoryView = UIView(frame: accessoryViewFrame)
+        accessoryView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return accessoryView
+    }()
+    
+    private lazy var doneButton: UIButton = {
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("완료", for: .normal)
+        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 18.0)
+        doneButton.addTarget(
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
+        doneButton.backgroundColor = HBColor.darkGray
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return doneButton
+    }()
+    
+    @IBOutlet var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
     
@@ -232,13 +221,15 @@ class RegisterPlayerInfoViewController: UIViewController {
                                     print(error)
                                 } else {
                                     let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                    if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                                    guard let mainTabBarController =
+                                        mainStoryboard.instantiateViewController(
+                                            withIdentifier: "MainTabBarController")
+                                            as? MainTabBarController else { return }
                                         
-                                        mainTabBarController.teamData = teamData
-                                        mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                                        self.spinnerStopAnimating(self.spinner)
-                                        UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
-                                    }
+                                    mainTabBarController.teamData = teamData
+                                    mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                                    self.spinnerStopAnimating(self.spinner)
+                                    UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
                                 }
                             }
                         } else {
@@ -267,7 +258,9 @@ class RegisterPlayerInfoViewController: UIViewController {
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
         
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height + accessoryView.frame.size.height
             
@@ -299,6 +292,15 @@ class RegisterPlayerInfoViewController: UIViewController {
         self.view.addSubview(doneButton)
         doneButtonConstraints()
         buttonDisabled(doneButton)
+        
+        positionTextField.delegate = self
+        playerNumberTextField.delegate = self
+        pitcherControl.setTitleTextAttributes(
+            [NSAttributedStringKey.font: controlFont ?? systemFont],
+            for: .normal)
+        hitterControl.setTitleTextAttributes(
+            [NSAttributedStringKey.font: controlFont ?? systemFont],
+            for: .normal)
         
         NotificationCenter.default.addObserver(
             self,
@@ -336,10 +338,10 @@ extension RegisterPlayerInfoViewController: UIPickerViewDelegate, UIPickerViewDa
         if state {
             positionCondition = true
             position = positionTextField.text ?? "default"
-            positionLabel.textColor = correctColor
-            positionTextField.textColor = correctColor
-            positionTextField.tintColor = correctColor
-            positionTextFieldBorder.backgroundColor = correctColor
+            positionLabel.textColor = HBColor.correct
+            positionTextField.textColor = HBColor.correct
+            positionTextField.tintColor = HBColor.correct
+            positionTextFieldBorder.backgroundColor = HBColor.correct
             
             if !positionConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(positionConditionImageView)
@@ -395,8 +397,8 @@ extension RegisterPlayerInfoViewController: UITextFieldDelegate {
         if positionCondition, playerNumberCondition {
             buttonEnabled(doneButton)
             
-            pitcherLabel.textColor = correctColor
-            hitterLabel.textColor = correctColor
+            pitcherLabel.textColor = HBColor.correct
+            hitterLabel.textColor = HBColor.correct
         } else {
             buttonDisabled(doneButton)
             
@@ -409,10 +411,10 @@ extension RegisterPlayerInfoViewController: UITextFieldDelegate {
         if state {
             playerNumberCondition = true
             playerNumber = Int(playerNumberTextField.text ?? "0") ?? 0
-            playerNumberLabel.textColor = correctColor
-            playerNumberTextField.textColor = correctColor
-            playerNumberTextField.tintColor = correctColor
-            playerNumberTextFieldBorder.backgroundColor = correctColor
+            playerNumberLabel.textColor = HBColor.correct
+            playerNumberTextField.textColor = HBColor.correct
+            playerNumberTextField.tintColor = HBColor.correct
+            playerNumberTextFieldBorder.backgroundColor = HBColor.correct
             
             if !playerNumberConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(playerNumberConditionImageView)

@@ -14,19 +14,25 @@ class RegisterTeamChoiceViewController: UIViewController {
     // MARK: Methods
     
     @IBAction private func createButtonDidTapped(_ sender: UIButton) {
-        if let registerTeamCreateViewController =
-            self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamCreateViewController") as? RegisterTeamCreateViewController {
+        guard let registerTeamCreateViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "RegisterTeamCreateViewController")
+                as? RegisterTeamCreateViewController else { return }
             
-            self.navigationController?.pushViewController(registerTeamCreateViewController, animated: true)
-        }
+        self.navigationController?.pushViewController(
+            registerTeamCreateViewController,
+            animated: true)
     }
     
     @IBAction private func joinButtonDidTapped(_ sender: UIButton) {
-        if let registerTeamJoinViewController =
-            self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamJoinViewController") as? RegisterTeamJoinViewController {
+        guard let registerTeamJoinViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "RegisterTeamJoinViewController")
+                as? RegisterTeamJoinViewController else { return }
             
-            self.navigationController?.pushViewController(registerTeamJoinViewController, animated: true)
-        }
+        self.navigationController?.pushViewController(
+            registerTeamJoinViewController,
+            animated: true)
     }
     
     // MARK: Life Cycles
@@ -37,9 +43,10 @@ class RegisterTeamChoiceViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.navigationBar.barTintColor =
-            UIColor(red: 44.0/255.0, green: 44.0/255.0, blue: 44.0/255.0, alpha: 1.0)
+        
+        if let navigationController = self.navigationController {
+            navigationController.isNavigationBarHidden = true
+            navigationController.navigationBar.barTintColor = HBColor.lightGray
+        }
     }
 }

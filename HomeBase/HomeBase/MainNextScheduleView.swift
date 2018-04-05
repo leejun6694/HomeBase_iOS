@@ -14,10 +14,7 @@ class MainNextScheduleView: UIView {
     
     private lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = UIColor(red: 239.0/255.0,
-                                              green: 239.0/255.0,
-                                              blue: 239.0/255.0,
-                                              alpha: 1.0)
+        contentView.backgroundColor = HBColor.lightBlack
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         return contentView
@@ -26,13 +23,12 @@ class MainNextScheduleView: UIView {
     private lazy var nextScheduleLabel: UILabel = {
         let nextScheduleLabel = UILabel()
         nextScheduleLabel.text = "다음\n일정"
-        nextScheduleLabel.textColor = UIColor(red: 44.0/255.0,
-                                          green: 44.0/255.0,
-                                          blue: 44.0/255.0,
-                                          alpha: 1.0)
+        nextScheduleLabel.textColor = HBColor.lightGray
         nextScheduleLabel.numberOfLines = 2
         nextScheduleLabel.textAlignment = .center
-        nextScheduleLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 25.0)
+        nextScheduleLabel.font = UIFont(
+            name: "AppleSDGothicNeo-Light",
+            size: 25.0)
         nextScheduleLabel.adjustsFontSizeToFitWidth = true
         nextScheduleLabel.minimumScaleFactor = 0.5
         nextScheduleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -43,10 +39,7 @@ class MainNextScheduleView: UIView {
     private lazy var dayLabel: UILabel = {
         let dayLabel = UILabel()
         dayLabel.text = "20"
-        dayLabel.textColor = UIColor(red: 44.0/255.0,
-                                     green: 44.0/255.0,
-                                     blue: 44.0/255.0,
-                                     alpha: 1.0)
+        dayLabel.textColor = HBColor.lightGray
         dayLabel.textAlignment = .center
         dayLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 31.0)
         dayLabel.adjustsFontSizeToFitWidth = true
@@ -60,10 +53,7 @@ class MainNextScheduleView: UIView {
     private lazy var dayOfWeekLabel: UILabel = {
         let dayOfWeekLabel = UILabel()
         dayOfWeekLabel.text = "토요일"
-        dayOfWeekLabel.textColor = UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0)
+        dayOfWeekLabel.textColor = HBColor.lightGray
         dayOfWeekLabel.textAlignment = .center
         dayOfWeekLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13.0)
         dayOfWeekLabel.adjustsFontSizeToFitWidth = true
@@ -75,10 +65,11 @@ class MainNextScheduleView: UIView {
     
     private lazy var divisionView: UIView = {
         let divisionView = UIView()
-        divisionView.backgroundColor = UIColor(red: 151.0/255.0,
-                                               green: 151.0/255.0,
-                                               blue: 151.0/255.0,
-                                               alpha: 1.0)
+        divisionView.backgroundColor = UIColor(
+            red: 151,
+            green: 151,
+            blue: 151,
+            alpha: 1.0)
         divisionView.translatesAutoresizingMaskIntoConstraints = false
         
         return divisionView
@@ -87,10 +78,7 @@ class MainNextScheduleView: UIView {
     private lazy var opponentTeamLabel: UILabel = {
         let opponentTeamLabel = UILabel()
         opponentTeamLabel.text = "HomeBase"
-        opponentTeamLabel.textColor = UIColor(red: 44.0/255.0,
-                                              green: 44.0/255.0,
-                                              blue: 44.0/255.0,
-                                              alpha: 1.0)
+        opponentTeamLabel.textColor = HBColor.lightGray
         opponentTeamLabel.textAlignment = .left
         opponentTeamLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 21.0)
         opponentTeamLabel.adjustsFontSizeToFitWidth = true
@@ -103,10 +91,7 @@ class MainNextScheduleView: UIView {
     private lazy var matchDateLabel: UILabel = {
         let matchDateLabel = UILabel()
         matchDateLabel.text = "2월 20일 토요일 오전 9:00"
-        matchDateLabel.textColor = UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0)
+        matchDateLabel.textColor = HBColor.lightGray
         matchDateLabel.textAlignment = .left
         matchDateLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12.0)
         matchDateLabel.adjustsFontSizeToFitWidth = true
@@ -119,10 +104,7 @@ class MainNextScheduleView: UIView {
     private lazy var matchPlaceLabel: UILabel = {
         let matchPlaceLabel = UILabel()
         matchPlaceLabel.text = "홈베이스 야구장"
-        matchPlaceLabel.textColor = UIColor(red: 44.0/255.0,
-                                            green: 44.0/255.0,
-                                            blue: 44.0/255.0,
-                                            alpha: 1.0)
+        matchPlaceLabel.textColor = HBColor.lightGray
         matchPlaceLabel.textAlignment = .left
         matchPlaceLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12.0)
         matchPlaceLabel.adjustsFontSizeToFitWidth = true

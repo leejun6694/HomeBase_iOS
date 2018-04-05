@@ -29,10 +29,7 @@ class ScheduleMonthlySectionHeaderView: UIView {
     private lazy var monthLabel: UILabel = {
         let monthLabel = UILabel()
         monthLabel.text = "01월,"
-        monthLabel.textColor = UIColor(red: 44.0/255.0,
-                                        green: 44.0/255.0,
-                                        blue: 44.0/255.0,
-                                        alpha: 1.0)
+        monthLabel.textColor = HBColor.lightGray
         monthLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 23.0)
         monthLabel.adjustsFontSizeToFitWidth = true
         monthLabel.minimumScaleFactor = 0.5
@@ -44,10 +41,7 @@ class ScheduleMonthlySectionHeaderView: UIView {
     private lazy var yearLabel: UILabel = {
         let yearLabel = UILabel()
         yearLabel.text = "2018"
-        yearLabel.textColor = UIColor(red: 44.0/255.0,
-                                       green: 44.0/255.0,
-                                       blue: 44.0/255.0,
-                                       alpha: 1.0)
+        yearLabel.textColor = HBColor.lightGray
         yearLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 15.0)
         yearLabel.adjustsFontSizeToFitWidth = true
         yearLabel.minimumScaleFactor = 0.5
@@ -60,16 +54,12 @@ class ScheduleMonthlySectionHeaderView: UIView {
         let monthlyRecordLabel = UILabel()
         monthlyRecordLabel.textAlignment = .right
         
-        let numberAttr = [NSAttributedStringKey.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0),
-                          NSAttributedStringKey.foregroundColor: UIColor(red: 44.0/255.0,
-                                                                         green: 44.0/255.0,
-                                                                         blue: 44.0/255.0,
-                                                                         alpha: 1.0)]
-        let charAttr = [NSAttributedStringKey.font: UIFont(name: "AppleSDGothicNeo-Light", size: 15.0),
-                        NSAttributedStringKey.foregroundColor: UIColor(red: 44.0/255.0,
-                                                                         green: 44.0/255.0,
-                                                                         blue: 44.0/255.0,
-                                                                         alpha: 1.0)]
+        let numberAttr = [NSAttributedStringKey.font: UIFont(name: "AppleSDGothicNeo-Bold",
+                                                             size: 15.0),
+                          NSAttributedStringKey.foregroundColor: HBColor.lightGray]
+        let charAttr = [NSAttributedStringKey.font: UIFont(name: "AppleSDGothicNeo-Light",
+                                                           size: 15.0),
+                        NSAttributedStringKey.foregroundColor: HBColor.lightGray]
         
         var monthlyRecordText = NSMutableAttributedString(string: "")
         let winNumber = NSMutableAttributedString(string: "10", attributes: numberAttr)
@@ -99,10 +89,7 @@ class ScheduleMonthlySectionHeaderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor(red: 192.0/255.0,
-                                       green: 222.0/255.0,
-                                       blue: 229.0/255.0,
-                                       alpha: 1.0)
+        self.backgroundColor = UIColor(red: 192, green: 222, blue: 229, alpha: 1.0)
     }
     
     override func draw(_ rect: CGRect) {

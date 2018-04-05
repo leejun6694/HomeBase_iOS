@@ -17,18 +17,12 @@ class SignInViewController: UIViewController {
     
     // MARK: Properties
     
-    private var currentOriginY:CGFloat = 0.0
+    private var currentOriginY: CGFloat = 0.0
     
-    @IBOutlet private weak var emailTextField: UITextField! {
-        didSet { emailTextField.delegate = self }
-    }
-    
-    @IBOutlet private weak var pwTextField: UITextField! {
-        didSet { pwTextField.delegate = self }
-    }
-    @IBOutlet private var pwTextFieldBorder: UIView!
-    
-    @IBOutlet var signInButton: UIButton!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var pwTextField: UITextField!
+    @IBOutlet private weak var pwTextFieldBorder: UIView!
+    @IBOutlet private weak var signInButton: UIButton!
     
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
@@ -63,42 +57,48 @@ class SignInViewController: UIViewController {
                                                 print(error)
                                             } else {
                                                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                                if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                                                
+                                                guard let mainTabBarController = mainStoryboard.instantiateViewController(
+                                                    withIdentifier: "MainTabBarController")
+                                                    as? MainTabBarController else { return }
                                                     
-                                                    mainTabBarController.teamData = teamData
-                                                    mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                                                    self.spinnerStopAnimating(self.spinner)
-                                                    UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
-                                                }
+                                                mainTabBarController.teamData = teamData
+                                                mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                                                self.spinnerStopAnimating(self.spinner)
+                                            
+                                                UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
                                             }
                                         }
                                     }
                                 }
                             } else {
-                                if let registerUserNavigation =
-                                    self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
+                                guard let registerUserNavigation = self.storyboard?.instantiateViewController(
+                                    withIdentifier: "RegisterUserNavigation")
+                                    as? RegisterUserNavigation else { return }
                                     
-                                    registerUserNavigation.teamCode = teamCode
-                                    self.spinnerStopAnimating(self.spinner)
-                                    UIApplication.shared.keyWindow?.rootViewController = registerUserNavigation
-                                }
+                                registerUserNavigation.teamCode = teamCode
+                                self.spinnerStopAnimating(self.spinner)
+                                UIApplication.shared.keyWindow?.rootViewController = registerUserNavigation
                             }
                         }
                     } else {
-                        if let registerTeamNavigation =
-                            self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation {
+                        guard let registerTeamNavigation =
+                            self.storyboard?.instantiateViewController(
+                                withIdentifier: "RegisterTeamNavigation")
+                                as? RegisterTeamNavigation else { return }
                             
-                            self.spinnerStopAnimating(self.spinner)
-                            UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
-                        }
+                        self.spinnerStopAnimating(self.spinner)
+                        UIApplication.shared.keyWindow?.rootViewController =
+                        registerTeamNavigation
                     }
                 } else {
-                    if let registerTeamNavigation =
-                        self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamNavigation") as? RegisterTeamNavigation {
+                    guard let registerTeamNavigation =
+                        self.storyboard?.instantiateViewController(
+                            withIdentifier: "RegisterTeamNavigation")
+                            as? RegisterTeamNavigation else { return }
                         
-                        self.spinnerStopAnimating(self.spinner)
-                        UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
-                    }
+                    self.spinnerStopAnimating(self.spinner)
+                    UIApplication.shared.keyWindow?.rootViewController = registerTeamNavigation
                 }
             }
         }
@@ -106,100 +106,86 @@ class SignInViewController: UIViewController {
     
     @IBAction private func emailSignInButtonDidTapped(_ sender: UIButton) {
         spinnerStartAnimating(spinner)
+        signOutCurrentUser()
         
-        if let _ = Auth.auth().currentUser {
-            do {
-                try Auth.auth().signOut()
-            } catch {
-                print("sign out error")
-            }
-        }
+        let email = emailTextField.text ?? "no email"
+        let pw = pwTextField.text ?? "no password"
         
-        if let email = emailTextField.text, let pw = pwTextField.text {
-            Auth.auth().signIn(withEmail: email, password: pw) {
-                (user, error) in
+        Auth.auth().signIn(withEmail: email, password: pw) {
+            (user, error) in
+            
+            if let error = error {
+                var errorText: String = ""
                 
-                if let error = error {
-                    var errorText: String = ""
-                    
-                    if let errorCode = AuthErrorCode(rawValue: error._code) {
-                        switch errorCode {
-                        case .userNotFound: errorText = "존재하지 않는 사용자입니다"
-                        case .operationNotAllowed: errorText = "허용되지 않은 사용자입니다"
-                        case .invalidEmail: errorText = "존재하지 않는 이메일입니다"
-                        case .userDisabled: errorText = "접근할 수 없는 사용자입니다"
-                        case .wrongPassword: errorText = "잘못된 비밀번호입니다"
-                        default: break
-                        }
+                if let errorCode = AuthErrorCode(rawValue: error._code) {
+                    switch errorCode {
+                    case .userNotFound: errorText = "존재하지 않는 사용자입니다"
+                    case .operationNotAllowed: errorText = "허용되지 않은 사용자입니다"
+                    case .invalidEmail: errorText = "존재하지 않는 이메일입니다"
+                    case .userDisabled: errorText = "접근할 수 없는 사용자입니다"
+                    case .wrongPassword: errorText = "잘못된 비밀번호입니다"
+                    default: break
                     }
+                }
+                
+                guard let signInErrorViewController =
+                    self.storyboard?.instantiateViewController(
+                    withIdentifier: "SignInErrorViewController")
+                        as? SignInErrorViewController else { return }
                     
-                    if let signInErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignInErrorViewController") as? SignInErrorViewController {
-                        
-                        signInErrorViewController.errorText = errorText
-                        signInErrorViewController.modalPresentationStyle = .overCurrentContext
-                        self.spinnerStopAnimating(self.spinner)
-                        self.present(signInErrorViewController, animated: false, completion: nil)
-                    }
+                signInErrorViewController.errorText = errorText
+                signInErrorViewController.modalPresentationStyle = .overCurrentContext
+                self.spinnerStopAnimating(self.spinner)
+                self.present(signInErrorViewController, animated: false, completion: nil)
+            } else {
+                guard let currentUser = user else { return }
+                
+                if currentUser.isEmailVerified {
+                    self.userConnected()
                 } else {
-                    if let currentUser = user {
-                        if currentUser.isEmailVerified {
-                            self.userConnected()
-                        } else {
-                            let errorText: String = "이메일 인증이 되지 않은 사용자입니다"
-                            
-                            if let signInErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignInErrorViewController") as? SignInErrorViewController {
-                                
-                                signInErrorViewController.errorText = errorText
-                                signInErrorViewController.modalPresentationStyle = .overCurrentContext
-                                self.spinnerStopAnimating(self.spinner)
-                                self.present(signInErrorViewController, animated: false, completion: nil)
-                            }
-                        }
-                    }
+                    let errorText: String = "이메일 인증이 되지 않은 사용자입니다"
+                    
+                    guard let signInErrorViewController =
+                        self.storyboard?.instantiateViewController(
+                        withIdentifier: "SignInErrorViewController")
+                            as? SignInErrorViewController else { return }
+                        
+                    signInErrorViewController.errorText = errorText
+                    signInErrorViewController.modalPresentationStyle = .overCurrentContext
+                    self.spinnerStopAnimating(self.spinner)
+                    self.present(signInErrorViewController, animated: false, completion: nil)
                 }
             }
         }
     }
     
     @IBAction private func emailSignUpButtonDidTapped(_ sender: UIButton) {
-        if let signUpViewController =
-            self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as?  SignUpViewController {
+        guard let signUpViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "SignUpViewController")
+                as? SignUpViewController else { return }
             
-            self.present(signUpViewController, animated: true, completion: nil)
-        }
+        self.present(signUpViewController, animated: true, completion: nil)
     }
     
     @IBAction private func forgotButtonDidTapped(_ sender: UIButton) {
-        if let forgotSelectNavigation =
-            self.storyboard?.instantiateViewController(withIdentifier: "ForgotSelectNavigation") as? ForgotSelectNavigation {
+        guard let forgotSelectNavigation =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "ForgotSelectNavigation")
+                as? ForgotSelectNavigation else { return }
             
-            forgotSelectNavigation.modalPresentationStyle = .overCurrentContext
-            self.present(forgotSelectNavigation, animated: false, completion: nil)
-        }
+        forgotSelectNavigation.modalPresentationStyle = .overCurrentContext
+        self.present(forgotSelectNavigation, animated: false, completion: nil)
     }
     
     @IBAction private func googleSignInButtonDidTapped(_ sender: UIButton) {
-        if let _ = Auth.auth().currentUser {
-            do {
-                try Auth.auth().signOut()
-            } catch {
-                print("sign out error")
-            }
-        }
-        
+        signOutCurrentUser()
         GIDSignIn.sharedInstance().signIn()
     }
     
     @IBAction private func facebookSignInButtonDidTapped(_ sender: UIButton) {
         spinnerStartAnimating(spinner)
-        
-        if let _ = Auth.auth().currentUser {
-            do {
-                try Auth.auth().signOut()
-            } catch {
-                print("sign out error")
-            }
-        }
+        signOutCurrentUser()
         
         let facebookLoginManager = FBSDKLoginManager()
         facebookLoginManager.logIn(withReadPermissions: ["email"], from: self) {
@@ -207,12 +193,11 @@ class SignInViewController: UIViewController {
             
             if error != nil {
                 self.spinnerStopAnimating(self.spinner)
-                print("facebook sign in error")
-            }
-            if let result = result {
+            } else {
+                guard let result = result else { return }
+                
                 if result.isCancelled {
                     self.spinnerStopAnimating(self.spinner)
-                    print("facebook sign in cancelled")
                 } else {
                     let credential = FacebookAuthProvider.credential(
                         withAccessToken: FBSDKAccessToken.current().tokenString)
@@ -220,12 +205,10 @@ class SignInViewController: UIViewController {
                     Auth.auth().signIn(with: credential) {
                         (user, error) in
                         
-                        if let error = error {
+                        if let _ = error {
                             self.spinnerStopAnimating(self.spinner)
-                            print("facebook sign in error: \(error)")
                             return
                         } else {
-                            print("facebook connected")
                             self.userConnected()
                         }
                     }
@@ -235,7 +218,9 @@ class SignInViewController: UIViewController {
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
@@ -265,6 +250,9 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        emailTextField.delegate = self
+        pwTextField.delegate = self
         
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
@@ -301,10 +289,8 @@ extension SignInViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         spinnerStartAnimating(self.spinner)
         
-        if let error = error {
+        if let _ = error {
             spinnerStopAnimating(spinner)
-            print("google sign in error: \(error)")
-            
             return
         }
         
@@ -316,12 +302,10 @@ extension SignInViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         Auth.auth().signIn(with: credential) {
             (user, error) in
             
-            if let error = error {
+            if let _ = error {
                 self.spinnerStopAnimating(self.spinner)
-                print("google sign in error: \(error)")
                 return
             } else {
-                print("google connected")
                 self.userConnected()
             }
         }

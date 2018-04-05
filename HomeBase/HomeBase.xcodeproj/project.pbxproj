@@ -55,6 +55,7 @@
 		72B6F2EF2029D6F200CA0755 /* Personal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72B6F2ED2029D6F200CA0755 /* Personal.storyboard */; };
 		72C44F572062D1BD00554FFA /* ScheduleNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C44F562062D1BD00554FFA /* ScheduleNoDataView.swift */; };
 		72C5755220297E94000432DB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5755120297E94000432DB /* MainTabBarController.swift */; };
+		72D1035C2074E6EE007D1610 /* CustomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1035B2074E6EE007D1610 /* CustomProperties.swift */; };
 		72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */; };
 		72D9322220239B33003F3889 /* RegisterTeamJoinEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9322120239B32003F3889 /* RegisterTeamJoinEnterViewController.swift */; };
 		72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */; };
@@ -138,6 +139,7 @@
 		72B6F2EE2029D6F200CA0755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Personal.storyboard; sourceTree = "<group>"; };
 		72C44F562062D1BD00554FFA /* ScheduleNoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoDataView.swift; sourceTree = "<group>"; };
 		72C5755120297E94000432DB /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		72D1035B2074E6EE007D1610 /* CustomProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProperties.swift; sourceTree = "<group>"; };
 		72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinErrorViewController.swift; sourceTree = "<group>"; };
 		72D9322120239B32003F3889 /* RegisterTeamJoinEnterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinEnterViewController.swift; sourceTree = "<group>"; };
 		72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteCopyViewController.swift; sourceTree = "<group>"; };
@@ -227,8 +229,9 @@
 			isa = PBXGroup;
 			children = (
 				726101131FFD1B2D003068A4 /* HomeBase.entitlements */,
-				72378A6F20081BC0007ED442 /* CustomMethods.swift */,
 				7213D7702021BBE000FB028C /* Models.swift */,
+				72D1035B2074E6EE007D1610 /* CustomProperties.swift */,
+				72378A6F20081BC0007ED442 /* CustomMethods.swift */,
 				7231C9262018F3AD004FE531 /* CloudFunction.swift */,
 				72881E7A1FFA8579009D23C2 /* AppDelegate.swift */,
 				729AC647201F362300F5FED2 /* SignIn */,
@@ -639,6 +642,7 @@
 				720DFFE5204C64FF0098C473 /* ScheduleDetailRecordPlayerTableViewCell.swift in Sources */,
 				725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */,
 				721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */,
+				72D1035C2074E6EE007D1610 /* CustomProperties.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
 				72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */,
 				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,

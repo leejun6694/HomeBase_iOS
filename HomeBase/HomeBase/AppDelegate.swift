@@ -52,13 +52,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         if let error = error {
                                             print(error)
                                         } else {
-                                            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                            if let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController {
+                                            let mainStoryboard = UIStoryboard(
+                                                name: "Main",
+                                                bundle: nil)
+                                            
+                                            guard let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController else { return }
                                                 
-                                                mainTabBarController.teamData = teamData
-                                                mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                                                UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
-                                            }
+                                            mainTabBarController.teamData = teamData
+                                            mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
+                                            UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
                                         }
                                     }
                                 }

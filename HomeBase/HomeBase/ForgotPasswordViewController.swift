@@ -14,46 +14,13 @@ class ForgotPasswordViewController: UIViewController {
 
     // MARK: Properties
     
-    private var currentOriginY:CGFloat = 0.0
+    private var currentOriginY: CGFloat = 0.0
     
     private var name: String = ""
     private var email: String = ""
     
     private var nameCondition = false
     private var emailCondition = false
-    
-    private let correctColor = UIColor(red: 0.0,
-                                       green: 180.0/255.0,
-                                       blue: 233.0/255.0,
-                                       alpha: 1.0)
-    
-    private lazy var accessoryView: UIView = {
-        let accessoryViewFrame = CGRect(x: 0.0,
-                                        y: 0.0,
-                                        width: self.view.frame.width,
-                                        height: 45.0)
-        let accessoryView = UIView(frame: accessoryViewFrame)
-        accessoryView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return accessoryView
-    }()
-    
-    @IBOutlet private var spinner: UIActivityIndicatorView!
-    
-    private lazy var doneButton: UIButton = {
-        let doneButton = UIButton(type: .system)
-        doneButton.setTitle("완료", for: .normal)
-        doneButton.setTitleColor(.white, for: .normal)
-        doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18.0)
-        doneButton.addTarget(self, action: #selector(doneButtonDidTapped(_:)), for: .touchUpInside)
-        doneButton.backgroundColor = UIColor(red: 75.0/255.0,
-                                             green: 75.0/255.0,
-                                             blue: 75.0/255.0,
-                                             alpha: 1.0)
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        return doneButton
-    }()
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -66,9 +33,7 @@ class ForgotPasswordViewController: UIViewController {
     }()
     
     @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var nameTextField: UITextField! {
-        didSet { nameTextField.delegate = self }
-    }
+    @IBOutlet private weak var nameTextField: UITextField!
     @IBOutlet private weak var nameTextFieldBorder: UIView!
     private lazy var nameConditionImageView: UIImageView = {
         let nameConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
@@ -78,9 +43,7 @@ class ForgotPasswordViewController: UIViewController {
     }()
     
     @IBOutlet private weak var emailLabel: UILabel!
-    @IBOutlet private weak var emailTextField: UITextField! {
-        didSet { emailTextField.delegate = self }
-    }
+    @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var emailTextFieldBorder: UIView!
     private lazy var emailConditionImageView: UIImageView = {
         let emailConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
@@ -88,6 +51,37 @@ class ForgotPasswordViewController: UIViewController {
         
         return emailConditionImageView
     }()
+    
+    private lazy var accessoryView: UIView = {
+        let accessoryViewFrame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.view.frame.width,
+            height: 45.0)
+        let accessoryView = UIView(frame: accessoryViewFrame)
+        accessoryView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return accessoryView
+    }()
+    
+    private lazy var doneButton: UIButton = {
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("완료", for: .normal)
+        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 18.0)
+        doneButton.addTarget(
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
+        doneButton.backgroundColor = HBColor.darkGray
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return doneButton
+    }()
+    
+    @IBOutlet private var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
     
@@ -105,12 +99,17 @@ class ForgotPasswordViewController: UIViewController {
                 
                 if response.result.isSuccess {
                     if response.result.value == "User is not found" {
-                        if let forgotErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotErrorViewController") as? ForgotErrorViewController {
+                        guard let forgotErrorViewController =
+                            self.storyboard?.instantiateViewController(
+                                withIdentifier: "ForgotErrorViewController")
+                                as? ForgotErrorViewController else { return }
                             
-                            forgotErrorViewController.modalPresentationStyle = .overCurrentContext
-                            self.spinnerStopAnimating(self.spinner)
-                            self.present(forgotErrorViewController, animated: false, completion: nil)
-                        }
+                        forgotErrorViewController.modalPresentationStyle = .overCurrentContext
+                        self.spinnerStopAnimating(self.spinner)
+                        self.present(
+                            forgotErrorViewController,
+                            animated: false,
+                            completion: nil)
                     } else {
                         Auth.auth().sendPasswordReset(withEmail: self.email) {
                             (error) in
@@ -120,29 +119,27 @@ class ForgotPasswordViewController: UIViewController {
                             }
                         }
 
-                        if let findPasswordViewController = self.storyboard?.instantiateViewController(withIdentifier: "FindPasswordViewController") as? FindPasswordViewController {
+                        guard let findPasswordViewController =
+                            self.storyboard?.instantiateViewController(
+                                withIdentifier: "FindPasswordViewController")
+                                as? FindPasswordViewController else { return }
                             
-                            findPasswordViewController.name = self.name
-                            findPasswordViewController.email = self.email
+                        findPasswordViewController.name = self.name
+                        findPasswordViewController.email = self.email
                             
-                            self.spinnerStopAnimating(self.spinner)
-                            self.navigationController?.pushViewController(findPasswordViewController, animated: true)
-                        }
+                        self.spinnerStopAnimating(self.spinner)
+                        self.navigationController?.pushViewController(
+                            findPasswordViewController,
+                            animated: true)
                     }
                 } else {
                     self.spinnerStopAnimating(self.spinner)
-                    print("fail")
                 }
         }
     }
     
     @IBAction private func backgroundViewDidTapped(_ sender: UITapGestureRecognizer) {
-        for subview in self.view.subviews {
-            if subview.isFirstResponder {
-                subview.resignFirstResponder()
-                break
-            }
-        }
+        self.view.endEditing(true)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -150,7 +147,9 @@ class ForgotPasswordViewController: UIViewController {
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
         
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height + accessoryView.frame.size.height
             
@@ -186,15 +185,19 @@ class ForgotPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.barTintColor =
-            UIColor(red: 54.0/255.0, green: 54.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.shadowImage = UIImage()
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.barTintColor = HBColor.gray
+        }
         self.navigationItem.titleView = titleLabel
         
         self.view.addSubview(doneButton)
         doneButtonConstraints()
         buttonDisabled(doneButton)
+        
+        nameTextField.delegate = self
+        emailTextField.delegate = self
         
         NotificationCenter.default.addObserver(
             self,
@@ -239,10 +242,10 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
         if state {
             nameCondition = true
             name = nameTextField.text ?? "default"
-            nameLabel.textColor = correctColor
-            nameTextField.textColor = correctColor
-            nameTextField.tintColor = correctColor
-            nameTextFieldBorder.backgroundColor = correctColor
+            nameLabel.textColor = HBColor.correct
+            nameTextField.textColor = HBColor.correct
+            nameTextField.tintColor = HBColor.correct
+            nameTextFieldBorder.backgroundColor = HBColor.correct
             
             if !nameConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(nameConditionImageView)
@@ -273,10 +276,10 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
         if state {
             email = emailTextField.text ?? ""
             emailCondition = true
-            emailLabel.textColor = correctColor
-            emailTextField.textColor = correctColor
-            emailTextField.tintColor = correctColor
-            emailTextFieldBorder.backgroundColor = correctColor
+            emailLabel.textColor = HBColor.correct
+            emailTextField.textColor = HBColor.correct
+            emailTextField.tintColor = HBColor.correct
+            emailTextFieldBorder.backgroundColor = HBColor.correct
             
             if !emailConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(emailConditionImageView)

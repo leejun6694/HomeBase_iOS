@@ -14,10 +14,12 @@ class SignUpCompleteViewController: UIViewController {
     // MARK: Methods
     
     @IBAction func signInButtonDidTapped(_ sender: UIButton) {
-        if let signInViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController {
+        guard let signInViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "SignInViewController")
+                as? SignInViewController else { return }
             
-            UIApplication.shared.keyWindow?.rootViewController = signInViewController
-        }
+        UIApplication.shared.keyWindow?.rootViewController = signInViewController
     }
     
     // MARK: Life Cycle
