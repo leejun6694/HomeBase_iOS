@@ -26,10 +26,7 @@ class MainTopSectionHeaderCell: UITableViewCell {
     
     private lazy var titleView: UIView = {
         let titleView = UIView()
-        titleView.backgroundColor = UIColor(red: 44.0/255.0,
-                                            green: 44.0/255.0,
-                                            blue: 44.0/255.0,
-                                            alpha: 1.0)
+        titleView.backgroundColor = HBColor.lightGray
         titleView.translatesAutoresizingMaskIntoConstraints = false
         
         return titleView
@@ -38,10 +35,7 @@ class MainTopSectionHeaderCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "default"
-        titleLabel.textColor = UIColor(red: 44.0/255.0,
-                                          green: 44.0/255.0,
-                                          blue: 44.0/255.0,
-                                          alpha: 1.0)
+        titleLabel.textColor = HBColor.lightGray
         titleLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 25.0)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.5
@@ -72,10 +66,7 @@ class MainTopSectionHeaderCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor(red: 239.0/255.0,
-                                       green: 239.0/255.0,
-                                       blue: 239.0/255.0,
-                                       alpha: 1.0)
+        self.backgroundColor = HBColor.lightBlack
     }
     
     override func draw(_ rect: CGRect) {

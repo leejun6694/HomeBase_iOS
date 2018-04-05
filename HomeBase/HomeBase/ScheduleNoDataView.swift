@@ -23,10 +23,7 @@ class ScheduleNoDataView: UIView {
     private lazy var smallLabel: UILabel = {
         let smallLabel = UILabel()
         smallLabel.text = "앗! 아직 등록된 일정이 없네요"
-        smallLabel.textColor = UIColor(red: 44.0/255.0,
-                                       green: 44.0/255.0,
-                                       blue: 44.0/255.0,
-                                       alpha: 1.0)
+        smallLabel.textColor = HBColor.lightGray
         smallLabel.textAlignment = .center
         smallLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13.0)
         smallLabel.adjustsFontSizeToFitWidth = true
@@ -40,10 +37,7 @@ class ScheduleNoDataView: UIView {
     private lazy var bigLabel: UILabel = {
         let bigLabel = UILabel()
         bigLabel.text = "이번 주말에 경기 어떠세요?"
-        bigLabel.textColor = UIColor(red: 44.0/255.0,
-                                     green: 44.0/255.0,
-                                     blue: 44.0/255.0,
-                                     alpha: 1.0)
+        bigLabel.textColor = HBColor.lightGray
         bigLabel.textAlignment = .center
         bigLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18.0)
         bigLabel.adjustsFontSizeToFitWidth = true
@@ -72,10 +66,7 @@ class ScheduleNoDataView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor(red: 192.0/255.0,
-                                       green: 222.0/255.0,
-                                       blue: 229.0/255.0,
-                                       alpha: 1.0)
+        self.backgroundColor = UIColor(red: 192, green: 222, blue: 229, alpha: 1.0)
     }
     
     override func draw(_ rect: CGRect) {

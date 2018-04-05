@@ -21,17 +21,25 @@ class ForgotSelectViewController: UIViewController {
     }
     
     @IBAction private func emailButtonDidTapped(_ sender: UIButton) {
-        if let forgotEmailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotEmailViewController") as? ForgotEmailViewController {
+        guard let forgotEmailViewController =
+            self.storyboard?.instantiateViewController(
+            withIdentifier: "ForgotEmailViewController")
+                as? ForgotEmailViewController else { return }
             
-            self.navigationController?.pushViewController(forgotEmailViewController, animated: false)
-        }
+        self.navigationController?.pushViewController(
+            forgotEmailViewController,
+            animated: false)
     }
     
     @IBAction private func pwButtonDidTapped(_ sender: UIButton) {
-        if let forgotPasswordViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
+        guard let forgotPasswordViewController =
+            self.storyboard?.instantiateViewController(
+            withIdentifier: "ForgotPasswordViewController")
+                as? ForgotPasswordViewController else { return }
             
-            self.navigationController?.pushViewController(forgotPasswordViewController, animated: false)
-        }
+            self.navigationController?.pushViewController(
+                forgotPasswordViewController,
+                animated: false)
     }
     
     // MARK: Life Cycles

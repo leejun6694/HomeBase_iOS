@@ -35,7 +35,8 @@ class MainTeamInfoView: UIView {
     
     private lazy var teamLogoImageView: UIImageView = {
         let teamLogoImageView = UIImageView(image: teamLogo)
-        teamLogoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
+        teamLogoImageView.layer.borderColor =
+            UIColor.black.withAlphaComponent(0.15).cgColor
         teamLogoImageView.layer.borderWidth = 1.0
         teamLogoImageView.clipsToBounds = true
         teamLogoImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,10 +47,7 @@ class MainTeamInfoView: UIView {
     private lazy var teamNameLabel: UILabel = {
         let teamNameLabel = UILabel()
         teamNameLabel.text = "HomeBase"
-        teamNameLabel.textColor = UIColor(red: 44.0/255.0,
-                                          green: 44.0/255.0,
-                                          blue: 44.0/255.0,
-                                          alpha: 1.0)
+        teamNameLabel.textColor = HBColor.lightGray
         teamNameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 25.0)
         teamNameLabel.textAlignment = .center
         teamNameLabel.adjustsFontSizeToFitWidth = true
@@ -62,10 +60,7 @@ class MainTeamInfoView: UIView {
     private lazy var teamIntroLabel: UILabel = {
         let teamIntroLabel = UILabel()
         teamIntroLabel.text = "우주최강 사회인 야구팀, 홈베이스. 저희 팀 짱이에요 얍얍"
-        teamIntroLabel.textColor = UIColor(red: 44.0/255.0,
-                                          green: 44.0/255.0,
-                                          blue: 44.0/255.0,
-                                          alpha: 1.0)
+        teamIntroLabel.textColor = HBColor.lightGray
         teamIntroLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14.0)
         teamIntroLabel.textAlignment = .center
         teamIntroLabel.numberOfLines = 2
@@ -78,10 +73,7 @@ class MainTeamInfoView: UIView {
     
     private lazy var teamSinceView: UIView = {
         let teamSinceView = UIView()
-        teamSinceView.backgroundColor = UIColor(red: 0.0,
-                                                green: 180.0/255.0,
-                                                blue: 223.0/255.0,
-                                                alpha: 1.0)
+        teamSinceView.backgroundColor = HBColor.correct
         teamSinceView.layer.cornerRadius = 10.0
         teamSinceView.clipsToBounds = true
         teamSinceView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,7 +85,9 @@ class MainTeamInfoView: UIView {
         let teamSinceLabel = UILabel()
         teamSinceLabel.text = "Since 2002"
         teamSinceLabel.textColor = .white
-        teamSinceLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)
+        teamSinceLabel.font = UIFont(
+            name: "AppleSDGothicNeo-Regular",
+            size: 12.0)
         teamSinceLabel.textAlignment = .center
         teamSinceLabel.adjustsFontSizeToFitWidth = true
         teamSinceLabel.minimumScaleFactor = 0.5
@@ -106,14 +100,13 @@ class MainTeamInfoView: UIView {
         let teamHomeStadiumLabel = UILabel()
         teamHomeStadiumLabel.text = "홈베이스 야구장"
         teamHomeStadiumLabel.textColor = .white
-        teamHomeStadiumLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)
+        teamHomeStadiumLabel.font = UIFont(
+            name: "AppleSDGothicNeo-Regular",
+            size: 12.0)
         teamHomeStadiumLabel.textAlignment = .center
         teamHomeStadiumLabel.adjustsFontSizeToFitWidth = true
         teamHomeStadiumLabel.minimumScaleFactor = 0.5
-        teamHomeStadiumLabel.backgroundColor = UIColor(red: 44.0/255.0,
-                                                 green: 44.0/255.0,
-                                                 blue: 44.0/255.0,
-                                                 alpha: 1.0)
+        teamHomeStadiumLabel.backgroundColor = HBColor.lightGray
         teamHomeStadiumLabel.layer.cornerRadius = 10.0
         teamHomeStadiumLabel.clipsToBounds = true
         teamHomeStadiumLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -123,10 +116,7 @@ class MainTeamInfoView: UIView {
     
     private lazy var teamRecordBaseView: UIView = {
         let teamRecordBaseView = UIView()
-        teamRecordBaseView.backgroundColor = UIColor(red: 44.0/255.0,
-                                                 green: 44.0/255.0,
-                                                 blue: 44.0/255.0,
-                                                 alpha: 1.0)
+        teamRecordBaseView.backgroundColor = HBColor.lightGray
         teamRecordBaseView.layer.cornerRadius = 10.0
         teamRecordBaseView.clipsToBounds = true
         teamRecordBaseView.translatesAutoresizingMaskIntoConstraints = false
@@ -150,7 +140,9 @@ class MainTeamInfoView: UIView {
         let winRecordLabel = UILabel()
         winRecordLabel.text = "999"
         winRecordLabel.textColor = .white
-        winRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
+        winRecordLabel.font = UIFont(
+            name: "AppleSDGothicNeo-UltraLight",
+            size: 27.0)
         winRecordLabel.adjustsFontSizeToFitWidth = true
         winRecordLabel.minimumScaleFactor = 0.5
         winRecordLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -174,7 +166,9 @@ class MainTeamInfoView: UIView {
         let drawRecordLabel = UILabel()
         drawRecordLabel.text = "555"
         drawRecordLabel.textColor = .white
-        drawRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
+        drawRecordLabel.font = UIFont(
+            name: "AppleSDGothicNeo-UltraLight",
+            size: 27.0)
         drawRecordLabel.adjustsFontSizeToFitWidth = true
         drawRecordLabel.minimumScaleFactor = 0.5
         drawRecordLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -198,7 +192,9 @@ class MainTeamInfoView: UIView {
         let loseRecordLabel = UILabel()
         loseRecordLabel.text = "120"
         loseRecordLabel.textColor = .white
-        loseRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
+        loseRecordLabel.font = UIFont(
+            name: "AppleSDGothicNeo-UltraLight",
+            size: 27.0)
         loseRecordLabel.adjustsFontSizeToFitWidth = true
         loseRecordLabel.minimumScaleFactor = 0.5
         loseRecordLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -208,10 +204,7 @@ class MainTeamInfoView: UIView {
     
     private lazy var teamAverageBaseView: UIView = {
         let teamAverageBaseView = UIView()
-        teamAverageBaseView.backgroundColor = UIColor(red: 44.0/255.0,
-                                                     green: 44.0/255.0,
-                                                     blue: 44.0/255.0,
-                                                     alpha: 1.0)
+        teamAverageBaseView.backgroundColor = HBColor.lightGray
         teamAverageBaseView.layer.cornerRadius = 10.0
         teamAverageBaseView.clipsToBounds = true
         teamAverageBaseView.translatesAutoresizingMaskIntoConstraints = false
@@ -223,7 +216,9 @@ class MainTeamInfoView: UIView {
         let teamERAverageLabel = UILabel()
         teamERAverageLabel.text = "방어율"
         teamERAverageLabel.textColor = .white
-        teamERAverageLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13.0)
+        teamERAverageLabel.font = UIFont(
+            name: "AppleSDGothicNeo-Medium",
+            size: 13.0)
         teamERAverageLabel.adjustsFontSizeToFitWidth = true
         teamERAverageLabel.minimumScaleFactor = 0.5
         teamERAverageLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -235,7 +230,9 @@ class MainTeamInfoView: UIView {
         let teamERAverageRecordLabel = UILabel()
         teamERAverageRecordLabel.text = "13.66"
         teamERAverageRecordLabel.textColor = .white
-        teamERAverageRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
+        teamERAverageRecordLabel.font = UIFont(
+            name: "AppleSDGothicNeo-UltraLight",
+            size: 27.0)
         teamERAverageRecordLabel.adjustsFontSizeToFitWidth = true
         teamERAverageRecordLabel.minimumScaleFactor = 0.3
         teamERAverageRecordLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -247,7 +244,9 @@ class MainTeamInfoView: UIView {
         let teamBattingAverageLabel = UILabel()
         teamBattingAverageLabel.text = "타율"
         teamBattingAverageLabel.textColor = .white
-        teamBattingAverageLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13.0)
+        teamBattingAverageLabel.font = UIFont(
+            name: "AppleSDGothicNeo-Medium",
+            size: 13.0)
         teamBattingAverageLabel.adjustsFontSizeToFitWidth = true
         teamBattingAverageLabel.minimumScaleFactor = 0.5
         teamBattingAverageLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -259,7 +258,9 @@ class MainTeamInfoView: UIView {
         let teamBattingAverageRecordLabel = UILabel()
         teamBattingAverageRecordLabel.text = "0.365"
         teamBattingAverageRecordLabel.textColor = .white
-        teamBattingAverageRecordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 27.0)
+        teamBattingAverageRecordLabel.font = UIFont(
+            name: "AppleSDGothicNeo-UltraLight",
+            size: 27.0)
         teamBattingAverageRecordLabel.adjustsFontSizeToFitWidth = true
         teamBattingAverageRecordLabel.minimumScaleFactor = 0.3
         teamBattingAverageRecordLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -270,20 +271,8 @@ class MainTeamInfoView: UIView {
     // MARK: Methods
     
     private func fetchTeamInfo() {
-//        let storageRef = Storage.storage().reference()
-//        let imageRef = storageRef.child(teamData.logo)
-//
-//        imageRef.getData(maxSize: 4 * 1024 * 1024) {
-//            (data, error) in
-//
-//            if let error = error {
-//                print(error)
-//            } else {
-//                self.teamLogoImageView.image = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                self.teamNameLabel.text = self.teamData.name
-                self.teamIntroLabel.text = self.teamData.description
-//            }
-//        }
+        teamNameLabel.text = teamData.name
+        teamIntroLabel.text = teamData.description
     }
     
     // MARK: Draw
@@ -339,8 +328,6 @@ class MainTeamInfoView: UIView {
         teamAverageBaseView.addConstraints(teamBattingAverageLabelConstraints())
         teamAverageBaseView.addSubview(teamBattingAverageRecordLabel)
         teamAverageBaseView.addConstraints(teamBattingAverageRecordLabelConstraints())
-        
-//        fetchTeamInfo()
     }
 }
 

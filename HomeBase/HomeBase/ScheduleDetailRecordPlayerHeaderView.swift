@@ -26,28 +26,24 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
                 }
                 self.addSubview(buttonUnderView)
                 self.addConstraints(batterButtonUnderViewConstraints())
-                batterButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                                   green: 44.0/255.0,
-                                                   blue: 44.0/255.0,
-                                                   alpha: 1.0), for: .normal)
-                pitcherButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                                    green: 44.0/255.0,
-                                                    blue: 44.0/255.0,
-                                                    alpha: 0.6), for: .normal)
+                batterButton.setTitleColor(HBColor.lightGray, for: .normal)
+                pitcherButton.setTitleColor(UIColor(
+                    red: 44,
+                    green: 44,
+                    blue: 44,
+                    alpha: 0.6), for: .normal)
             } else {
                 if buttonUnderView.isDescendant(of: self) {
                     buttonUnderView.removeFromSuperview()
                 }
                 self.addSubview(buttonUnderView)
                 self.addConstraints(pitcherButtonUnderViewConstraints())
-                batterButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                                   green: 44.0/255.0,
-                                                   blue: 44.0/255.0,
-                                                   alpha: 0.6), for: .normal)
-                pitcherButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                                    green: 44.0/255.0,
-                                                    blue: 44.0/255.0,
-                                                    alpha: 1.0), for: .normal)
+                batterButton.setTitleColor(UIColor(
+                    red: 44,
+                    green: 44,
+                    blue: 44,
+                    alpha: 0.6), for: .normal)
+                pitcherButton.setTitleColor(HBColor.lightGray, for: .normal)
             }
         }
     }
@@ -55,10 +51,7 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
     lazy var cancelButton: UIButton = {
         let cancelButton = UIButton(type: .system)
         cancelButton.setImage(#imageLiteral(resourceName: "iconExit"), for: .normal)
-        cancelButton.tintColor = UIColor(red: 44.0/255.0,
-                                         green: 44.0/255.0,
-                                         blue: 44.0/255.0,
-                                         alpha: 1.0)
+        cancelButton.tintColor = HBColor.lightGray
         cancelButton.backgroundColor = UIColor.clear
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -68,10 +61,7 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "이승엽"
-        nameLabel.textColor = UIColor(red: 44.0/255.0,
-                                      green: 44.0/255.0,
-                                      blue: 44.0/255.0,
-                                      alpha: 1.0)
+        nameLabel.textColor = HBColor.lightGray
         nameLabel.textAlignment = .center
         nameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 21.0)
         nameLabel.adjustsFontSizeToFitWidth = true
@@ -84,10 +74,7 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
     lazy var doneButton: UIButton = {
         let doneButton = UIButton(type: .system)
         doneButton.setTitle("완료", for: .normal)
-        doneButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                         green: 44.0/255.0,
-                                         blue: 44.0/255.0,
-                                         alpha: 1.0), for: .normal)
+        doneButton.setTitleColor(HBColor.lightGray, for: .normal)
         doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17.0)
         doneButton.titleLabel?.adjustsFontSizeToFitWidth = true
         doneButton.titleLabel?.minimumScaleFactor = 0.5
@@ -100,10 +87,7 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
     lazy var batterButton: UIButton = {
         let batterButton = UIButton(type: .system)
         batterButton.setTitle("타자", for: .normal)
-        batterButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0), for: .normal)
+        batterButton.setTitleColor(HBColor.lightGray, for: .normal)
         batterButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17.0)
         batterButton.titleLabel?.adjustsFontSizeToFitWidth = true
         batterButton.titleLabel?.minimumScaleFactor = 0.5
@@ -116,10 +100,11 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
     lazy var pitcherButton: UIButton = {
         let pitcherButton = UIButton(type: .system)
         pitcherButton.setTitle("투수", for: .normal)
-        pitcherButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                            green: 44.0/255.0,
-                                            blue: 44.0/255.0,
-                                            alpha: 0.6), for: .normal)
+        pitcherButton.setTitleColor(UIColor(
+            red: 44,
+            green: 44,
+            blue: 44,
+            alpha: 0.6), for: .normal)
         pitcherButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 17.0)
         pitcherButton.titleLabel?.adjustsFontSizeToFitWidth = true
         pitcherButton.titleLabel?.minimumScaleFactor = 0.5
@@ -131,10 +116,7 @@ class ScheduleDetailRecordPlayerHeaderView: UIView {
     
     private lazy var buttonUnderView: UIView = {
         let buttonUnderView = UIView()
-        buttonUnderView.backgroundColor = UIColor(red: 44.0/255.0,
-                                                  green: 44.0/255.0,
-                                                  blue: 44.0/255.0,
-                                                  alpha: 1.0)
+        buttonUnderView.backgroundColor = HBColor.lightGray
         buttonUnderView.translatesAutoresizingMaskIntoConstraints = false
         
         return buttonUnderView

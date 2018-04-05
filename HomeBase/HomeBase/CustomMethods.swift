@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 extension UIViewController {
     
@@ -60,11 +61,27 @@ extension UIViewController {
         
         return bottomLocation
     }
+    
+    // MARK: Auth
+    
+    func signOutCurrentUser() {
+        if let _ = Auth.auth().currentUser {
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("sign out error")
+            }
+        }
+    }
 }
 
 extension UIView {
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let path = UIBezierPath(
+            roundedRect: self.bounds,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius))
+        
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         self.layer.mask = mask
@@ -74,5 +91,15 @@ extension UIView {
 extension UIApplication {
     var statusBarView: UIView? {
         return value(forKey: "statusBar") as? UIView
+    }
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat) {
+        let newRed = CGFloat(red)/255
+        let newGreen = CGFloat(green)/255
+        let newBlue = CGFloat(blue)/255
+        
+        self.init(red: newRed, green: newGreen, blue: newBlue, alpha: alpha)
     }
 }

@@ -1,14 +1,14 @@
 //
-//  ScheduleMonthlySectionHeaderView.swift
+//  ScheduleMonthlySectionHeaderCell.swift
 //  HomeBase
 //
-//  Created by JUN LEE on 2018. 2. 26..
+//  Created by JUN LEE on 2018. 4. 3..
 //  Copyright © 2018년 JUN LEE. All rights reserved.
 //
 
 import UIKit
 
-class ScheduleMonthlySectionHeaderView: UIView {
+class ScheduleMonthlySectionHeaderCell: UITableViewCell {
 
     // MARK: Properties
     
@@ -20,7 +20,7 @@ class ScheduleMonthlySectionHeaderView: UIView {
             let year = dateFormatter.string(from: matchDate)
             dateFormatter.dateFormat = "MM"
             let month = dateFormatter.string(from: matchDate)
-                
+            
             monthLabel.text = "\(month)월,"
             yearLabel.text = "\(year)"
         }
@@ -84,6 +84,17 @@ class ScheduleMonthlySectionHeaderView: UIView {
         return monthlyRecordLabel
     }()
     
+    // MARK: Init
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: Draw
     
     override func layoutSubviews() {
@@ -104,7 +115,7 @@ class ScheduleMonthlySectionHeaderView: UIView {
     }
 }
 
-extension ScheduleMonthlySectionHeaderView {
+extension ScheduleMonthlySectionHeaderCell {
     private func monthLabelConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: monthLabel, attribute: .top, relatedBy: .equal,

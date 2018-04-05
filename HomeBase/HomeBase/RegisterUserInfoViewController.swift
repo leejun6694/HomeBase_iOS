@@ -17,6 +17,7 @@ class RegisterUserInfoViewController: UIViewController {
     var teamCode: String!
     
     private var currentOriginY: CGFloat = 0.0
+    private var keyboardHeight: CGFloat = 0.0
     
     private var name: String = ""
     private var year: String = ""
@@ -30,12 +31,6 @@ class RegisterUserInfoViewController: UIViewController {
     private var heightCondition = false
     private var weightCondition = false
     
-    private var keyboardHeight: CGFloat = 0.0
-    private let correctColor = UIColor(red: 0.0,
-                                       green: 180.0/255.0,
-                                       blue: 223.0/255.0,
-                                       alpha: 1.0)
-    
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "정보 입력"
@@ -46,11 +41,54 @@ class RegisterUserInfoViewController: UIViewController {
         return titleLabel
     }()
     
+    @IBOutlet private weak var contentsView: UIView!
+    
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var nameTextField: UITextField!
+    @IBOutlet weak var nameTextFieldBorder: UIView!
+    private lazy var nameConditionImageView: UIImageView = {
+        let nameConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
+        nameConditionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return nameConditionImageView
+    }()
+    
+    @IBOutlet private weak var birthLabel: UILabel!
+    @IBOutlet private weak var birthTextField: UITextField!
+    @IBOutlet weak var birthTextFieldBorder: UIView!
+    private lazy var birthConditionImageView: UIImageView = {
+        let birthConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
+        birthConditionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return birthConditionImageView
+    }()
+    
+    @IBOutlet private weak var heightLabel: UILabel!
+    @IBOutlet private weak var heightTextField: UITextField!
+    @IBOutlet weak var heightTextFieldBorder: UIView!
+    private lazy var heightConditionImageView: UIImageView = {
+        let heightConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
+        heightConditionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return heightConditionImageView
+    }()
+    
+    @IBOutlet private weak var weightLabel: UILabel!
+    @IBOutlet private weak var weightTextField: UITextField!
+    @IBOutlet weak var weightTextFieldBorder: UIView!
+    private lazy var weightConditionImageView: UIImageView = {
+        let weightConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
+        weightConditionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return weightConditionImageView
+    }()
+    
     private lazy var accessoryView: UIView = {
-        let accessoryViewFrame = CGRect(x: 0.0,
-                                        y: 0.0,
-                                        width: self.view.frame.width,
-                                        height: 45.0)
+        let accessoryViewFrame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.view.frame.width,
+            height: 45.0)
         let accessoryView = UIView(frame: accessoryViewFrame)
         accessoryView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -61,126 +99,74 @@ class RegisterUserInfoViewController: UIViewController {
         let doneButton = UIButton(type: .system)
         doneButton.setTitle("완료", for: .normal)
         doneButton.setTitleColor(.white, for: .normal)
-        doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18.0)
-        doneButton.addTarget(self, action: #selector(doneButtonDidTapped(_:)), for: .touchUpInside)
-        doneButton.backgroundColor = UIColor(red: 75.0/255.0,
-                                             green: 75.0/255.0,
-                                             blue: 75.0/255.0,
-                                             alpha: 1.0)
+        doneButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 18.0)
+        doneButton.addTarget(
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
+        doneButton.backgroundColor = HBColor.darkGray
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         
         return doneButton
     }()
     
-    @IBOutlet private weak var contentsView: UIView!
-    
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var nameTextField: UITextField! {
-        didSet { nameTextField.delegate = self }
-    }
-    @IBOutlet weak var nameTextFieldBorder: UIView!
-    private lazy var nameConditionImageView: UIImageView = {
-        let nameConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
-        nameConditionImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return nameConditionImageView
-    }()
-    
-    @IBOutlet private weak var birthLabel: UILabel!
-    @IBOutlet private weak var birthTextField: UITextField! {
-        didSet { birthTextField.delegate = self }
-    }
-    @IBOutlet weak var birthTextFieldBorder: UIView!
-    private lazy var birthConditionImageView: UIImageView = {
-        let birthConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
-        birthConditionImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return birthConditionImageView
-    }()
-    
-    @IBOutlet private weak var heightLabel: UILabel!
-    @IBOutlet private weak var heightTextField: UITextField! {
-        didSet { heightTextField.delegate = self }
-    }
-    @IBOutlet weak var heightTextFieldBorder: UIView!
-    private lazy var heightConditionImageView: UIImageView = {
-        let heightConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
-        heightConditionImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return heightConditionImageView
-    }()
-    
-    @IBOutlet private weak var weightLabel: UILabel!
-    @IBOutlet private weak var weightTextField: UITextField! {
-        didSet { weightTextField.delegate = self }
-    }
-    @IBOutlet weak var weightTextFieldBorder: UIView!
-    private lazy var weightConditionImageView: UIImageView = {
-        let weightConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
-        weightConditionImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return weightConditionImageView
-    }()
-    
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
-    
     
     // MARK: Methods
     
     @IBAction private func backgroundViewDidTapped(_ sender: UITapGestureRecognizer) {
-        for subview in contentsView.subviews {
-            if subview.isFirstResponder {
-                subview.resignFirstResponder()
-                break
-            }
-        }
+        self.view.endEditing(true)
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        if let registerPlayerInfoViewController =
-            self.storyboard?.instantiateViewController(withIdentifier: "RegisterPlayerInfoViewController") as? RegisterPlayerInfoViewController {
+        guard let registerPlayerInfoViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "RegisterPlayerInfoViewController")
+                as? RegisterPlayerInfoViewController else { return }
             
-            registerPlayerInfoViewController.name = self.name
-            registerPlayerInfoViewController.year = self.year
-            registerPlayerInfoViewController.month = self.month
-            registerPlayerInfoViewController.day = self.day
-            registerPlayerInfoViewController.height = self.height
-            registerPlayerInfoViewController.weight = self.weight
-            
-            registerPlayerInfoViewController.teamCode = self.teamCode
-            self.navigationController?.pushViewController(registerPlayerInfoViewController, animated: true)
-        }
+        registerPlayerInfoViewController.name = self.name
+        registerPlayerInfoViewController.year = self.year
+        registerPlayerInfoViewController.month = self.month
+        registerPlayerInfoViewController.day = self.day
+        registerPlayerInfoViewController.height = self.height
+        registerPlayerInfoViewController.weight = self.weight
+        
+        registerPlayerInfoViewController.teamCode = self.teamCode
+        self.navigationController?.pushViewController(
+            registerPlayerInfoViewController,
+            animated: true)
     }
     
     private func autoCompleteTextField() {
         spinnerStartAnimating(spinner)
         
         DispatchQueue.global(qos: .userInitiated).async {
-            if let currentUser = Auth.auth().currentUser {
-                let ref = Database.database().reference()
+            guard let currentUser = Auth.auth().currentUser else { return }
+            let ref = Database.database().reference()
+            
+            ref.child("users").child(currentUser.uid).observeSingleEvent(of: .value) {
+                (snapshot, error) in
                 
-                ref.child("users").child(currentUser.uid).observeSingleEvent(of: .value) {
-                    (snapshot, error) in
+                if let error = error {
+                    print("database error: \(error)")
+                } else {
+                    let value = snapshot.value as? NSDictionary
+                    let provider = value?["provider"] as? String ?? ""
                     
-                    if let error = error {
-                        print("database error: \(error)")
-                    } else {
-                        let value = snapshot.value as? NSDictionary
-                        let provider = value?["provider"] as? String ?? ""
+                    if provider == "password" {
+                        let name = value?["name"] as? String ?? ""
+                        let birth = value?["birth"] as? String ?? ""
                         
-                        if provider == "password" {
-                            let name = value?["name"] as? String ?? ""
-                            let birth = value?["birth"] as? String ?? ""
+                        DispatchQueue.main.async {
+                            self.nameTextField.text = name
+                            self.birthTextField.text = birth
                             
-                            DispatchQueue.main.async {
-                                self.nameTextField.text = name
-                                self.birthTextField.text = birth
-                                
-                                self.nameTextFieldCondition(true)
-                                self.birthTextFieldCondition(self.birthChecked(self.birthTextField))
-                            }
+                            self.nameTextFieldCondition(true)
+                            self.birthTextFieldCondition(self.birthChecked(self.birthTextField))
                         }
                     }
                 }
@@ -194,13 +180,15 @@ class RegisterUserInfoViewController: UIViewController {
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
         
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height + accessoryView.frame.size.height
             
             for subview in contentsView.subviews {
                 if subview.isFirstResponder {
-                    var bottomLocationOfNextView:CGFloat = 0.0
+                    var bottomLocationOfNextView: CGFloat = 0.0
                     switch subview {
                     case nameTextField:
                         bottomLocationOfNextView = bottomLocationOf(birthTextFieldBorder)
@@ -238,20 +226,25 @@ class RegisterUserInfoViewController: UIViewController {
         super.viewDidLoad()
         
         if let registerUserNavigation = self.navigationController as? RegisterUserNavigation {
-            
             self.teamCode = registerUserNavigation.teamCode
         }
         
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.barTintColor =
-            UIColor(red: 44.0/255.0, green: 44.0/255.0, blue: 44.0/255.0, alpha: 1.0)
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.isTranslucent = false
+            navigationController.navigationBar.shadowImage = UIImage()
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.barTintColor = HBColor.lightGray
+        }
         self.navigationItem.titleView = titleLabel
         
         self.view.addSubview(doneButton)
         doneButtonConstraints()
         buttonDisabled(doneButton)
+        
+        nameTextField.delegate = self
+        birthTextField.delegate = self
+        heightTextField.delegate = self
+        weightTextField.delegate = self
         
         NotificationCenter.default.addObserver(
             self,
@@ -271,7 +264,6 @@ class RegisterUserInfoViewController: UIViewController {
         super.viewDidAppear(animated)
         
         autoCompleteTextField()
-        
         currentOriginY = self.view.frame.origin.y
     }
 }
@@ -292,10 +284,10 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
         if state {
             nameCondition = true
             name = nameTextField.text ?? "default"
-            nameLabel.textColor = correctColor
-            nameTextField.textColor = correctColor
-            nameTextField.tintColor = correctColor
-            nameTextFieldBorder.backgroundColor = correctColor
+            nameLabel.textColor = HBColor.correct
+            nameTextField.textColor = HBColor.correct
+            nameTextField.tintColor = HBColor.correct
+            nameTextFieldBorder.backgroundColor = HBColor.correct
             
             if !nameConditionImageView.isDescendant(of: contentsView) {
                 contentsView.addSubview(nameConditionImageView)
@@ -358,10 +350,10 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     private func birthTextFieldCondition(_ state: Bool) {
         if state {
             birthCondition = true
-            birthLabel.textColor = correctColor
-            birthTextField.textColor = correctColor
-            birthTextField.tintColor = correctColor
-            birthTextFieldBorder.backgroundColor = correctColor
+            birthLabel.textColor = HBColor.correct
+            birthTextField.textColor = HBColor.correct
+            birthTextField.tintColor = HBColor.correct
+            birthTextFieldBorder.backgroundColor = HBColor.correct
             
             if !birthConditionImageView.isDescendant(of: contentsView) {
                 contentsView.addSubview(birthConditionImageView)
@@ -391,10 +383,10 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     private func heightTextFieldCondition(_ state: Bool) {
         if state {
             heightCondition = true
-            heightLabel.textColor = correctColor
-            heightTextField.textColor = correctColor
-            heightTextField.tintColor = correctColor
-            heightTextFieldBorder.backgroundColor = correctColor
+            heightLabel.textColor = HBColor.correct
+            heightTextField.textColor = HBColor.correct
+            heightTextField.tintColor = HBColor.correct
+            heightTextFieldBorder.backgroundColor = HBColor.correct
             
             if !heightConditionImageView.isDescendant(of: contentsView) {
                 contentsView.addSubview(heightConditionImageView)
@@ -426,10 +418,10 @@ extension RegisterUserInfoViewController: UITextFieldDelegate {
     private func weightTextFieldCondition(_ state: Bool) {
         if state {
             weightCondition = true
-            weightLabel.textColor = correctColor
-            weightTextField.textColor = correctColor
-            weightTextField.tintColor = correctColor
-            weightTextFieldBorder.backgroundColor = correctColor
+            weightLabel.textColor = HBColor.correct
+            weightTextField.textColor = HBColor.correct
+            weightTextField.tintColor = HBColor.correct
+            weightTextFieldBorder.backgroundColor = HBColor.correct
             
             if !weightConditionImageView.isDescendant(of: contentsView) {
                 contentsView.addSubview(weightConditionImageView)

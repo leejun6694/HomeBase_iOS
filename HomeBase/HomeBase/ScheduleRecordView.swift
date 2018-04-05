@@ -18,17 +18,19 @@ class ScheduleRecordView:UIView {
             
             switch recordText {
             case "승":
-                recordLabel.textColor = UIColor(red: 106.0/255.0,
-                                                green: 219.0/255.0,
-                                                blue: 246.0/255.0,
-                                                alpha: 1.0)
+                recordLabel.textColor = UIColor(
+                    red: 106,
+                    green: 219,
+                    blue: 246,
+                    alpha: 1.0)
             case "무":
                 recordLabel.textColor = UIColor.white
             case "패":
-                recordLabel.textColor = UIColor(red: 250.0/255.0,
-                                                green: 119.0/255.0,
-                                                blue: 119.0/255.0,
-                                                alpha: 1.0)
+                recordLabel.textColor = UIColor(
+                    red: 250,
+                    green: 119,
+                    blue: 119,
+                    alpha: 1.0)
             default: break
             }
         }
@@ -42,10 +44,7 @@ class ScheduleRecordView:UIView {
     
     private lazy var recordView: UIView = {
         let recordView = UIView()
-        recordView.backgroundColor = UIColor(red: 44.0/255.0,
-                                             green: 44.0/255.0,
-                                             blue: 44.0/255.0,
-                                             alpha: 1.0)
+        recordView.backgroundColor = HBColor.lightGray
         recordView.translatesAutoresizingMaskIntoConstraints = false
         
         return recordView
@@ -54,10 +53,7 @@ class ScheduleRecordView:UIView {
     private lazy var recordLabel: UILabel = {
         let recordLabel = UILabel()
         recordLabel.text = "승"
-        recordLabel.textColor = UIColor(red: 106.0/255.0,
-                                        green: 219.0/255.0,
-                                        blue: 246.0/255.0,
-                                        alpha: 1.0)
+        recordLabel.textColor = UIColor(red: 106, green: 219, blue: 246, alpha: 1.0)
         recordLabel.font = UIFont(name: "AppleSDGothicNeo-ExtraBold", size: 16.0)
         recordLabel.textAlignment = .center
         recordLabel.adjustsFontSizeToFitWidth = true
@@ -70,10 +66,7 @@ class ScheduleRecordView:UIView {
     private lazy var dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.text = "00.00"
-        dateLabel.textColor = UIColor(red: 44.0/255.0,
-                                        green: 44.0/255.0,
-                                        blue: 44.0/255.0,
-                                        alpha: 1.0)
+        dateLabel.textColor = HBColor.lightGray
         dateLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 13.0)
         dateLabel.textAlignment = .center
         dateLabel.adjustsFontSizeToFitWidth = true

@@ -21,17 +21,23 @@ class FindEmailViewController: UIViewController {
     // MARK: Methods
     
     @IBAction private func signInButtonDidTapped(_ sender: UIButton) {
-        if let signInViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController {
+        guard let signInViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "SignInViewController")
+                as? SignInViewController else { return }
             
             UIApplication.shared.keyWindow?.rootViewController = signInViewController
-        }
     }
     
     @IBAction func forgotPasswordButtonDidTapped(_ sender: UIButton) {
-        if let forgotPasswordViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
+        guard let forgotPasswordViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "ForgotPasswordViewController")
+                as? ForgotPasswordViewController else { return }
             
-            self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
-        }
+            self.navigationController?.pushViewController(
+                forgotPasswordViewController,
+                animated: true)
     }
     
     // MARK: Life Cycle

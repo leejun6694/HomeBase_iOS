@@ -18,17 +18,12 @@ class RegisterTeamCreateViewController: UIViewController {
     private var currentOriginY:CGFloat = 0.0
     
     private var teamLogo: UIImage = UIImage()
-    private var isTeamLogoChanged:Bool = false
-    private var teamName:String = ""
-    private var teamIntro:String = ""
+    private var isTeamLogoChanged: Bool = false
+    private var teamName: String = ""
+    private var teamIntro: String = ""
     
     private var teamNameCondition = false
     private var teamIntroCondition = false
-    
-    private let correctColor = UIColor(red: 0.0,
-                                       green: 180.0/255.0,
-                                       blue: 223.0/255.0,
-                                       alpha: 1.0)
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -40,11 +35,28 @@ class RegisterTeamCreateViewController: UIViewController {
         return titleLabel
     }()
     
+    @IBOutlet private weak var teamLogoImageView: UIImageView!
+    
+    @IBOutlet private weak var teamNameLabel: UILabel!
+    @IBOutlet private weak var teamNameTextField: UITextField!
+    @IBOutlet private weak var teamNameTextFieldBorder: UIView!
+    private lazy var teamNameConditionImageView: UIImageView = {
+        let teamNameConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
+        teamNameConditionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return teamNameConditionImageView
+    }()
+    
+    @IBOutlet private weak var teamIntroLabel: UILabel!
+    @IBOutlet private weak var teamIntroBaseView: UIView!
+    @IBOutlet private weak var teamIntroTextView: UITextView!
+    
     private lazy var accessoryView: UIView = {
-        let accessoryViewFrame = CGRect(x: 0.0,
-                                        y: 0.0,
-                                        width: self.view.frame.width,
-                                        height: 45.0)
+        let accessoryViewFrame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.view.frame.width,
+            height: 45.0)
         let accessoryView = UIView(frame: accessoryViewFrame)
         accessoryView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -55,43 +67,20 @@ class RegisterTeamCreateViewController: UIViewController {
         let doneButton = UIButton(type: .system)
         doneButton.setTitle("완료", for: .normal)
         doneButton.setTitleColor(.white, for: .normal)
-        doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18.0)
-        doneButton.addTarget(self, action: #selector(doneButtonDidTapped(_:)), for: .touchUpInside)
-        doneButton.backgroundColor = UIColor(red: 75.0/255.0,
-                                             green: 75.0/255.0,
-                                             blue: 75.0/255.0,
-                                             alpha: 1.0)
+        doneButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 18.0)
+        doneButton.addTarget(
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
+        doneButton.backgroundColor = HBColor.darkGray
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         
         return doneButton
     }()
     
     @IBOutlet private var spinner: UIActivityIndicatorView!
-    
-    @IBOutlet private weak var teamLogoImageView: UIImageView!
-    
-    @IBOutlet private weak var teamNameLabel: UILabel!
-    @IBOutlet private weak var teamNameTextField: UITextField! {
-        didSet { teamNameTextField.delegate = self }
-    }
-    @IBOutlet private weak var teamNameTextFieldBorder: UIView!
-    private lazy var teamNameConditionImageView: UIImageView = {
-        let teamNameConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
-        teamNameConditionImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return teamNameConditionImageView
-    }()
-    
-    @IBOutlet private weak var teamIntroLabel: UILabel!
-    @IBOutlet private weak var teamIntroBaseView: UIView! {
-        didSet {
-            teamIntroBaseView.layer.borderWidth = 1.0
-            teamIntroBaseView.layer.borderColor = UIColor.white.cgColor
-        }
-    }
-    @IBOutlet private weak var teamIntroTextView: UITextView! {
-        didSet { teamIntroTextView.delegate = self }
-    }
     
     // MARK: Methods
     
@@ -120,42 +109,45 @@ class RegisterTeamCreateViewController: UIViewController {
         if isTeamLogoChanged == false {
             teamLogo = #imageLiteral(resourceName: "team_logo")
         }
+        
         if let logoData = UIImagePNGRepresentation(teamLogo) {
             let logoRef = storageRef.child(teamCode).child("teamLogo")
             logoRef.putData(logoData)
             
-            if let currentUser = Auth.auth().currentUser {
-                var provider:String = ""
-                for profile in currentUser.providerData {
-                    provider = profile.providerID
-                }
-                
-                if provider == "password" {
-                    databaseRef.child("users").child(currentUser.uid).updateChildValues(
-                        ["teamCode": teamCode])
-                } else {
-                    databaseRef.child("users").child(currentUser.uid).setValue(
-                        ["teamCode": teamCode])
-                }
-                
-                let admin:String = currentUser.uid
-                
-                databaseRef.child("teams").child(teamCode).setValue(
-                    ["name": teamName,
-                     "logo": logoRef.fullPath,
-                     "description": teamIntro,
-                     "admin": admin])
+            guard let currentUser = Auth.auth().currentUser else { return }
+            let admin: String = currentUser.uid
+            var provider: String = ""
+            for profile in currentUser.providerData {
+                provider = profile.providerID
             }
             
-            if let registerTeamCompleteViewController =
-                self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamCompleteViewController") as? RegisterTeamCompleteViewController {
-                
-                registerTeamCompleteViewController.teamLogo = teamLogo
-                registerTeamCompleteViewController.teamName = self.teamName
-                registerTeamCompleteViewController.teamCode = teamCode
-                spinnerStopAnimating(spinner)
-                self.navigationController?.pushViewController(registerTeamCompleteViewController, animated: true)
+            if provider == "password" {
+                databaseRef.child("users").child(currentUser.uid).updateChildValues(
+                    ["teamCode": teamCode])
+            } else {
+                databaseRef.child("users").child(currentUser.uid).setValue(
+                    ["teamCode": teamCode])
             }
+            
+            databaseRef.child("teams").child(teamCode).setValue(
+                ["name": teamName,
+                 "logo": logoRef.fullPath,
+                 "description": teamIntro,
+                 "admin": admin])
+            
+            guard let registerTeamCompleteViewController =
+                self.storyboard?.instantiateViewController(
+                    withIdentifier: "RegisterTeamCompleteViewController")
+                    as? RegisterTeamCompleteViewController else { return }
+                
+            registerTeamCompleteViewController.teamLogo = teamLogo
+            registerTeamCompleteViewController.teamName = self.teamName
+            registerTeamCompleteViewController.teamCode = teamCode
+            spinnerStopAnimating(spinner)
+            
+            self.navigationController?.pushViewController(
+                registerTeamCompleteViewController,
+                animated: true)
         } else {
             spinnerStopAnimating(spinner)
             print("UIImage to Data error")
@@ -203,10 +195,13 @@ class RegisterTeamCreateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.shadowImage = UIImage()
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        }
         self.navigationItem.titleView = titleLabel
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        self.navigationItem.backBarButtonItem =
+            UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         teamIntroTextView.text = "우리는 우주 최강 사회인 야구팀, 홈베이스이다. 다 덤벼라 얍!"
         teamIntroTextView.textColor = .lightGray
@@ -215,6 +210,9 @@ class RegisterTeamCreateViewController: UIViewController {
         self.view.addSubview(doneButton)
         doneButtonConstraints()
         buttonDisabled(doneButton)
+        
+        teamNameTextField.delegate = self
+        teamIntroTextView.delegate = self
         
         NotificationCenter.default.addObserver(
             self,
@@ -246,11 +244,11 @@ class RegisterTeamCreateViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2.0
-        teamLogoImageView.layer.borderColor = UIColor(red: 44.0/255.0,
-                                                      green: 44.0/255.0,
-                                                      blue: 44.0/255.0,
-                                                      alpha: 1.0).cgColor
+        teamLogoImageView.layer.borderColor = HBColor.lightGray.cgColor
         teamLogoImageView.layer.borderWidth = 1.0
+        
+        teamIntroBaseView.layer.borderWidth = 1.0
+        teamIntroBaseView.layer.borderColor = UIColor.white.cgColor
     }
 }
 
@@ -283,10 +281,10 @@ extension RegisterTeamCreateViewController: UITextFieldDelegate {
         if state {
             teamNameCondition = true
             teamName = teamNameTextField.text ?? "default"
-            teamNameLabel.textColor = correctColor
-            teamNameTextField.textColor = correctColor
-            teamNameTextField.tintColor = correctColor
-            teamNameTextFieldBorder.backgroundColor = correctColor
+            teamNameLabel.textColor = HBColor.correct
+            teamNameTextField.textColor = HBColor.correct
+            teamNameTextField.tintColor = HBColor.correct
+            teamNameTextFieldBorder.backgroundColor = HBColor.correct
             
             if !teamNameConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(teamNameConditionImageView)
@@ -371,10 +369,10 @@ extension RegisterTeamCreateViewController: UITextViewDelegate {
         if state {
             teamIntroCondition = true
             teamIntro = teamIntroTextView.text ?? "default"
-            teamIntroLabel.textColor = correctColor
-            teamIntroBaseView.layer.borderColor = correctColor.cgColor
-            teamIntroTextView.textColor = correctColor
-            teamIntroTextView.tintColor = correctColor
+            teamIntroLabel.textColor = HBColor.correct
+            teamIntroBaseView.layer.borderColor = HBColor.correct.cgColor
+            teamIntroTextView.textColor = HBColor.correct
+            teamIntroTextView.tintColor = HBColor.correct
         } else {
             teamIntroCondition = false
             teamIntroLabel.textColor = .white

@@ -48,10 +48,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     private lazy var dayLabel: UILabel = {
         let dayLabel = UILabel()
         dayLabel.text = "22"
-        dayLabel.textColor = UIColor(red: 44.0/255.0,
-                                     green: 44.0/255.0,
-                                     blue: 44.0/255.0,
-                                     alpha: 1.0)
+        dayLabel.textColor = HBColor.lightGray
         dayLabel.textAlignment = .center
         dayLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 28.0)
         dayLabel.adjustsFontSizeToFitWidth = true
@@ -64,10 +61,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     private lazy var dayOfWeekLabel: UILabel = {
         let dayOfWeekLabel = UILabel()
         dayOfWeekLabel.text = "토요일"
-        dayOfWeekLabel.textColor = UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0)
+        dayOfWeekLabel.textColor = HBColor.lightGray
         dayOfWeekLabel.textAlignment = .center
         dayOfWeekLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13.0)
         dayOfWeekLabel.adjustsFontSizeToFitWidth = true
@@ -80,10 +74,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     private lazy var opponentTeamLabel: UILabel = {
         let opponentTeamLabel = UILabel()
         opponentTeamLabel.text = "HomeBase"
-        opponentTeamLabel.textColor = UIColor(red: 44.0/255.0,
-                                              green: 44.0/255.0,
-                                              blue: 44.0/255.0,
-                                              alpha: 1.0)
+        opponentTeamLabel.textColor = HBColor.lightGray
         opponentTeamLabel.textAlignment = .left
         opponentTeamLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 21.0)
         opponentTeamLabel.adjustsFontSizeToFitWidth = true
@@ -96,10 +87,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     private lazy var matchDateLabel: UILabel = {
         let matchDateLabel = UILabel()
         matchDateLabel.text = "2월 20일 토요일 오전 9:00"
-        matchDateLabel.textColor = UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0)
+        matchDateLabel.textColor = HBColor.lightGray
         matchDateLabel.textAlignment = .left
         matchDateLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12.0)
         matchDateLabel.adjustsFontSizeToFitWidth = true
@@ -112,10 +100,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     private lazy var matchPlaceLabel: UILabel = {
         let matchPlaceLabel = UILabel()
         matchPlaceLabel.text = "홈베이스 야구장"
-        matchPlaceLabel.textColor = UIColor(red: 44.0/255.0,
-                                            green: 44.0/255.0,
-                                            blue: 44.0/255.0,
-                                            alpha: 1.0)
+        matchPlaceLabel.textColor = HBColor.lightGray
         matchPlaceLabel.textAlignment = .left
         matchPlaceLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12.0)
         matchPlaceLabel.adjustsFontSizeToFitWidth = true
@@ -127,10 +112,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     
     private lazy var divisionView: UIView = {
         let divisionView = UIView()
-        divisionView.backgroundColor = UIColor(red: 151.0/255.0,
-                                               green: 151.0/255.0,
-                                               blue: 151.0/255.0,
-                                               alpha: 1.0)
+        divisionView.backgroundColor = UIColor(red: 151, green: 151, blue: 151, alpha: 1.0)
         divisionView.translatesAutoresizingMaskIntoConstraints = false
         
         return divisionView
@@ -139,10 +121,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     lazy var recordButton: UIButton = {
         let recordButton = UIButton(type: .system)
         recordButton.setTitle("기록하기", for: .normal)
-        recordButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0), for: .normal)
+        recordButton.setTitleColor(HBColor.lightGray, for: .normal)
         recordButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
         recordButton.backgroundColor = UIColor.clear
         recordButton.translatesAutoresizingMaskIntoConstraints = false
@@ -166,10 +145,7 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor(red: 192.0/255.0,
-                                       green: 222.0/255.0,
-                                       blue: 229.0/255.0,
-                                       alpha: 1.0)
+        self.backgroundColor = UIColor(red: 192, green: 222, blue: 229, alpha: 1.0)
     }
     
     override func draw(_ rect: CGRect) {

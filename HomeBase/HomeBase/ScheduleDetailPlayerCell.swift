@@ -35,10 +35,7 @@ class ScheduleDetailPlayerCell: UITableViewCell {
     private lazy var backNumberLabel: UILabel = {
         let backNumberLabel = UILabel()
         backNumberLabel.text = "14"
-        backNumberLabel.textColor = UIColor(red: 44.0/255.0,
-                                              green: 44.0/255.0,
-                                              blue: 44.0/255.0,
-                                              alpha: 1.0)
+        backNumberLabel.textColor = HBColor.lightGray
         backNumberLabel.textAlignment = .center
         backNumberLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 26.0)
         backNumberLabel.adjustsFontSizeToFitWidth = true
@@ -51,10 +48,7 @@ class ScheduleDetailPlayerCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "이승엽"
-        nameLabel.textColor = UIColor(red: 44.0/255.0,
-                                      green: 44.0/255.0,
-                                      blue: 44.0/255.0,
-                                      alpha: 1.0)
+        nameLabel.textColor = HBColor.lightGray
         nameLabel.textAlignment = .left
         nameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
         nameLabel.adjustsFontSizeToFitWidth = true
@@ -66,10 +60,7 @@ class ScheduleDetailPlayerCell: UITableViewCell {
     
     private lazy var divisionView: UIView = {
         let divisionView = UIView()
-        divisionView.backgroundColor = UIColor(red: 44.0/255.0,
-                                               green: 44.0/255.0,
-                                               blue: 44.0/255.0,
-                                               alpha: 1.0)
+        divisionView.backgroundColor = HBColor.lightGray
         divisionView.translatesAutoresizingMaskIntoConstraints = false
         
         return divisionView
@@ -78,11 +69,10 @@ class ScheduleDetailPlayerCell: UITableViewCell {
     lazy var recordPlayerButton: UIButton = {
         let recordPlayerButton = UIButton(type: .system)
         recordPlayerButton.setTitle("결과 입력", for: .normal)
-        recordPlayerButton.setTitleColor(UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0), for: .normal)
-        recordPlayerButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
+        recordPlayerButton.setTitleColor(HBColor.lightGray, for: .normal)
+        recordPlayerButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 15.0)
         recordPlayerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         recordPlayerButton.titleLabel?.minimumScaleFactor = 0.5
         recordPlayerButton.backgroundColor = UIColor.clear

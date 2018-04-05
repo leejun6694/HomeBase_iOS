@@ -13,7 +13,7 @@ class ForgotEmailViewController: UIViewController {
 
     // MARK: Properties
     
-    private var currentOriginY:CGFloat = 0.0
+    private var currentOriginY: CGFloat = 0.0
     
     private var name: String = ""
     private var year: String = ""
@@ -22,22 +22,6 @@ class ForgotEmailViewController: UIViewController {
     
     private var nameCondition = false
     private var birthCondition = false
-    
-    private let correctColor = UIColor(red: 0.0,
-                                       green: 180.0/255.0,
-                                       blue: 233.0/255.0,
-                                       alpha: 1.0)
-    
-    private lazy var accessoryView: UIView = {
-        let accessoryViewFrame = CGRect(x: 0.0,
-                                        y: 0.0,
-                                        width: self.view.frame.width,
-                                        height: 45.0)
-        let accessoryView = UIView(frame: accessoryViewFrame)
-        accessoryView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return accessoryView
-    }()
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -49,27 +33,8 @@ class ForgotEmailViewController: UIViewController {
         return titleLabel
     }()
     
-    private lazy var doneButton: UIButton = {
-        let doneButton = UIButton(type: .system)
-        doneButton.setTitle("완료", for: .normal)
-        doneButton.setTitleColor(.white, for: .normal)
-        doneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18.0)
-        doneButton.addTarget(self, action: #selector(doneButtonDidTapped(_:)), for: .touchUpInside)
-        doneButton.backgroundColor = UIColor(red: 75.0/255.0,
-                                             green: 75.0/255.0,
-                                             blue: 75.0/255.0,
-                                             alpha: 1.0)
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        return doneButton
-    }()
-    
-    @IBOutlet var spinner: UIActivityIndicatorView!
-    
     @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var nameTextField: UITextField! {
-        didSet { nameTextField.delegate = self }
-    }
+    @IBOutlet private weak var nameTextField: UITextField!
     @IBOutlet private weak var nameTextFieldBorder: UIView!
     private lazy var nameConditionImageView: UIImageView = {
         let nameConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
@@ -79,9 +44,7 @@ class ForgotEmailViewController: UIViewController {
     }()
     
     @IBOutlet private weak var birthLabel: UILabel!
-    @IBOutlet private weak var birthTextField: UITextField! {
-        didSet { birthTextField.delegate = self }
-    }
+    @IBOutlet private weak var birthTextField: UITextField!
     @IBOutlet private weak var birthTextFieldBorder: UIView!
     private lazy var birthConditionImageView: UIImageView = {
         let birthConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
@@ -90,15 +53,41 @@ class ForgotEmailViewController: UIViewController {
         return birthConditionImageView
     }()
     
+    private lazy var accessoryView: UIView = {
+        let accessoryViewFrame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.view.frame.width,
+            height: 45.0)
+        let accessoryView = UIView(frame: accessoryViewFrame)
+        accessoryView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return accessoryView
+    }()
+    
+    private lazy var doneButton: UIButton = {
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("완료", for: .normal)
+        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 18.0)
+        doneButton.addTarget(
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
+        doneButton.backgroundColor = HBColor.darkGray
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return doneButton
+    }()
+    
+    @IBOutlet var spinner: UIActivityIndicatorView!
+    
     // MARK: Methods
     
     @IBAction private func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
-        for subview in self.view.subviews {
-            if subview.isFirstResponder {
-                subview.resignFirstResponder()
-                break
-            }
-        }
+        self.view.endEditing(true)
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
@@ -115,25 +104,33 @@ class ForgotEmailViewController: UIViewController {
                 (response) -> Void in
                 
                 if response.result.isSuccess {
-                    if let value = response.result.value as? [String: [String]] {
-                        if let emails = value["emails"] {
-                            if let findEmailViewController = self.storyboard?.instantiateViewController(withIdentifier: "FindEmailViewController") as? FindEmailViewController {
-                                
-                                findEmailViewController.name = self.name
-                                findEmailViewController.emails = emails
-                                
-                                self.spinnerStopAnimating(self.spinner)
-                                self.navigationController?.pushViewController(findEmailViewController, animated: true)
-                            }
-                        }
+                    guard let value = response.result.value as? [String: [String]]
+                        else { return }
+                    
+                    if let emails = value["emails"] {
+                        guard let findEmailViewController = self.storyboard?.instantiateViewController(
+                            withIdentifier: "FindEmailViewController")
+                            as? FindEmailViewController else { return }
+                            
+                        findEmailViewController.name = self.name
+                        findEmailViewController.emails = emails
+                        
+                        self.spinnerStopAnimating(self.spinner)
+                        self.navigationController?.pushViewController(
+                            findEmailViewController,
+                            animated: true)
                     }
                 } else {
-                    if let forgotErrorViewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotErrorViewController") as? ForgotErrorViewController {
+                    guard let forgotErrorViewController = self.storyboard?.instantiateViewController(
+                        withIdentifier: "ForgotErrorViewController")
+                        as? ForgotErrorViewController else { return }
                         
-                        forgotErrorViewController.modalPresentationStyle = .overCurrentContext
-                        self.spinnerStopAnimating(self.spinner)
-                        self.present(forgotErrorViewController, animated: false, completion: nil)
-                }
+                    forgotErrorViewController.modalPresentationStyle = .overCurrentContext
+                    self.spinnerStopAnimating(self.spinner)
+                    self.present(
+                        forgotErrorViewController,
+                        animated: false,
+                        completion: nil)
             }
         }
     }
@@ -143,7 +140,9 @@ class ForgotEmailViewController: UIViewController {
         accessoryView.addSubview(doneButton)
         accessoryView.addConstraints(doneButtonKeyboardConstraints())
         
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height + accessoryView.frame.size.height
             
@@ -179,15 +178,19 @@ class ForgotEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.barTintColor =
-            UIColor(red: 44.0/255.0, green: 44.0/255.0, blue: 44.0/255.0, alpha: 1.0)
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.shadowImage = UIImage()
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.barTintColor = HBColor.lightGray
+        }
         self.navigationItem.titleView = titleLabel
         
         self.view.addSubview(doneButton)
         doneButtonConstraints()
         buttonDisabled(doneButton)
+        
+        nameTextField.delegate = self
+        birthTextField.delegate = self
         
         NotificationCenter.default.addObserver(
             self,
@@ -232,10 +235,10 @@ extension ForgotEmailViewController: UITextFieldDelegate {
         if state {
             nameCondition = true
             name = nameTextField.text ?? "default"
-            nameLabel.textColor = correctColor
-            nameTextField.textColor = correctColor
-            nameTextField.tintColor = correctColor
-            nameTextFieldBorder.backgroundColor = correctColor
+            nameLabel.textColor = HBColor.correct
+            nameTextField.textColor = HBColor.correct
+            nameTextField.tintColor = HBColor.correct
+            nameTextFieldBorder.backgroundColor = HBColor.correct
             
             if !nameConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(nameConditionImageView)
@@ -298,10 +301,10 @@ extension ForgotEmailViewController: UITextFieldDelegate {
     private func birthTextFieldCondition(_ state: Bool) {
         if state {
             birthCondition = true
-            birthLabel.textColor = correctColor
-            birthTextField.textColor = correctColor
-            birthTextField.tintColor = correctColor
-            birthTextFieldBorder.backgroundColor = correctColor
+            birthLabel.textColor = HBColor.correct
+            birthTextField.textColor = HBColor.correct
+            birthTextField.tintColor = HBColor.correct
+            birthTextFieldBorder.backgroundColor = HBColor.correct
             
             if !birthConditionImageView.isDescendant(of: self.view) {
                 self.view.addSubview(birthConditionImageView)

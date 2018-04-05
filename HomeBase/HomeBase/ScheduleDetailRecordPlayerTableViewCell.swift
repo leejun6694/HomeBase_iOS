@@ -19,10 +19,7 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
     private lazy var headLabel: UILabel = {
         let headLabel = UILabel()
         headLabel.text = "\(headText)"
-        headLabel.textColor = UIColor(red: 44.0/255.0,
-                                      green: 44.0/255.0,
-                                      blue: 44.0/255.0,
-                                      alpha: 1.0)
+        headLabel.textColor = HBColor.lightGray
         headLabel.textAlignment = .center
         headLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16.0)
         headLabel.adjustsFontSizeToFitWidth = true
@@ -34,10 +31,7 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
     
     lazy var minusImageView: UIImageView = {
         let minusImageView = UIImageView(image: #imageLiteral(resourceName: "iconMinus"))
-        minusImageView.tintColor = UIColor(red: 44.0/255.0,
-                                        green: 44.0/255.0,
-                                        blue: 44.0/255.0,
-                                        alpha: 1.0)
+        minusImageView.tintColor = HBColor.lightGray
         minusImageView.backgroundColor = UIColor.clear
         minusImageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -47,10 +41,7 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
     lazy var recordLabel: UILabel = {
         let recordLabel = UILabel()
         recordLabel.text = "0"
-        recordLabel.textColor = UIColor(red: 0.0,
-                                        green: 180.0/255.0,
-                                        blue: 223.0/255.0,
-                                        alpha: 1.0)
+        recordLabel.textColor = HBColor.correct
         recordLabel.textAlignment = .center
         recordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 47.0)
         recordLabel.adjustsFontSizeToFitWidth = true
@@ -62,10 +53,7 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
     
     lazy var plusImageView: UIImageView = {
         let plusImageView = UIImageView(image: #imageLiteral(resourceName: "iconPlus"))
-        plusImageView.tintColor = UIColor(red: 44.0/255.0,
-                                           green: 44.0/255.0,
-                                           blue: 44.0/255.0,
-                                           alpha: 1.0)
+        plusImageView.tintColor = HBColor.lightGray
         plusImageView.backgroundColor = UIColor.clear
         plusImageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -74,10 +62,7 @@ class ScheduleDetailRecordPlayerTableViewCell: UITableViewCell {
     
     private lazy var divisionView: UIView = {
         let divisionView = UIView()
-        divisionView.backgroundColor = UIColor(red: 44.0/255.0,
-                                               green: 44.0/255.0,
-                                               blue: 44.0/255.0,
-                                               alpha: 0.6)
+        divisionView.backgroundColor = UIColor(red: 44, green: 44, blue: 44, alpha: 0.6)
         divisionView.translatesAutoresizingMaskIntoConstraints = false
         
         return divisionView

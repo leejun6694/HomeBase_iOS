@@ -18,10 +18,7 @@ class MainViewController: UIViewController {
     
     private func drawProgressView() {
         MainViewController.progressView.setProgress(0.01, animated: false)
-        MainViewController.progressView.tintColor = UIColor(red: 0.0,
-                                                            green: 180.0/255.0,
-                                                            blue: 233.0/255.0,
-                                                            alpha: 1.0)
+        MainViewController.progressView.tintColor = HBColor.correct
         MainViewController.progressView.trackTintColor = UIColor.clear
         MainViewController.progressView.layer.cornerRadius = 7.0
         MainViewController.progressView.clipsToBounds = true
@@ -36,9 +33,6 @@ class MainViewController: UIViewController {
         drawProgressView()
         self.view.addSubview(MainViewController.progressView)
         self.view.addConstraints(progressViewConstraints())
-        
-//        MainViewController.progressView.transform = CGAffineTransform(scaleX: 1, y: 8)
-        
     }
 }
 
@@ -63,10 +57,11 @@ extension MainViewController {
 
 extension UIProgressView {
     func animate(value: Float) {
-        UIView.animate(withDuration: 0.25,
-                       delay: 0.0,
-                       options: .curveLinear,
-                       animations: { self.setProgress(value, animated: true) },
-                       completion: nil)
+        UIView.animate(
+            withDuration: 0.25,
+            delay: 0.0,
+            options: .curveLinear,
+            animations: { self.setProgress(value, animated: true) },
+            completion: nil)
     }
 }

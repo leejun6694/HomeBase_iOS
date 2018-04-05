@@ -19,34 +19,33 @@ class RegisterTeamCompleteViewController: UIViewController {
     @IBOutlet private var teamLogoImageView: UIImageView!
     @IBOutlet private var teamNameLabel: UILabel!
     @IBOutlet private var teamCodeLabel: UILabel!
-    @IBOutlet private var copyButton: UIButton! {
-        didSet {
-            copyButton.layer.borderWidth = 2.0
-            copyButton.layer.borderColor = UIColor(red: 44.0/255.0,
-                                                   green: 44.0/255.0,
-                                                   blue: 44.0/255.0,
-                                                   alpha: 1.0).cgColor
-        }
-    }
+    @IBOutlet private var copyButton: UIButton!
     
     // MARK: Methods
     
     @IBAction private func copyButtonDidTapped(_ sender: UIButton) {
         UIPasteboard.general.string = teamCode
         
-        if let registerTeamCompleteCopyViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterTeamCompleteCopyViewController") as? RegisterTeamCompleteCopyViewController {
+        guard let registerTeamCompleteCopyViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "RegisterTeamCompleteCopyViewController")
+                as? RegisterTeamCompleteCopyViewController else { return }
             
-            registerTeamCompleteCopyViewController.modalPresentationStyle = .overCurrentContext
-            self.present(registerTeamCompleteCopyViewController, animated: false, completion: nil)
-        }
+        registerTeamCompleteCopyViewController.modalPresentationStyle = .overCurrentContext
+        self.present(
+            registerTeamCompleteCopyViewController,
+            animated: false,
+            completion: nil)
     }
     
     @IBAction private func doneButtonDidTapped(_ sender: UIButton) {
-        if let registerUserNavigation = self.storyboard?.instantiateViewController(withIdentifier: "RegisterUserNavigation") as? RegisterUserNavigation {
+        guard let registerUserNavigation =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "RegisterUserNavigation")
+                as? RegisterUserNavigation else { return }
             
-            registerUserNavigation.teamCode = teamCode
-            self.present(registerUserNavigation, animated: true, completion: nil)
-        }
+        registerUserNavigation.teamCode = teamCode
+        self.present(registerUserNavigation, animated: true, completion: nil)
     }
     
     // MARK: Life Cycle
@@ -69,10 +68,10 @@ class RegisterTeamCompleteViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
-        teamLogoImageView.layer.borderColor = UIColor(red: 44.0/255.0,
-                                                      green: 44.0/255.0,
-                                                      blue: 44.0/255.0,
-                                                      alpha: 1.0).cgColor
+        teamLogoImageView.layer.borderColor = HBColor.lightGray.cgColor
         teamLogoImageView.layer.borderWidth = 1.0
+        
+        copyButton.layer.borderWidth = 2.0
+        copyButton.layer.borderColor = HBColor.lightGray.cgColor
     }
 }

@@ -23,14 +23,12 @@ class ScheduleTableViewController: UITableViewController {
     var sectionInTable = [String]()
     
     private let scheduleRecentView = ScheduleRecentView()
+    private let headerCellReuseIdendifier = "monthlyHeaderSectionCell"
     private let cellReuseIdendifier = "monthlySectionCell"
     
     private lazy var addButtonView: UIView = {
         let addButton = UIView()
-        addButton.backgroundColor = UIColor(red: 44.0/255.0,
-                                            green: 44.0/255.0,
-                                            blue: 44.0/255.0,
-                                            alpha: 1.0)
+        addButton.backgroundColor = HBColor.lightGray
         addButton.translatesAutoresizingMaskIntoConstraints = false
         
         return addButton
@@ -39,9 +37,10 @@ class ScheduleTableViewController: UITableViewController {
     private lazy var addButton: UIButton = {
         let addButton = UIButton(type: .system)
         addButton.setImage(#imageLiteral(resourceName: "iconPlus"), for: .normal)
-        addButton.addTarget(self,
-                            action: #selector(addButtonDidTapped(_:)),
-                            for: .touchUpInside)
+        addButton.addTarget(
+            self,
+            action: #selector(addButtonDidTapped(_:)),
+            for: .touchUpInside)
         addButton.tintColor = UIColor.white
         addButton.backgroundColor = UIColor.clear
         addButton.translatesAutoresizingMaskIntoConstraints = false
@@ -50,10 +49,11 @@ class ScheduleTableViewController: UITableViewController {
     }()
     
     private lazy var footerView: UIView = {
-        let footerView = UIView(frame: CGRect(x: 0.0,
-                                              y: 0.0,
-                                              width: self.view.frame.size.width,
-                                              height: self.view.frame.size.height * 191/736))
+        let footerView = UIView(frame: CGRect(
+                x: 0.0,
+                y: 0.0,
+                width: self.view.frame.size.width,
+                height: self.view.frame.size.height * 191/736))
         let footerImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundSchedule2"))
         footerView.addSubview(footerImageView)
         footerView.translatesAutoresizingMaskIntoConstraints = false
@@ -134,10 +134,10 @@ class ScheduleTableViewController: UITableViewController {
     
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self,
-                                 action: #selector(refreshControlDidChanged(_:)),
-                                 for: .valueChanged)
-
+        refreshControl.addTarget(
+            self,
+            action: #selector(refreshControlDidChanged(_:)),
+            for: .valueChanged)
         if #available(iOS 10.0, *) {
             self.tableView.refreshControl = refreshControl
         } else {
@@ -146,33 +146,40 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     @objc private func addButtonDidTapped(_ sender: UIButton) {
-        if let scheduleCreateViewController = self.storyboard?.instantiateViewController(withIdentifier:
-            "ScheduleCreateViewController") as? ScheduleCreateViewController {
+        guard let scheduleCreateViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier:"ScheduleCreateViewController")
+                as? ScheduleCreateViewController else { return }
             
-            self.present(scheduleCreateViewController, animated: true, completion: nil)
-        }
+        self.present(scheduleCreateViewController, animated: true, completion: nil)
     }
     
     @objc private func recordButtonDidTapped(_ sender: UIButton) {
-        if let scheduleDetailTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleDetailTableViewController") as? ScheduleDetailTableViewController {
+        guard let scheduleDetailTableViewController =
+            self.storyboard?.instantiateViewController(
+            withIdentifier: "ScheduleDetailTableViewController")
+                as? ScheduleDetailTableViewController else { return }
             
-            let section = sender.tag / 10000
-            let row = sender.tag % 10000
-            
-            let cellSchedules = scheduleSorted(by: section - 1)
-            let cellSchedule = cellSchedules[row]
-            
-            scheduleDetailTableViewController.teamData = teamData
-            scheduleDetailTableViewController.cellSchedule = cellSchedule
-            self.navigationController?.pushViewController(
-                scheduleDetailTableViewController,
-                animated: true)
-        }
+        let section = sender.tag / 10000
+        let row = sender.tag % 10000
+        
+        let cellSchedules = scheduleSorted(by: section - 1)
+        let cellSchedule = cellSchedules[row - 1]
+        
+        scheduleDetailTableViewController.teamData = teamData
+        scheduleDetailTableViewController.cellSchedule = cellSchedule
+        self.navigationController?.pushViewController(
+            scheduleDetailTableViewController,
+            animated: true)
     }
     
     @objc private func refreshControlDidChanged(_ sender: UIRefreshControl) {
         tableViewReloadData()
         sender.endRefreshing()
+    }
+    
+    @IBAction func unwindToDetailView(segue: UIStoryboardSegue) {
+        tableViewReloadData()
     }
     
     // MARK: Life Cycle
@@ -183,8 +190,12 @@ class ScheduleTableViewController: UITableViewController {
         fetchTeamData()
         tableViewReloadData()
         
-        self.tableView.register(ScheduleMonthlySectionCell.self,
-                                forCellReuseIdentifier: cellReuseIdendifier)
+        self.tableView.register(
+            ScheduleMonthlySectionHeaderCell.self,
+            forCellReuseIdentifier: headerCellReuseIdendifier)
+        self.tableView.register(
+            ScheduleMonthlySectionCell.self,
+            forCellReuseIdentifier: cellReuseIdendifier)
         self.tableView.allowsSelection = false
         self.tableView.tableFooterView = footerView
         
@@ -194,12 +205,15 @@ class ScheduleTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 51.0/255.0,
-                                                                        green: 215.0/255.0,
-                                                                        blue: 253.0/255.0,
-                                                                        alpha: 1.0)
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.shadowImage = UIImage()
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.barTintColor = UIColor(
+                red: 51,
+                green: 215,
+                blue: 253,
+                alpha: 1.0)
+        }
         
         if let currentUser = Auth.auth().currentUser {
             if teamData.admin == currentUser.uid {
@@ -214,11 +228,7 @@ class ScheduleTableViewController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.tableView.backgroundColor = UIColor(red: 51.0/255.0,
-                                                 green: 215.0/255.0,
-                                                 blue: 253.0/255.0,
-                                                 alpha: 1.0)
-        
+        self.tableView.backgroundColor = UIColor(red: 51, green: 215, blue: 253, alpha: 1.0)
         addButtonView.layer.cornerRadius = addButtonView.frame.size.width / 2
     }
     
@@ -251,7 +261,7 @@ extension ScheduleTableViewController {
                 return 0
             } else {
                 let cellSchedules = scheduleSorted(by: section - 1)
-                return cellSchedules.count
+                return cellSchedules.count + 1
             }
         }
     }
@@ -259,8 +269,6 @@ extension ScheduleTableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let recentViewHeight =
             CGFloat(self.view.frame.size.height * 346/736).rounded()
-        let monthlySectionHeaderViewHeight =
-            CGFloat(self.view.frame.size.height * 57/736).rounded()
         let noDataSectionHeaderViewHeight =
             CGFloat(self.view.frame.size.height * 127/736).rounded()
         
@@ -270,7 +278,7 @@ extension ScheduleTableViewController {
             if schedules.count == 0 {
                 return noDataSectionHeaderViewHeight
             } else {
-                return monthlySectionHeaderViewHeight
+                return 0.0
             }
         }
     }
@@ -298,25 +306,46 @@ extension ScheduleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: cellReuseIdendifier, for: indexPath) as! ScheduleMonthlySectionCell
         
-        let cellSchedules = scheduleSorted(by: indexPath.section - 1)
-        let cellSchedule = cellSchedules[indexPath.row]
-        
-        cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
-        cell.recordButton.addTarget(self,
-                                    action: #selector(recordButtonDidTapped(_:)),
-                                    for: .touchUpInside)
-        cell.opponentTeam = cellSchedule.opponentTeam
-        cell.matchPlace = cellSchedule.matchPlace
-        cell.matchDate = cellSchedule.matchDate
-        
-        return cell
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: headerCellReuseIdendifier,
+                for: indexPath) as! ScheduleMonthlySectionHeaderCell
+            
+            dateFormatter.locale = Locale(identifier: "ko-KR")
+            dateFormatter.dateFormat = "yyyy-MM"
+            if let date = dateFormatter.date(from: sectionInTable[indexPath.section - 1]) {
+                cell.matchDate = date
+            }
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: cellReuseIdendifier,
+                for: indexPath) as! ScheduleMonthlySectionCell
+            
+            let cellSchedules = scheduleSorted(by: indexPath.section - 1)
+            let cellSchedule = cellSchedules[indexPath.row - 1]
+            
+            cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
+            cell.recordButton.addTarget(
+                self,
+                action: #selector(recordButtonDidTapped(_:)),
+                for: .touchUpInside)
+            cell.opponentTeam = cellSchedule.opponentTeam
+            cell.matchPlace = cellSchedule.matchPlace
+            cell.matchDate = cellSchedule.matchDate
+            
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(self.view.frame.size.height * 111/736).rounded()
+        if indexPath.row == 0 {
+            return CGFloat(self.view.frame.size.height * 57/736).rounded()
+        } else {
+            return CGFloat(self.view.frame.size.height * 111/736).rounded()
+        }
     }
 }
 
