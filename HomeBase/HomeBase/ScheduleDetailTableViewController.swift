@@ -175,6 +175,12 @@ class ScheduleDetailTableViewController: UITableViewController {
         
         self.navigationController?.navigationBar.barTintColor = HBColor.lightGray
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tableViewReloadData()
+    }
 }
 
 extension ScheduleDetailTableViewController {
@@ -204,10 +210,8 @@ extension ScheduleDetailTableViewController {
         scheduleDetailInfoView.matchDate = cellSchedule.matchDate
         scheduleDetailInfoView.matchPlace = cellSchedule.matchPlace
         
-        if cellSchedule.homeScore != -1, cellSchedule.opponentScore != -1 {
-            scheduleDetailInfoView.homeTeamScore = cellSchedule.homeScore
-            scheduleDetailInfoView.opponentTeamScore = cellSchedule.opponentScore
-        }
+        scheduleDetailInfoView.homeTeamScore = cellSchedule.homeScore
+        scheduleDetailInfoView.opponentTeamScore = cellSchedule.opponentScore
         
         guard let currentUser = Auth.auth().currentUser else { return nil }
         if currentUser.uid != teamData.admin {
