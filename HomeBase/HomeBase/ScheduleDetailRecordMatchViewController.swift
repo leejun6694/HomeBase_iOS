@@ -16,6 +16,9 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     
     var sid: String!
     
+    var homeState: Bool = false
+    var opponentState: Bool = false
+    
     var homeScore: Int = -1
     var opponentScore: Int = -1
     
@@ -87,6 +90,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         let homeTeamTextField = UITextField()
         homeTeamTextField.placeholder = "-"
         if homeScore != -1 {
+            homeState = true
             homeTeamTextField.text = "\(homeScore)"
         }
         homeTeamTextField.textColor = HBColor.lightGray
@@ -145,6 +149,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         let opponentTeamTextField = UITextField()
         opponentTeamTextField.placeholder = "-"
         if opponentScore != -1 {
+            opponentState = true
             opponentTeamTextField.text = "\(opponentScore)"
         }
         opponentTeamTextField.textColor = HBColor.lightGray
@@ -166,8 +171,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         opponentTeamTextFieldBorder.backgroundColor = UIColor(
             red: 44,
             green: 44,
-            blue: 44,
-            alpha: 0.5)
+            blue: 44, alpha: 0.5)
         opponentTeamTextFieldBorder.translatesAutoresizingMaskIntoConstraints = false
         
         return opponentTeamTextFieldBorder
@@ -176,6 +180,28 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
     // MARK: Methods
     
     @objc private func cancelButtonDidTapped(_ sender: UIButton) {
+        homeState = false
+        opponentState = false
+        homeScore = -1
+        opponentScore = -1
+        
+        homeTeamTextField.text = ""
+        opponentTeamTextField.text = ""
+        
+        guard let currnetUser = Auth.auth().currentUser else { return }
+        let ref = Database.database().reference()
+        
+        CloudFunction.getUserDataWith(currnetUser) {
+            (user, error) -> Void in
+            
+            if let user = user {
+                let scheduleRef = ref.child("schedules").child(user.teamCode)
+                scheduleRef.child(self.sid).updateChildValues(
+                    ["homeScore": -1,
+                     "opponentScore": -1])
+            }
+        }
+        
         self.performSegue(withIdentifier: "unwindToDetailView", sender: self)
     }
     
@@ -221,6 +247,14 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         }
     }
     
+    private func doneButtonCondition() {
+        if homeState, opponentState {
+            buttonEnabled(doneButton)
+        } else {
+            buttonDisabled(doneButton)
+        }
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -250,6 +284,8 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
         self.view.addConstraints(opponentTeamTextFieldBorderConstraints())
         
         homeTeamTextField.becomeFirstResponder()
+        
+        doneButtonCondition()
     }
     
     override func viewDidLayoutSubviews() {
@@ -270,6 +306,29 @@ extension ScheduleDetailRecordMatchViewController: UITextFieldDelegate {
         if replacementCount > 2 {
             return false
         }
+        
+        if replacementCount == 0 {
+            switch textField {
+            case homeTeamTextField:
+                homeState = false
+                homeScore = -1
+            case opponentTeamTextField:
+                opponentState = false
+                opponentScore = -1
+            default:
+                break
+            }
+        } else {
+            switch textField {
+            case homeTeamTextField:
+                homeState = true
+            case opponentTeamTextField:
+                opponentState = true
+            default:
+                break
+            }
+        }
+        doneButtonCondition()
         
         return true
     }

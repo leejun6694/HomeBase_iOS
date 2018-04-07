@@ -14,12 +14,20 @@ class ScheduleDetailInfoView: UIView {
     
     var homeTeamScore = -1 {
         didSet {
-            homeTeamButton.setTitle("\(homeTeamScore)", for: .normal)
+            if homeTeamScore == -1 {
+                homeTeamButton.setTitle("-", for: .normal)
+            } else {
+                homeTeamButton.setTitle("\(homeTeamScore)", for: .normal)
+            }
         }
     }
     var opponentTeamScore = -1 {
         didSet {
-            opponentTeamButton.setTitle("\(opponentTeamScore)", for: .normal)
+            if opponentTeamScore == -1 {
+                opponentTeamButton.setTitle("-", for: .normal)
+            } else {
+                opponentTeamButton.setTitle("\(opponentTeamScore)", for: .normal)
+            }
         }
     }
     
