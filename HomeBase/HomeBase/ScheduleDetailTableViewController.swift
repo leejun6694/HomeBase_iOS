@@ -34,6 +34,7 @@ class ScheduleDetailTableViewController: UITableViewController {
     
     private func tableViewReloadData() {
         viewDisabled(self.view)
+        self.navigationController?.view.isUserInteractionEnabled = false
         
         guard let currentUser = Auth.auth().currentUser else { return }
         CloudFunction.getUserDataWith(currentUser) {
@@ -58,6 +59,7 @@ class ScheduleDetailTableViewController: UITableViewController {
                             
                             self.tableView.reloadData()
                             self.viewEnabled(self.view)
+                            self.navigationController?.view.isUserInteractionEnabled = true
                         }
                     }
                 }

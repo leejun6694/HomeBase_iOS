@@ -229,6 +229,7 @@ class RegisterPlayerInfoViewController: UIViewController {
                                     mainTabBarController.teamData = teamData
                                     mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
                                     self.spinnerStopAnimating(self.spinner)
+                                    
                                     UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
                                 }
                             }

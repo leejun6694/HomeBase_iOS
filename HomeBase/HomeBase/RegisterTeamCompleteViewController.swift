@@ -45,7 +45,8 @@ class RegisterTeamCompleteViewController: UIViewController {
                 as? RegisterUserNavigation else { return }
             
         registerUserNavigation.teamCode = teamCode
-        self.present(registerUserNavigation, animated: true, completion: nil)
+        
+        UIApplication.shared.keyWindow?.rootViewController = registerUserNavigation
     }
     
     // MARK: Life Cycle
