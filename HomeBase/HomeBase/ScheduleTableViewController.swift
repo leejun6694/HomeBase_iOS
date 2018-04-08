@@ -109,6 +109,12 @@ class ScheduleTableViewController: UITableViewController {
     private func tableViewReloadData() {
         viewDisabled(self.view)
         
+        if let navigationController = self.navigationController {
+            if addButtonView.isDescendant(of: navigationController.view) {
+                buttonDisabled(addButton)
+            }
+        }
+        
         scheduleRecentView.scheduleCount = schedules.count
         
         if let currentUser = Auth.auth().currentUser {
@@ -125,6 +131,12 @@ class ScheduleTableViewController: UITableViewController {
                             self.tableView.reloadData()
                             
                             self.viewEnabled(self.view)
+                            if let navigationController = self.navigationController {
+                                if self.addButtonView.isDescendant(
+                                    of: navigationController.view) {
+                                    self.buttonEnabled(self.addButton)
+                                }
+                            }
                         }
                     }
                 }
