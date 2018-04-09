@@ -5,11 +5,7 @@
 사회인 야구팀을 위한 경기 스케줄 및 경기 결과 관리 앱!  
 내가 어제 안타를 몇 번 쳤지? 다음주 목요일에 경기 있었나? 더 이상 고민하지 마세요! Home Base 앱은 당신의 팀 경기 스케줄과 경기 결과를 최대한 간편하고 쉽게 관리해줍니다.
 
-<img src="images/ios_login.png" width="100">
-<img src="images/iOS_main_tabbar.png" width="100">
-<img src="images/iOS_main_schedule_tabbar.png" width="100">
-<img src="images/iOS_main_team_tabbar.png" width="100">
-<img src="images/iOS_main_record_batter.png" width="100">  
+<img src="images/iOS_login.png" width="100"> <img src="images/iOS_main_tabbar.png" width="100"> <img src="images/iOS_main_schedule_tabbar.png" width="100"> <img src="images/iOS_main_team_tabbar.png" width="100"> <img src="images/iOS_main_record_batter.png" width="100">  
 
 ---
 
