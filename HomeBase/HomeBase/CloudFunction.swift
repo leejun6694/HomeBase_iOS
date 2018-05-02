@@ -217,7 +217,8 @@ struct CloudFunction {
                                     matchDate: date,
                                     matchPlace: matchPlace,
                                     homeScore: homeScore,
-                                    opponentScore: opponentScore)
+                                    opponentScore: opponentScore,
+                                    record: nil)
                                 
                                 schedules.append(schedule)
                             }
@@ -255,6 +256,69 @@ struct CloudFunction {
                     let homeScore = value["homeScore"] as? Int,
                     let opponentScore = value["opponentScore"] as? Int {
                     
+                    var records = [String: HBRecord]()
+                    if let recordList = value["record"] as? [String: [String: Any]] {
+                        for (pid, record) in recordList {
+                            if let singleHit = record["singleHit"] as? Int,
+                                let doubleHit = record["doubleHit"] as? Int,
+                                let tripleHit = record["tripleHit"] as? Int,
+                                let homeRun = record["homeRun"] as? Int,
+                                let baseOnBalls = record["baseOnBalls"] as? Int,
+                                let hitByPitch = record["hitByPitch"] as? Int,
+                                let sacrificeHit = record["sacrificeHit"] as? Int,
+                                let stolenBase = record["stolenBase"] as? Int,
+                                let strikeOut = record["strikeOut"] as? Int,
+                                let groundBall = record["groundBall"] as? Int,
+                                let flyBall = record["flyBall"] as? Int,
+                                let run = record["run"] as? Int,
+                                let RBI = record["RBI"] as? Int,
+                                let win = record["win"] as? Int,
+                                let lose = record["lose"] as? Int,
+                                let save = record["save"] as? Int,
+                                let hold = record["hold"] as? Int,
+                                let inning = record["inning"] as? Double,
+                                let strikeOuts = record["strikeOuts"] as? Int,
+                                let ER = record["ER"] as? Int,
+                                let hits = record["hits"] as? Int,
+                                let homeRuns = record["homeRuns"] as? Int,
+                                let walks = record["walks"] as? Int,
+                                let hitBatters = record["hitBatters"] as? Int {
+                                
+                                let batterRecord = HBBatterRecord(
+                                    singleHit: singleHit,
+                                    doubleHit: doubleHit,
+                                    tripleHit: tripleHit,
+                                    homeRun: homeRun,
+                                    baseOnBalls: baseOnBalls,
+                                    hitByPitch: hitByPitch,
+                                    sacrificeHit: sacrificeHit,
+                                    stolenBase: stolenBase,
+                                    strikeOut: strikeOut,
+                                    groundBall: groundBall,
+                                    flyBall: flyBall,
+                                    run: run,
+                                    RBI: RBI)
+                                let pitcherRecord = HBPitcherRecord(
+                                    win: win,
+                                    lose: lose,
+                                    save: save,
+                                    hold: hold,
+                                    inning: inning,
+                                    strikeOuts: strikeOuts,
+                                    ER: ER,
+                                    hits: hits,
+                                    homeRuns: homeRuns,
+                                    walks: walks,
+                                    hitBatters: hitBatters)
+                                let playerRecord = HBRecord(
+                                    batterRecord: batterRecord,
+                                    pitcherRecord: pitcherRecord)
+                                
+                                records[pid] = playerRecord
+                            }
+                        }
+                    }
+                    
                     let dateFormatter = DateFormatter()
                     dateFormatter.locale = Locale(identifier: "ko-KR")
                     dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
@@ -266,7 +330,8 @@ struct CloudFunction {
                             matchDate: date,
                             matchPlace: matchPlace,
                             homeScore: homeScore,
-                            opponentScore: opponentScore)
+                            opponentScore: opponentScore,
+                            record: records)
                         
                         completion(schedule, nil)
                     }
