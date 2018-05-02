@@ -17,6 +17,7 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
     var sid: String!
     var pid: String!
     var player: HBPlayer!
+    var record: HBRecord?
     
     var batterRecord = HBBatterRecord()
     var pitcherRecord = HBPitcherRecord()
@@ -88,7 +89,7 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
     }
     
     @objc private func cancelButtonDidTapped(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "unwindToDetailView", sender: self)
+        self.performSegue(withIdentifier: "cancelToDetailView", sender: self)
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
@@ -260,8 +261,58 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
             action: #selector(pitcherButtonDidTapped(_:)),
             for: .touchUpInside)
         
-        for _ in 0...11 {
-            pitcherRecords.append(0)
+        for index in 0...12 {
+            if let record = record {
+                switch index {
+                case 0: batterRecords.append(record.batterRecord.singleHit)
+                case 1: batterRecords.append(record.batterRecord.doubleHit)
+                case 2: batterRecords.append(record.batterRecord.tripleHit)
+                case 3: batterRecords.append(record.batterRecord.homeRun)
+                case 4: batterRecords.append(record.batterRecord.baseOnBalls)
+                case 5: batterRecords.append(record.batterRecord.hitByPitch)
+                case 6: batterRecords.append(record.batterRecord.sacrificeHit)
+                case 7: batterRecords.append(record.batterRecord.stolenBase)
+                case 8: batterRecords.append(record.batterRecord.strikeOut)
+                case 9: batterRecords.append(record.batterRecord.groundBall)
+                case 10: batterRecords.append(record.batterRecord.flyBall)
+                case 11: batterRecords.append(record.batterRecord.run)
+                case 12: batterRecords.append(record.batterRecord.RBI)
+                default: break
+                }
+            } else {
+                batterRecords.append(0)
+            }
+        }
+        
+        for index in 0...11 {
+            if let record = record {
+                switch index {
+                case 0: pitcherRecords.append(record.pitcherRecord.win)
+                case 1: pitcherRecords.append(record.pitcherRecord.lose)
+                case 2: pitcherRecords.append(record.pitcherRecord.hold)
+                case 3: pitcherRecords.append(record.pitcherRecord.save)
+                case 4:
+                    pitcherRecords.append(-1)
+                    inning = record.pitcherRecord.inning
+                case 5: pitcherRecords.append(record.pitcherRecord.strikeOuts)
+                case 6: pitcherRecords.append(record.pitcherRecord.ER)
+                case 7: pitcherRecords.append(record.pitcherRecord.hits)
+                case 8: pitcherRecords.append(record.pitcherRecord.homeRuns)
+                case 9: pitcherRecords.append(record.pitcherRecord.walks)
+                case 10: pitcherRecords.append(record.pitcherRecord.hitBatters)
+                default: break
+                }
+                
+                if record.pitcherRecord.win == 1 { buttonHold = true }
+                if record.pitcherRecord.lose == 1 { buttonHold = true }
+                if record.pitcherRecord.hold == 1 { buttonHold = true }
+                if record.pitcherRecord.save == 1 { buttonHold = true }
+            } else {
+                switch index {
+                case 4: pitcherRecords.append(-1)
+                default: pitcherRecords.append(0)
+                }
+            }
         }
     }
     
@@ -304,7 +355,6 @@ extension ScheduleDetailRecordPlayerViewController: UITableViewDataSource, UITab
         cell.plusImageView.addGestureRecognizer(plusTapRecognizer)
         
         if scheduleDetailRecordPlayerHeaderView.batterButtonState {
-            batterRecords.append(0)
             cell.recordLabel.text = "\(batterRecords[indexPath.row])"
             
             switch indexPath.row {
@@ -334,10 +384,13 @@ extension ScheduleDetailRecordPlayerViewController: UITableViewDataSource, UITab
         } else {
             switch indexPath.row {
             case 4:
-                pitcherRecords.append(-1)
-                cell.recordLabel.text = "0"
+                let inningReminder = Int(inning * 10.0) % 10
+                if inningReminder == 0 {
+                    cell.recordLabel.text = "\(Int(inning))"
+                } else {
+                    cell.recordLabel.text = "\(Int(inning)) \(inningReminder)/3"
+                }
             default:
-                pitcherRecords.append(0)
                 cell.recordLabel.text = "\(pitcherRecords[indexPath.row])"
             }
             
@@ -346,14 +399,7 @@ extension ScheduleDetailRecordPlayerViewController: UITableViewDataSource, UITab
             case 1: cell.headText = "패배"
             case 2: cell.headText = "홀드"
             case 3: cell.headText = "세이브"
-            case 4:
-                cell.headText = "이닝"
-                let inningReminder = Int(inning * 10.0) % 10
-                if inningReminder == 0 {
-                    cell.recordLabel.text = "\(Int(inning))"
-                } else {
-                    cell.recordLabel.text = "\(Int(inning)) \(inningReminder)/3"
-                }
+            case 4: cell.headText = "이닝"
             case 5: cell.headText = "삼진"
             case 6: cell.headText = "자책점"
             case 7: cell.headText = "피안타"

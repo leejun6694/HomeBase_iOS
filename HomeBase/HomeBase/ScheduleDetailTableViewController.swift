@@ -124,6 +124,10 @@ class ScheduleDetailTableViewController: UITableViewController {
         let pid = arrayOfKeys[sender.tag]
         let player = teamData.members[pid]
         
+        if let record = cellSchedule.record[pid] {
+            scheduleDetailRecordPlayerViewController.record = record
+        }
+        
         scheduleDetailRecordPlayerViewController.sid = sid
         scheduleDetailRecordPlayerViewController.pid = pid
         scheduleDetailRecordPlayerViewController.player = player
@@ -139,6 +143,13 @@ class ScheduleDetailTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToDetailView(segue: UIStoryboardSegue) {
+        self.navigationController?.navigationBar.alpha = 1.0
+        self.tableView.alpha = 1.0
+        
+        tableViewReloadData()
+    }
+    
+    @IBAction func cancelToDetailView(segue: UIStoryboardSegue) {
         self.navigationController?.navigationBar.alpha = 1.0
         self.tableView.alpha = 1.0
     }

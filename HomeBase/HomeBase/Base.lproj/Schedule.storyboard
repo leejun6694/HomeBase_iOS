@@ -116,6 +116,7 @@
                         <outlet property="scheduleDetailRecordPlayerHeaderView" destination="UvE-oG-fyM" id="5Ui-k0-YJr"/>
                         <outlet property="tableView" destination="B1F-ON-38y" id="3a6-zC-Obd"/>
                         <segue destination="QAL-Gg-B6c" kind="unwind" identifier="unwindToDetailView" unwindAction="unwindToDetailViewWithSegue:" id="1vy-qj-yob"/>
+                        <segue destination="QAL-Gg-B6c" kind="unwind" identifier="cancelToDetailView" unwindAction="cancelToDetailViewWithSegue:" id="Lha-WE-D2w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHO-bO-EPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
