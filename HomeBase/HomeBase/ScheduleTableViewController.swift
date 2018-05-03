@@ -359,6 +359,32 @@ extension ScheduleTableViewController {
             return CGFloat(self.view.frame.size.height * 111/736).rounded()
         }
     }
+    
+    @available(iOS 11.0, *)
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .normal, title: nil) {
+            (ac, view, success) in
+
+            success(true)
+        }
+        editAction.image = #imageLiteral(resourceName: "iconEdit")
+        editAction.backgroundColor = HBColor.darkGray
+
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) {
+            (ac, view, success) in
+
+            success(true)
+        }
+        deleteAction.image = #imageLiteral(resourceName: "iconDelete")
+        deleteAction.backgroundColor = UIColor(red: 250,
+                                               green: 119,
+                                               blue: 119,
+                                               alpha: 1.0)
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction ,editAction])
+
+        return configuration
+    }
 }
 
 extension ScheduleTableViewController {
