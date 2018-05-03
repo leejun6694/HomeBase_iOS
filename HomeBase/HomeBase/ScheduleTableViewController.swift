@@ -401,7 +401,8 @@ extension ScheduleTableViewController {
             deleteAction.backgroundColor = HBColor.lightRed
 
             let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
-
+            configuration.performsFirstActionWithFullSwipe = false
+            
             return configuration
         } else {
             return nil
