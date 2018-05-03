@@ -183,7 +183,7 @@ extension ScheduleMonthlySectionCell {
             toItem: self, attribute: .width, multiplier: 1.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: baseView, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 103/111, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 1.0, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }

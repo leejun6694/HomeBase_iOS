@@ -14,5 +14,6 @@ struct HBColor {
     static let gray = UIColor(red: 54, green: 54, blue: 54, alpha: 1.0)
     static let lightGray = UIColor(red: 44, green: 44, blue: 44, alpha: 1.0)
     static let lightBlack = UIColor(red: 239, green: 239, blue: 239, alpha: 1.0)
+    static let lightRed = UIColor(red: 250, green: 119, blue: 119, alpha: 1.0)
 }
 
