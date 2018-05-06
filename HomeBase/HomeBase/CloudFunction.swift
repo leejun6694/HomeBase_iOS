@@ -218,7 +218,7 @@ struct CloudFunction {
                                     matchPlace: matchPlace,
                                     homeScore: homeScore,
                                     opponentScore: opponentScore,
-                                    record: nil)
+                                    records: nil)
                                 
                                 schedules.append(schedule)
                             }
@@ -257,7 +257,7 @@ struct CloudFunction {
                     let opponentScore = value["opponentScore"] as? Int {
                     
                     var records = [String: HBRecord]()
-                    if let recordList = value["record"] as? [String: [String: Any]] {
+                    if let recordList = value["records"] as? [String: [String: Any]] {
                         for (pid, record) in recordList {
                             if let singleHit = record["singleHit"] as? Int,
                                 let doubleHit = record["doubleHit"] as? Int,
@@ -331,7 +331,7 @@ struct CloudFunction {
                             matchPlace: matchPlace,
                             homeScore: homeScore,
                             opponentScore: opponentScore,
-                            record: records)
+                            records: records)
                         
                         completion(schedule, nil)
                     }

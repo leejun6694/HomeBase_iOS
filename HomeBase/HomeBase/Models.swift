@@ -85,7 +85,7 @@ class HBSchedule {
     var matchPlace: String
     var homeScore: Int
     var opponentScore: Int
-    var record: [String: HBRecord]
+    var records: [String: HBRecord]
     
     init(sid: String,
          opponentTeam: String,
@@ -93,7 +93,7 @@ class HBSchedule {
          matchPlace: String,
          homeScore: Int,
          opponentScore: Int,
-         record: [String: HBRecord]?) {
+         records: [String: HBRecord]?) {
         
         self.sid = sid
         self.opponentTeam = opponentTeam
@@ -101,7 +101,7 @@ class HBSchedule {
         self.matchPlace = matchPlace
         self.homeScore = homeScore
         self.opponentScore = opponentScore
-        self.record = record ?? ["none": HBRecord()]
+        self.records = records ?? ["none": HBRecord()]
     }
 }
 

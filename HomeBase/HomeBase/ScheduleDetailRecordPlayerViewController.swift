@@ -103,7 +103,7 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
 
             if let user = user {
                 let teamRef = ref.child("schedules").child(user.teamCode)
-                teamRef.child(self.sid).child("record").child(self.pid).setValue(
+                teamRef.child(self.sid).child("records").child(self.pid).setValue(
                     ["singleHit": record.batterRecord.singleHit,
                      "doubleHit": record.batterRecord.doubleHit,
                      "tripleHit": record.batterRecord.tripleHit,
