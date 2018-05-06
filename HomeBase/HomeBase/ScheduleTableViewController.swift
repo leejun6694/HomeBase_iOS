@@ -25,6 +25,7 @@ class ScheduleTableViewController: UITableViewController {
     private let scheduleRecentView = ScheduleRecentView()
     private let headerCellReuseIdendifier = "monthlyHeaderSectionCell"
     private let cellReuseIdendifier = "monthlySectionCell"
+    private let blankCellReuseIdendifier = "blankCell"
     
     private lazy var addButtonView: UIView = {
         let addButton = UIView()
@@ -208,6 +209,9 @@ class ScheduleTableViewController: UITableViewController {
         self.tableView.register(
             ScheduleMonthlySectionCell.self,
             forCellReuseIdentifier: cellReuseIdendifier)
+        self.tableView.register(
+            ScheduleMonthlySectionBlankCell.self,
+            forCellReuseIdentifier: blankCellReuseIdendifier)
         self.tableView.allowsSelection = false
         self.tableView.tableFooterView = footerView
         
@@ -273,7 +277,7 @@ extension ScheduleTableViewController {
                 return 0
             } else {
                 let cellSchedules = scheduleSorted(by: section - 1)
-                return cellSchedules.count + 1
+                return cellSchedules.count * 2 + 1
             }
         }
     }
@@ -317,6 +321,14 @@ extension ScheduleTableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row % 2 == 1 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
@@ -331,7 +343,7 @@ extension ScheduleTableViewController {
             }
             
             return cell
-        } else {
+        } else if indexPath.row % 2 == 1 {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: cellReuseIdendifier,
                 for: indexPath) as! ScheduleMonthlySectionCell
@@ -349,14 +361,51 @@ extension ScheduleTableViewController {
             cell.matchDate = cellSchedule.matchDate
             
             return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: blankCellReuseIdendifier,
+                for: indexPath) as! ScheduleMonthlySectionBlankCell
+            
+            return cell
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return CGFloat(self.view.frame.size.height * 57/736).rounded()
+        } else if indexPath.row % 2 == 1 {
+            return CGFloat(self.view.frame.size.height * 103/736).rounded()
         } else {
-            return CGFloat(self.view.frame.size.height * 111/736).rounded()
+            return CGFloat(self.view.frame.size.height * 8/736).rounded()
+        }
+    }
+    
+    @available(iOS 11.0, *)
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        if indexPath.row % 2 == 1 {
+            let editAction = UIContextualAction(style: .normal, title: nil) {
+                (ac, view, success) in
+
+                success(true)
+            }
+            editAction.image = #imageLiteral(resourceName: "iconEdit")
+            editAction.backgroundColor = HBColor.darkGray
+
+            let deleteAction = UIContextualAction(style: .destructive, title: nil) {
+                (ac, view, success) in
+
+                success(true)
+            }
+            deleteAction.image = #imageLiteral(resourceName: "iconDelete")
+            deleteAction.backgroundColor = HBColor.lightRed
+
+            let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+            configuration.performsFirstActionWithFullSwipe = false
+            
+            return configuration
+        } else {
+            return nil
         }
     }
 }

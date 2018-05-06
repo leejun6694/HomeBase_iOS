@@ -124,7 +124,7 @@ class ScheduleDetailTableViewController: UITableViewController {
         let pid = arrayOfKeys[sender.tag]
         let player = teamData.members[pid]
         
-        if let record = cellSchedule.record[pid] {
+        if let record = cellSchedule.records[pid] {
             scheduleDetailRecordPlayerViewController.record = record
         }
         
