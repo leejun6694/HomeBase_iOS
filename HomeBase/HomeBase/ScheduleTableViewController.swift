@@ -109,6 +109,7 @@ class ScheduleTableViewController: UITableViewController {
     
     private func tableViewReloadData() {
         viewDisabled(self.view)
+        sleep(1)
         
         if let navigationController = self.navigationController {
             if addButtonView.isDescendant(of: navigationController.view) {
@@ -177,7 +178,7 @@ class ScheduleTableViewController: UITableViewController {
         let row = sender.tag % 10000
         
         let cellSchedules = scheduleSorted(by: section - 1)
-        let cellSchedule = cellSchedules[row - 1]
+        let cellSchedule = cellSchedules[row/2]
         
         scheduleDetailTableViewController.teamData = teamData
         scheduleDetailTableViewController.cellSchedule = cellSchedule
@@ -191,7 +192,7 @@ class ScheduleTableViewController: UITableViewController {
         sender.endRefreshing()
     }
     
-    @IBAction func unwindToDetailView(segue: UIStoryboardSegue) {
+    @IBAction func unwindToScheduleView(segue: UIStoryboardSegue) {
         tableViewReloadData()
     }
     
@@ -349,7 +350,7 @@ extension ScheduleTableViewController {
                 for: indexPath) as! ScheduleMonthlySectionCell
             
             let cellSchedules = scheduleSorted(by: indexPath.section - 1)
-            let cellSchedule = cellSchedules[indexPath.row - 1]
+            let cellSchedule = cellSchedules[indexPath.row/2]
             
             cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
             cell.recordButton.addTarget(
@@ -395,7 +396,19 @@ extension ScheduleTableViewController {
             let deleteAction = UIContextualAction(style: .destructive, title: nil) {
                 (ac, view, success) in
 
-                success(true)
+                guard let scheduleDeleteViewController =
+                    self.storyboard?.instantiateViewController(
+                        withIdentifier: "ScheduleDeleteViewController")
+                        as? ScheduleDeleteViewController else { return }
+                
+                let cellSchedules = self.scheduleSorted(by: indexPath.section - 1)
+                let cellSchedule = cellSchedules[indexPath.row/2]
+                
+                scheduleDeleteViewController.sid = cellSchedule.sid
+                scheduleDeleteViewController.modalPresentationStyle = .overCurrentContext
+                self.present(scheduleDeleteViewController, animated: false, completion: nil)
+                
+                success(false)
             }
             deleteAction.image = #imageLiteral(resourceName: "iconDelete")
             deleteAction.backgroundColor = HBColor.lightRed

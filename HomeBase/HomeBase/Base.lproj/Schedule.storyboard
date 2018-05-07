@@ -304,7 +304,7 @@
                         <outlet property="opponentTeamTextField" destination="BQt-h7-KoV" id="z0B-wj-p4R"/>
                         <outlet property="opponentTeamTextFieldBorder" destination="d5x-Ij-Ntb" id="jr1-tp-tEP"/>
                         <outlet property="spinner" destination="MNr-oZ-9zN" id="oU8-1U-JKw"/>
-                        <segue destination="kHo-45-zyV" kind="unwind" identifier="unwindToScheduleView" unwindAction="unwindToDetailViewWithSegue:" id="ogq-HR-wgr"/>
+                        <segue destination="kHo-45-zyV" kind="unwind" identifier="unwindToScheduleView" unwindAction="unwindToScheduleViewWithSegue:" id="ogq-HR-wgr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SzM-gQ-ZOi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -316,6 +316,101 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1298.4000000000001" y="225.33733133433284"/>
+        </scene>
+        <!--Schedule Delete View Controller-->
+        <scene sceneID="2cm-EC-dtA">
+            <objects>
+                <viewController storyboardIdentifier="ScheduleDeleteViewController" id="ScO-g9-MLN" customClass="ScheduleDeleteViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xsv-OU-kba">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UML-dV-iEv">
+                                <rect key="frame" x="46.5" y="222" width="281" height="255"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconError" translatesAutoresizingMaskIntoConstraints="NO" id="WEc-dd-iC8">
+                                        <rect key="frame" x="109" y="32" width="63" height="63"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="WEc-dd-iC8" secondAttribute="height" multiplier="1:1" id="Lo5-Km-FQM"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일정을 삭제하시겠습니까?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1x-jY-X3p">
+                                        <rect key="frame" x="31.5" y="106" width="218" height="28.5"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iN-na-s6n">
+                                        <rect key="frame" x="20" y="162.5" width="241" height="41"/>
+                                        <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="doneButtonDidTapped:" destination="ScO-g9-MLN" eventType="touchUpInside" id="FWB-Ct-Ib0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAa-nZ-qGC">
+                                        <rect key="frame" x="20" y="208.5" width="241" height="41"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <state key="normal" title="취소">
+                                            <color key="titleColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelButtonDidTapped:" destination="ScO-g9-MLN" eventType="touchUpInside" id="A9p-XI-ewa"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="u1x-jY-X3p" firstAttribute="height" secondItem="UML-dV-iEv" secondAttribute="height" multiplier="31/281" id="38x-eh-k4w"/>
+                                    <constraint firstItem="hAa-nZ-qGC" firstAttribute="width" secondItem="2iN-na-s6n" secondAttribute="width" id="FQp-ky-29p"/>
+                                    <constraint firstItem="2iN-na-s6n" firstAttribute="width" secondItem="UML-dV-iEv" secondAttribute="width" multiplier="266/310" id="Hax-H9-Ihv"/>
+                                    <constraint firstItem="hAa-nZ-qGC" firstAttribute="height" secondItem="2iN-na-s6n" secondAttribute="height" id="I8m-6P-mJg"/>
+                                    <constraint firstItem="u1x-jY-X3p" firstAttribute="centerX" secondItem="UML-dV-iEv" secondAttribute="centerX" id="M8r-Sw-U7g"/>
+                                    <constraint firstItem="WEc-dd-iC8" firstAttribute="width" secondItem="UML-dV-iEv" secondAttribute="width" multiplier="70/310" id="PZO-xd-3fI"/>
+                                    <constraint firstItem="hAa-nZ-qGC" firstAttribute="centerX" secondItem="UML-dV-iEv" secondAttribute="centerX" id="Xky-CV-eOd"/>
+                                    <constraint firstItem="2iN-na-s6n" firstAttribute="top" secondItem="UML-dV-iEv" secondAttribute="centerY" multiplier="179/140.5" id="jTV-pa-2NT"/>
+                                    <constraint firstItem="2iN-na-s6n" firstAttribute="centerX" secondItem="UML-dV-iEv" secondAttribute="centerX" id="jY7-dK-1Xq"/>
+                                    <constraint firstItem="2iN-na-s6n" firstAttribute="height" secondItem="UML-dV-iEv" secondAttribute="height" multiplier="45/281" id="kcX-LZ-0ht"/>
+                                    <constraint firstItem="u1x-jY-X3p" firstAttribute="top" secondItem="UML-dV-iEv" secondAttribute="centerY" multiplier="117/140.5" id="keB-Ps-pSr"/>
+                                    <constraint firstItem="WEc-dd-iC8" firstAttribute="top" secondItem="UML-dV-iEv" secondAttribute="centerY" multiplier="35/140.5" id="m20-Sw-qco"/>
+                                    <constraint firstItem="u1x-jY-X3p" firstAttribute="width" secondItem="UML-dV-iEv" secondAttribute="width" multiplier="240/310" id="mmI-j5-cSu"/>
+                                    <constraint firstItem="WEc-dd-iC8" firstAttribute="centerX" secondItem="UML-dV-iEv" secondAttribute="centerX" id="uci-gT-g3j"/>
+                                    <constraint firstItem="hAa-nZ-qGC" firstAttribute="top" secondItem="UML-dV-iEv" secondAttribute="centerY" multiplier="230/140.5" id="zaD-2X-IET"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UML-dV-iEv" firstAttribute="centerX" secondItem="sm5-Od-okA" secondAttribute="centerX" id="CsR-0n-F09"/>
+                            <constraint firstItem="UML-dV-iEv" firstAttribute="top" secondItem="sm5-Od-okA" secondAttribute="centerY" multiplier="238/368" id="Zhe-85-hgd"/>
+                            <constraint firstItem="UML-dV-iEv" firstAttribute="width" secondItem="xsv-OU-kba" secondAttribute="width" multiplier="310/414" id="ghh-Ep-cWB"/>
+                            <constraint firstItem="UML-dV-iEv" firstAttribute="height" secondItem="xsv-OU-kba" secondAttribute="height" multiplier="281/736" id="wAM-BE-ag0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sm5-Od-okA"/>
+                    </view>
+                    <connections>
+                        <outlet property="deleteView" destination="UML-dV-iEv" id="P9c-j5-fDn"/>
+                        <segue destination="nPb-AZ-E8D" kind="unwind" identifier="unwindToScheduleView" unwindAction="unwindToScheduleViewWithSegue:" id="Tr3-OB-Wc4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zkJ-W3-YAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="nPb-AZ-E8D" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2094" y="225"/>
         </scene>
         <!--일정-->
         <scene sceneID="0XZ-pD-6Ex">
@@ -340,6 +435,7 @@
     </scenes>
     <resources>
         <image name="back" width="40" height="40"/>
+        <image name="iconError" width="70" height="70"/>
         <image name="scheduleIcon" width="27" height="27"/>
     </resources>
 </document>
