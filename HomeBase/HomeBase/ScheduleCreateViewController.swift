@@ -14,9 +14,12 @@ class ScheduleCreateViewController: UIViewController {
 
     // MARK: Properties
     
-    private var opponentTeam: String = ""
-    private var matchPlace: String = ""
-    private var matchDate: String = ""
+    var edit: Bool = false
+    var sid: String = ""
+    
+    var opponentTeam: String = ""
+    var matchPlace: String = ""
+    var matchDate: String = ""
     
     private var opponentTeamCondition = false
     private var matchPlaceCondition = false
@@ -106,6 +109,7 @@ class ScheduleCreateViewController: UIViewController {
         return toolBar
     }()
     
+    @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var doneButton: UIButton!
     @IBOutlet private var spinner: UIActivityIndicatorView!
     
@@ -152,6 +156,7 @@ class ScheduleCreateViewController: UIViewController {
         self.view.endEditing(true)
         
         spinnerStartAnimating(spinner)
+
         if let currnetUser = Auth.auth().currentUser {
             let ref = Database.database().reference()
             
@@ -159,18 +164,31 @@ class ScheduleCreateViewController: UIViewController {
                 (user, error) -> Void in
                 
                 if let user = user {
-                    let homeScore: Int = -1
-                    let opponentScore: Int = -1
-                    
-                    ref.child("schedules").child(user.teamCode).childByAutoId().setValue(
-                        ["opponentTeam": self.opponentTeam,
-                         "matchPlace": self.matchPlace,
-                         "matchDate": self.matchDate,
-                         "homeScore": homeScore,
-                         "opponentScore": opponentScore])
-                    
-                    self.spinnerStopAnimating(self.spinner)
-                    self.performSegue(withIdentifier: "unwindToScheduleView", sender: nil)
+                    if self.edit {
+                        let teamRef = ref.child("schedules").child(user.teamCode)
+                        teamRef.child(self.sid).updateChildValues(
+                            ["opponentTeam": self.opponentTeam,
+                             "matchPlace": self.matchPlace,
+                             "matchDate": self.matchDate])
+                        
+                        sleep(1)
+                        self.spinnerStopAnimating(self.spinner)
+                        self.performSegue(withIdentifier: "unwindToScheduleView", sender: nil)
+                    } else {
+                        let homeScore: Int = -1
+                        let opponentScore: Int = -1
+                        
+                        ref.child("schedules").child(user.teamCode).childByAutoId().setValue(
+                            ["opponentTeam": self.opponentTeam,
+                             "matchPlace": self.matchPlace,
+                             "matchDate": self.matchDate,
+                             "homeScore": homeScore,
+                             "opponentScore": opponentScore])
+                        
+                        sleep(1)
+                        self.spinnerStopAnimating(self.spinner)
+                        self.performSegue(withIdentifier: "unwindToScheduleView", sender: nil)
+                    }
                 }
             }
         }
@@ -189,7 +207,30 @@ class ScheduleCreateViewController: UIViewController {
         
         dateFormatter.locale = Locale(identifier: "ko-KR")
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        matchDate = dateFormatter.string(from: matchDatePicker.date)
+        
+        opponentTeamTextField.text = opponentTeam
+        matchPlaceTextField.text = matchPlace
+        matchDateTextField.text = matchDate
+        
+        if edit {
+            titleLabel.text = "일정 수정"
+            opponentTeamTextFieldCondition(true)
+            if let date = dateFormatter.date(from: matchDate) {
+                dateFormatter.dateFormat = "MM"
+                let month = dateFormatter.string(from: date)
+                dateFormatter.dateFormat = "dd"
+                let day = dateFormatter.string(from: date)
+                dateFormatter.dateFormat = "EEEE"
+                let dayOfWeek = dateFormatter.string(from: date)
+                dateFormatter.dateFormat = "a hh:mm"
+                let time = dateFormatter.string(from: date)
+            
+                matchDateTextField.text = "\(month)월 \(day)일 \(dayOfWeek) \(time)"
+            }
+            matchPlaceTextFieldCondition(true)
+            matchDateFieldCondition(true)
+            textFieldConditionChecked()
+        }
     }
 }
 

@@ -177,7 +177,7 @@ class ScheduleTableViewController: UITableViewController {
         let row = sender.tag % 10000
         
         let cellSchedules = scheduleSorted(by: section - 1)
-        let cellSchedule = cellSchedules[row - 1]
+        let cellSchedule = cellSchedules[row/2]
         
         scheduleDetailTableViewController.teamData = teamData
         scheduleDetailTableViewController.cellSchedule = cellSchedule
@@ -191,7 +191,7 @@ class ScheduleTableViewController: UITableViewController {
         sender.endRefreshing()
     }
     
-    @IBAction func unwindToDetailView(segue: UIStoryboardSegue) {
+    @IBAction func unwindToScheduleView(segue: UIStoryboardSegue) {
         tableViewReloadData()
     }
     
@@ -322,11 +322,14 @@ extension ScheduleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row % 2 == 1 {
-            return true
-        } else {
-            return false
+        if let currentUser = Auth.auth().currentUser {
+            if teamData.admin == currentUser.uid {
+                if indexPath.row % 2 == 1 {
+                    return true
+                }
+            }
         }
+        return false
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -349,7 +352,7 @@ extension ScheduleTableViewController {
                 for: indexPath) as! ScheduleMonthlySectionCell
             
             let cellSchedules = scheduleSorted(by: indexPath.section - 1)
-            let cellSchedule = cellSchedules[indexPath.row - 1]
+            let cellSchedule = cellSchedules[indexPath.row/2]
             
             cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
             cell.recordButton.addTarget(
@@ -384,10 +387,30 @@ extension ScheduleTableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         if indexPath.row % 2 == 1 {
+            let cellSchedules = self.scheduleSorted(by: indexPath.section - 1)
+            let cellSchedule = cellSchedules[indexPath.row/2]
+            
             let editAction = UIContextualAction(style: .normal, title: nil) {
                 (ac, view, success) in
 
-                success(true)
+                guard let scheduleCreateViewController =
+                    self.storyboard?.instantiateViewController(
+                        withIdentifier: "ScheduleCreateViewController")
+                        as? ScheduleCreateViewController else { return }
+                
+                self.dateFormatter.locale = Locale(identifier: "ko-KR")
+                self.dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                let matchDate = self.dateFormatter.string(from: cellSchedule.matchDate)
+                
+                scheduleCreateViewController.edit = true
+                scheduleCreateViewController.sid = cellSchedule.sid
+                scheduleCreateViewController.opponentTeam = cellSchedule.opponentTeam
+                scheduleCreateViewController.matchPlace = cellSchedule.matchPlace
+                scheduleCreateViewController.matchDate = matchDate
+                
+                self.present(scheduleCreateViewController, animated: true, completion: nil)
+                
+                success(false)
             }
             editAction.image = #imageLiteral(resourceName: "iconEdit")
             editAction.backgroundColor = HBColor.darkGray
@@ -395,7 +418,16 @@ extension ScheduleTableViewController {
             let deleteAction = UIContextualAction(style: .destructive, title: nil) {
                 (ac, view, success) in
 
-                success(true)
+                guard let scheduleDeleteViewController =
+                    self.storyboard?.instantiateViewController(
+                        withIdentifier: "ScheduleDeleteViewController")
+                        as? ScheduleDeleteViewController else { return }
+                
+                scheduleDeleteViewController.sid = cellSchedule.sid
+                scheduleDeleteViewController.modalPresentationStyle = .overCurrentContext
+                self.present(scheduleDeleteViewController, animated: false, completion: nil)
+                
+                success(false)
             }
             deleteAction.image = #imageLiteral(resourceName: "iconDelete")
             deleteAction.backgroundColor = HBColor.lightRed
