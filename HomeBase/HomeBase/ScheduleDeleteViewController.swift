@@ -30,6 +30,7 @@ class ScheduleDeleteViewController: UIViewController {
                     let scheduleRef = ref.child("schedules").child(user.teamCode)
                     scheduleRef.child(self.sid).removeValue()
                     
+                    sleep(1)
                     self.performSegue(withIdentifier: "unwindToScheduleView", sender: nil)
                 }
             }

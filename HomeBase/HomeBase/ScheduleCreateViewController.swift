@@ -156,6 +156,7 @@ class ScheduleCreateViewController: UIViewController {
         self.view.endEditing(true)
         
         spinnerStartAnimating(spinner)
+
         if let currnetUser = Auth.auth().currentUser {
             let ref = Database.database().reference()
             
@@ -170,6 +171,7 @@ class ScheduleCreateViewController: UIViewController {
                              "matchPlace": self.matchPlace,
                              "matchDate": self.matchDate])
                         
+                        sleep(1)
                         self.spinnerStopAnimating(self.spinner)
                         self.performSegue(withIdentifier: "unwindToScheduleView", sender: nil)
                     } else {
@@ -183,6 +185,7 @@ class ScheduleCreateViewController: UIViewController {
                              "homeScore": homeScore,
                              "opponentScore": opponentScore])
                         
+                        sleep(1)
                         self.spinnerStopAnimating(self.spinner)
                         self.performSegue(withIdentifier: "unwindToScheduleView", sender: nil)
                     }

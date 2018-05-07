@@ -109,7 +109,6 @@ class ScheduleTableViewController: UITableViewController {
     
     private func tableViewReloadData() {
         viewDisabled(self.view)
-        sleep(1)
         
         if let navigationController = self.navigationController {
             if addButtonView.isDescendant(of: navigationController.view) {
