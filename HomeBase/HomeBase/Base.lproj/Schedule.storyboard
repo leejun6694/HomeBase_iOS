@@ -304,6 +304,7 @@
                         <outlet property="opponentTeamTextField" destination="BQt-h7-KoV" id="z0B-wj-p4R"/>
                         <outlet property="opponentTeamTextFieldBorder" destination="d5x-Ij-Ntb" id="jr1-tp-tEP"/>
                         <outlet property="spinner" destination="MNr-oZ-9zN" id="oU8-1U-JKw"/>
+                        <outlet property="titleLabel" destination="fxL-vv-zqw" id="LNS-7n-sMJ"/>
                         <segue destination="kHo-45-zyV" kind="unwind" identifier="unwindToScheduleView" unwindAction="unwindToScheduleViewWithSegue:" id="ogq-HR-wgr"/>
                     </connections>
                 </viewController>
