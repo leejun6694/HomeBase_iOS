@@ -345,6 +345,27 @@ extension ScheduleTableViewController {
                 cell.matchDate = date
             }
             
+            var monthWin: Int = 0;
+            var monthDraw: Int = 0;
+            var monthLose: Int = 0;
+            
+            let cellSchedules = scheduleSorted(by: indexPath.section - 1)
+            for cellSchedule in cellSchedules {
+                if cellSchedule.homeScore != -1, cellSchedule.opponentScore != -1 {
+                    let score = cellSchedule.homeScore - cellSchedule.opponentScore
+                    
+                    if score > 0 { monthWin += 1 }
+                    else if score == 0 { monthDraw += 1 }
+                    else { monthLose += 1 }
+                }
+            }
+            
+            cell.monthWin = monthWin
+            cell.monthDraw = monthDraw
+            cell.monthLose = monthLose
+            
+            cell.changeMonthlyRecordLabel()
+            
             return cell
         } else if indexPath.row % 2 == 1 {
             let cell = tableView.dequeueReusableCell(

@@ -202,6 +202,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
             }
         }
         
+        sleep(1)
         self.performSegue(withIdentifier: "unwindToDetailView", sender: self)
     }
     
@@ -234,6 +235,7 @@ class ScheduleDetailRecordMatchViewController: UIViewController {
             opponentScore = -1
         }
         
+        sleep(1)
         self.performSegue(withIdentifier: "unwindToDetailView", sender: self)
     }
     

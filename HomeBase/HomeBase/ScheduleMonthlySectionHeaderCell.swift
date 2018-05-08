@@ -12,6 +12,10 @@ class ScheduleMonthlySectionHeaderCell: UITableViewCell {
 
     // MARK: Properties
     
+    var monthWin: Int = 0
+    var monthDraw: Int = 0
+    var monthLose: Int = 0
+    
     var matchDate = Date() {
         didSet {
             let dateFormatter = DateFormatter()
@@ -62,11 +66,11 @@ class ScheduleMonthlySectionHeaderCell: UITableViewCell {
                         NSAttributedStringKey.foregroundColor: HBColor.lightGray]
         
         var monthlyRecordText = NSMutableAttributedString(string: "")
-        let winNumber = NSMutableAttributedString(string: "10", attributes: numberAttr)
+        let winNumber = NSMutableAttributedString(string: "0", attributes: numberAttr)
         let winChar = NSMutableAttributedString(string: "승 ", attributes: charAttr)
-        let drawNumber = NSMutableAttributedString(string: "10", attributes: numberAttr)
+        let drawNumber = NSMutableAttributedString(string: "0", attributes: numberAttr)
         let drawChar = NSMutableAttributedString(string: "무 ", attributes: charAttr)
-        let loseNumber = NSMutableAttributedString(string: "10", attributes: numberAttr)
+        let loseNumber = NSMutableAttributedString(string: "0", attributes: numberAttr)
         let loseChar = NSMutableAttributedString(string: "패 ", attributes: charAttr)
         
         monthlyRecordText.append(winNumber)
@@ -83,6 +87,34 @@ class ScheduleMonthlySectionHeaderCell: UITableViewCell {
         
         return monthlyRecordLabel
     }()
+    
+    // MARK: Methods
+    
+    func changeMonthlyRecordLabel() {
+        let numberAttr = [NSAttributedStringKey.font: UIFont(name: "AppleSDGothicNeo-Bold",
+                                                             size: 15.0),
+                          NSAttributedStringKey.foregroundColor: HBColor.lightGray]
+        let charAttr = [NSAttributedStringKey.font: UIFont(name: "AppleSDGothicNeo-Light",
+                                                           size: 15.0),
+                        NSAttributedStringKey.foregroundColor: HBColor.lightGray]
+        
+        var monthlyRecordText = NSMutableAttributedString(string: "")
+        let winNumber = NSMutableAttributedString(string: "\(monthWin)", attributes: numberAttr)
+        let winChar = NSMutableAttributedString(string: "승 ", attributes: charAttr)
+        let drawNumber = NSMutableAttributedString(string: "\(monthDraw)", attributes: numberAttr)
+        let drawChar = NSMutableAttributedString(string: "무 ", attributes: charAttr)
+        let loseNumber = NSMutableAttributedString(string: "\(monthLose)", attributes: numberAttr)
+        let loseChar = NSMutableAttributedString(string: "패 ", attributes: charAttr)
+        
+        monthlyRecordText.append(winNumber)
+        monthlyRecordText.append(winChar)
+        monthlyRecordText.append(drawNumber)
+        monthlyRecordText.append(drawChar)
+        monthlyRecordText.append(loseNumber)
+        monthlyRecordText.append(loseChar)
+        
+        monthlyRecordLabel.attributedText = monthlyRecordText
+    }
     
     // MARK: Init
     
