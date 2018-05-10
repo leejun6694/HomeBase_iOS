@@ -16,6 +16,7 @@ class ScheduleTableViewController: UITableViewController {
     var teamData: HBTeam!
     var teamLogo: UIImage!
     var schedules: [HBSchedule] = [HBSchedule]()
+    var recentSchedules: [HBSchedule] = [HBSchedule]()
     
     let dateFormatter = DateFormatter()
     
@@ -107,6 +108,23 @@ class ScheduleTableViewController: UITableViewController {
         return cellSchedules
     }
     
+    private func recentRecordChecked(_ schedules: [HBSchedule]) {
+        recentSchedules.removeAll()
+        
+        for schedule in schedules {
+            if recentSchedules.count < 6 {
+                let homeScore = schedule.homeScore
+                let opponentScore = schedule.opponentScore
+                
+                if homeScore != -1, opponentScore != -1 {
+                    recentSchedules.append(schedule)
+                }
+            } else {
+                break
+            }
+        }
+    }
+    
     private func tableViewReloadData() {
         viewDisabled(self.view)
         
@@ -128,6 +146,7 @@ class ScheduleTableViewController: UITableViewController {
                         
                         if let schedules = schedules {
                             self.schedules = schedules
+                            self.recentRecordChecked(self.schedules)
                             self.sectionSorted()
                             self.tableView.reloadData()
                             
@@ -303,6 +322,38 @@ extension ScheduleTableViewController {
         switch section {
         case 0:
             scheduleRecentView.scheduleCount = schedules.count
+            
+            for (index, recent) in recentSchedules.enumerated() {
+                var record = ""
+                dateFormatter.dateFormat = "M.d"
+                let date = dateFormatter.string(from: recent.matchDate)
+                
+                let recordScore = recent.homeScore - recent.opponentScore
+                if recordScore > 0 { record = "승" }
+                else if recordScore < 0 { record = "패" }
+                else { record = "무" }
+                
+                switch index {
+                case 0:
+                    scheduleRecentView.firstRecord = record
+                    scheduleRecentView.firstDate = date
+                case 1:
+                    scheduleRecentView.secondRecord = record
+                    scheduleRecentView.secondDate = date
+                case 2:
+                    scheduleRecentView.thirdRecord = record
+                    scheduleRecentView.thirdDate = date
+                case 3:
+                    scheduleRecentView.fourthRecord = record
+                    scheduleRecentView.fourthDate = date
+                case 4:
+                    scheduleRecentView.fifthRecord = record
+                    scheduleRecentView.fifthDate = date
+                default:
+                    break
+                }
+            }
+            
             return scheduleRecentView
         default:
             if schedules.count == 0 {
