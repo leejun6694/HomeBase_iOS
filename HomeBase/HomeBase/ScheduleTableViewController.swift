@@ -23,6 +23,8 @@ class ScheduleTableViewController: UITableViewController {
     var sectionCount = 0
     var sectionInTable = [String]()
     
+    var tag = 0
+    
     private let scheduleRecentView = ScheduleRecentView()
     private let headerCellReuseIdendifier = "monthlyHeaderSectionCell"
     private let cellReuseIdendifier = "monthlySectionCell"
@@ -231,7 +233,6 @@ class ScheduleTableViewController: UITableViewController {
         self.tableView.register(
             ScheduleMonthlySectionBlankCell.self,
             forCellReuseIdentifier: blankCellReuseIdendifier)
-        self.tableView.allowsSelection = false
         self.tableView.tableFooterView = footerView
         
         setupRefreshControl()
@@ -385,12 +386,12 @@ extension ScheduleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: headerCellReuseIdendifier,
                 for: indexPath) as! ScheduleMonthlySectionHeaderCell
             
+            cell.selectionStyle = .none
             dateFormatter.locale = Locale(identifier: "ko-KR")
             dateFormatter.dateFormat = "yyyy-MM"
             if let date = dateFormatter.date(from: sectionInTable[indexPath.section - 1]) {
@@ -424,6 +425,7 @@ extension ScheduleTableViewController {
                 withIdentifier: cellReuseIdendifier,
                 for: indexPath) as! ScheduleMonthlySectionCell
             
+            cell.selectionStyle = .none
             cell.teamData = teamData
             
             let cellSchedules = scheduleSorted(by: indexPath.section - 1)
@@ -445,17 +447,21 @@ extension ScheduleTableViewController {
             cell.matchPlace = cellSchedule.matchPlace
             cell.matchDate = cellSchedule.matchDate
             
-            cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
-            cell.recordButton.addTarget(
-                self,
-                action: #selector(recordButtonDidTapped(_:)),
-                for: .touchUpInside)
+            if cell.recordButton.isDescendant(of: cell.baseView) {
+                cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
+                cell.recordButton.addTarget(
+                    self,
+                    action: #selector(recordButtonDidTapped(_:)),
+                    for: .touchUpInside)
+            }
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: blankCellReuseIdendifier,
                 for: indexPath) as! ScheduleMonthlySectionBlankCell
+            
+            cell.selectionStyle = .none
             
             return cell
         }
@@ -468,6 +474,28 @@ extension ScheduleTableViewController {
             return CGFloat(self.view.frame.size.height * 103/736).rounded()
         } else {
             return CGFloat(self.view.frame.size.height * 8/736).rounded()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row % 2 == 1 {
+            guard let scheduleDetailTableViewController =
+                self.storyboard?.instantiateViewController(
+                    withIdentifier: "ScheduleDetailTableViewController")
+                    as? ScheduleDetailTableViewController else { return }
+            
+            let cellSchedules = scheduleSorted(by: indexPath.section - 1)
+            let cellSchedule = cellSchedules[indexPath.row/2]
+            
+            let date = Date()
+            if cellSchedule.matchDate <= date {
+                scheduleDetailTableViewController.teamData = teamData
+                scheduleDetailTableViewController.cellSchedule = cellSchedule
+                
+                self.navigationController?.pushViewController(
+                    scheduleDetailTableViewController,
+                    animated: true)
+            }
         }
     }
     

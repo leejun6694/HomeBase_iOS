@@ -190,9 +190,10 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         return recordButton
     }()
     
-    private lazy var recordView: UIView = {
+    lazy var recordView: UIView = {
         let recordView = UIView()
         recordView.backgroundColor = .clear
+        recordView.isUserInteractionEnabled = true
         recordView.translatesAutoresizingMaskIntoConstraints = false
         
         return recordView
