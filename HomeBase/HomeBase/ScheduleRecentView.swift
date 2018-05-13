@@ -178,6 +178,21 @@ class ScheduleRecentView: UIView {
         return noDataLabel
     }()
     
+    // MARK: Methods
+    
+    func resetRecentView() {
+        firstRecord = "-"
+        firstDate = "-"
+        secondRecord = "-"
+        secondDate = "-"
+        thirdRecord = "-"
+        thirdDate = "-"
+        fourthRecord = "-"
+        fourthDate = "-"
+        fifthRecord = "-"
+        fifthDate = "-"
+    }
+    
     // MARK: Draw
     
     override func layoutSubviews() {

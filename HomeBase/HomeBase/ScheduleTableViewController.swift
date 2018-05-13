@@ -321,6 +321,7 @@ extension ScheduleTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
+            scheduleRecentView.resetRecentView()
             scheduleRecentView.scheduleCount = schedules.count
             
             for (index, recent) in recentSchedules.enumerated() {
@@ -428,14 +429,27 @@ extension ScheduleTableViewController {
             let cellSchedules = scheduleSorted(by: indexPath.section - 1)
             let cellSchedule = cellSchedules[indexPath.row/2]
             
+            if cellSchedule.homeScore != -1, cellSchedule.opponentScore != -1 {
+                cell.homeScore = cellSchedule.homeScore
+                cell.opponentScore = cellSchedule.opponentScore
+                
+                let score = cellSchedule.homeScore - cellSchedule.opponentScore
+                if score > 0 { cell.result = "승" }
+                else if score == 0 { cell.result = "무" }
+                else { cell.result = "패" }
+            } else {
+                cell.result = "-"
+            }
+            
+            cell.opponentTeam = cellSchedule.opponentTeam
+            cell.matchPlace = cellSchedule.matchPlace
+            cell.matchDate = cellSchedule.matchDate
+            
             cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
             cell.recordButton.addTarget(
                 self,
                 action: #selector(recordButtonDidTapped(_:)),
                 for: .touchUpInside)
-            cell.opponentTeam = cellSchedule.opponentTeam
-            cell.matchPlace = cellSchedule.matchPlace
-            cell.matchDate = cellSchedule.matchDate
             
             return cell
         } else {
