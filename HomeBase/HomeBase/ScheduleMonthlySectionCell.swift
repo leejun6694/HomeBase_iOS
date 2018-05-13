@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ScheduleMonthlySectionCell: UITableViewCell {
 
     // MARK: Properties
+    
+    var teamData: HBTeam!
     
     var opponentTeam = "HomeBase" {
         didSet { opponentTeamLabel.text = opponentTeam}
@@ -120,7 +123,15 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     
     lazy var recordButton: UIButton = {
         let recordButton = UIButton(type: .system)
-        recordButton.setTitle("기록하기", for: .normal)
+        
+        if let currentUser = Auth.auth().currentUser {
+            if teamData.admin == currentUser.uid {
+                recordButton.setTitle("기록입력", for: .normal)
+            } else {
+                recordButton.setTitle("기록보기", for: .normal)
+            }
+        }
+        
         recordButton.setTitleColor(HBColor.lightGray, for: .normal)
         recordButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
         recordButton.backgroundColor = UIColor.clear

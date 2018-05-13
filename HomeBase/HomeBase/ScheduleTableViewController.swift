@@ -423,6 +423,8 @@ extension ScheduleTableViewController {
                 withIdentifier: cellReuseIdendifier,
                 for: indexPath) as! ScheduleMonthlySectionCell
             
+            cell.teamData = teamData
+            
             let cellSchedules = scheduleSorted(by: indexPath.section - 1)
             let cellSchedule = cellSchedules[indexPath.row/2]
             
