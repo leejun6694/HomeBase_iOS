@@ -37,6 +37,41 @@ class ScheduleRecentView: UIView {
         }
     }
     
+    var firstRecord = "" {
+        didSet { firstRecordView.recordText = firstRecord }
+    }
+    var firstDate = "" {
+        didSet { firstRecordView.dateText = firstDate }
+    }
+    
+    var secondRecord = "" {
+        didSet { secondRecordView.recordText = secondRecord }
+    }
+    var secondDate = "" {
+        didSet { secondRecordView.dateText = secondDate }
+    }
+    
+    var thirdRecord = "" {
+        didSet { thirdRecordView.recordText = thirdRecord }
+    }
+    var thirdDate = "" {
+        didSet { thirdRecordView.dateText = thirdDate }
+    }
+    
+    var fourthRecord = "" {
+        didSet { fourthRecordView.recordText = fourthRecord }
+    }
+    var fourthDate = "" {
+        didSet { fourthRecordView.dateText = fourthDate }
+    }
+    
+    var fifthRecord = "" {
+        didSet { fifthRecordView.recordText = fifthRecord }
+    }
+    var fifthDate = "" {
+        didSet { fifthRecordView.dateText = fifthDate }
+    }
+    
     private lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundSchedule"))
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,8 +104,8 @@ class ScheduleRecentView: UIView {
     
     private lazy var firstRecordView: ScheduleRecordView = {
         let firstRecordView = ScheduleRecordView()
-        firstRecordView.recordText = "승"
-        firstRecordView.dateText = "1.20"
+        firstRecordView.recordText = "-"
+        firstRecordView.dateText = "-"
         firstRecordView.translatesAutoresizingMaskIntoConstraints = false
         
         return firstRecordView
@@ -78,8 +113,8 @@ class ScheduleRecentView: UIView {
     
     private lazy var secondRecordView: ScheduleRecordView = {
         let secondRecordView = ScheduleRecordView()
-        secondRecordView.recordText = "패"
-        secondRecordView.dateText = "1.13"
+        secondRecordView.recordText = "-"
+        secondRecordView.dateText = "-"
         secondRecordView.translatesAutoresizingMaskIntoConstraints = false
         
         return secondRecordView
@@ -87,8 +122,8 @@ class ScheduleRecentView: UIView {
     
     private lazy var thirdRecordView: ScheduleRecordView = {
         let thirdRecordView = ScheduleRecordView()
-        thirdRecordView.recordText = "무"
-        thirdRecordView.dateText = "1.6"
+        thirdRecordView.recordText = "-"
+        thirdRecordView.dateText = "-"
         thirdRecordView.translatesAutoresizingMaskIntoConstraints = false
         
         return thirdRecordView
@@ -96,8 +131,8 @@ class ScheduleRecentView: UIView {
     
     private lazy var fourthRecordView: ScheduleRecordView = {
         let fourthRecordView = ScheduleRecordView()
-        fourthRecordView.recordText = "패"
-        fourthRecordView.dateText = "12.27"
+        fourthRecordView.recordText = "-"
+        fourthRecordView.dateText = "-"
         fourthRecordView.translatesAutoresizingMaskIntoConstraints = false
         
         return fourthRecordView
@@ -105,8 +140,8 @@ class ScheduleRecentView: UIView {
     
     private lazy var fifthRecordView: ScheduleRecordView = {
         let fifthRecordView = ScheduleRecordView()
-        fifthRecordView.recordText = "승"
-        fifthRecordView.dateText = "12.20"
+        fifthRecordView.recordText = "-"
+        fifthRecordView.dateText = "-"
         fifthRecordView.translatesAutoresizingMaskIntoConstraints = false
         
         return fifthRecordView
@@ -142,6 +177,21 @@ class ScheduleRecentView: UIView {
         
         return noDataLabel
     }()
+    
+    // MARK: Methods
+    
+    func resetRecentView() {
+        firstRecord = "-"
+        firstDate = "-"
+        secondRecord = "-"
+        secondDate = "-"
+        thirdRecord = "-"
+        thirdDate = "-"
+        fourthRecord = "-"
+        fourthDate = "-"
+        fifthRecord = "-"
+        fifthDate = "-"
+    }
     
     // MARK: Draw
     

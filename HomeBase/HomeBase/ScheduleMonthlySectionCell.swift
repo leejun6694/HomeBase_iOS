@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ScheduleMonthlySectionCell: UITableViewCell {
 
     // MARK: Properties
+    
+    var teamData: HBTeam!
     
     var opponentTeam = "HomeBase" {
         didSet { opponentTeamLabel.text = opponentTeam}
@@ -31,13 +34,71 @@ class ScheduleMonthlySectionCell: UITableViewCell {
             dayLabel.text = day
             dayOfWeekLabel.text = dayOfWeek
             matchDateLabel.text = "\(month)월 \(day)일 \(dayOfWeek) \(time)"
+            
+            if recordButton.isDescendant(of: baseView) {
+                let currentDate = Date()
+                if matchDate > currentDate {
+                    recordButton.setTitle("경기 전", for: .normal)
+                    recordButton.alpha = 0.5
+                    recordButton.isEnabled = false
+                } else {
+                    recordButton.alpha = 1.0
+                    recordButton.isEnabled = true
+                    
+                    if let currentUser = Auth.auth().currentUser {
+                        if teamData.admin == currentUser.uid {
+                            recordButton.setTitle("기록입력", for: .normal)
+                        } else {
+                            recordButton.setTitle("기록보기", for: .normal)
+                        }
+                    }
+                }
+            }
         }
     }
     var matchPlace = "" {
         didSet { matchPlaceLabel.text = matchPlace }
     }
+    var homeScore = -1
+    var opponentScore = -1
+    var result = "-" {
+        didSet {
+            if recordButton.isDescendant(of: baseView) {
+                recordButton.removeFromSuperview()
+            }
+            
+            baseView.addSubview(recordView)
+            baseView.addConstraints(recordViewConstraints())
+            recordView.addSubview(scoreLabel)
+            recordView.addConstraints(scoreLabelConstraints())
+            recordView.addSubview(resultLabel)
+            recordView.addConstraints(resultLabelConstraints())
+            scoreLabel.text = "\(homeScore) : \(opponentScore)"
+            resultLabel.text = "\(result)"
+            
+            if result == "승" {
+                resultLabel.textColor = UIColor(red: 5,
+                                                green: 62,
+                                                blue: 88,
+                                                alpha: 1.0)
+            } else if result == "무" {
+                resultLabel.textColor = HBColor.lightGray
+            } else if result == "패" {
+                resultLabel.textColor = UIColor(red: 237,
+                                                green: 96,
+                                                blue: 96,
+                                                alpha: 1.0)
+            } else {
+                if recordView.isDescendant(of: baseView) {
+                    recordView.removeFromSuperview()
+                }
+                baseView.addSubview(recordButton)
+                baseView.addConstraints(recordButtonConstraints())
+            }
+        }
+    }
     
-    private lazy var baseView: UIView = {
+    lazy var baseView: UIView = {
         let baseView = UIView()
         baseView.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         baseView.translatesAutoresizingMaskIntoConstraints = false
@@ -120,13 +181,48 @@ class ScheduleMonthlySectionCell: UITableViewCell {
     
     lazy var recordButton: UIButton = {
         let recordButton = UIButton(type: .system)
-        recordButton.setTitle("기록하기", for: .normal)
+        recordButton.setTitle("기록보기", for: .normal)
         recordButton.setTitleColor(HBColor.lightGray, for: .normal)
         recordButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 15.0)
         recordButton.backgroundColor = UIColor.clear
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         
         return recordButton
+    }()
+    
+    lazy var recordView: UIView = {
+        let recordView = UIView()
+        recordView.backgroundColor = .clear
+        recordView.isUserInteractionEnabled = true
+        recordView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return recordView
+    }()
+    
+    private lazy var scoreLabel: UILabel = {
+        let scoreLabel = UILabel()
+        scoreLabel.text = "0 : 0"
+        scoreLabel.textColor = HBColor.lightGray
+        scoreLabel.textAlignment = .center
+        scoreLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 24.0)
+        scoreLabel.adjustsFontSizeToFitWidth = true
+        scoreLabel.minimumScaleFactor = 0.5
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scoreLabel
+    }()
+    
+    private lazy var resultLabel: UILabel = {
+        let resultLabel = UILabel()
+        resultLabel.text = "무"
+        resultLabel.textColor = HBColor.lightGray
+        resultLabel.textAlignment = .center
+        resultLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16.0)
+        resultLabel.adjustsFontSizeToFitWidth = true
+        resultLabel.minimumScaleFactor = 0.5
+        resultLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return resultLabel
     }()
     
     // MARK: Init
@@ -165,8 +261,6 @@ class ScheduleMonthlySectionCell: UITableViewCell {
         baseView.addConstraints(matchPlaceLabelConstraints())
         baseView.addSubview(divisionView)
         baseView.addConstraints(divisionViewConstraints())
-        baseView.addSubview(recordButton)
-        baseView.addConstraints(recordButtonConstraints())
     }
 }
 
@@ -305,5 +399,56 @@ extension ScheduleMonthlySectionCell {
             toItem: baseView, attribute: .height, multiplier: 20/103, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func recordViewConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: recordView, attribute: .centerX, relatedBy: .equal,
+            toItem: baseView, attribute: .centerX, multiplier: 365.5/207, constant: 0.0)
+        let centerYConstraint = NSLayoutConstraint(
+            item: recordView, attribute: .centerY, relatedBy: .equal,
+            toItem: baseView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: recordView, attribute: .width, relatedBy: .equal,
+            toItem: baseView, attribute: .width, multiplier: 76/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: recordView, attribute: .height, relatedBy: .equal,
+            toItem: baseView, attribute: .height, multiplier: 57/103, constant: 0.0)
+        
+        return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func scoreLabelConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: scoreLabel, attribute: .centerX, relatedBy: .equal,
+            toItem: recordView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: scoreLabel, attribute: .bottom, relatedBy: .equal,
+            toItem: recordView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: scoreLabel, attribute: .width, relatedBy: .equal,
+            toItem: recordView, attribute: .width, multiplier: 1.0, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: scoreLabel, attribute: .height, relatedBy: .equal,
+            toItem: recordView, attribute: .height, multiplier: 0.5, constant: 0.0)
+        
+        return [centerXConstraint, bottomConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func resultLabelConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: resultLabel, attribute: .centerX, relatedBy: .equal,
+            toItem: recordView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: resultLabel, attribute: .top, relatedBy: .equal,
+            toItem: recordView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: resultLabel, attribute: .width, relatedBy: .equal,
+            toItem: recordView, attribute: .width, multiplier: 1.0, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: resultLabel, attribute: .height, relatedBy: .equal,
+            toItem: recordView, attribute: .height, multiplier: 0.5, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
     }
 }

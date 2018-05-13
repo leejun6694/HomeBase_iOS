@@ -16,11 +16,14 @@ class ScheduleTableViewController: UITableViewController {
     var teamData: HBTeam!
     var teamLogo: UIImage!
     var schedules: [HBSchedule] = [HBSchedule]()
+    var recentSchedules: [HBSchedule] = [HBSchedule]()
     
     let dateFormatter = DateFormatter()
     
     var sectionCount = 0
     var sectionInTable = [String]()
+    
+    var tag = 0
     
     private let scheduleRecentView = ScheduleRecentView()
     private let headerCellReuseIdendifier = "monthlyHeaderSectionCell"
@@ -107,6 +110,23 @@ class ScheduleTableViewController: UITableViewController {
         return cellSchedules
     }
     
+    private func recentRecordChecked(_ schedules: [HBSchedule]) {
+        recentSchedules.removeAll()
+        
+        for schedule in schedules {
+            if recentSchedules.count < 6 {
+                let homeScore = schedule.homeScore
+                let opponentScore = schedule.opponentScore
+                
+                if homeScore != -1, opponentScore != -1 {
+                    recentSchedules.append(schedule)
+                }
+            } else {
+                break
+            }
+        }
+    }
+    
     private func tableViewReloadData() {
         viewDisabled(self.view)
         
@@ -128,6 +148,7 @@ class ScheduleTableViewController: UITableViewController {
                         
                         if let schedules = schedules {
                             self.schedules = schedules
+                            self.recentRecordChecked(self.schedules)
                             self.sectionSorted()
                             self.tableView.reloadData()
                             
@@ -212,7 +233,6 @@ class ScheduleTableViewController: UITableViewController {
         self.tableView.register(
             ScheduleMonthlySectionBlankCell.self,
             forCellReuseIdentifier: blankCellReuseIdendifier)
-        self.tableView.allowsSelection = false
         self.tableView.tableFooterView = footerView
         
         setupRefreshControl()
@@ -302,7 +322,40 @@ extension ScheduleTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
+            scheduleRecentView.resetRecentView()
             scheduleRecentView.scheduleCount = schedules.count
+            
+            for (index, recent) in recentSchedules.enumerated() {
+                var record = ""
+                dateFormatter.dateFormat = "M.d"
+                let date = dateFormatter.string(from: recent.matchDate)
+                
+                let recordScore = recent.homeScore - recent.opponentScore
+                if recordScore > 0 { record = "승" }
+                else if recordScore < 0 { record = "패" }
+                else { record = "무" }
+                
+                switch index {
+                case 0:
+                    scheduleRecentView.firstRecord = record
+                    scheduleRecentView.firstDate = date
+                case 1:
+                    scheduleRecentView.secondRecord = record
+                    scheduleRecentView.secondDate = date
+                case 2:
+                    scheduleRecentView.thirdRecord = record
+                    scheduleRecentView.thirdDate = date
+                case 3:
+                    scheduleRecentView.fourthRecord = record
+                    scheduleRecentView.fourthDate = date
+                case 4:
+                    scheduleRecentView.fifthRecord = record
+                    scheduleRecentView.fifthDate = date
+                default:
+                    break
+                }
+            }
+            
             return scheduleRecentView
         default:
             if schedules.count == 0 {
@@ -333,17 +386,38 @@ extension ScheduleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: headerCellReuseIdendifier,
                 for: indexPath) as! ScheduleMonthlySectionHeaderCell
             
+            cell.selectionStyle = .none
             dateFormatter.locale = Locale(identifier: "ko-KR")
             dateFormatter.dateFormat = "yyyy-MM"
             if let date = dateFormatter.date(from: sectionInTable[indexPath.section - 1]) {
                 cell.matchDate = date
             }
+            
+            var monthWin: Int = 0;
+            var monthDraw: Int = 0;
+            var monthLose: Int = 0;
+            
+            let cellSchedules = scheduleSorted(by: indexPath.section - 1)
+            for cellSchedule in cellSchedules {
+                if cellSchedule.homeScore != -1, cellSchedule.opponentScore != -1 {
+                    let score = cellSchedule.homeScore - cellSchedule.opponentScore
+                    
+                    if score > 0 { monthWin += 1 }
+                    else if score == 0 { monthDraw += 1 }
+                    else { monthLose += 1 }
+                }
+            }
+            
+            cell.monthWin = monthWin
+            cell.monthDraw = monthDraw
+            cell.monthLose = monthLose
+            
+            cell.changeMonthlyRecordLabel()
             
             return cell
         } else if indexPath.row % 2 == 1 {
@@ -351,23 +425,43 @@ extension ScheduleTableViewController {
                 withIdentifier: cellReuseIdendifier,
                 for: indexPath) as! ScheduleMonthlySectionCell
             
+            cell.selectionStyle = .none
+            cell.teamData = teamData
+            
             let cellSchedules = scheduleSorted(by: indexPath.section - 1)
             let cellSchedule = cellSchedules[indexPath.row/2]
             
-            cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
-            cell.recordButton.addTarget(
-                self,
-                action: #selector(recordButtonDidTapped(_:)),
-                for: .touchUpInside)
+            if cellSchedule.homeScore != -1, cellSchedule.opponentScore != -1 {
+                cell.homeScore = cellSchedule.homeScore
+                cell.opponentScore = cellSchedule.opponentScore
+                
+                let score = cellSchedule.homeScore - cellSchedule.opponentScore
+                if score > 0 { cell.result = "승" }
+                else if score == 0 { cell.result = "무" }
+                else { cell.result = "패" }
+            } else {
+                cell.result = "-"
+            }
+            
             cell.opponentTeam = cellSchedule.opponentTeam
             cell.matchPlace = cellSchedule.matchPlace
             cell.matchDate = cellSchedule.matchDate
+            
+            if cell.recordButton.isDescendant(of: cell.baseView) {
+                cell.recordButton.tag = indexPath.section * 10000 + indexPath.row
+                cell.recordButton.addTarget(
+                    self,
+                    action: #selector(recordButtonDidTapped(_:)),
+                    for: .touchUpInside)
+            }
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: blankCellReuseIdendifier,
                 for: indexPath) as! ScheduleMonthlySectionBlankCell
+            
+            cell.selectionStyle = .none
             
             return cell
         }
@@ -380,6 +474,28 @@ extension ScheduleTableViewController {
             return CGFloat(self.view.frame.size.height * 103/736).rounded()
         } else {
             return CGFloat(self.view.frame.size.height * 8/736).rounded()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row % 2 == 1 {
+            guard let scheduleDetailTableViewController =
+                self.storyboard?.instantiateViewController(
+                    withIdentifier: "ScheduleDetailTableViewController")
+                    as? ScheduleDetailTableViewController else { return }
+            
+            let cellSchedules = scheduleSorted(by: indexPath.section - 1)
+            let cellSchedule = cellSchedules[indexPath.row/2]
+            
+            let date = Date()
+            if cellSchedule.matchDate <= date {
+                scheduleDetailTableViewController.teamData = teamData
+                scheduleDetailTableViewController.cellSchedule = cellSchedule
+                
+                self.navigationController?.pushViewController(
+                    scheduleDetailTableViewController,
+                    animated: true)
+            }
         }
     }
     

@@ -131,6 +131,7 @@ class ScheduleDetailRecordPlayerViewController: UIViewController {
             }
         }
         
+        sleep(1)
         self.performSegue(withIdentifier: "unwindToDetailView", sender: self)
     }
     
