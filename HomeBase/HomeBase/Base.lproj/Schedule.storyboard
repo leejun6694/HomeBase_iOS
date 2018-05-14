@@ -143,6 +143,25 @@
             </objects>
             <point key="canvasLocation" x="2980" y="577"/>
         </scene>
+        <!--Schedule Detail Load Player View Controller-->
+        <scene sceneID="e9B-mQ-6Hg">
+            <objects>
+                <viewController storyboardIdentifier="ScheduleDetailLoadPlayerViewController" id="WcS-X0-cMK" customClass="ScheduleDetailLoadPlayerViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KmI-ds-5E5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Rvf-SE-cWT"/>
+                    </view>
+                    <connections>
+                        <segue destination="eoS-Fb-Woa" kind="unwind" identifier="cancelToDetailView" unwindAction="cancelToDetailViewWithSegue:" id="ijk-kz-662"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="suz-eP-OlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="eoS-Fb-Woa" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3759" y="576"/>
+        </scene>
         <!--Schedule Create View Controller-->
         <scene sceneID="lxH-Xg-Lmy">
             <objects>
