@@ -62,6 +62,9 @@
 		72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */; };
 		72E15E7E203D6C0B00ECA9A3 /* MainTopRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E15E7D203D6C0B00ECA9A3 /* MainTopRankingView.swift */; };
 		72E6600420A97BA600371A5E /* ScheduleDetailLoadPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E6600320A97BA600371A5E /* ScheduleDetailLoadPlayerViewController.swift */; };
+		72E6600620A98CB100371A5E /* ScheduleDetailLoadBatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E6600520A98CB100371A5E /* ScheduleDetailLoadBatterView.swift */; };
+		72E6600820A98CBE00371A5E /* ScheduleDetailLoadPitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E6600720A98CBE00371A5E /* ScheduleDetailLoadPitcherView.swift */; };
+		72E6600A20A9905900371A5E /* ScheduleDetailRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E6600920A9905900371A5E /* ScheduleDetailRecordView.swift */; };
 		72E916C5209F7D950018A033 /* ScheduleDeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E916C4209F7D950018A033 /* ScheduleDeleteViewController.swift */; };
 		72E96C96200600E000B68F29 /* RegisterTeamCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C95200600E000B68F29 /* RegisterTeamCreateViewController.swift */; };
 		72E96C982006026200B68F29 /* RegisterTeamChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E96C972006026200B68F29 /* RegisterTeamChoiceViewController.swift */; };
@@ -149,6 +152,9 @@
 		72D9322320239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteCopyViewController.swift; sourceTree = "<group>"; };
 		72E15E7D203D6C0B00ECA9A3 /* MainTopRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopRankingView.swift; sourceTree = "<group>"; };
 		72E6600320A97BA600371A5E /* ScheduleDetailLoadPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailLoadPlayerViewController.swift; sourceTree = "<group>"; };
+		72E6600520A98CB100371A5E /* ScheduleDetailLoadBatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailLoadBatterView.swift; sourceTree = "<group>"; };
+		72E6600720A98CBE00371A5E /* ScheduleDetailLoadPitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailLoadPitcherView.swift; sourceTree = "<group>"; };
+		72E6600920A9905900371A5E /* ScheduleDetailRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailRecordView.swift; sourceTree = "<group>"; };
 		72E916C4209F7D950018A033 /* ScheduleDeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDeleteViewController.swift; sourceTree = "<group>"; };
 		72E96C95200600E000B68F29 /* RegisterTeamCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCreateViewController.swift; sourceTree = "<group>"; };
 		72E96C972006026200B68F29 /* RegisterTeamChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamChoiceViewController.swift; sourceTree = "<group>"; };
@@ -339,6 +345,9 @@
 				720DFFE2204C2C980098C473 /* ScheduleDetailRecordPlayerHeaderView.swift */,
 				720DFFE4204C64FF0098C473 /* ScheduleDetailRecordPlayerTableViewCell.swift */,
 				72E6600320A97BA600371A5E /* ScheduleDetailLoadPlayerViewController.swift */,
+				72E6600520A98CB100371A5E /* ScheduleDetailLoadBatterView.swift */,
+				72E6600720A98CBE00371A5E /* ScheduleDetailLoadPitcherView.swift */,
+				72E6600920A9905900371A5E /* ScheduleDetailRecordView.swift */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -617,6 +626,7 @@
 				729AC646201F34DE00F5FED2 /* SignInViewController.swift in Sources */,
 				72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */,
 				7277BF9F209B862600AA8256 /* ScheduleMonthlySectionBlankCell.swift in Sources */,
+				72E6600820A98CBE00371A5E /* ScheduleDetailLoadPitcherView.swift in Sources */,
 				72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */,
 				72B6F2EA20299CE300CA0755 /* MainTeamInfoView.swift in Sources */,
 				72637663203E875000388939 /* MainTopSectionHeaderCell.swift in Sources */,
@@ -655,6 +665,7 @@
 				721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */,
 				72D1035C2074E6EE007D1610 /* CustomProperties.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
+				72E6600620A98CB100371A5E /* ScheduleDetailLoadBatterView.swift in Sources */,
 				72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */,
 				72E916C5209F7D950018A033 /* ScheduleDeleteViewController.swift in Sources */,
 				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,
@@ -662,6 +673,7 @@
 				726376732040090300388939 /* ScheduleRecordView.swift in Sources */,
 				726376752043F41B00388939 /* ScheduleMonthlySectionHeaderView.swift in Sources */,
 				7297626E201EF91000A2CE4A /* FindPasswordViewController.swift in Sources */,
+				72E6600A20A9905900371A5E /* ScheduleDetailRecordView.swift in Sources */,
 				7231C929201905F7004FE531 /* FindEmailViewController.swift in Sources */,
 				72E96C982006026200B68F29 /* RegisterTeamChoiceViewController.swift in Sources */,
 				7221D7BF2072A23900533E6B /* ScheduleMonthlySectionHeaderCell.swift in Sources */,

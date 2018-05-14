@@ -258,8 +258,10 @@ extension ScheduleDetailTableViewController {
                     self,
                     action: #selector(recordPlayerButtonDidTapped(_:)),
                     for: .touchUpInside)
+                cell.recordPlayerButton.isUserInteractionEnabled = true
             } else {
                 cell.recordPlayerButton.setTitle("결과 보기", for: .normal)
+                cell.recordPlayerButton.isUserInteractionEnabled = false
             }
         }
         

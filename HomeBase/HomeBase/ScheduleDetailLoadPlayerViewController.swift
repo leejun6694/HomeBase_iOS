@@ -12,6 +12,9 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
 
     // MARK: Properties
     
+    let loadBatterView = ScheduleDetailLoadBatterView()
+    let loadPitcherView = ScheduleDetailLoadPitcherView()
+    
     private lazy var cancelButton: UIButton = {
         let cancelButton = UIButton(type: .system)
         cancelButton.setImage(#imageLiteral(resourceName: "iconExit"), for: .normal)
@@ -42,6 +45,10 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
         let batterButton = UIButton(type: .system)
         batterButton.setTitle("타자", for: .normal)
         batterButton.setTitleColor(HBColor.lightGray, for: .normal)
+        batterButton.addTarget(
+            self,
+            action: #selector(batterButtonDidTapped(_:)),
+            for: .touchUpInside)
         batterButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold",
                                                size: 17.0)
         batterButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -60,6 +67,10 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
             green: 44,
             blue: 44,
             alpha: 0.6), for: .normal)
+        pitcherButton.addTarget(
+            self,
+            action: #selector(pitcherButtonDidTapped(_:)),
+            for: .touchUpInside)
         pitcherButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold",
                                                 size: 17.0)
         pitcherButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -105,6 +116,47 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
         self.performSegue(withIdentifier: "cancelToDetailView", sender: self)
     }
     
+    @objc private func batterButtonDidTapped(_ sender: UIButton) {
+        if buttonUnderView.isDescendant(of: self.view) {
+            buttonUnderView.removeFromSuperview()
+        }
+        
+        self.view.addSubview(buttonUnderView)
+        self.view.addConstraints(batterButtonUnderViewConstraints())
+        batterButton.setTitleColor(HBColor.lightGray, for: .normal)
+        pitcherButton.setTitleColor(UIColor(
+            red: 44,
+            green: 44,
+            blue: 44,
+            alpha: 0.6), for: .normal)
+        
+        if loadPitcherView.isDescendant(of: self.view) {
+            loadPitcherView.removeFromSuperview()
+        }
+        self.view.addSubview(loadBatterView)
+        self.view.addConstraints(loadBatterViewConstraints())
+    }
+    
+    @objc private func pitcherButtonDidTapped(_ sender: UIButton) {
+        if buttonUnderView.isDescendant(of: self.view) {
+            buttonUnderView.removeFromSuperview()
+        }
+        self.view.addSubview(buttonUnderView)
+        self.view.addConstraints(pitcherButtonUnderViewConstraints())
+        batterButton.setTitleColor(UIColor(
+            red: 44,
+            green: 44,
+            blue: 44,
+            alpha: 0.6), for: .normal)
+        pitcherButton.setTitleColor(HBColor.lightGray, for: .normal)
+        
+        if loadBatterView.isDescendant(of: self.view) {
+            loadBatterView.removeFromSuperview()
+        }
+        self.view.addSubview(loadPitcherView)
+        self.view.addConstraints(loadPitcherViewConstraints())
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -124,6 +176,12 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
         self.view.addConstraints(playerImageViewConstraints())
         self.view.addSubview(divisionView)
         self.view.addConstraints(divisionViewConstraints())
+        
+        loadBatterView.translatesAutoresizingMaskIntoConstraints = false
+        loadPitcherView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(loadBatterView)
+        self.view.addConstraints(loadBatterViewConstraints())
     }
 
     override func viewDidLayoutSubviews() {
@@ -272,5 +330,39 @@ extension ScheduleDetailLoadPlayerViewController {
             toItem: self.view, attribute: .height, multiplier: 1/736, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func loadBatterViewConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: loadBatterView, attribute: .top, relatedBy: .equal,
+            toItem: divisionView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: loadBatterView, attribute: .leading, relatedBy: .equal,
+            toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let trailingConstraint = NSLayoutConstraint(
+            item: loadBatterView, attribute: .trailing, relatedBy: .equal,
+            toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: loadBatterView, attribute: .bottom, relatedBy: .equal,
+            toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: -50.0)
+        
+        return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
+    }
+    
+    private func loadPitcherViewConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: loadPitcherView, attribute: .top, relatedBy: .equal,
+            toItem: divisionView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: loadPitcherView, attribute: .leading, relatedBy: .equal,
+            toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let trailingConstraint = NSLayoutConstraint(
+            item: loadPitcherView, attribute: .trailing, relatedBy: .equal,
+            toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: loadPitcherView, attribute: .bottom, relatedBy: .equal,
+            toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: -50.0)
+        
+        return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
     }
 }
