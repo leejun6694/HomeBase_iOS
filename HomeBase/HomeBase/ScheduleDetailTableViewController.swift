@@ -168,7 +168,6 @@ class ScheduleDetailTableViewController: UITableViewController {
         self.tableView.register(
             ScheduleDetailPlayerCell.self,
             forCellReuseIdentifier: cellReuseIdendifier)
-        self.tableView.allowsSelection = false
         
         setupRefreshControl()
         arrayOfKeys = Array(teamData.members.keys)
@@ -240,6 +239,8 @@ extension ScheduleDetailTableViewController {
             withIdentifier: cellReuseIdendifier,
             for: indexPath) as! ScheduleDetailPlayerCell
         
+        cell.selectionStyle = .none
+        
         if indexPath.row % 2 == 0 {
             cell.baseView.backgroundColor = UIColor.white.withAlphaComponent(0.95)
         }
@@ -267,5 +268,33 @@ extension ScheduleDetailTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(self.view.frame.size.height * 82/736).rounded()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let scheduleDetailLoadPlayerViewController = self.storyboard?.instantiateViewController(
+            withIdentifier: "ScheduleDetailLoadPlayerViewController")
+            as? ScheduleDetailLoadPlayerViewController else { return }
+        
+        self.navigationController?.navigationBar.alpha = 0.5
+        self.tableView.alpha = 0.5
+        
+        self.tabBarController?.definesPresentationContext = false
+        scheduleDetailLoadPlayerViewController.modalPresentationStyle = .overFullScreen
+        
+//        let sid = cellSchedule.sid
+//        let pid = arrayOfKeys[sender.tag]
+//        let player = teamData.members[pid]
+//
+//        if let record = cellSchedule.records[pid] {
+//            scheduleDetailRecordPlayerViewController.record = record
+//        }
+//
+//        scheduleDetailRecordPlayerViewController.sid = sid
+//        scheduleDetailRecordPlayerViewController.pid = pid
+//        scheduleDetailRecordPlayerViewController.player = player
+        self.present(
+            scheduleDetailLoadPlayerViewController,
+            animated: true,
+            completion: nil)
     }
 }
