@@ -12,6 +12,27 @@ class ScheduleDetailLoadPitcherView: UIView {
 
     // MARK: Properties
     
+    var win = 0 { didSet { winView.record = "\(win)" } }
+    var lose = 0 { didSet { loseView.record = "\(lose)" } }
+    var hold = 0 { didSet { holdView.record = "\(hold)" } }
+    var save = 0 { didSet { saveView.record = "\(save)" } }
+    var ER = 0 { didSet { ERView.record = "\(ER)" } }
+    var strikeOuts = 0 { didSet { strikeOutsView.record = "\(strikeOuts)" } }
+    var hits = 0 { didSet { hitsView.record = "\(hits)" } }
+    var homeRuns = 0 { didSet { homeRunsView.record = "\(homeRuns)" } }
+    var walks = 0 { didSet { walksView.record = "\(walks)" } }
+    var hitBatters = 0 { didSet { hitBattersView.record = "\(hitBatters)" } }
+    var inning: Double = 0.0 {
+        didSet {
+            let inningReminder = Int(inning * 10.0) % 10
+            if inningReminder == 0 {
+                inningView.record = "\(Int(inning))"
+            } else {
+                inningView.record = "\(Int(inning)) \(inningReminder)/3"
+            }
+        }
+    }
+    
     private lazy var winView: ScheduleDetailRecordView = {
         let winView = ScheduleDetailRecordView()
         winView.recordName = "승리"
@@ -57,6 +78,15 @@ class ScheduleDetailLoadPitcherView: UIView {
         return inningView
     }()
     
+    private lazy var ERView: ScheduleDetailRecordView = {
+        let ERView = ScheduleDetailRecordView()
+        ERView.recordName = "자책점"
+        ERView.record = "0"
+        ERView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return ERView
+    }()
+    
     private lazy var strikeOutsView: ScheduleDetailRecordView = {
         let strikeOutsView = ScheduleDetailRecordView()
         strikeOutsView.recordName = "탈삼진"
@@ -82,15 +112,6 @@ class ScheduleDetailLoadPitcherView: UIView {
         homeRunsView.translatesAutoresizingMaskIntoConstraints = false
         
         return homeRunsView
-    }()
-    
-    private lazy var ERView: ScheduleDetailRecordView = {
-        let ERView = ScheduleDetailRecordView()
-        ERView.recordName = "자책점"
-        ERView.record = "0"
-        ERView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return ERView
     }()
     
     private lazy var walksView: ScheduleDetailRecordView = {
@@ -129,9 +150,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         secondStackView.axis = .horizontal
         secondStackView.distribution = .fillEqually
         secondStackView.addArrangedSubview(inningView)
+        secondStackView.addArrangedSubview(ERView)
         secondStackView.addArrangedSubview(strikeOutsView)
-        secondStackView.addArrangedSubview(hitsView)
-        secondStackView.addArrangedSubview(homeRunsView)
         secondStackView.translatesAutoresizingMaskIntoConstraints = false
         
         return secondStackView
@@ -141,7 +161,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         let thirdStackView = UIStackView()
         thirdStackView.axis = .horizontal
         thirdStackView.distribution = .fillEqually
-        thirdStackView.addArrangedSubview(ERView)
+        thirdStackView.addArrangedSubview(hitsView)
+        thirdStackView.addArrangedSubview(homeRunsView)
         thirdStackView.addArrangedSubview(walksView)
         thirdStackView.addArrangedSubview(hitBattersView)
         thirdStackView.translatesAutoresizingMaskIntoConstraints = false
