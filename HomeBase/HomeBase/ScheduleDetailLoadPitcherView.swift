@@ -148,7 +148,7 @@ class ScheduleDetailLoadPitcherView: UIView {
     private lazy var secondStackView: UIStackView = {
         let secondStackView = UIStackView()
         secondStackView.axis = .horizontal
-        secondStackView.distribution = .fillEqually
+        secondStackView.distribution = .fillProportionally
         secondStackView.addArrangedSubview(inningView)
         secondStackView.addArrangedSubview(ERView)
         secondStackView.addArrangedSubview(strikeOutsView)
@@ -190,6 +190,16 @@ class ScheduleDetailLoadPitcherView: UIView {
         
         self.addSubview(recordStackView)
         self.addConstraints(recordStackViewConstraints())
+        
+        inningView.widthAnchor.constraint(
+            equalTo: secondStackView.widthAnchor,
+            multiplier: 0.5).isActive = true
+        ERView.widthAnchor.constraint(
+            equalTo: inningView.widthAnchor,
+            multiplier: 0.5).isActive = true
+        strikeOutsView.widthAnchor.constraint(
+            equalTo: inningView.widthAnchor,
+            multiplier: 0.5).isActive = true
     }
     
     override func layoutSubviews() {
