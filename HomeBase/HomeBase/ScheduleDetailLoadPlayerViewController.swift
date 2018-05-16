@@ -12,6 +12,9 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
 
     // MARK: Properties
     
+    var player: HBPlayer!
+    var record: HBRecord?
+    
     let loadBatterView = ScheduleDetailLoadBatterView()
     let loadPitcherView = ScheduleDetailLoadPitcherView()
     
@@ -157,6 +160,38 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
         self.view.addConstraints(loadPitcherViewConstraints())
     }
     
+    private func fetchData() {
+        nameLabel.text = "\(player.name)"
+        
+        if let record = self.record {
+            loadBatterView.singleHit = record.batterRecord.singleHit
+            loadBatterView.doubleHit = record.batterRecord.doubleHit
+            loadBatterView.tripleHit = record.batterRecord.tripleHit
+            loadBatterView.homeRun = record.batterRecord.homeRun
+            loadBatterView.baseOnBalls = record.batterRecord.baseOnBalls
+            loadBatterView.sacrificeHit = record.batterRecord.sacrificeHit
+            loadBatterView.strikeOut = record.batterRecord.strikeOut
+            loadBatterView.groundBall = record.batterRecord.groundBall
+            loadBatterView.flyBall = record.batterRecord.flyBall
+            loadBatterView.run = record.batterRecord.run
+            loadBatterView.hitByPitch = record.batterRecord.hitByPitch
+            loadBatterView.run = record.batterRecord.run
+            loadBatterView.RBI = record.batterRecord.RBI
+            
+            loadPitcherView.win = record.pitcherRecord.win
+            loadPitcherView.lose = record.pitcherRecord.lose
+            loadPitcherView.hold = record.pitcherRecord.hold
+            loadPitcherView.save = record.pitcherRecord.save
+            loadPitcherView.inning = record.pitcherRecord.inning
+            loadPitcherView.ER = record.pitcherRecord.ER
+            loadPitcherView.strikeOuts = record.pitcherRecord.strikeOuts
+            loadPitcherView.hits = record.pitcherRecord.hits
+            loadPitcherView.homeRuns = record.pitcherRecord.homeRuns
+            loadPitcherView.walks = record.pitcherRecord.walks
+            loadPitcherView.hitBatters = record.pitcherRecord.hitBatters
+        }
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -182,6 +217,8 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
         
         self.view.addSubview(loadBatterView)
         self.view.addConstraints(loadBatterViewConstraints())
+        
+        fetchData()
     }
 
     override func viewDidLayoutSubviews() {

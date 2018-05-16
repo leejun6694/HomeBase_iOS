@@ -283,17 +283,14 @@ extension ScheduleDetailTableViewController {
         self.tabBarController?.definesPresentationContext = false
         scheduleDetailLoadPlayerViewController.modalPresentationStyle = .overFullScreen
         
-//        let sid = cellSchedule.sid
-//        let pid = arrayOfKeys[sender.tag]
-//        let player = teamData.members[pid]
-//
-//        if let record = cellSchedule.records[pid] {
-//            scheduleDetailRecordPlayerViewController.record = record
-//        }
-//
-//        scheduleDetailRecordPlayerViewController.sid = sid
-//        scheduleDetailRecordPlayerViewController.pid = pid
-//        scheduleDetailRecordPlayerViewController.player = player
+        let pid = arrayOfKeys[indexPath.row]
+        let player = teamData.members[pid]
+
+        if let record = cellSchedule.records[pid] {
+            scheduleDetailLoadPlayerViewController.record = record
+        }
+
+        scheduleDetailLoadPlayerViewController.player = player
         self.present(
             scheduleDetailLoadPlayerViewController,
             animated: true,

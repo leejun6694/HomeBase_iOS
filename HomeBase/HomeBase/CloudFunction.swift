@@ -114,25 +114,25 @@ struct CloudFunction {
         completion: @escaping(_ team: HBTeam?, _ error: Error?) ->()) {
         
         let parameterDictionary = ["teamCode": teamCode]
-        
+
         Alamofire.request(
             CloudFunction.methodURL(method: Method.getTeam),
             method: .get,
             parameters: parameterDictionary).responseJSON{
                 (response) -> Void in
-                
+
                 if response.result.isSuccess {
                     guard let value = response.result.value as? [String: Any]
                         else { return }
-                    
+
                     if let name = value["name"] as? String,
                         let logo = value["logo"] as? String,
                         let description = value["description"] as? String,
                         let admin = value["admin"] as? String,
                         let memberList = value["members"] as? [String: [String: Any]]  {
-                        
+
                         var members = [String: HBPlayer]()
-                        
+
                         for (uid, member) in memberList {
                             if let name = member["name"] as? String,
                                 let position = member["position"] as? String,
@@ -141,7 +141,7 @@ struct CloudFunction {
                                 let weight = member["weight"] as? Int,
                                 let batPosition = member["batPosition"] as? String,
                                 let pitchPosition = member["pitchPosition"] as? String {
-                                
+
                                 let player = HBPlayer(
                                     name: name,
                                     position: position,
@@ -150,29 +150,29 @@ struct CloudFunction {
                                     weight: weight,
                                     batPoition: batPosition,
                                     pitchPosition: pitchPosition)
-                                
+
                                 members[uid] = player
                             }
                         }
-                        
+
                         // enhancement
                         // [String: HBPlayer] -> sorted -> [(key: String, value: HBPlayer)]
                         // double loop
-                        let sortedMembers = members.sorted(by: {
-                            $0.value.backNumber < $1.value.backNumber })
-                        
-                        members.removeAll()
-                        for (key, value) in sortedMembers {
-                            members[key] = value
-                        }
-                        
+//                        let sortedMembers = members.sorted(by: {
+//                            $0.value.backNumber > $1.value.backNumber })
+//
+//                        members.removeAll()
+//                        for (key, value) in sortedMembers {
+//                            members[key] = value
+//                        }
+
                         let team = HBTeam(
                             name: name,
                             logo: logo,
                             description: description,
                             admin: admin,
                             members: members)
-                        
+
                         completion(team, nil)
                     }
                 } else {
