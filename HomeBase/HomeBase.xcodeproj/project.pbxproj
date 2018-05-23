@@ -58,6 +58,7 @@
 		72B7A74320B2EE5100E9AEB9 /* PersonalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74220B2EE5100E9AEB9 /* PersonalTableViewController.swift */; };
 		72B7A74620B2F0D900E9AEB9 /* PersonalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74520B2F0D900E9AEB9 /* PersonalHeaderView.swift */; };
 		72B7A74820B57BB700E9AEB9 /* PersonalRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74720B57BB700E9AEB9 /* PersonalRankingView.swift */; };
+		72B7A74C20B597A700E9AEB9 /* PersonalRankingGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74B20B597A700E9AEB9 /* PersonalRankingGraphView.swift */; };
 		72C44F572062D1BD00554FFA /* ScheduleNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C44F562062D1BD00554FFA /* ScheduleNoDataView.swift */; };
 		72C5755220297E94000432DB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5755120297E94000432DB /* MainTabBarController.swift */; };
 		72D1035C2074E6EE007D1610 /* CustomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1035B2074E6EE007D1610 /* CustomProperties.swift */; };
@@ -152,6 +153,7 @@
 		72B7A74220B2EE5100E9AEB9 /* PersonalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTableViewController.swift; sourceTree = "<group>"; };
 		72B7A74520B2F0D900E9AEB9 /* PersonalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalHeaderView.swift; sourceTree = "<group>"; };
 		72B7A74720B57BB700E9AEB9 /* PersonalRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRankingView.swift; sourceTree = "<group>"; };
+		72B7A74B20B597A700E9AEB9 /* PersonalRankingGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRankingGraphView.swift; sourceTree = "<group>"; };
 		72C44F562062D1BD00554FFA /* ScheduleNoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoDataView.swift; sourceTree = "<group>"; };
 		72C5755120297E94000432DB /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		72D1035B2074E6EE007D1610 /* CustomProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProperties.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				72B7A74220B2EE5100E9AEB9 /* PersonalTableViewController.swift */,
 				72B7A74520B2F0D900E9AEB9 /* PersonalHeaderView.swift */,
 				72B7A74720B57BB700E9AEB9 /* PersonalRankingView.swift */,
+				72B7A74B20B597A700E9AEB9 /* PersonalRankingGraphView.swift */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */,
 				7244A943206924150032F8B8 /* ScheduleDetailRecordMatchViewController.swift in Sources */,
 				726376792045248000388939 /* ScheduleCreateViewController.swift in Sources */,
+				72B7A74C20B597A700E9AEB9 /* PersonalRankingGraphView.swift in Sources */,
 				7220479F2034B7B40088BEE4 /* MainTopSectionCell.swift in Sources */,
 				72E6600420A97BA600371A5E /* ScheduleDetailLoadPlayerViewController.swift in Sources */,
 				72F5ECF720473AE400C7B594 /* ScheduleDetailPlayerCell.swift in Sources */,
