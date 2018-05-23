@@ -69,6 +69,32 @@ class PersonalHeaderView: UIView {
         return rankingView
     }()
     
+    private lazy var existLabel: UILabel = {
+        let existLabel = UILabel()
+        existLabel.text = "내가 참여했을 때"
+        existLabel.textColor = .white
+        existLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14.0)
+        existLabel.textAlignment = .center
+        existLabel.adjustsFontSizeToFitWidth = true
+        existLabel.minimumScaleFactor = 0.5
+        existLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return existLabel
+    }()
+    
+    private lazy var notExistLabel: UILabel = {
+        let notExistLabel = UILabel()
+        notExistLabel.text = "내가 안 참여했을 때"
+        notExistLabel.textColor = .white
+        notExistLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14.0)
+        notExistLabel.textAlignment = .center
+        notExistLabel.adjustsFontSizeToFitWidth = true
+        notExistLabel.minimumScaleFactor = 0.5
+        notExistLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return notExistLabel
+    }()
+    
     // MARK: Draw
     
     override func draw(_ rect: CGRect) {
@@ -84,6 +110,10 @@ class PersonalHeaderView: UIView {
         self.addConstraints(positionLabelConstraints())
         self.addSubview(rankingView)
         self.addConstraints(rankingViewConstraints())
+        self.addSubview(existLabel)
+        self.addConstraints(existLabelViewConstraints())
+        self.addSubview(notExistLabel)
+        self.addConstraints(notExistLabelViewConstraints())
     }
     
     override func layoutSubviews() {
@@ -177,6 +207,40 @@ extension PersonalHeaderView {
         let heightConstraint = NSLayoutConstraint(
             item: rankingView, attribute: .height, relatedBy: .equal,
             toItem: self, attribute: .height, multiplier: 50/587, constant: 0.0)
+        
+        return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func existLabelViewConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: existLabel, attribute: .top, relatedBy: .equal,
+            toItem: self, attribute: .centerY, multiplier: 372/293.5, constant: 0.0)
+        let centerXConstraint = NSLayoutConstraint(
+            item: existLabel, attribute: .centerX, relatedBy: .equal,
+            toItem: self, attribute: .centerX, multiplier: 1/2, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: existLabel, attribute: .width, relatedBy: .equal,
+            toItem: self, attribute: .width, multiplier: 140/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: existLabel, attribute: .height, relatedBy: .equal,
+            toItem: self, attribute: .height, multiplier: 18/587, constant: 0.0)
+        
+        return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func notExistLabelViewConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = NSLayoutConstraint(
+            item: notExistLabel, attribute: .top, relatedBy: .equal,
+            toItem: self, attribute: .centerY, multiplier: 372/293.5, constant: 0.0)
+        let centerXConstraint = NSLayoutConstraint(
+            item: notExistLabel, attribute: .centerX, relatedBy: .equal,
+            toItem: self, attribute: .centerX, multiplier: 3/2, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: notExistLabel, attribute: .width, relatedBy: .equal,
+            toItem: self, attribute: .width, multiplier: 140/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: notExistLabel, attribute: .height, relatedBy: .equal,
+            toItem: self, attribute: .height, multiplier: 18/587, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
