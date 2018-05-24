@@ -62,7 +62,7 @@ class PersonalHeaderView: UIView {
         let rankingView = PersonalRankingView()
         rankingView.backgroundColor = .clear
         rankingView.layer.borderColor = UIColor.white.cgColor
-        rankingView.layer.borderWidth = 0.5
+        rankingView.layer.borderWidth = 1.0
         rankingView.clipsToBounds = true
         rankingView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -114,7 +114,7 @@ class PersonalHeaderView: UIView {
     }
     
     private func addNotExistGraphView() {
-        let graphX = self.frame.size.width * 235/414
+        let graphX = self.frame.size.width * 227/414
         let graphY = self.frame.size.height * 415/597
         let graphWidth = self.frame.size.width * 125/414
         let graphHeight = graphWidth
