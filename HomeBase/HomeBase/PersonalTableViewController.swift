@@ -14,6 +14,7 @@ class PersonalTableViewController: UITableViewController {
     
     let headerView = PersonalHeaderView()
     let divisionView = PersonalDivisionView()
+    let batterView = PersonalBatterView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ extension PersonalTableViewController {
         switch section {
         case 0: return headerView
         case 1: return divisionView
+        case 2: return batterView
         default: return nil
         }
     }
@@ -50,6 +52,7 @@ extension PersonalTableViewController {
         switch section {
         case 0: return CGFloat(self.view.frame.size.height * 587/736).rounded()
         case 1: return CGFloat(self.view.frame.size.height * 56/736).rounded()
+        case 2: return CGFloat(self.view.frame.size.height * 462/736).rounded()
         default: return 0.0
         }
     }

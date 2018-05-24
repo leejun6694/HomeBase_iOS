@@ -1,30 +1,16 @@
 //
-//  ScheduleDetailLoadBatterView.swift
+//  PersonalBatterView.swift
 //  HomeBase
 //
-//  Created by JUN LEE on 2018. 5. 14..
+//  Created by JUN LEE on 2018. 5. 24..
 //  Copyright © 2018년 JUN LEE. All rights reserved.
 //
 
 import UIKit
 
-class ScheduleDetailLoadBatterView: UIView {
+class PersonalBatterView: UIView {
 
     // MARK: Properties
-    
-    var singleHit = 0 { didSet { singleHitView.record = "\(singleHit)" } }
-    var doubleHit = 0 { didSet { doubleHitView.record = "\(doubleHit)" } }
-    var tripleHit = 0 { didSet { tripleHitView.record = "\(tripleHit)" } }
-    var homeRun = 0 { didSet { homeRunView.record = "\(homeRun)" } }
-    var baseOnBalls = 0 { didSet { baseOnBallsView.record = "\(baseOnBalls)" } }
-    var sacrificeHit = 0 { didSet { sacrificeHitView.record = "\(sacrificeHit)" } }
-    var strikeOut = 0 { didSet { strikeOutView.record = "\(strikeOut)" } }
-    var groundBall = 0 { didSet { groundBallView.record = "\(groundBall)" } }
-    var flyBall = 0 { didSet { flyBallView.record = "\(flyBall)" } }
-    var stolenBase = 0 { didSet { stolenBaseView.record = "\(stolenBase)" } }
-    var hitByPitch = 0 { didSet { hitByPitchView.record = "\(hitByPitch)" } }
-    var run = 0 { didSet { runView.record = "\(run)" } }
-    var RBI = 0 { didSet { RBIView.record = "\(RBI)" } }
     
     private lazy var singleHitView: RecordView = {
         let singleHitView = RecordView()
@@ -222,7 +208,7 @@ class ScheduleDetailLoadBatterView: UIView {
     }
 }
 
-extension ScheduleDetailLoadBatterView {
+extension PersonalBatterView {
     private func recordStackViewConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
             item: recordStackView, attribute: .centerX, relatedBy: .equal,

@@ -33,8 +33,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         }
     }
     
-    private lazy var winView: ScheduleDetailRecordView = {
-        let winView = ScheduleDetailRecordView()
+    private lazy var winView: RecordView = {
+        let winView = RecordView()
         winView.recordName = "승리"
         winView.record = "0"
         winView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,8 +42,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return winView
     }()
     
-    private lazy var loseView: ScheduleDetailRecordView = {
-        let loseView = ScheduleDetailRecordView()
+    private lazy var loseView: RecordView = {
+        let loseView = RecordView()
         loseView.recordName = "패배"
         loseView.record = "0"
         loseView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,8 +51,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return loseView
     }()
     
-    private lazy var holdView: ScheduleDetailRecordView = {
-        let holdView = ScheduleDetailRecordView()
+    private lazy var holdView: RecordView = {
+        let holdView = RecordView()
         holdView.recordName = "홀드"
         holdView.record = "0"
         holdView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,8 +60,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return holdView
     }()
     
-    private lazy var saveView: ScheduleDetailRecordView = {
-        let saveView = ScheduleDetailRecordView()
+    private lazy var saveView: RecordView = {
+        let saveView = RecordView()
         saveView.recordName = "세이브"
         saveView.record = "0"
         saveView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,8 +69,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return saveView
     }()
     
-    private lazy var inningView: ScheduleDetailRecordView = {
-        let inningView = ScheduleDetailRecordView()
+    private lazy var inningView: RecordView = {
+        let inningView = RecordView()
         inningView.recordName = "이닝"
         inningView.record = "0"
         inningView.translatesAutoresizingMaskIntoConstraints = false
@@ -78,8 +78,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return inningView
     }()
     
-    private lazy var ERView: ScheduleDetailRecordView = {
-        let ERView = ScheduleDetailRecordView()
+    private lazy var ERView: RecordView = {
+        let ERView = RecordView()
         ERView.recordName = "자책점"
         ERView.record = "0"
         ERView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,8 +87,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return ERView
     }()
     
-    private lazy var strikeOutsView: ScheduleDetailRecordView = {
-        let strikeOutsView = ScheduleDetailRecordView()
+    private lazy var strikeOutsView: RecordView = {
+        let strikeOutsView = RecordView()
         strikeOutsView.recordName = "탈삼진"
         strikeOutsView.record = "0"
         strikeOutsView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,8 +96,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return strikeOutsView
     }()
     
-    private lazy var hitsView: ScheduleDetailRecordView = {
-        let hitsView = ScheduleDetailRecordView()
+    private lazy var hitsView: RecordView = {
+        let hitsView = RecordView()
         hitsView.recordName = "피안타"
         hitsView.record = "0"
         hitsView.translatesAutoresizingMaskIntoConstraints = false
@@ -105,8 +105,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return hitsView
     }()
     
-    private lazy var homeRunsView: ScheduleDetailRecordView = {
-        let homeRunsView = ScheduleDetailRecordView()
+    private lazy var homeRunsView: RecordView = {
+        let homeRunsView = RecordView()
         homeRunsView.recordName = "피홈런"
         homeRunsView.record = "0"
         homeRunsView.translatesAutoresizingMaskIntoConstraints = false
@@ -114,8 +114,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return homeRunsView
     }()
     
-    private lazy var walksView: ScheduleDetailRecordView = {
-        let walksView = ScheduleDetailRecordView()
+    private lazy var walksView: RecordView = {
+        let walksView = RecordView()
         walksView.recordName = "볼넷"
         walksView.record = "0"
         walksView.translatesAutoresizingMaskIntoConstraints = false
@@ -123,8 +123,8 @@ class ScheduleDetailLoadPitcherView: UIView {
         return walksView
     }()
     
-    private lazy var hitBattersView: ScheduleDetailRecordView = {
-        let hitBattersView = ScheduleDetailRecordView()
+    private lazy var hitBattersView: RecordView = {
+        let hitBattersView = RecordView()
         hitBattersView.recordName = "사구"
         hitBattersView.record = "0"
         hitBattersView.translatesAutoresizingMaskIntoConstraints = false
