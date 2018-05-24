@@ -1,17 +1,15 @@
 //
-//  ScheduleDetailRecordView.swift
+//  RecordView.swift
 //  HomeBase
 //
-//  Created by JUN LEE on 2018. 5. 14..
+//  Created by JUN LEE on 2018. 5. 24..
 //  Copyright © 2018년 JUN LEE. All rights reserved.
 //
 
 import UIKit
 
-class ScheduleDetailRecordView: UIView {
+class RecordView: UIView {
 
-    // MARK: Properties
-    
     var recordName = "" {
         didSet { recordNameLabel.text = "\(recordName)" }
     }
@@ -39,7 +37,7 @@ class ScheduleDetailRecordView: UIView {
         recordLabel.textColor = HBColor.correct
         recordLabel.textAlignment = .center
         recordLabel.font = UIFont(name: "AppleSDGothicNeo-UltraLight",
-                                      size: 37.0)
+                                  size: 37.0)
         recordLabel.adjustsFontSizeToFitWidth = true
         recordLabel.minimumScaleFactor = 0.5
         recordLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +63,7 @@ class ScheduleDetailRecordView: UIView {
     }
 }
 
-extension ScheduleDetailRecordView {
+extension RecordView {
     private func recordNameLabelConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
             item: recordNameLabel, attribute: .centerX, relatedBy: .equal,

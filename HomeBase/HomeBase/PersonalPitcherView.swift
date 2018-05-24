@@ -1,37 +1,16 @@
 //
-//  ScheduleDetailLoadPitcherView.swift
+//  PersonalPitcherView.swift
 //  HomeBase
 //
-//  Created by JUN LEE on 2018. 5. 14..
+//  Created by JUN LEE on 2018. 5. 25..
 //  Copyright © 2018년 JUN LEE. All rights reserved.
 //
 
 import UIKit
 
-class ScheduleDetailLoadPitcherView: UIView {
+class PersonalPitcherView: UIView {
 
     // MARK: Properties
-    
-    var win = 0 { didSet { winView.record = "\(win)" } }
-    var lose = 0 { didSet { loseView.record = "\(lose)" } }
-    var hold = 0 { didSet { holdView.record = "\(hold)" } }
-    var save = 0 { didSet { saveView.record = "\(save)" } }
-    var ER = 0 { didSet { ERView.record = "\(ER)" } }
-    var strikeOuts = 0 { didSet { strikeOutsView.record = "\(strikeOuts)" } }
-    var hits = 0 { didSet { hitsView.record = "\(hits)" } }
-    var homeRuns = 0 { didSet { homeRunsView.record = "\(homeRuns)" } }
-    var walks = 0 { didSet { walksView.record = "\(walks)" } }
-    var hitBatters = 0 { didSet { hitBattersView.record = "\(hitBatters)" } }
-    var inning: Double = 0.0 {
-        didSet {
-            let inningReminder = Int(inning * 10.0) % 10
-            if inningReminder == 0 {
-                inningView.record = "\(Int(inning))"
-            } else {
-                inningView.record = "\(Int(inning)) \(inningReminder)/3"
-            }
-        }
-    }
     
     private lazy var winView: RecordView = {
         let winView = RecordView()
@@ -209,7 +188,7 @@ class ScheduleDetailLoadPitcherView: UIView {
     }
 }
 
-extension ScheduleDetailLoadPitcherView {
+extension PersonalPitcherView {
     private func recordStackViewConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
             item: recordStackView, attribute: .centerX, relatedBy: .equal,
