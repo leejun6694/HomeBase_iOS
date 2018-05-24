@@ -15,6 +15,7 @@ class PersonalTableViewController: UITableViewController {
     let headerView = PersonalHeaderView()
     let divisionView = PersonalDivisionView()
     let batterView = PersonalBatterView()
+    let pitcherView = PersonalPitcherView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,7 @@ extension PersonalTableViewController {
         switch section {
         case 0: return headerView
         case 1: return divisionView
-        case 2: return batterView
+        case 2: return pitcherView
         default: return nil
         }
     }

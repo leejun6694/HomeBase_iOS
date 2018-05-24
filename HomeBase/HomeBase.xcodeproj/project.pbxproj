@@ -12,6 +12,7 @@
 		720DFFE3204C2C980098C473 /* ScheduleDetailRecordPlayerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720DFFE2204C2C980098C473 /* ScheduleDetailRecordPlayerHeaderView.swift */; };
 		720DFFE5204C64FF0098C473 /* ScheduleDetailRecordPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720DFFE4204C64FF0098C473 /* ScheduleDetailRecordPlayerTableViewCell.swift */; };
 		720DFFE7204C6EA10098C473 /* ScheduleDetailRecordPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720DFFE6204C6EA10098C473 /* ScheduleDetailRecordPlayerViewController.swift */; };
+		720E98AC20B728A900C45CEE /* PersonalPitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720E98AB20B728A900C45CEE /* PersonalPitcherView.swift */; };
 		72134FC2203D9300007B7FCB /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72134FC1203D9300007B7FCB /* MainTableViewController.swift */; };
 		7213D76D2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */; };
 		7213D7712021BBE000FB028C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D7702021BBE000FB028C /* Models.swift */; };
@@ -104,6 +105,7 @@
 		720DFFE2204C2C980098C473 /* ScheduleDetailRecordPlayerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailRecordPlayerHeaderView.swift; sourceTree = "<group>"; };
 		720DFFE4204C64FF0098C473 /* ScheduleDetailRecordPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailRecordPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		720DFFE6204C6EA10098C473 /* ScheduleDetailRecordPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailRecordPlayerViewController.swift; sourceTree = "<group>"; };
+		720E98AB20B728A900C45CEE /* PersonalPitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPitcherView.swift; sourceTree = "<group>"; };
 		72134FC1203D9300007B7FCB /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteViewController.swift; sourceTree = "<group>"; };
 		7213D7702021BBE000FB028C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				72B7A74B20B597A700E9AEB9 /* PersonalRankingGraphView.swift */,
 				72B7A74D20B6DD5F00E9AEB9 /* PersonalDivisionView.swift */,
 				72B7A74F20B6E1E500E9AEB9 /* PersonalBatterView.swift */,
+				720E98AB20B728A900C45CEE /* PersonalPitcherView.swift */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				729AC646201F34DE00F5FED2 /* SignInViewController.swift in Sources */,
 				72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */,
 				7277BF9F209B862600AA8256 /* ScheduleMonthlySectionBlankCell.swift in Sources */,
+				720E98AC20B728A900C45CEE /* PersonalPitcherView.swift in Sources */,
 				72E6600820A98CBE00371A5E /* ScheduleDetailLoadPitcherView.swift in Sources */,
 				72D9322420239CAA003F3889 /* RegisterTeamCompleteCopyViewController.swift in Sources */,
 				72B6F2EA20299CE300CA0755 /* MainTeamInfoView.swift in Sources */,
