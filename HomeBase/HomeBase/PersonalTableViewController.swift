@@ -13,6 +13,7 @@ class PersonalTableViewController: UITableViewController {
     // MARK: Properties
     
     let headerView = PersonalHeaderView()
+    let divisionView = PersonalDivisionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,20 +25,32 @@ class PersonalTableViewController: UITableViewController {
 
 extension PersonalTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 0
+        switch section {
+        case 0: return 0
+        default: return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return headerView
+        
+        switch section {
+        case 0: return headerView
+        case 1: return divisionView
+        default: return nil
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(self.view.frame.size.height * 587/736).rounded()
+        
+        switch section {
+        case 0: return CGFloat(self.view.frame.size.height * 587/736).rounded()
+        case 1: return CGFloat(self.view.frame.size.height * 56/736).rounded()
+        default: return 0.0
+        }
     }
 }
