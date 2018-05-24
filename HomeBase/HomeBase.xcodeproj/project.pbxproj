@@ -13,6 +13,7 @@
 		720DFFE5204C64FF0098C473 /* ScheduleDetailRecordPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720DFFE4204C64FF0098C473 /* ScheduleDetailRecordPlayerTableViewCell.swift */; };
 		720DFFE7204C6EA10098C473 /* ScheduleDetailRecordPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720DFFE6204C6EA10098C473 /* ScheduleDetailRecordPlayerViewController.swift */; };
 		720E98AC20B728A900C45CEE /* PersonalPitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720E98AB20B728A900C45CEE /* PersonalPitcherView.swift */; };
+		720E98AE20B72B9400C45CEE /* PersonalRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720E98AD20B72B9400C45CEE /* PersonalRecordView.swift */; };
 		72134FC2203D9300007B7FCB /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72134FC1203D9300007B7FCB /* MainTableViewController.swift */; };
 		7213D76D2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */; };
 		7213D7712021BBE000FB028C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D7702021BBE000FB028C /* Models.swift */; };
@@ -60,7 +61,6 @@
 		72B7A74620B2F0D900E9AEB9 /* PersonalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74520B2F0D900E9AEB9 /* PersonalHeaderView.swift */; };
 		72B7A74820B57BB700E9AEB9 /* PersonalRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74720B57BB700E9AEB9 /* PersonalRankingView.swift */; };
 		72B7A74C20B597A700E9AEB9 /* PersonalRankingGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74B20B597A700E9AEB9 /* PersonalRankingGraphView.swift */; };
-		72B7A74E20B6DD5F00E9AEB9 /* PersonalDivisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74D20B6DD5F00E9AEB9 /* PersonalDivisionView.swift */; };
 		72B7A75020B6E1E500E9AEB9 /* PersonalBatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74F20B6E1E500E9AEB9 /* PersonalBatterView.swift */; };
 		72B7A75220B6E2F700E9AEB9 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A75120B6E2F700E9AEB9 /* RecordView.swift */; };
 		72C44F572062D1BD00554FFA /* ScheduleNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C44F562062D1BD00554FFA /* ScheduleNoDataView.swift */; };
@@ -106,6 +106,7 @@
 		720DFFE4204C64FF0098C473 /* ScheduleDetailRecordPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailRecordPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		720DFFE6204C6EA10098C473 /* ScheduleDetailRecordPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailRecordPlayerViewController.swift; sourceTree = "<group>"; };
 		720E98AB20B728A900C45CEE /* PersonalPitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPitcherView.swift; sourceTree = "<group>"; };
+		720E98AD20B72B9400C45CEE /* PersonalRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRecordView.swift; sourceTree = "<group>"; };
 		72134FC1203D9300007B7FCB /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteViewController.swift; sourceTree = "<group>"; };
 		7213D7702021BBE000FB028C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -158,7 +159,6 @@
 		72B7A74520B2F0D900E9AEB9 /* PersonalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalHeaderView.swift; sourceTree = "<group>"; };
 		72B7A74720B57BB700E9AEB9 /* PersonalRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRankingView.swift; sourceTree = "<group>"; };
 		72B7A74B20B597A700E9AEB9 /* PersonalRankingGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRankingGraphView.swift; sourceTree = "<group>"; };
-		72B7A74D20B6DD5F00E9AEB9 /* PersonalDivisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDivisionView.swift; sourceTree = "<group>"; };
 		72B7A74F20B6E1E500E9AEB9 /* PersonalBatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalBatterView.swift; sourceTree = "<group>"; };
 		72B7A75120B6E2F700E9AEB9 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		72C44F562062D1BD00554FFA /* ScheduleNoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoDataView.swift; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 				72B7A74520B2F0D900E9AEB9 /* PersonalHeaderView.swift */,
 				72B7A74720B57BB700E9AEB9 /* PersonalRankingView.swift */,
 				72B7A74B20B597A700E9AEB9 /* PersonalRankingGraphView.swift */,
-				72B7A74D20B6DD5F00E9AEB9 /* PersonalDivisionView.swift */,
+				720E98AD20B72B9400C45CEE /* PersonalRecordView.swift */,
 				72B7A74F20B6E1E500E9AEB9 /* PersonalBatterView.swift */,
 				720E98AB20B728A900C45CEE /* PersonalPitcherView.swift */,
 			);
@@ -681,7 +681,6 @@
 				726376792045248000388939 /* ScheduleCreateViewController.swift in Sources */,
 				72B7A74C20B597A700E9AEB9 /* PersonalRankingGraphView.swift in Sources */,
 				7220479F2034B7B40088BEE4 /* MainTopSectionCell.swift in Sources */,
-				72B7A74E20B6DD5F00E9AEB9 /* PersonalDivisionView.swift in Sources */,
 				72E6600420A97BA600371A5E /* ScheduleDetailLoadPlayerViewController.swift in Sources */,
 				72F5ECF720473AE400C7B594 /* ScheduleDetailPlayerCell.swift in Sources */,
 				72B7A74320B2EE5100E9AEB9 /* PersonalTableViewController.swift in Sources */,
@@ -711,6 +710,7 @@
 				725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */,
 				721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */,
 				72D1035C2074E6EE007D1610 /* CustomProperties.swift in Sources */,
+				720E98AE20B72B9400C45CEE /* PersonalRecordView.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
 				72E6600620A98CB100371A5E /* ScheduleDetailLoadBatterView.swift in Sources */,
 				72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */,

@@ -13,9 +13,9 @@ class PersonalTableViewController: UITableViewController {
     // MARK: Properties
     
     let headerView = PersonalHeaderView()
-    let divisionView = PersonalDivisionView()
-    let batterView = PersonalBatterView()
-    let pitcherView = PersonalPitcherView()
+    let recordView = PersonalRecordView()
+    
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,23 +27,18 @@ class PersonalTableViewController: UITableViewController {
 
 extension PersonalTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch section {
-        case 0: return 0
-        default: return 0
-        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         switch section {
         case 0: return headerView
-        case 1: return divisionView
-        case 2: return pitcherView
+        case 1: return recordView
         default: return nil
         }
     }
@@ -52,8 +47,7 @@ extension PersonalTableViewController {
         
         switch section {
         case 0: return CGFloat(self.view.frame.size.height * 587/736).rounded()
-        case 1: return CGFloat(self.view.frame.size.height * 56/736).rounded()
-        case 2: return CGFloat(self.view.frame.size.height * 462/736).rounded()
+        case 1: return CGFloat(self.view.frame.size.height * 518/736).rounded()
         default: return 0.0
         }
     }
