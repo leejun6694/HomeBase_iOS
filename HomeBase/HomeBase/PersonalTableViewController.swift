@@ -17,8 +17,17 @@ class PersonalTableViewController: UITableViewController {
     
     // MARK: Life Cycle
     
+    private func fetchPlayerData() {
+        if let mainTabBarController = self.tabBarController as? MainTabBarController {
+            headerView.playerData = mainTabBarController.playerData
+            recordView.playerData = mainTabBarController.playerData
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchPlayerData()
         
         self.tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
         self.tableView.bounces = false

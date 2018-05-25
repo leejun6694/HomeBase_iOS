@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 (playerData, error) -> Void in
                 
                 MainViewController.progressView.animate(value: 0.25)
-                if let _ = playerData {
+                if let playerData = playerData {
                     CloudFunction.getUserDataWith(currentUser) {
                         (userData, error) -> Void in
                         
@@ -57,7 +57,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                 bundle: nil)
                                             
                                             guard let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController else { return }
-                                                
+                                            
+                                            mainTabBarController.playerData = playerData
                                             mainTabBarController.teamData = teamData
                                             mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
                                             UIApplication.shared.keyWindow?.rootViewController = mainTabBarController

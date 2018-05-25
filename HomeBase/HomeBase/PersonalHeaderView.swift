@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class PersonalHeaderView: UIView {
 
     // MARK: Properties
+    
+    var playerData: HBPlayer! {
+        didSet {
+            nameLabel.text = "\(playerData.backNumber) \(playerData.name)"
+            positionLabel.text = "\(playerData.position)"
+        }
+    }
     
     private lazy var settingButton: UIButton = {
         let settingButton = UIButton(type: .system)
@@ -34,7 +43,7 @@ class PersonalHeaderView: UIView {
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.text = "00 홈베이스"
+        nameLabel.text = ""
         nameLabel.textColor = .white
         nameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 28.0)
         nameLabel.textAlignment = .center
@@ -217,7 +226,7 @@ extension PersonalHeaderView {
     private func positionLabelConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: positionLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 232/293.5, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 240/293.5, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: positionLabel, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)

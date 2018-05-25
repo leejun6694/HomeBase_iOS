@@ -119,6 +119,28 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
         self.performSegue(withIdentifier: "cancelToDetailView", sender: self)
     }
     
+    private func checkPlayerPosition() {
+        self.view.addSubview(buttonUnderView)
+        
+        let position = player.position
+        if position == "선발투수" || position == "중간계투" || position == "마무리투수" {
+            batterButton.setTitleColor(UIColor(
+                red: 44,
+                green: 44,
+                blue: 44,
+                alpha: 0.6), for: .normal)
+            pitcherButton.setTitleColor(HBColor.lightGray, for: .normal)
+            
+            self.view.addConstraints(pitcherButtonUnderViewConstraints())
+            self.view.addSubview(loadPitcherView)
+            self.view.addConstraints(loadPitcherViewConstraints())
+        } else {
+            self.view.addConstraints(batterButtonUnderViewConstraints())
+            self.view.addSubview(loadBatterView)
+            self.view.addConstraints(loadBatterViewConstraints())
+        }
+    }
+    
     @objc private func batterButtonDidTapped(_ sender: UIButton) {
         if buttonUnderView.isDescendant(of: self.view) {
             buttonUnderView.removeFromSuperview()
@@ -205,8 +227,6 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
         self.view.addConstraints(batterButtonConstraints())
         self.view.addSubview(pitcherButton)
         self.view.addConstraints(pitcherButtonConstraints())
-        self.view.addSubview(buttonUnderView)
-        self.view.addConstraints(batterButtonUnderViewConstraints())
         self.view.addSubview(playerImageView)
         self.view.addConstraints(playerImageViewConstraints())
         self.view.addSubview(divisionView)
@@ -215,10 +235,8 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
         loadBatterView.translatesAutoresizingMaskIntoConstraints = false
         loadPitcherView.translatesAutoresizingMaskIntoConstraints = false
         
-        self.view.addSubview(loadBatterView)
-        self.view.addConstraints(loadBatterViewConstraints())
-        
         fetchData()
+        checkPlayerPosition()
     }
 
     override func viewDidLayoutSubviews() {
