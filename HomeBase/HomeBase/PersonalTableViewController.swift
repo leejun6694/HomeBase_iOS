@@ -15,7 +15,7 @@ class PersonalTableViewController: UITableViewController {
     let headerView = PersonalHeaderView()
     let recordView = PersonalRecordView()
     
-    // MARK: Life Cycle
+    // MARK: Methods
     
     private func fetchPlayerData() {
         if let mainTabBarController = self.tabBarController as? MainTabBarController {
@@ -23,6 +23,17 @@ class PersonalTableViewController: UITableViewController {
             recordView.playerData = mainTabBarController.playerData
         }
     }
+    
+    @objc private func settingButtonDidTapped(_ sender: UIButton) {
+        guard let personalSettingViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "PersonalSettingViewController") as? PersonalSettingViewController else { return }
+        
+        self.navigationController?.pushViewController(
+            personalSettingViewController, animated: true)
+    }
+    
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +57,12 @@ extension PersonalTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         switch section {
-        case 0: return headerView
+        case 0:
+            headerView.settingButton.addTarget(
+                self,
+                action: #selector(settingButtonDidTapped(_:)),
+                for: .touchUpInside)
+            return headerView
         case 1: return recordView
         default: return nil
         }

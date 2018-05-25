@@ -21,7 +21,7 @@ class PersonalHeaderView: UIView {
         }
     }
     
-    private lazy var settingButton: UIButton = {
+    lazy var settingButton: UIButton = {
         let settingButton = UIButton(type: .system)
         settingButton.setImage(#imageLiteral(resourceName: "settingIcon"), for: .normal)
         settingButton.tintColor = .white
