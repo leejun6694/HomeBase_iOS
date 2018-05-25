@@ -12,6 +12,8 @@ class PersonalRecordView: UIView {
 
     // MARK: Properties
     
+    var playerData: HBPlayer!
+    
     private lazy var batterButton: UIButton = {
         let batterButton = UIButton(type: .system)
         batterButton.setTitle("타자", for: .normal)
@@ -92,6 +94,28 @@ class PersonalRecordView: UIView {
     
     // MARK: Methods
     
+    private func checkPlayerPosition() {
+        self.addSubview(buttonUnderView)
+        
+        let position = playerData.position
+        if position == "선발투수" || position == "중간계투" || position == "마무리투수" {
+            batterButton.setTitleColor(UIColor(
+                red: 44,
+                green: 44,
+                blue: 44,
+                alpha: 0.6), for: .normal)
+            pitcherButton.setTitleColor(HBColor.lightGray, for: .normal)
+            
+            self.addConstraints(pitcherButtonUnderViewConstraints())
+            self.addSubview(pitcherView)
+            self.addConstraints(pitcherViewConstraints())
+        } else {
+            self.addConstraints(batterButtonUnderViewConstraints())
+            self.addSubview(batterView)
+            self.addConstraints(batterViewConstraints())
+        }
+    }
+    
     @objc private func batterButtonDidTapped(_ sender: UIButton) {
         if buttonUnderView.isDescendant(of: self) {
             buttonUnderView.removeFromSuperview()
@@ -142,13 +166,10 @@ class PersonalRecordView: UIView {
         self.addConstraints(batterButtonConstraints())
         self.addSubview(pitcherButton)
         self.addConstraints(pitcherButtonConstraints())
-        self.addSubview(buttonUnderView)
-        self.addConstraints(batterButtonUnderViewConstraints())
         self.addSubview(divisionView)
         self.addConstraints(divisionViewConstraints())
         
-        self.addSubview(batterView)
-        self.addConstraints(batterViewConstraints())
+        checkPlayerPosition()
     }
     
     override func layoutSubviews() {
