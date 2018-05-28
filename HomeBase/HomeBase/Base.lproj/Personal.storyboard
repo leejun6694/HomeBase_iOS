@@ -15,7 +15,7 @@
             <objects>
                 <tableViewController id="3bT-fB-esl" customClass="PersonalTableViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="h7r-H2-cx8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -33,7 +33,9 @@
                             <outlet property="delegate" destination="3bT-fB-esl" id="IEm-E4-fLg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="o5p-Zz-pFw"/>
+                    <navigationItem key="navigationItem" id="o5p-Zz-pFw">
+                        <barButtonItem key="backBarButtonItem" title=" " id="ABV-gy-3o5"/>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUs-Of-iJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -47,6 +49,17 @@
                     <view key="view" contentMode="scaleToFill" id="Gcz-yl-f8T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2Y-Xj-Coj">
+                                <rect key="frame" x="109" y="299" width="156" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOutButtonDidTapped:" destination="cEV-fz-4z8" eventType="touchUpInside" id="RqD-Y9-pts"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="qQ1-Oh-flq"/>
                     </view>
@@ -55,42 +68,17 @@
             </objects>
             <point key="canvasLocation" x="2975" y="878"/>
         </scene>
-        <!--Personal View Controller-->
-        <scene sceneID="TNf-0G-sdp">
-            <objects>
-                <viewController id="7Zf-dJ-AAu" customClass="PersonalViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ibr-1b-B4Z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2Y-Xj-Coj">
-                                <rect key="frame" x="109" y="299" width="156" height="69"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <state key="normal" title="Sign Out"/>
-                                <connections>
-                                    <action selector="signOutButtonDidTapped:" destination="7Zf-dJ-AAu" eventType="touchUpInside" id="8XW-8y-LgG"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Py2-0C-90A"/>
-                    </view>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O8T-Br-2or" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2113" y="56"/>
-        </scene>
         <!--개인-->
         <scene sceneID="i08-B6-o47">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Tgu-Uc-JVb" customClass="PersonalNavigation" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tgu-Uc-JVb" customClass="PersonalNavigation" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="개인" image="personalIcon" id="nOQ-qo-lp1"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wbc-He-GUq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="wbc-He-GUq">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
