@@ -42,7 +42,7 @@ class SignInViewController: UIViewController {
                         CloudFunction.getPlayerDataWith(currentUser) {
                             (player, error) -> Void in
                             
-                            if let _ = player {
+                            if let playerData = player {
                                 CloudFunction.getTeamDataWith(teamCode) {
                                     (teamData, error) -> Void in
                                     
@@ -61,7 +61,8 @@ class SignInViewController: UIViewController {
                                                 guard let mainTabBarController = mainStoryboard.instantiateViewController(
                                                     withIdentifier: "MainTabBarController")
                                                     as? MainTabBarController else { return }
-                                                    
+                                                
+                                                mainTabBarController.playerData = playerData
                                                 mainTabBarController.teamData = teamData
                                                 mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
                                                 self.spinnerStopAnimating(self.spinner)
