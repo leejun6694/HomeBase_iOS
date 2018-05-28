@@ -21,16 +21,6 @@ class PersonalHeaderView: UIView {
         }
     }
     
-    lazy var settingButton: UIButton = {
-        let settingButton = UIButton(type: .system)
-        settingButton.setImage(#imageLiteral(resourceName: "settingIcon"), for: .normal)
-        settingButton.tintColor = .white
-        settingButton.backgroundColor = UIColor.clear
-        settingButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        return settingButton
-    }()
-    
     private lazy var playerImageView: UIImageView = {
         let playerImageView = UIImageView()
         playerImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
@@ -108,7 +98,7 @@ class PersonalHeaderView: UIView {
     
     private func addExistGraphView() {
         let graphX = self.frame.size.width * 60/414
-        let graphY = self.frame.size.height * 415/597
+        let graphY = self.frame.size.height * 345/527
         let graphWidth = self.frame.size.width * 125/414
         let graphHeight = graphWidth
         
@@ -124,7 +114,7 @@ class PersonalHeaderView: UIView {
     
     private func addNotExistGraphView() {
         let graphX = self.frame.size.width * 227/414
-        let graphY = self.frame.size.height * 415/597
+        let graphY = self.frame.size.height * 345/527
         let graphWidth = self.frame.size.width * 125/414
         let graphHeight = graphWidth
         
@@ -142,9 +132,7 @@ class PersonalHeaderView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
-        self.addSubview(settingButton)
-        self.addConstraints(settingButtonConstraints())
+    
         self.addSubview(playerImageView)
         self.addConstraints(playerImageViewConstraints())
         self.addSubview(nameLabel)
@@ -172,33 +160,16 @@ class PersonalHeaderView: UIView {
 }
 
 extension PersonalHeaderView {
-    private func settingButtonConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = NSLayoutConstraint(
-            item: settingButton, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 35/293.5, constant: 0.0)
-        let leadingConstraint = NSLayoutConstraint(
-            item: settingButton, attribute: .leading, relatedBy: .equal,
-            toItem: self, attribute: .centerX, multiplier: 352/207, constant: 0.0)
-        let widthConstraint = NSLayoutConstraint(
-            item: settingButton, attribute: .width, relatedBy: .equal,
-            toItem: self, attribute: .width, multiplier: 40/414, constant: 0.0)
-        let heightConstraint = NSLayoutConstraint(
-            item: settingButton, attribute: .height, relatedBy: .equal,
-            toItem: settingButton, attribute: .width, multiplier: 1.0, constant: 0.0)
-        
-        return [topConstraint, leadingConstraint, widthConstraint, heightConstraint]
-    }
-    
     private func playerImageViewConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: playerImageView, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 77/293.5, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 17/263.5, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: playerImageView, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: playerImageView, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 106/597, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 106/527, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: playerImageView, attribute: .width, relatedBy: .equal,
             toItem: playerImageView, attribute: .height, multiplier: 1.0, constant: 0.0)
@@ -209,7 +180,7 @@ extension PersonalHeaderView {
     private func nameLabelConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 197/293.5, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 137/263.5, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
@@ -218,7 +189,7 @@ extension PersonalHeaderView {
             toItem: self, attribute: .width, multiplier: 2/3, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 29/597, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 29/527, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -226,7 +197,7 @@ extension PersonalHeaderView {
     private func positionLabelConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: positionLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 240/293.5, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 173/263.5, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: positionLabel, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
@@ -235,7 +206,7 @@ extension PersonalHeaderView {
             toItem: self, attribute: .width, multiplier: 2/3, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: positionLabel, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 16/597, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 16/527, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -243,7 +214,7 @@ extension PersonalHeaderView {
     private func rankingViewConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: rankingView, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 284/293.5, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 224/263.5, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: rankingView, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
@@ -252,7 +223,7 @@ extension PersonalHeaderView {
             toItem: self, attribute: .width, multiplier: 373/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: rankingView, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 50/597, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 50/527, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -260,7 +231,7 @@ extension PersonalHeaderView {
     private func existLabelViewConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: existLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 372/293.5, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 312/263.5, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: existLabel, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 123/207, constant: 0.0)
@@ -269,7 +240,7 @@ extension PersonalHeaderView {
             toItem: self, attribute: .width, multiplier: 140/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: existLabel, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 18/597, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 18/527, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -277,7 +248,7 @@ extension PersonalHeaderView {
     private func notExistLabelViewConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: notExistLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 372/293.5, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 312/263.5, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: notExistLabel, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 291.5/207, constant: 0.0)
@@ -286,7 +257,7 @@ extension PersonalHeaderView {
             toItem: self, attribute: .width, multiplier: 140/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: notExistLabel, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 18/597, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 18/527, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }

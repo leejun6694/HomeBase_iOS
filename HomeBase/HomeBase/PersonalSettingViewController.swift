@@ -7,29 +7,49 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class PersonalSettingViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: Properties
+    
+    private lazy var titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.text = "설정"
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 21.0)
+        titleLabel.textAlignment = .center
+        
+        return titleLabel
+    }()
+    
+    // MARK: Methods
+    
+    @IBAction func signOutButtonDidTapped(_ sender: UIButton) {
+        if let user = Auth.auth().currentUser {
+            do {
+                print("sign out: \(user.email ?? "default")")
+                try Auth.auth().signOut()
+                
+                let storyBoard = UIStoryboard(name: "Start", bundle: nil)
+                let signInViewController = storyBoard.instantiateInitialViewController()
+                
+                UIApplication.shared.keyWindow?.rootViewController = signInViewController
+            } catch {
+                print(error)
+            }
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationItem.titleView = titleLabel
+        self.navigationItem.backBarButtonItem =
+            UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        self.view.backgroundColor = HBColor.lightGray
     }
-    */
-
 }

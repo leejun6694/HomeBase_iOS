@@ -55,7 +55,6 @@
 		729AC646201F34DE00F5FED2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729AC645201F34DE00F5FED2 /* SignInViewController.swift */; };
 		72ABA1D2202986DB00635927 /* Team.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72ABA1D0202986DB00635927 /* Team.storyboard */; };
 		72B6F2EA20299CE300CA0755 /* MainTeamInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */; };
-		72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B6F2EB2029D6BE00CA0755 /* PersonalViewController.swift */; };
 		72B6F2EF2029D6F200CA0755 /* Personal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72B6F2ED2029D6F200CA0755 /* Personal.storyboard */; };
 		72B7A74120B2EDFF00E9AEB9 /* PersonalNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74020B2EDFF00E9AEB9 /* PersonalNavigation.swift */; };
 		72B7A74320B2EE5100E9AEB9 /* PersonalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74220B2EE5100E9AEB9 /* PersonalTableViewController.swift */; };
@@ -154,7 +153,6 @@
 		729AC645201F34DE00F5FED2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		72ABA1D1202986DB00635927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Team.storyboard; sourceTree = "<group>"; };
 		72B6F2E920299CE300CA0755 /* MainTeamInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTeamInfoView.swift; sourceTree = "<group>"; };
-		72B6F2EB2029D6BE00CA0755 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		72B6F2EE2029D6F200CA0755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Personal.storyboard; sourceTree = "<group>"; };
 		72B7A74020B2EDFF00E9AEB9 /* PersonalNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalNavigation.swift; sourceTree = "<group>"; };
 		72B7A74220B2EE5100E9AEB9 /* PersonalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTableViewController.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 				72B6F2E420298A2B00CA0755 /* Register */,
 				72C5755320297EA3000432DB /* Main */,
 				72B7A74920B57BD300E9AEB9 /* Schedule */,
-				72B6F2EB2029D6BE00CA0755 /* PersonalViewController.swift */,
 				72B7A74420B2EE5600E9AEB9 /* Personal */,
 				72881E9C1FFB3291009D23C2 /* Start.storyboard */,
 				72881EA11FFB3B98009D23C2 /* Main.storyboard */,
@@ -717,7 +714,6 @@
 				720E98AE20B72B9400C45CEE /* PersonalRecordView.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,
 				72E6600620A98CB100371A5E /* ScheduleDetailLoadBatterView.swift in Sources */,
-				72B6F2EC2029D6BE00CA0755 /* PersonalViewController.swift in Sources */,
 				72B7A75220B6E2F700E9AEB9 /* RecordView.swift in Sources */,
 				72E916C5209F7D950018A033 /* ScheduleDeleteViewController.swift in Sources */,
 				72F07C03200C6BBD004C83F6 /* ForgotPasswordViewController.swift in Sources */,
