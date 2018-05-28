@@ -54,10 +54,20 @@ class PersonalTableViewController: UITableViewController {
             navigationController.navigationBar.barTintColor = HBColor.lightGray
             navigationController.navigationBar.shadowImage = UIImage()
             navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.hidesBarsOnSwipe = true
         }
         navigationItem.rightBarButtonItem = settingButton
         
+        self.view.backgroundColor = HBColor.lightGray
         self.tableView.bounces = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let navigationController = self.navigationController {
+            navigationController.hidesBarsOnSwipe = true
+        }
     }
 }
 

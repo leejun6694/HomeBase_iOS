@@ -52,4 +52,12 @@ class PersonalSettingViewController: UIViewController {
         
         self.view.backgroundColor = HBColor.lightGray
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let navigationController = self.navigationController {
+            navigationController.hidesBarsOnSwipe = false
+        }
+    }
 }
