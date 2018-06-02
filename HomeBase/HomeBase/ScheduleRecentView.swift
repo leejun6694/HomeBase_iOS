@@ -19,19 +19,19 @@ class ScheduleRecentView: UIView {
     var scheduleCount: Int = 0 {
         didSet {
             if scheduleCount == 0 {
-                if recordStackView.isDescendant(of: self) {
+                if recordStackView.isDescendant(of: backgroundImageView) {
                     recordStackView.removeFromSuperview()
                 }
                 
-                self.addSubview(noDataLabel)
-                self.addConstraints(noDataLabelConstraints())
+                backgroundImageView.addSubview(noDataLabel)
+                backgroundImageView.addConstraints(noDataLabelConstraints())
             } else {
-                if noDataLabel.isDescendant(of: self) {
+                if noDataLabel.isDescendant(of: backgroundImageView) {
                     noDataLabel.removeFromSuperview()
                 }
                 
-                self.addSubview(recordStackView)
-                self.addConstraints(recordStackViewConstraints())
+                backgroundImageView.addSubview(recordStackView)
+                backgroundImageView.addConstraints(recordStackViewConstraints())
                 recordStackView.spacing = self.frame.size.width * 14/414
             }
         }
@@ -210,8 +210,8 @@ class ScheduleRecentView: UIView {
         self.addConstraints(teamLogoImageViewConstraints())
         self.addSubview(recordLabel)
         self.addConstraints(recordLabelConstraints())
-        self.addSubview(noDataLabel)
-        self.addConstraints(noDataLabelConstraints())
+//        self.addSubview(noDataLabel)
+//        self.addConstraints(noDataLabelConstraints())
     }
 }
 
@@ -253,16 +253,16 @@ extension ScheduleRecentView {
     private func recordLabelConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: recordLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 220/173, constant: 0.0)
+            toItem: backgroundImageView, attribute: .centerY, multiplier: 220/173, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: recordLabel, attribute: .centerX, relatedBy: .equal,
-            toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+            toItem: backgroundImageView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: recordLabel, attribute: .width, relatedBy: .equal,
-            toItem: self, attribute: .width, multiplier: 94/414, constant: 0.0)
+            toItem: backgroundImageView, attribute: .width, multiplier: 94/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: recordLabel, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 15/346, constant: 0.0)
+            toItem: backgroundImageView, attribute: .height, multiplier: 15/346, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -270,16 +270,16 @@ extension ScheduleRecentView {
     private func recordStackViewConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: recordStackView, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 248/173, constant: 0.0)
+            toItem: backgroundImageView, attribute: .centerY, multiplier: 248/173, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: recordStackView, attribute: .centerX, relatedBy: .equal,
-            toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+            toItem: backgroundImageView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: recordStackView, attribute: .width, relatedBy: .equal,
-            toItem: self, attribute: .width, multiplier: 332/414, constant: 0.0)
+            toItem: backgroundImageView, attribute: .width, multiplier: 332/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: recordStackView, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 76/346, constant: 6.0)
+            toItem: backgroundImageView, attribute: .height, multiplier: 76/346, constant: 6.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -287,16 +287,16 @@ extension ScheduleRecentView {
     private func noDataLabelConstraints() -> [NSLayoutConstraint] {
         let topConstraint = NSLayoutConstraint(
             item: noDataLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 251/173, constant: 0.0)
+            toItem: backgroundImageView, attribute: .centerY, multiplier: 251/173, constant: 0.0)
         let centerXConstraint = NSLayoutConstraint(
             item: noDataLabel, attribute: .centerX, relatedBy: .equal,
-            toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+            toItem: backgroundImageView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: noDataLabel, attribute: .width, relatedBy: .equal,
-            toItem: self, attribute: .width, multiplier: 187/414, constant: 0.0)
+            toItem: backgroundImageView, attribute: .width, multiplier: 187/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: noDataLabel, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 37/346, constant: 6.0)
+            toItem: backgroundImageView, attribute: .height, multiplier: 37/346, constant: 6.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }

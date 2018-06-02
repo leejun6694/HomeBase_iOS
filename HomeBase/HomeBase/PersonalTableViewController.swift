@@ -68,6 +68,8 @@ class PersonalTableViewController: UITableViewController {
         if let navigationController = self.navigationController {
             navigationController.hidesBarsOnSwipe = true
         }
+        
+        headerView.reloadGraph()
     }
 }
 

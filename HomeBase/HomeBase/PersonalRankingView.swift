@@ -16,6 +16,7 @@ class PersonalRankingView: UIView {
         let firstRankLabel = UILabel()
         firstRankLabel.text = "기록명"
         firstRankLabel.textColor = .white
+        firstRankLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13.0)
         firstRankLabel.textAlignment = .center
         firstRankLabel.adjustsFontSizeToFitWidth = true
         firstRankLabel.minimumScaleFactor = 0.5
@@ -28,6 +29,7 @@ class PersonalRankingView: UIView {
         let secondRankLabel = UILabel()
         secondRankLabel.text = "기록명"
         secondRankLabel.textColor = .white
+        secondRankLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13.0)
         secondRankLabel.textAlignment = .center
         secondRankLabel.adjustsFontSizeToFitWidth = true
         secondRankLabel.minimumScaleFactor = 0.5
@@ -40,6 +42,7 @@ class PersonalRankingView: UIView {
         let thirdRankLabel = UILabel()
         thirdRankLabel.text = "기록명"
         thirdRankLabel.textColor = .white
+        thirdRankLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13.0)
         thirdRankLabel.textAlignment = .center
         thirdRankLabel.adjustsFontSizeToFitWidth = true
         thirdRankLabel.minimumScaleFactor = 0.5
