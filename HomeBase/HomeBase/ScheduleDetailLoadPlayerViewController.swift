@@ -93,7 +93,7 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
     }()
     
     private lazy var playerImageView: UIImageView = {
-        let playerImageView = UIImageView()
+        let playerImageView = UIImageView(image: #imageLiteral(resourceName: "personal_default"))
         playerImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
         playerImageView.layer.borderWidth = 1.0
         playerImageView.clipsToBounds = true
