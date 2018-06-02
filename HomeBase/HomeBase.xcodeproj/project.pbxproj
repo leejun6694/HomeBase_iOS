@@ -16,6 +16,7 @@
 		720E98AE20B72B9400C45CEE /* PersonalRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720E98AD20B72B9400C45CEE /* PersonalRecordView.swift */; };
 		720E98B020B8230500C45CEE /* PersonalSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720E98AF20B8230500C45CEE /* PersonalSettingViewController.swift */; };
 		7213179420C2892E00A512C1 /* TeamInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213179320C2892E00A512C1 /* TeamInfoView.swift */; };
+		7213179620C2969000A512C1 /* TeamDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213179520C2969000A512C1 /* TeamDataView.swift */; };
 		72134FC2203D9300007B7FCB /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72134FC1203D9300007B7FCB /* MainTableViewController.swift */; };
 		7213D76D2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */; };
 		7213D7712021BBE000FB028C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D7702021BBE000FB028C /* Models.swift */; };
@@ -112,6 +113,7 @@
 		720E98AD20B72B9400C45CEE /* PersonalRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRecordView.swift; sourceTree = "<group>"; };
 		720E98AF20B8230500C45CEE /* PersonalSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalSettingViewController.swift; sourceTree = "<group>"; };
 		7213179320C2892E00A512C1 /* TeamInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoView.swift; sourceTree = "<group>"; };
+		7213179520C2969000A512C1 /* TeamDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDataView.swift; sourceTree = "<group>"; };
 		72134FC1203D9300007B7FCB /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		7213D76C2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamCompleteViewController.swift; sourceTree = "<group>"; };
 		7213D7702021BBE000FB028C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				72DAEE9D20C2868F00E9E3E3 /* TeamNavigation.swift */,
 				72DAEE9B20C2867E00E9E3E3 /* TeamTableViewController.swift */,
 				7213179320C2892E00A512C1 /* TeamInfoView.swift */,
+				7213179520C2969000A512C1 /* TeamDataView.swift */,
 			);
 			name = Team;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				72B7A74320B2EE5100E9AEB9 /* PersonalTableViewController.swift in Sources */,
 				72E96C9A200603A000B68F29 /* RegisterTeamJoinViewController.swift in Sources */,
 				72B7A74120B2EDFF00E9AEB9 /* PersonalNavigation.swift in Sources */,
+				7213179620C2969000A512C1 /* TeamDataView.swift in Sources */,
 				728EE77A203369F2006108F9 /* MainBlankView.swift in Sources */,
 				72DAEE9C20C2867E00E9E3E3 /* TeamTableViewController.swift in Sources */,
 				72134FC2203D9300007B7FCB /* MainTableViewController.swift in Sources */,

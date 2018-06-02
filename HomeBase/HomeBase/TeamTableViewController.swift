@@ -16,6 +16,7 @@ class TeamTableViewController: UITableViewController {
     var teamLogo: UIImage!
     
     private let teamInfoView = TeamInfoView()
+    private let teamDataView = TeamDataView()
     
     private lazy var settingButton: UIBarButtonItem = {
         let settingButton = UIBarButtonItem(
@@ -79,6 +80,7 @@ extension TeamTableViewController {
         
         switch section {
         case 0: return teamInfoView
+        case 1: return teamDataView
         default: return nil
         }
     }
@@ -86,7 +88,8 @@ extension TeamTableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         switch section {
-        case 0: return CGFloat(self.view.frame.size.height * 394/736).rounded()
+        case 0: return CGFloat(self.view.frame.size.width * 347/414).rounded()
+        case 1: return CGFloat(self.view.frame.size.height * 40/736).rounded()
         default: return 0.0
         }
     }
