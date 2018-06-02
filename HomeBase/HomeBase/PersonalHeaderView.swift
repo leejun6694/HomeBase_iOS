@@ -25,7 +25,8 @@ class PersonalHeaderView: UIView {
     }
     
     private lazy var playerImageView: UIImageView = {
-        let playerImageView = UIImageView()
+        let playerImageView = UIImageView(image: #imageLiteral(resourceName: "personal_default"))
+        playerImageView.backgroundColor = .white
         playerImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
         playerImageView.layer.borderWidth = 1.0
         playerImageView.clipsToBounds = true
@@ -38,7 +39,7 @@ class PersonalHeaderView: UIView {
         let nameLabel = UILabel()
         nameLabel.text = ""
         nameLabel.textColor = .white
-        nameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 29.0)
+        nameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 23.0)
         nameLabel.textAlignment = .center
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.minimumScaleFactor = 0.5
