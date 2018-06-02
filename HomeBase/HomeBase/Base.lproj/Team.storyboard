@@ -1,31 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iPU-5t-QEt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9c6-K2-YIL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--팀-->
-        <scene sceneID="pQY-9q-lOv">
+        <scene sceneID="xuT-Gm-gPF">
             <objects>
-                <viewController id="iPU-5t-QEt" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3of-jN-bnq">
+                <navigationController storyboardIdentifier="TeamNavigation" automaticallyAdjustsScrollViewInsets="NO" id="9c6-K2-YIL" customClass="TeamNavigation" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="팀" image="teamIcon" id="k5a-LH-eN4"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iqi-s9-YQV">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tYH-51-yxJ" kind="relationship" relationship="rootViewController" id="thy-gO-Flh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pyh-cb-9XJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1770.4000000000001" y="974.6626686656673"/>
+        </scene>
+        <!--Team Table View Controller-->
+        <scene sceneID="i3u-44-GDa">
+            <objects>
+                <tableViewController storyboardIdentifier="TeamTableViewController" id="tYH-51-yxJ" customClass="TeamTableViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2BD-aj-S9a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Nun-o9-AOV"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="팀" image="teamIcon" id="k5a-LH-eN4"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yTe-Dh-xL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="cV4-nd-azp">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cV4-nd-azp" id="8Lr-8m-yma">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tYH-51-yxJ" id="c5C-fV-7Cw"/>
+                            <outlet property="delegate" destination="tYH-51-yxJ" id="IXa-R1-d3x"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Yie-4Q-Yfd"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KFe-e3-wW1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1771" y="975"/>
+            <point key="canvasLocation" x="2527" y="975"/>
         </scene>
     </scenes>
     <resources>
