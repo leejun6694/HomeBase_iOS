@@ -14,6 +14,9 @@ class PersonalHeaderView: UIView {
 
     // MARK: Properties
     
+    var existGraph = PersonalRankingGraphView()
+    var notExistGraph = PersonalRankingGraphView()
+    
     var playerData: HBPlayer! {
         didSet {
             nameLabel.text = "\(playerData.backNumber) \(playerData.name)"
@@ -22,7 +25,8 @@ class PersonalHeaderView: UIView {
     }
     
     private lazy var playerImageView: UIImageView = {
-        let playerImageView = UIImageView()
+        let playerImageView = UIImageView(image: #imageLiteral(resourceName: "personal_default"))
+        playerImageView.backgroundColor = .white
         playerImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
         playerImageView.layer.borderWidth = 1.0
         playerImageView.clipsToBounds = true
@@ -35,7 +39,7 @@ class PersonalHeaderView: UIView {
         let nameLabel = UILabel()
         nameLabel.text = ""
         nameLabel.textColor = .white
-        nameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 28.0)
+        nameLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 23.0)
         nameLabel.textAlignment = .center
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.minimumScaleFactor = 0.5
@@ -48,7 +52,7 @@ class PersonalHeaderView: UIView {
         let positionLabel = UILabel()
         positionLabel.text = "2루수"
         positionLabel.textColor = .white
-        positionLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14.0)
+        positionLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 13.0)
         positionLabel.textAlignment = .center
         positionLabel.adjustsFontSizeToFitWidth = true
         positionLabel.minimumScaleFactor = 0.5
@@ -97,35 +101,40 @@ class PersonalHeaderView: UIView {
     // MARK: Methods
     
     private func addExistGraphView() {
-        let graphX = self.frame.size.width * 60/414
-        let graphY = self.frame.size.height * 345/527
-        let graphWidth = self.frame.size.width * 125/414
+        let graphX = self.frame.size.width * 63/414
+        let graphY = self.frame.size.height * 350/527
+        let graphWidth = self.frame.size.width * 120/414
         let graphHeight = graphWidth
         
-        let graphView = PersonalRankingGraphView(frame: CGRect(
+        existGraph = PersonalRankingGraphView(frame: CGRect(
             x: graphX,
             y: graphY,
             width: graphWidth,
             height: graphHeight))
         
-        self.addSubview(graphView)
-        graphView.percentage = 0.7
+        self.addSubview(existGraph)
+        existGraph.percentage = 0.7
     }
     
     private func addNotExistGraphView() {
-        let graphX = self.frame.size.width * 227/414
-        let graphY = self.frame.size.height * 345/527
-        let graphWidth = self.frame.size.width * 125/414
+        let graphX = self.frame.size.width * 231/414
+        let graphY = self.frame.size.height * 350/527
+        let graphWidth = self.frame.size.width * 120/414
         let graphHeight = graphWidth
         
-        let graphView = PersonalRankingGraphView(frame: CGRect(
+        notExistGraph = PersonalRankingGraphView(frame: CGRect(
             x: graphX,
             y: graphY,
             width: graphWidth,
             height: graphHeight))
         
-        self.addSubview(graphView)
-        graphView.percentage = 0.25
+        self.addSubview(notExistGraph)
+        notExistGraph.percentage = 0.25
+    }
+    
+    func reloadGraph() {
+        existGraph.percentage = 0.7
+        notExistGraph.percentage = 0.25
     }
     
     // MARK: Draw
@@ -240,7 +249,7 @@ extension PersonalHeaderView {
             toItem: self, attribute: .width, multiplier: 140/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: existLabel, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 18/527, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 17/527, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
@@ -257,7 +266,7 @@ extension PersonalHeaderView {
             toItem: self, attribute: .width, multiplier: 140/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: notExistLabel, attribute: .height, relatedBy: .equal,
-            toItem: self, attribute: .height, multiplier: 18/527, constant: 0.0)
+            toItem: self, attribute: .height, multiplier: 17/527, constant: 0.0)
         
         return [topConstraint, centerXConstraint, widthConstraint, heightConstraint]
     }
