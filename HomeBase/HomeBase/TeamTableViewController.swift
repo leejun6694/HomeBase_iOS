@@ -37,7 +37,17 @@ class TeamTableViewController: UITableViewController {
     // MARK: Methods
     
     @objc private func settingButtonDidTapped(_ sender: UIButton) {
+        guard let teamSettingTeamDataViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "TeamSettingTeamDataViewController")
+                as? TeamSettingTeamDataViewController else { return }
         
+        teamSettingTeamDataViewController.teamData = teamData
+        teamSettingTeamDataViewController.teamLogo = teamLogo
+        
+        self.navigationController?.pushViewController(
+            teamSettingTeamDataViewController,
+            animated: true)
     }
     
     private func checkTeamAdmin() {
@@ -108,7 +118,6 @@ class TeamTableViewController: UITableViewController {
             navigationController.navigationBar.barTintColor = UIColor.clear
             navigationController.navigationBar.shadowImage = UIImage()
             navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.hidesBarsOnSwipe = true
             
             self.tableView.contentInset.top =
                 -(UIApplication.shared.statusBarFrame.height +
@@ -116,6 +125,14 @@ class TeamTableViewController: UITableViewController {
         }
         
         navigationItem.rightBarButtonItem = settingButton
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let navigationController = self.navigationController {
+            navigationController.hidesBarsOnSwipe = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
