@@ -15,7 +15,7 @@ class ScheduleDetailTableViewController: UITableViewController {
     
     var teamData: HBTeam!
     var cellSchedule: HBSchedule!
-    var arrayOfKeys = [String]()
+    var playerList = [HBPlayer]()
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -55,7 +55,7 @@ class ScheduleDetailTableViewController: UITableViewController {
                         
                         if let teamData = teamData {
                             self.teamData = teamData
-                            self.arrayOfKeys = Array(teamData.members.keys)
+                            self.playerList = teamData.members
                             
                             self.tableView.reloadData()
                             self.viewEnabled(self.view)
@@ -121,15 +121,14 @@ class ScheduleDetailTableViewController: UITableViewController {
         scheduleDetailRecordPlayerViewController.modalPresentationStyle = .overFullScreen
         
         let sid = cellSchedule.sid
-        let pid = arrayOfKeys[sender.tag]
-        let player = teamData.members[pid]
+        let player = playerList[sender.tag]
         
-        if let record = cellSchedule.records[pid] {
+        if let record = cellSchedule.records[player.pid] {
             scheduleDetailRecordPlayerViewController.record = record
         }
         
         scheduleDetailRecordPlayerViewController.sid = sid
-        scheduleDetailRecordPlayerViewController.pid = pid
+        scheduleDetailRecordPlayerViewController.pid = player.pid
         scheduleDetailRecordPlayerViewController.player = player
         self.present(
             scheduleDetailRecordPlayerViewController,
@@ -170,7 +169,7 @@ class ScheduleDetailTableViewController: UITableViewController {
             forCellReuseIdentifier: cellReuseIdendifier)
         
         setupRefreshControl()
-        arrayOfKeys = Array(teamData.members.keys)
+        self.playerList = teamData.members
         
         scheduleDetailInfoView.homeTeamButton.addTarget(
             self,
@@ -245,11 +244,9 @@ extension ScheduleDetailTableViewController {
             cell.baseView.backgroundColor = UIColor.white.withAlphaComponent(0.95)
         }
         
-        let key = arrayOfKeys[indexPath.row]
-        if let player = teamData.members[key] {
-            cell.backNumber = player.backNumber
-            cell.name = player.name
-        }
+        let player = playerList[indexPath.row]
+        cell.backNumber = player.backNumber
+        cell.name = player.name
         
         cell.recordPlayerButton.tag = indexPath.row
         if let currentUser = Auth.auth().currentUser {
@@ -283,10 +280,9 @@ extension ScheduleDetailTableViewController {
         self.tabBarController?.definesPresentationContext = false
         scheduleDetailLoadPlayerViewController.modalPresentationStyle = .overFullScreen
         
-        let pid = arrayOfKeys[indexPath.row]
-        let player = teamData.members[pid]
+        let player = playerList[indexPath.row]
 
-        if let record = cellSchedule.records[pid] {
+        if let record = cellSchedule.records[player.pid] {
             scheduleDetailLoadPlayerViewController.record = record
         }
 

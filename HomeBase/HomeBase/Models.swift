@@ -31,6 +31,7 @@ class HBUser {
 }
 
 class HBPlayer {
+    var pid: String
     var name: String
     var position: String
     var backNumber: Int
@@ -39,7 +40,8 @@ class HBPlayer {
     var batPosition: String
     var pitchPosition: String
     
-    init(name: String,
+    init(pid: String,
+         name: String,
          position: String,
          backNumber: Int,
          height: Int,
@@ -47,6 +49,7 @@ class HBPlayer {
          batPoition: String,
          pitchPosition: String) {
         
+        self.pid = pid
         self.name = name
         self.position = position
         self.backNumber = backNumber
@@ -62,13 +65,13 @@ class HBTeam {
     var logo: String
     var description: String
     var admin: String
-    var members: [String: HBPlayer]
+    var members: [HBPlayer]
     
     init(name: String,
          logo: String,
          description: String,
          admin: String,
-         members: [String: HBPlayer]) {
+         members: [HBPlayer]) {
         
         self.name = name
         self.logo = logo
