@@ -69,43 +69,41 @@ struct CloudFunction {
     
     static func getPlayerDataWith(
         _ currentUser: User,
-        completion: @escaping(_ player: HBPlayer?, _ error: Error?) ->()) {
+        completion: @escaping(_ player: HBPlayer?, _ error: String?) ->()) {
         
-        let parameterDictionary = ["uid": currentUser.uid]
+        let ref = Database.database().reference()
+        let playerRef = ref.child("players").child(currentUser.uid)
         
-        Alamofire.request(
-            CloudFunction.methodURL(method: Method.getPlayer),
-            method: .get,
-            parameters: parameterDictionary).responseJSON{
-                (response) -> Void in
+        playerRef.observeSingleEvent(of: .value) {
+            (snapshot, error) in
+            
+            if let error = error {
+                completion(nil, error)
+            } else {
+                guard let value = snapshot.value as? [String: Any] else { return }
+                let pid = snapshot.key
                 
-                if response.result.isSuccess {
-                    guard let value = response.result.value as? [String: Any]
-                        else { return }
+                if let name = value["name"] as? String,
+                    let position = value["position"] as? String,
+                    let backNumber = value["backNumber"] as? Int,
+                    let height = value["height"] as? Int,
+                    let weight = value["weight"] as? Int,
+                    let batPosition = value["batPosition"] as? String,
+                    let pitchPosition = value["pitchPosition"] as? String {
                     
-                    if let name = value["name"] as? String,
-                        let position = value["position"] as? String,
-                        let backNumber = value["backNumber"] as? Int,
-                        let height = value["height"] as? Int,
-                        let weight = value["weight"] as? Int,
-                        let batPosition = value["batPosition"] as? String,
-                        let pitchPosition = value["pitchPosition"] as? String {
-                        
-                        let player = HBPlayer(
-                            name: name,
-                            position: position,
-                            backNumber: backNumber,
-                            height: height,
-                            weight: weight,
-                            batPoition: batPosition,
-                            pitchPosition: pitchPosition)
-                        
-                        completion(player, nil)
-                    }
-                } else {
-                    let error = response.result.error
-                    completion(nil, error)
+                    let player = HBPlayer(
+                        pid: pid,
+                        name: name,
+                        position: position,
+                        backNumber: backNumber,
+                        height: height,
+                        weight: weight,
+                        batPoition: batPosition,
+                        pitchPosition: pitchPosition)
+                    
+                    completion(player, nil)
                 }
+            }
         }
     }
     
@@ -131,9 +129,9 @@ struct CloudFunction {
                         let admin = value["admin"] as? String,
                         let memberList = value["members"] as? [String: [String: Any]]  {
 
-                        var members = [String: HBPlayer]()
+                        var members = [HBPlayer]()
 
-                        for (uid, member) in memberList {
+                        for (pid, member) in memberList {
                             if let name = member["name"] as? String,
                                 let position = member["position"] as? String,
                                 let backNumber = member["backNumber"] as? Int,
@@ -143,6 +141,7 @@ struct CloudFunction {
                                 let pitchPosition = member["pitchPosition"] as? String {
 
                                 let player = HBPlayer(
+                                    pid: pid,
                                     name: name,
                                     position: position,
                                     backNumber: backNumber,
@@ -151,7 +150,7 @@ struct CloudFunction {
                                     batPoition: batPosition,
                                     pitchPosition: pitchPosition)
 
-                                members[uid] = player
+                                members.append(player)
                             }
                         }
 
