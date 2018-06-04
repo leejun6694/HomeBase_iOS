@@ -52,7 +52,7 @@ class TeamPlayerListCell: UITableViewCell {
         let backNumberLabel = UILabel()
         backNumberLabel.text = "0"
         backNumberLabel.textColor = HBColor.lightGray
-        backNumberLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 30.0)
+        backNumberLabel.font = UIFont(name: "AppleSDGothicNeo-Light", size: 28.0)
         backNumberLabel.textAlignment = .center
         backNumberLabel.adjustsFontSizeToFitWidth = true
         backNumberLabel.minimumScaleFactor = 0.5

@@ -40,6 +40,14 @@ class TeamTableViewController: UITableViewController {
         
     }
     
+    private func checkTeamAdmin() {
+        for (index, player) in playerList.enumerated() {
+            if player.pid == teamData.admin {
+                playerList.swapAt(0, index)
+            }
+        }
+    }
+    
     private func fetchTeamData() {
         if let mainTabBarController = self.tabBarController as? MainTabBarController {
             teamData = mainTabBarController.teamData
@@ -48,9 +56,11 @@ class TeamTableViewController: UITableViewController {
             teamInfoView.teamLogo = teamLogo
             
             self.playerList = teamData.members
+            self.playerList = self.playerList.sorted(
+                by: { $0.backNumber < $1.backNumber })
+            checkTeamAdmin()
         }
     }
-    
     
     private func tableViewReloadData() {
         viewDisabled(self.view)
@@ -67,6 +77,9 @@ class TeamTableViewController: UITableViewController {
                     if let teamData = teamData {
                         self.teamData = teamData
                         self.playerList = teamData.members
+                        self.playerList = self.playerList.sorted(
+                            by: { $0.backNumber < $1.backNumber })
+                        self.checkTeamAdmin()
                         
                         self.tableView.reloadData()
                         self.viewEnabled(self.view)
@@ -88,8 +101,8 @@ class TeamTableViewController: UITableViewController {
         self.tableView.register(
             TeamPlayerListCell.self,
             forCellReuseIdentifier: cellReuseIdendifier)
-        
         self.tableView.bounces = false
+        self.tableView.tableFooterView = UIView()
         
         if let navigationController = self.navigationController {
             navigationController.navigationBar.barTintColor = UIColor.clear
@@ -104,6 +117,12 @@ class TeamTableViewController: UITableViewController {
         
         navigationItem.rightBarButtonItem = settingButton
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tableViewReloadData()
+    }
 }
 
 extension TeamTableViewController {
@@ -113,7 +132,7 @@ extension TeamTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 2: return 10
+        case 2: return playerList.count
         default: return 0
         }
     }
@@ -138,6 +157,9 @@ extension TeamTableViewController {
         if indexPath.row == 0 {
             cell.isAdmin = true
         }
+        
+        cell.backNumber = playerList[indexPath.row].backNumber
+        cell.name = playerList[indexPath.row].name
         
         return cell
     }
