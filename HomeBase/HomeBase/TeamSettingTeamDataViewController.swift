@@ -80,6 +80,45 @@ class TeamSettingTeamDataViewController: UIViewController {
         return teamLogoSettingImageView
     }()
     
+    private lazy var homeStadiumLabel: UILabel = {
+        let homeStadiumLabel = UILabel()
+        homeStadiumLabel.text = "홈 구장"
+        homeStadiumLabel.textColor = .white
+        homeStadiumLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15.0)
+        homeStadiumLabel.adjustsFontSizeToFitWidth = true
+        homeStadiumLabel.minimumScaleFactor = 0.5
+        homeStadiumLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return homeStadiumLabel
+    }()
+    
+    private lazy var homeStadiumTextField: UITextField = {
+        let homeStadiumTextField = UITextField()
+        homeStadiumTextField.textColor = .white
+        homeStadiumTextField.tintColor = .white
+        homeStadiumTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
+        homeStadiumTextField.adjustsFontSizeToFitWidth = true
+        homeStadiumTextField.minimumFontSize = 9.0
+        homeStadiumTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        return homeStadiumTextField
+    }()
+    
+    private lazy var homeStadiumTextFieldBorder: UIView = {
+        let homeStadiumTextFieldBorder = UIView()
+        homeStadiumTextFieldBorder.backgroundColor = .white
+        homeStadiumTextFieldBorder.translatesAutoresizingMaskIntoConstraints = false
+        
+        return homeStadiumTextFieldBorder
+    }()
+    
+    private lazy var homeStadiumConditionImageView: UIImageView = {
+        let homeStadiumConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
+        homeStadiumConditionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return homeStadiumConditionImageView
+    }()
+    
     // MARK: Methods
     
     @objc private func doneButtonDidTapped(_ sender: UIBarButtonItem) {
@@ -112,6 +151,13 @@ class TeamSettingTeamDataViewController: UIViewController {
         self.view.addConstraints(teamPhotoSettingImageViewConstraints())
         self.view.addSubview(teamLogoSettingImageView)
         self.view.addConstraints(teamLogoSettingImageViewConstraints())
+        
+        self.view.addSubview(homeStadiumLabel)
+        self.view.addConstraints(homeStadiumLabelConstraints())
+        self.view.addSubview(homeStadiumTextField)
+        self.view.addConstraints(homeStadiumTextFieldConstraints())
+        self.view.addSubview(homeStadiumTextFieldBorder)
+        self.view.addConstraints(homeStadiumTextFieldBorderConstraints())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -200,5 +246,56 @@ extension TeamSettingTeamDataViewController {
             toItem: teamLogoSettingImageView, attribute: .width, multiplier: 1.0, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func homeStadiumLabelConstraints() -> [NSLayoutConstraint] {
+        let leadingConstraint = NSLayoutConstraint(
+            item: homeStadiumLabel, attribute: .leading, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 44/207, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: homeStadiumLabel, attribute: .top, relatedBy: .equal,
+            toItem: teamLogoImageView, attribute: .bottom, multiplier: 1.0, constant: 30.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: homeStadiumLabel, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 50/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: homeStadiumLabel, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 19/736, constant: 0.0)
+        
+        return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func homeStadiumTextFieldConstraints() -> [NSLayoutConstraint] {
+        let leadingConstraint = NSLayoutConstraint(
+            item: homeStadiumTextField, attribute: .leading, relatedBy: .equal,
+            toItem: homeStadiumLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: homeStadiumTextField, attribute: .top, relatedBy: .equal,
+            toItem: homeStadiumLabel, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: homeStadiumTextField, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 297/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: homeStadiumTextField, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 37/736, constant: 0.0)
+        
+        return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func homeStadiumTextFieldBorderConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: homeStadiumTextFieldBorder, attribute: .centerX, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: homeStadiumTextFieldBorder, attribute: .top, relatedBy: .equal,
+            toItem: homeStadiumTextField, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: homeStadiumTextFieldBorder, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 345/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: homeStadiumTextFieldBorder, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 2/736, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
     }
 }

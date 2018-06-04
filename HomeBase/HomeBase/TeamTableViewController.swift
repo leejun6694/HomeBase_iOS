@@ -123,8 +123,6 @@ class TeamTableViewController: UITableViewController {
                 -(UIApplication.shared.statusBarFrame.height +
                     navigationController.navigationBar.frame.size.height)
         }
-        
-        navigationItem.rightBarButtonItem = settingButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,12 +131,28 @@ class TeamTableViewController: UITableViewController {
         if let navigationController = self.navigationController {
             navigationController.hidesBarsOnSwipe = false
         }
+        
+        if let currentUser = Auth.auth().currentUser {
+            if teamData.admin == currentUser.uid {
+                navigationItem.rightBarButtonItem = settingButton
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         tableViewReloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let currentUser = Auth.auth().currentUser {
+            if teamData.admin == currentUser.uid {
+                navigationItem.rightBarButtonItem = nil
+            }
+        }
     }
 }
 
