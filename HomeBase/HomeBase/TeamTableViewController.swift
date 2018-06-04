@@ -18,6 +18,8 @@ class TeamTableViewController: UITableViewController {
     private let teamInfoView = TeamInfoView()
     private let teamDataView = TeamDataView()
     
+    private let cellReuseIdendifier = "playerListCell"
+    
     private lazy var settingButton: UIBarButtonItem = {
         let settingButton = UIBarButtonItem(
             image: #imageLiteral(resourceName: "settingIcon"),
@@ -50,6 +52,10 @@ class TeamTableViewController: UITableViewController {
 
         fetchTeamData()
         
+        self.tableView.register(
+            TeamPlayerListCell.self,
+            forCellReuseIdentifier: cellReuseIdendifier)
+        
         self.tableView.bounces = false
         
         if let navigationController = self.navigationController {
@@ -73,7 +79,10 @@ extension TeamTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        switch section {
+        case 2: return 10
+        default: return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -85,12 +94,35 @@ extension TeamTableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellReuseIdendifier,
+            for: indexPath) as! TeamPlayerListCell
+        
+        cell.selectionStyle = .none
+        
+        if indexPath.row == 0 {
+            cell.isAdmin = true
+        }
+        
+        return cell
+    }
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         switch section {
         case 0: return CGFloat(self.view.frame.size.width * 347/414).rounded()
         case 1: return CGFloat(self.view.frame.size.height * 40/736).rounded()
         default: return 0.0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch indexPath.section {
+        case 2: return CGFloat(self.view.frame.size.height * 77/736).rounded()
+        default: return 0
         }
     }
 }
