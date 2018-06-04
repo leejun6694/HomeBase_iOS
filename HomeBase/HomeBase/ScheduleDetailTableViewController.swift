@@ -56,6 +56,8 @@ class ScheduleDetailTableViewController: UITableViewController {
                         if let teamData = teamData {
                             self.teamData = teamData
                             self.playerList = teamData.members
+                            self.playerList =
+                                self.playerList.sorted(by: { $0.backNumber < $1.backNumber })
                             
                             self.tableView.reloadData()
                             self.viewEnabled(self.view)
@@ -170,6 +172,8 @@ class ScheduleDetailTableViewController: UITableViewController {
         
         setupRefreshControl()
         self.playerList = teamData.members
+        self.playerList =
+            self.playerList.sorted(by: { $0.backNumber < $1.backNumber })
         
         scheduleDetailInfoView.homeTeamButton.addTarget(
             self,
