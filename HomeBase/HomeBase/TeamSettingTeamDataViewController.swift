@@ -152,6 +152,21 @@ class TeamSettingTeamDataViewController: UIViewController {
         return createAtConditionImageView
     }()
     
+    private lazy var teamMemberButton: UIButton = {
+        let teamMemberButton = UIButton(type: .system)
+        teamMemberButton.setTitle("팀원 관리", for: .normal)
+        teamMemberButton.setTitleColor(HBColor.lightGray, for: .normal)
+        teamMemberButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 16.0)
+        teamMemberButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        teamMemberButton.titleLabel?.minimumScaleFactor = 0.5
+        teamMemberButton.backgroundColor = .white
+        teamMemberButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return teamMemberButton
+    }()
+    
     // MARK: Methods
     
     @objc private func doneButtonDidTapped(_ sender: UIBarButtonItem) {
@@ -197,6 +212,8 @@ class TeamSettingTeamDataViewController: UIViewController {
         self.view.addConstraints(createAtTextFieldConstraints())
         self.view.addSubview(createAtTextFieldBorder)
         self.view.addConstraints(createAtTextFieldBorderConstraints())
+        self.view.addSubview(teamMemberButton)
+        self.view.addConstraints(teamMemberButtonConstraints())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -215,6 +232,7 @@ class TeamSettingTeamDataViewController: UIViewController {
             teamPhotoSettingImageView.frame.size.height / 2
         teamLogoSettingImageView.layer.cornerRadius =
             teamLogoSettingImageView.frame.size.height / 2
+        teamMemberButton.layer.cornerRadius = 10.0
     }
 }
 
@@ -366,7 +384,7 @@ extension TeamSettingTeamDataViewController {
             item: createAtTextField, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 297/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: homeStadiumTextField, attribute: .height, relatedBy: .equal,
+            item: createAtTextField, attribute: .height, relatedBy: .equal,
             toItem: self.view, attribute: .height, multiplier: 37/736, constant: 0.0)
         
         return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
@@ -385,6 +403,23 @@ extension TeamSettingTeamDataViewController {
         let heightConstraint = NSLayoutConstraint(
             item: createAtTextFieldBorder, attribute: .height, relatedBy: .equal,
             toItem: self.view, attribute: .height, multiplier: 2/736, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func teamMemberButtonConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: teamMemberButton, attribute: .centerX, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: teamMemberButton, attribute: .top, relatedBy: .equal,
+            toItem: teamLogoImageView, attribute: .bottom, multiplier: 1.0, constant: self.view.bounds.size.height * 255/736)
+        let widthConstraint = NSLayoutConstraint(
+            item: teamMemberButton, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 345/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: teamMemberButton, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 60/736, constant: 0.0)
         
         return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
     }
