@@ -37,7 +37,17 @@ class TeamTableViewController: UITableViewController {
     // MARK: Methods
     
     @objc private func settingButtonDidTapped(_ sender: UIButton) {
+        guard let teamSettingTeamDataViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "TeamSettingTeamDataViewController")
+                as? TeamSettingTeamDataViewController else { return }
         
+        teamSettingTeamDataViewController.teamData = teamData
+        teamSettingTeamDataViewController.teamLogo = teamLogo
+        
+        self.navigationController?.pushViewController(
+            teamSettingTeamDataViewController,
+            animated: true)
     }
     
     private func checkTeamAdmin() {
@@ -108,20 +118,41 @@ class TeamTableViewController: UITableViewController {
             navigationController.navigationBar.barTintColor = UIColor.clear
             navigationController.navigationBar.shadowImage = UIImage()
             navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.hidesBarsOnSwipe = true
             
             self.tableView.contentInset.top =
                 -(UIApplication.shared.statusBarFrame.height +
                     navigationController.navigationBar.frame.size.height)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        navigationItem.rightBarButtonItem = settingButton
+        if let navigationController = self.navigationController {
+            navigationController.hidesBarsOnSwipe = false
+        }
+        
+        if let currentUser = Auth.auth().currentUser {
+            if teamData.admin == currentUser.uid {
+                navigationItem.rightBarButtonItem = settingButton
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         tableViewReloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let currentUser = Auth.auth().currentUser {
+            if teamData.admin == currentUser.uid {
+                navigationItem.rightBarButtonItem = nil
+            }
+        }
     }
 }
 

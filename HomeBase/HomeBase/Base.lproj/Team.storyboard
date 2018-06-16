@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -52,11 +53,28 @@
                             <outlet property="delegate" destination="tYH-51-yxJ" id="IXa-R1-d3x"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Yie-4Q-Yfd"/>
+                    <navigationItem key="navigationItem" id="Yie-4Q-Yfd">
+                        <barButtonItem key="backBarButtonItem" title=" " id="guW-Y3-rGk"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFe-e3-wW1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2527" y="975"/>
+        </scene>
+        <!--Team Setting Team Data View Controller-->
+        <scene sceneID="bDH-8d-zHm">
+            <objects>
+                <viewController storyboardIdentifier="TeamSettingTeamDataViewController" id="b9L-Sa-Pak" customClass="TeamSettingTeamDataViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HTK-xt-LAk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="glF-uJ-wIC"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NeQ-UE-Wsq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3316" y="975"/>
         </scene>
     </scenes>
     <resources>
