@@ -38,8 +38,6 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -66,5 +64,7 @@
 	<string>710150745832472</string>
 	<key>FacebookDisplayName</key>
 	<string>HomeBase</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string> </string>
 </dict>
 </plist>

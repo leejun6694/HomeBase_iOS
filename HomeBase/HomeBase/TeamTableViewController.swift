@@ -17,6 +17,7 @@ class TeamTableViewController: UITableViewController {
     
     var teamData: HBTeam!
     var teamLogo: UIImage!
+    var teamPhoto: UIImage!
     var playerList = [HBPlayer]()
     
     private let teamInfoView = TeamInfoView()
@@ -44,6 +45,7 @@ class TeamTableViewController: UITableViewController {
         
         teamSettingTeamDataViewController.teamData = teamData
         teamSettingTeamDataViewController.teamLogo = teamLogo
+        teamSettingTeamDataViewController.teamPhoto = teamPhoto
         
         self.navigationController?.pushViewController(
             teamSettingTeamDataViewController,
@@ -62,8 +64,10 @@ class TeamTableViewController: UITableViewController {
         if let mainTabBarController = self.tabBarController as? MainTabBarController {
             teamData = mainTabBarController.teamData
             teamLogo = mainTabBarController.teamLogo
+            teamPhoto = mainTabBarController.teamPhoto
             teamInfoView.teamData = teamData
             teamInfoView.teamLogo = teamLogo
+            teamInfoView.teamPhoto = teamPhoto
             
             self.playerList = teamData.members
             self.playerList = self.playerList.sorted(

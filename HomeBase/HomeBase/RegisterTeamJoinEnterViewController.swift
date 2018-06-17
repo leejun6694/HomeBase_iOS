@@ -42,7 +42,9 @@ class RegisterTeamJoinEnterViewController: UIViewController {
         registerUserNavigation.teamCode = teamCode
         spinnerStopAnimating(spinner)
         
-        UIApplication.shared.keyWindow?.rootViewController = registerUserNavigation
+        self.dismiss(animated: true) {
+            UIApplication.shared.keyWindow?.rootViewController = registerUserNavigation
+        }
     }
     
     @IBAction func cancelButtonDidTapped(_ sender: UIButton) {

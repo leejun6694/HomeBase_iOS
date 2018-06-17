@@ -110,44 +110,56 @@ class RegisterTeamCreateViewController: UIViewController {
             teamLogo = #imageLiteral(resourceName: "team_logo")
         }
         
-        if let logoData = UIImagePNGRepresentation(teamLogo) {
+        if let logoData = UIImagePNGRepresentation(teamLogo),
+            let photoData = UIImagePNGRepresentation(#imageLiteral(resourceName: "backgroundMain")) {
             let logoRef = storageRef.child(teamCode).child("teamLogo")
-            logoRef.putData(logoData)
-            
-            guard let currentUser = Auth.auth().currentUser else { return }
-            let admin: String = currentUser.uid
-            var provider: String = ""
-            for profile in currentUser.providerData {
-                provider = profile.providerID
-            }
-            
-            if provider == "password" {
-                databaseRef.child("users").child(currentUser.uid).updateChildValues(
-                    ["teamCode": teamCode])
-            } else {
-                databaseRef.child("users").child(currentUser.uid).setValue(
-                    ["teamCode": teamCode])
-            }
-            
-            databaseRef.child("teams").child(teamCode).setValue(
-                ["name": teamName,
-                 "logo": logoRef.fullPath,
-                 "description": teamIntro,
-                 "admin": admin])
-            
-            guard let registerTeamCompleteViewController =
-                self.storyboard?.instantiateViewController(
-                    withIdentifier: "RegisterTeamCompleteViewController")
-                    as? RegisterTeamCompleteViewController else { return }
+            let photoRef = storageRef.child(teamCode).child("teamPhoto")
+            logoRef.putData(logoData, metadata: nil) {
+                (logoMetaData, logoError) in
                 
-            registerTeamCompleteViewController.teamLogo = teamLogo
-            registerTeamCompleteViewController.teamName = self.teamName
-            registerTeamCompleteViewController.teamCode = teamCode
-            spinnerStopAnimating(spinner)
-            
-            self.navigationController?.pushViewController(
-                registerTeamCompleteViewController,
-                animated: true)
+                photoRef.putData(photoData, metadata: nil) {
+                    (photoMetaData, photoError) in
+                    
+                    
+                    guard let currentUser = Auth.auth().currentUser else { return }
+                    let admin: String = currentUser.uid
+                    var provider: String = ""
+                    for profile in currentUser.providerData {
+                        provider = profile.providerID
+                    }
+                    
+                    if provider == "password" {
+                        databaseRef.child("users").child(currentUser.uid).updateChildValues(
+                            ["teamCode": teamCode])
+                    } else {
+                        databaseRef.child("users").child(currentUser.uid).setValue(
+                            ["teamCode": teamCode])
+                    }
+                    
+                    databaseRef.child("teams").child(teamCode).setValue(
+                        ["name": self.teamName,
+                         "logo": logoRef.fullPath,
+                         "photo": photoRef.fullPath,
+                         "description": self.teamIntro,
+                         "admin": admin]) {
+                            (error, ref) in
+                            
+                            guard let registerTeamCompleteViewController =
+                                self.storyboard?.instantiateViewController(
+                                    withIdentifier: "RegisterTeamCompleteViewController")
+                                    as? RegisterTeamCompleteViewController else { return }
+                            
+                            registerTeamCompleteViewController.teamLogo = self.teamLogo
+                            registerTeamCompleteViewController.teamName = self.teamName
+                            registerTeamCompleteViewController.teamCode = teamCode
+                            self.spinnerStopAnimating(self.spinner)
+                            
+                            self.navigationController?.pushViewController(
+                                registerTeamCompleteViewController,
+                                animated: true)
+                    }
+                }
+            }
         } else {
             spinnerStopAnimating(spinner)
             print("UIImage to Data error")
@@ -203,6 +215,7 @@ class RegisterTeamCreateViewController: UIViewController {
         self.navigationItem.backBarButtonItem =
             UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
+        teamIntroBaseView.layer.borderColor = UIColor.white.cgColor
         teamIntroTextView.text = "우리는 우주 최강 사회인 야구팀, 홈베이스이다. 다 덤벼라 얍!"
         teamIntroTextView.textColor = .lightGray
         teamIntroTextView.inputAccessoryView = accessoryView
@@ -248,7 +261,6 @@ class RegisterTeamCreateViewController: UIViewController {
         teamLogoImageView.layer.borderWidth = 1.0
         
         teamIntroBaseView.layer.borderWidth = 1.0
-        teamIntroBaseView.layer.borderColor = UIColor.white.cgColor
     }
 }
 
@@ -261,6 +273,10 @@ extension RegisterTeamCreateViewController: UIImagePickerControllerDelegate, UIN
             teamLogoImageView.image = teamLogo
         }
         
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
     }
 }

@@ -43,25 +43,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 MainViewController.progressView.animate(value: 0.75)
                                 if let teamData = teamData {
                                     let storageRef = Storage.storage().reference()
-                                    let imageRef = storageRef.child(teamData.logo)
+                                    let logoRef = storageRef.child(teamData.logo)
+                                    let photoRef = storageRef.child(teamData.photo)
                                     
                                     MainViewController.progressView.animate(value: 1.0)
-                                    imageRef.getData(maxSize: 4 * 1024 * 1024) {
-                                        (data, error) in
+                                    logoRef.getData(maxSize: 4 * 1024 * 1024) {
+                                        (logoData, error) in
                                         
-                                        if let error = error {
-                                            print(error)
-                                        } else {
-                                            let mainStoryboard = UIStoryboard(
-                                                name: "Main",
-                                                bundle: nil)
+                                        photoRef.getData(maxSize: 4 * 1024 * 1024) {
+                                            (photoData, error) in
                                             
-                                            guard let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController else { return }
-                                            
-                                            mainTabBarController.playerData = playerData
-                                            mainTabBarController.teamData = teamData
-                                            mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                                            UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                            if let error = error {
+                                                print(error)
+                                            } else {
+                                                let mainStoryboard = UIStoryboard(
+                                                    name: "Main",
+                                                    bundle: nil)
+                                                
+                                                guard let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController else { return }
+                                                
+                                                mainTabBarController.playerData = playerData
+                                                mainTabBarController.teamData = teamData
+                                                mainTabBarController.teamLogo = UIImage(data: logoData!) ?? #imageLiteral(resourceName: "team_logo")
+                                                mainTabBarController.teamPhoto = UIImage(data: photoData!) ?? #imageLiteral(resourceName: "backgroundMain")
+                                                UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                            }
                                         }
                                     }
                                 }

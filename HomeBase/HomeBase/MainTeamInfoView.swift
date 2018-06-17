@@ -17,6 +17,7 @@ class MainTeamInfoView: UIView {
     
     var teamData: HBTeam!
     var teamLogo: UIImage!
+    var teamPhoto: UIImage!
     
     private lazy var teamPhotoImageView: UIImageView =  {
         let teamPhotoImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundMain"))
@@ -328,6 +329,8 @@ class MainTeamInfoView: UIView {
         teamAverageBaseView.addConstraints(teamBattingAverageLabelConstraints())
         teamAverageBaseView.addSubview(teamBattingAverageRecordLabel)
         teamAverageBaseView.addConstraints(teamBattingAverageRecordLabelConstraints())
+        
+        teamPhotoImageView.image = teamPhoto
     }
 }
 
