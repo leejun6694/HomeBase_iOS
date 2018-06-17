@@ -17,6 +17,7 @@ class MainTabBarController: UITabBarController {
     var playerData: HBPlayer!
     var teamData: HBTeam!
     var teamLogo: UIImage!
+    var teamPhoto: UIImage!
     
     // MARK: Life Cycle
     

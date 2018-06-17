@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import Alamofire
 
-enum Method:String {
+enum Method: String {
     case findEmail = "findEmail"
     case findPassword = "checkEmailByName"
     case getUser = "getUser"
@@ -69,41 +69,44 @@ struct CloudFunction {
     
     static func getPlayerDataWith(
         _ currentUser: User,
-        completion: @escaping(_ player: HBPlayer?, _ error: String?) ->()) {
+        completion: @escaping(_ player: HBPlayer?, _ error: Error?) ->()) {
         
-        let ref = Database.database().reference()
-        let playerRef = ref.child("players").child(currentUser.uid)
+        let parameterDictionary = ["uid": currentUser.uid]
         
-        playerRef.observeSingleEvent(of: .value) {
-            (snapshot, error) in
-            
-            if let error = error {
-                completion(nil, error)
-            } else {
-                guard let value = snapshot.value as? [String: Any] else { return }
-                let pid = snapshot.key
+        Alamofire.request(
+            CloudFunction.methodURL(method: Method.getPlayer),
+            method: .get,
+            parameters: parameterDictionary).responseJSON{
+                (response) -> Void in
                 
-                if let name = value["name"] as? String,
-                    let position = value["position"] as? String,
-                    let backNumber = value["backNumber"] as? Int,
-                    let height = value["height"] as? Int,
-                    let weight = value["weight"] as? Int,
-                    let batPosition = value["batPosition"] as? String,
-                    let pitchPosition = value["pitchPosition"] as? String {
+                if response.result.isSuccess {
+                    guard let value = response.result.value as? [String: Any]
+                        else { return }
                     
-                    let player = HBPlayer(
-                        pid: pid,
-                        name: name,
-                        position: position,
-                        backNumber: backNumber,
-                        height: height,
-                        weight: weight,
-                        batPoition: batPosition,
-                        pitchPosition: pitchPosition)
-                    
-                    completion(player, nil)
+                    if let name = value["name"] as? String,
+                        let position = value["position"] as? String,
+                        let backNumber = value["backNumber"] as? Int,
+                        let height = value["height"] as? Int,
+                        let weight = value["weight"] as? Int,
+                        let batPosition = value["batPosition"] as? String,
+                        let pitchPosition = value["pitchPosition"] as? String {
+                        
+                        let player = HBPlayer(
+                            pid: currentUser.uid,
+                            name: name,
+                            position: position,
+                            backNumber: backNumber,
+                            height: height,
+                            weight: weight,
+                            batPoition: batPosition,
+                            pitchPosition: pitchPosition)
+                        
+                        completion(player, nil)
+                    }
+                } else {
+                    let error = response.result.error
+                    completion(nil, error)
                 }
-            }
         }
     }
     
@@ -125,6 +128,7 @@ struct CloudFunction {
 
                     if let name = value["name"] as? String,
                         let logo = value["logo"] as? String,
+                        let photo = value["photo"] as? String,
                         let description = value["description"] as? String,
                         let admin = value["admin"] as? String,
                         let memberList = value["members"] as? [String: [String: Any]]  {
@@ -168,6 +172,7 @@ struct CloudFunction {
                         let team = HBTeam(
                             name: name,
                             logo: logo,
+                            photo: photo,
                             description: description,
                             admin: admin,
                             members: members)

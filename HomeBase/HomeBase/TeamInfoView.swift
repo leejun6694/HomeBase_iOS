@@ -14,6 +14,7 @@ class TeamInfoView: UIView {
     
     var teamData: HBTeam!
     var teamLogo: UIImage!
+    var teamPhoto: UIImage!
     
     private lazy var teamPhotoImageView: UIImageView =  {
         let teamPhotoImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundMain"))
@@ -58,6 +59,8 @@ class TeamInfoView: UIView {
         self.addConstraints(contentViewConstraints())
         self.addSubview(teamLogoImageView)
         self.addConstraints(teamLogoImageViewConstraints())
+        
+        teamPhotoImageView.image = teamPhoto
     }
 }
 

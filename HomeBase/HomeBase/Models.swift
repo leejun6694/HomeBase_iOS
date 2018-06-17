@@ -63,18 +63,21 @@ class HBPlayer {
 class HBTeam {
     var name: String
     var logo: String
+    var photo: String
     var description: String
     var admin: String
     var members: [HBPlayer]
     
     init(name: String,
          logo: String,
+         photo: String,
          description: String,
          admin: String,
          members: [HBPlayer]) {
         
         self.name = name
         self.logo = logo
+        self.photo = photo
         self.description = description
         self.admin = admin
         self.members = members

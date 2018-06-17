@@ -14,6 +14,12 @@ class TeamSettingTeamDataViewController: UIViewController {
     
     var teamData: HBTeam!
     var teamLogo: UIImage!
+    var teamPhoto: UIImage!
+    
+    var teamPhotoIsEditing = false
+    var teamLogoIsEditing = false
+    var changedTeamPhoto: UIImage?
+    var changedTeamLogo: UIImage?
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -54,6 +60,11 @@ class TeamSettingTeamDataViewController: UIViewController {
         teamPhotoSettingImageView.clipsToBounds = true
         teamPhotoSettingImageView.translatesAutoresizingMaskIntoConstraints = false
         
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(teamPhotoDidTapped(_:)))
+        teamPhotoSettingImageView.isUserInteractionEnabled = true
+        teamPhotoSettingImageView.addGestureRecognizer(tapGesture)
+        
         return teamPhotoSettingImageView
     }()
     
@@ -64,6 +75,10 @@ class TeamSettingTeamDataViewController: UIViewController {
         teamLogoImageView.layer.borderWidth = 1.0
         teamLogoImageView.clipsToBounds = true
         teamLogoImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(teamLogoDidTapped(_:)))
+        teamLogoImageView.isUserInteractionEnabled = true
+        teamLogoImageView.addGestureRecognizer(tapGesture)
         
         return teamLogoImageView
     }()
@@ -76,6 +91,10 @@ class TeamSettingTeamDataViewController: UIViewController {
         teamLogoSettingImageView.layer.borderWidth = 1.0
         teamLogoSettingImageView.clipsToBounds = true
         teamLogoSettingImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(teamLogoDidTapped(_:)))
+        teamLogoSettingImageView.isUserInteractionEnabled = true
+        teamLogoSettingImageView.addGestureRecognizer(tapGesture)
         
         return teamLogoSettingImageView
     }()
@@ -169,8 +188,38 @@ class TeamSettingTeamDataViewController: UIViewController {
     
     // MARK: Methods
     
-    @objc private func doneButtonDidTapped(_ sender: UIBarButtonItem) {
+    @objc private func teamPhotoDidTapped(_ sender: UITapGestureRecognizer) {
+        let imagePicker = UIImagePickerController()
         
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        
+        teamPhotoIsEditing = true
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @objc private func teamLogoDidTapped(_ sender: UITapGestureRecognizer) {
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        
+        teamLogoIsEditing = true
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @objc private func doneButtonDidTapped(_ sender: UIBarButtonItem) {
+        if let changedTeamPhoto = changedTeamPhoto {
+            
+        }
+        
+        if let changedTeamLogo = changedTeamLogo {
+            
+        }
     }
     
     // MARK: Life Cycle
@@ -233,6 +282,34 @@ class TeamSettingTeamDataViewController: UIViewController {
         teamLogoSettingImageView.layer.cornerRadius =
             teamLogoSettingImageView.frame.size.height / 2
         teamMemberButton.layer.cornerRadius = 10.0
+    }
+}
+
+// MAKR: ImagePicker Delegate
+extension TeamSettingTeamDataViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            if teamPhotoIsEditing {
+                teamPhotoImageView.image = image
+                changedTeamPhoto = image
+                
+                teamPhotoIsEditing = false
+            } else if teamLogoIsEditing {
+                teamLogoImageView.image = image
+                changedTeamLogo = image
+                
+                teamLogoIsEditing = false
+            }
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        teamPhotoIsEditing = false
+        teamLogoIsEditing = false
+        
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

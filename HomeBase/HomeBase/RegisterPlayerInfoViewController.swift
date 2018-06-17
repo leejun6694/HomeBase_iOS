@@ -189,6 +189,16 @@ class RegisterPlayerInfoViewController: UIViewController {
             dateFormatter.dateFormat = "yyyy.MM.dd"
             let joinedAt = dateFormatter.string(from: Date())
             
+            let playerData = HBPlayer(
+                pid: currentUser.uid,
+                name: name,
+                position: position,
+                backNumber: playerNumber,
+                height: height,
+                weight: weight,
+                batPoition: batPosition,
+                pitchPosition: pitchPosition)
+            
             ref.child("users").child(currentUser.uid).updateChildValues(
                 ["email": currentUser.email ?? "no email",
                  "name": name,
@@ -207,30 +217,39 @@ class RegisterPlayerInfoViewController: UIViewController {
                  "joinedAt": joinedAt]) {
                     (error, ref) -> Void in
                     
+                    sleep(2)
+                    
                     CloudFunction.getTeamDataWith(self.teamCode) {
                         (teamData, error) -> Void in
                         
                         if let teamData = teamData {
                             let storageRef = Storage.storage().reference()
-                            let imageRef = storageRef.child(teamData.logo)
+                            let logoRef = storageRef.child(teamData.logo)
+                            let photoRef = storageRef.child(teamData.photo)
                             
-                            imageRef.getData(maxSize: 4 * 1024 * 1024) {
-                                (data, error) in
+                            logoRef.getData(maxSize: 4 * 1024 * 1024) {
+                                (logoData, error) in
                                 
-                                if let error = error {
-                                    print(error)
-                                } else {
-                                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                    guard let mainTabBarController =
-                                        mainStoryboard.instantiateViewController(
-                                            withIdentifier: "MainTabBarController")
-                                            as? MainTabBarController else { return }
-                                        
-                                    mainTabBarController.teamData = teamData
-                                    mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                                    self.spinnerStopAnimating(self.spinner)
+                                photoRef.getData(maxSize: 4 * 1024 * 1024) {
+                                    (photoData, error) in
                                     
-                                    UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                    if let error = error {
+                                        print(error)
+                                    } else {
+                                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                        guard let mainTabBarController =
+                                            mainStoryboard.instantiateViewController(
+                                                withIdentifier: "MainTabBarController")
+                                                as? MainTabBarController else { return }
+                                        
+                                        mainTabBarController.playerData = playerData
+                                        mainTabBarController.teamData = teamData
+                                        mainTabBarController.teamLogo = UIImage(data: logoData!) ?? #imageLiteral(resourceName: "team_logo")
+                                        mainTabBarController.teamPhoto = UIImage(data: photoData!) ?? #imageLiteral(resourceName: "backgroundMain")
+                                        self.spinnerStopAnimating(self.spinner)
+                                        
+                                        UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                    }
                                 }
                             }
                         } else {

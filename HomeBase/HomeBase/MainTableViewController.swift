@@ -14,6 +14,7 @@ class MainTableViewController: UITableViewController {
     
     var teamData: HBTeam!
     var teamLogo: UIImage!
+    var teamPhoto: UIImage!
     
     private let mainTeamInfoView = MainTeamInfoView()
     private let mainNextScheduleView = MainNextScheduleView()
@@ -28,8 +29,10 @@ class MainTableViewController: UITableViewController {
         if let mainTabBarController = self.tabBarController as? MainTabBarController {
             teamData = mainTabBarController.teamData
             teamLogo = mainTabBarController.teamLogo
+            teamPhoto = mainTabBarController.teamPhoto
             mainTeamInfoView.teamData = teamData
             mainTeamInfoView.teamLogo = teamLogo
+            mainTeamInfoView.teamPhoto = teamPhoto
         }
     }
     
