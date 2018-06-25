@@ -48,6 +48,9 @@ class TeamInfoView: UIView {
         super.layoutSubviews()
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.height / 2
+        
+        teamLogoImageView.image = teamLogo
+        teamPhotoImageView.image = teamPhoto
     }
     
     override func draw(_ rect: CGRect) {
@@ -59,8 +62,6 @@ class TeamInfoView: UIView {
         self.addConstraints(contentViewConstraints())
         self.addSubview(teamLogoImageView)
         self.addConstraints(teamLogoImageViewConstraints())
-        
-        teamPhotoImageView.image = teamPhoto
     }
 }
 

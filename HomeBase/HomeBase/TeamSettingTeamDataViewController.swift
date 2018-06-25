@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class TeamSettingTeamDataViewController: UIViewController {
 
@@ -45,7 +48,7 @@ class TeamSettingTeamDataViewController: UIViewController {
     }()
     
     private lazy var teamPhotoImageView: UIImageView =  {
-        let teamPhotoImageView = UIImageView(image: #imageLiteral(resourceName: "backgroundMain"))
+        let teamPhotoImageView = UIImageView(image: teamPhoto)
         teamPhotoImageView.translatesAutoresizingMaskIntoConstraints = false
         
         return teamPhotoImageView
@@ -186,6 +189,8 @@ class TeamSettingTeamDataViewController: UIViewController {
         return teamMemberButton
     }()
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     // MARK: Methods
     
     @objc private func teamPhotoDidTapped(_ sender: UITapGestureRecognizer) {
@@ -213,12 +218,49 @@ class TeamSettingTeamDataViewController: UIViewController {
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIBarButtonItem) {
-        if let changedTeamPhoto = changedTeamPhoto {
-            
-        }
+        viewDisabled(self.view)
+        spinnerStartAnimating(spinner)
         
-        if let changedTeamLogo = changedTeamLogo {
-            
+        if let currentUser = Auth.auth().currentUser {
+            CloudFunction.getUserDataWith(currentUser) {
+                (userData, error) in
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                guard let userData = userData else { return }
+                guard let mainTabBarController =
+                    self.tabBarController as? MainTabBarController else { return }
+                
+//                let databaseRef = Database.database().reference()
+//                let teamRef = databaseRef.child("teams").child(userData.teamCode)
+                let storageRef = Storage.storage().reference()
+                
+                if let changedTeamPhoto = self.changedTeamPhoto {
+                    if let photoData = UIImagePNGRepresentation(changedTeamPhoto) {
+                        let photoRef = storageRef.child(userData.teamCode).child("teamPhoto")
+                        
+                        photoRef.putData(photoData)
+                        mainTabBarController.teamPhoto = changedTeamPhoto
+                    }
+                }
+                
+                if let changedTeamLogo = self.changedTeamLogo {
+                    if let logoData = UIImagePNGRepresentation(changedTeamLogo) {
+                        let logoRef = storageRef.child(userData.teamCode).child("teamLogo")
+                        
+                        logoRef.putData(logoData)
+                        mainTabBarController.teamLogo = changedTeamLogo
+                    }
+                }
+                
+                self.viewEnabled(self.view)
+                self.spinnerStopAnimating(self.spinner)
+                
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     

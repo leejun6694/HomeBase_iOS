@@ -53,6 +53,13 @@ class MainTableViewController: UITableViewController {
         self.tableView.allowsSelection = false
         self.tableView.bounces = false
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchTeamData()
+        self.tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 

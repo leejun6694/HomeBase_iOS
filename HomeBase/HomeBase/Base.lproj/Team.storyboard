@@ -68,9 +68,21 @@
                     <view key="view" contentMode="scaleToFill" id="HTK-xt-LAk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Shs-kW-Beb">
+                                <rect key="frame" x="177" y="333.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Shs-kW-Beb" firstAttribute="centerY" secondItem="glF-uJ-wIC" secondAttribute="centerY" id="CAL-Rs-VMN"/>
+                            <constraint firstItem="Shs-kW-Beb" firstAttribute="centerX" secondItem="glF-uJ-wIC" secondAttribute="centerX" id="Jz1-5x-AOp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="glF-uJ-wIC"/>
                     </view>
+                    <connections>
+                        <outlet property="spinner" destination="Shs-kW-Beb" id="rZn-49-Ocz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NeQ-UE-Wsq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
