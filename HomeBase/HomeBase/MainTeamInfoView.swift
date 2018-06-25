@@ -85,7 +85,7 @@ class MainTeamInfoView: UIView {
     private lazy var teamSinceLabel: UILabel = {
         let teamSinceLabel = UILabel()
         if teamData.createdAt > 0 {
-            teamSinceLabel.text = "\(teamData.createdAt)"
+            teamSinceLabel.text = "since \(teamData.createdAt)"
         }
         teamSinceLabel.textColor = .white
         teamSinceLabel.font = UIFont(
@@ -291,6 +291,18 @@ class MainTeamInfoView: UIView {
         
         teamPhotoImageView.image = teamPhoto
         teamLogoImageView.image = teamLogo
+        
+        if teamData.createdAt > 0 {
+            teamSinceLabel.text = "since \(teamData.createdAt)"
+        } else {
+            teamSinceLabel.text = ""
+        }
+        
+        if teamData.homeStadium != "default" {
+            teamHomeStadiumLabel.text = "\(teamData.homeStadium)"
+        } else {
+            teamHomeStadiumLabel.text = ""
+        }
     }
     
     override func draw(_ rect: CGRect) {

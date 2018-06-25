@@ -121,6 +121,9 @@ class TeamSettingTeamDataViewController: UIViewController {
     }()
     private lazy var homeStadiumTextField: UITextField = {
         let homeStadiumTextField = UITextField()
+        if teamData.homeStadium != "default" {
+            homeStadiumTextField.text = teamData.homeStadium
+        }
         homeStadiumTextField.textColor = .white
         homeStadiumTextField.tintColor = .white
         homeStadiumTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
@@ -158,6 +161,9 @@ class TeamSettingTeamDataViewController: UIViewController {
     }()
     private lazy var createdAtTextField: UITextField = {
         let createdAtTextField = UITextField()
+        if teamData.createdAt > 0 {
+            createdAtTextField.text = "\(teamData.createdAt)"
+        }
         createdAtTextField.textColor = .white
         createdAtTextField.tintColor = .white
         createdAtTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
@@ -231,6 +237,8 @@ class TeamSettingTeamDataViewController: UIViewController {
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIBarButtonItem) {
+        self.view.endEditing(true)
+        
         viewDisabled(self.view)
         spinnerStartAnimating(spinner)
         
@@ -247,8 +255,8 @@ class TeamSettingTeamDataViewController: UIViewController {
                 guard let mainTabBarController =
                     self.tabBarController as? MainTabBarController else { return }
                 
-//                let databaseRef = Database.database().reference()
-//                let teamRef = databaseRef.child("teams").child(userData.teamCode)
+                let databaseRef = Database.database().reference()
+                let teamRef = databaseRef.child("teams").child(userData.teamCode)
                 let storageRef = Storage.storage().reference()
                 
                 if let changedTeamPhoto = self.changedTeamPhoto {
@@ -267,6 +275,22 @@ class TeamSettingTeamDataViewController: UIViewController {
                         logoRef.putData(logoData)
                         mainTabBarController.teamLogo = changedTeamLogo
                     }
+                }
+                
+                if self.homeStadiumCondition {
+                    teamRef.updateChildValues(["homeStadium": self.homeStadium])
+                    mainTabBarController.teamData.homeStadium = self.homeStadium
+                } else {
+                    teamRef.updateChildValues(["homeStadium": "default"])
+                    mainTabBarController.teamData.homeStadium = "default"
+                }
+                
+                if self.createdAtCondition {
+                    teamRef.updateChildValues(["createdAt": self.createdAt])
+                    mainTabBarController.teamData.createdAt = self.createdAt
+                } else {
+                    teamRef.updateChildValues(["createdAt": 0])
+                    mainTabBarController.teamData.createdAt = 0
                 }
                 
                 self.viewEnabled(self.view)
@@ -367,6 +391,18 @@ class TeamSettingTeamDataViewController: UIViewController {
         
         if let navigationController = self.navigationController {
             navigationController.hidesBarsOnSwipe = false
+        }
+        
+        if teamData.homeStadium != "default" {
+            homeStadiumTextFieldCondition(true)
+        } else {
+            homeStadiumTextFieldCondition(false)
+        }
+        
+        if teamData.createdAt > 0 {
+            createdAtTextFieldCondition(true)
+        } else {
+            createdAtTextFieldCondition(false)
         }
     }
     
