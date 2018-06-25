@@ -24,6 +24,8 @@ class TeamSettingTeamDataViewController: UIViewController {
     var changedTeamPhoto: UIImage?
     var changedTeamLogo: UIImage?
     
+    private var currentOriginY: CGFloat = 0.0
+    
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "팀 설정"
@@ -120,6 +122,7 @@ class TeamSettingTeamDataViewController: UIViewController {
         homeStadiumTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
         homeStadiumTextField.adjustsFontSizeToFitWidth = true
         homeStadiumTextField.minimumFontSize = 9.0
+        homeStadiumTextField.delegate = self
         homeStadiumTextField.translatesAutoresizingMaskIntoConstraints = false
         
         return homeStadiumTextField
@@ -156,7 +159,9 @@ class TeamSettingTeamDataViewController: UIViewController {
         createAtTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
         createAtTextField.adjustsFontSizeToFitWidth = true
         createAtTextField.minimumFontSize = 9.0
+        createAtTextField.delegate = self
         createAtTextField.translatesAutoresizingMaskIntoConstraints = false
+        createAtTextField.keyboardType = .numberPad
         
         return createAtTextField
     }()
@@ -192,6 +197,10 @@ class TeamSettingTeamDataViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
+    
+    @IBAction func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     
     @objc private func teamPhotoDidTapped(_ sender: UITapGestureRecognizer) {
         let imagePicker = UIImagePickerController()
@@ -264,6 +273,35 @@ class TeamSettingTeamDataViewController: UIViewController {
         }
     }
     
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            self.view.frame.origin.y = currentOriginY
+            
+            if homeStadiumTextField.isFirstResponder {
+                if bottomLocationOf(createAtTextFieldBorder) < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOf(createAtTextFieldBorder)
+                            - keyboardHeight)
+                }
+            } else if createAtTextField.isFirstResponder {
+                if bottomLocationOf(createAtTextFieldBorder) < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOf(createAtTextFieldBorder)
+                            - keyboardHeight)
+                }
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification:NSNotification) {        
+        self.view.frame.origin.y = currentOriginY
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -305,6 +343,19 @@ class TeamSettingTeamDataViewController: UIViewController {
         self.view.addConstraints(createAtTextFieldBorderConstraints())
         self.view.addSubview(teamMemberButton)
         self.view.addConstraints(teamMemberButtonConstraints())
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: NSNotification.Name.UIKeyboardWillHide,
+            object: nil
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -313,6 +364,12 @@ class TeamSettingTeamDataViewController: UIViewController {
         if let navigationController = self.navigationController {
             navigationController.hidesBarsOnSwipe = false
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        currentOriginY = self.view.frame.origin.y
     }
     
     override func viewDidLayoutSubviews() {
@@ -352,6 +409,17 @@ extension TeamSettingTeamDataViewController: UIImagePickerControllerDelegate, UI
         teamLogoIsEditing = false
         
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: TextField Delegate
+extension TeamSettingTeamDataViewController: UITextFieldDelegate {
+    private func homeStadiumTextFieldCondition(_ state: Bool) {
+        if state {
+            
+        } else {
+            
+        }
     }
 }
 

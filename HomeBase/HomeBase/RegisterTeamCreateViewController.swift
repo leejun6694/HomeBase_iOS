@@ -141,7 +141,9 @@ class RegisterTeamCreateViewController: UIViewController {
                          "logo": logoRef.fullPath,
                          "photo": photoRef.fullPath,
                          "description": self.teamIntro,
-                         "admin": admin]) {
+                         "admin": admin,
+                         "homeStadium": "default",
+                         "createdAt": 0]) {
                             (error, ref) in
                             
                             guard let registerTeamCompleteViewController =

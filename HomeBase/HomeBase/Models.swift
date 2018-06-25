@@ -67,13 +67,17 @@ class HBTeam {
     var description: String
     var admin: String
     var members: [HBPlayer]
+    var homeStadium: String
+    var createdAt: Int
     
     init(name: String,
          logo: String,
          photo: String,
          description: String,
          admin: String,
-         members: [HBPlayer]) {
+         members: [HBPlayer],
+         homeStadium: String,
+         createdAt: Int) {
         
         self.name = name
         self.logo = logo
@@ -81,6 +85,8 @@ class HBTeam {
         self.description = description
         self.admin = admin
         self.members = members
+        self.homeStadium = homeStadium
+        self.createdAt = createdAt
     }
 }
 

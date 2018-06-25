@@ -84,7 +84,9 @@ class MainTeamInfoView: UIView {
     
     private lazy var teamSinceLabel: UILabel = {
         let teamSinceLabel = UILabel()
-        teamSinceLabel.text = "Since 2002"
+        if teamData.createdAt > 0 {
+            teamSinceLabel.text = "\(teamData.createdAt)"
+        }
         teamSinceLabel.textColor = .white
         teamSinceLabel.font = UIFont(
             name: "AppleSDGothicNeo-Regular",
@@ -99,7 +101,9 @@ class MainTeamInfoView: UIView {
     
     private lazy var teamHomeStadiumLabel: UILabel = {
         let teamHomeStadiumLabel = UILabel()
-        teamHomeStadiumLabel.text = "홈베이스 야구장"
+        if teamData.homeStadium != "default" {
+            teamHomeStadiumLabel.text = "\(teamData.homeStadium)"
+        }
         teamHomeStadiumLabel.textColor = .white
         teamHomeStadiumLabel.font = UIFont(
             name: "AppleSDGothicNeo-Regular",

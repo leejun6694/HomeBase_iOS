@@ -131,7 +131,9 @@ struct CloudFunction {
                         let photo = value["photo"] as? String,
                         let description = value["description"] as? String,
                         let admin = value["admin"] as? String,
-                        let memberList = value["members"] as? [String: [String: Any]]  {
+                        let memberList = value["members"] as? [String: [String: Any]],
+                        let homeStadium = value["homeStadium"] as? String,
+                        let createdAt = value["createdAt"] as? Int {
 
                         var members = [HBPlayer]()
 
@@ -175,7 +177,9 @@ struct CloudFunction {
                             photo: photo,
                             description: description,
                             admin: admin,
-                            members: members)
+                            members: members,
+                            homeStadium: homeStadium,
+                            createdAt: createdAt)
 
                         completion(team, nil)
                     }
