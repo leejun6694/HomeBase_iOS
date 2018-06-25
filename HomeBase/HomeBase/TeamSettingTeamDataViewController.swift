@@ -19,10 +19,14 @@ class TeamSettingTeamDataViewController: UIViewController {
     var teamLogo: UIImage!
     var teamPhoto: UIImage!
     
-    var teamPhotoIsEditing = false
-    var teamLogoIsEditing = false
-    var changedTeamPhoto: UIImage?
-    var changedTeamLogo: UIImage?
+    private var teamPhotoIsEditing = false
+    private var teamLogoIsEditing = false
+    private var homeStadiumCondition = false
+    private var createdAtCondition = false
+    private var changedTeamPhoto: UIImage?
+    private var changedTeamLogo: UIImage?
+    private var homeStadium = "default"
+    private var createdAt = 0
     
     private var currentOriginY: CGFloat = 0.0
     
@@ -141,42 +145,42 @@ class TeamSettingTeamDataViewController: UIViewController {
         return homeStadiumConditionImageView
     }()
     
-    private lazy var createAtLabel: UILabel = {
-        let createAtLabel = UILabel()
-        createAtLabel.text = "창단 연도"
-        createAtLabel.textColor = .white
-        createAtLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15.0)
-        createAtLabel.adjustsFontSizeToFitWidth = true
-        createAtLabel.minimumScaleFactor = 0.5
-        createAtLabel.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var createdAtLabel: UILabel = {
+        let createdAtLabel = UILabel()
+        createdAtLabel.text = "창단 연도"
+        createdAtLabel.textColor = .white
+        createdAtLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15.0)
+        createdAtLabel.adjustsFontSizeToFitWidth = true
+        createdAtLabel.minimumScaleFactor = 0.5
+        createdAtLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        return createAtLabel
+        return createdAtLabel
     }()
-    private lazy var createAtTextField: UITextField = {
-        let createAtTextField = UITextField()
-        createAtTextField.textColor = .white
-        createAtTextField.tintColor = .white
-        createAtTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
-        createAtTextField.adjustsFontSizeToFitWidth = true
-        createAtTextField.minimumFontSize = 9.0
-        createAtTextField.delegate = self
-        createAtTextField.translatesAutoresizingMaskIntoConstraints = false
-        createAtTextField.keyboardType = .numberPad
+    private lazy var createdAtTextField: UITextField = {
+        let createdAtTextField = UITextField()
+        createdAtTextField.textColor = .white
+        createdAtTextField.tintColor = .white
+        createdAtTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
+        createdAtTextField.adjustsFontSizeToFitWidth = true
+        createdAtTextField.minimumFontSize = 9.0
+        createdAtTextField.delegate = self
+        createdAtTextField.translatesAutoresizingMaskIntoConstraints = false
+        createdAtTextField.keyboardType = .numberPad
         
-        return createAtTextField
+        return createdAtTextField
     }()
-    private lazy var createAtTextFieldBorder: UIView = {
-        let createAtTextFieldBorder = UIView()
-        createAtTextFieldBorder.backgroundColor = .white
-        createAtTextFieldBorder.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var createdAtTextFieldBorder: UIView = {
+        let createdAtTextFieldBorder = UIView()
+        createdAtTextFieldBorder.backgroundColor = .white
+        createdAtTextFieldBorder.translatesAutoresizingMaskIntoConstraints = false
         
-        return createAtTextFieldBorder
+        return createdAtTextFieldBorder
     }()
-    private lazy var createAtConditionImageView: UIImageView = {
-        let createAtConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
-        createAtConditionImageView.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var createdAtConditionImageView: UIImageView = {
+        let createdAtConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
+        createdAtConditionImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        return createAtConditionImageView
+        return createdAtConditionImageView
     }()
     
     private lazy var teamMemberButton: UIButton = {
@@ -283,15 +287,15 @@ class TeamSettingTeamDataViewController: UIViewController {
             self.view.frame.origin.y = currentOriginY
             
             if homeStadiumTextField.isFirstResponder {
-                if bottomLocationOf(createAtTextFieldBorder) < keyboardHeight {
+                if bottomLocationOf(createdAtTextFieldBorder) < keyboardHeight {
                     self.view.frame.origin.y += (
-                        bottomLocationOf(createAtTextFieldBorder)
+                        bottomLocationOf(createdAtTextFieldBorder)
                             - keyboardHeight)
                 }
-            } else if createAtTextField.isFirstResponder {
-                if bottomLocationOf(createAtTextFieldBorder) < keyboardHeight {
+            } else if createdAtTextField.isFirstResponder {
+                if bottomLocationOf(createdAtTextFieldBorder) < keyboardHeight {
                     self.view.frame.origin.y += (
-                        bottomLocationOf(createAtTextFieldBorder)
+                        bottomLocationOf(createdAtTextFieldBorder)
                             - keyboardHeight)
                 }
             }
@@ -335,12 +339,12 @@ class TeamSettingTeamDataViewController: UIViewController {
         self.view.addConstraints(homeStadiumTextFieldConstraints())
         self.view.addSubview(homeStadiumTextFieldBorder)
         self.view.addConstraints(homeStadiumTextFieldBorderConstraints())
-        self.view.addSubview(createAtLabel)
-        self.view.addConstraints(createAtLabelConstraints())
-        self.view.addSubview(createAtTextField)
-        self.view.addConstraints(createAtTextFieldConstraints())
-        self.view.addSubview(createAtTextFieldBorder)
-        self.view.addConstraints(createAtTextFieldBorderConstraints())
+        self.view.addSubview(createdAtLabel)
+        self.view.addConstraints(createdAtLabelConstraints())
+        self.view.addSubview(createdAtTextField)
+        self.view.addConstraints(createdAtTextFieldConstraints())
+        self.view.addSubview(createdAtTextFieldBorder)
+        self.view.addConstraints(createdAtTextFieldBorderConstraints())
         self.view.addSubview(teamMemberButton)
         self.view.addConstraints(teamMemberButtonConstraints())
         
@@ -416,9 +420,116 @@ extension TeamSettingTeamDataViewController: UIImagePickerControllerDelegate, UI
 extension TeamSettingTeamDataViewController: UITextFieldDelegate {
     private func homeStadiumTextFieldCondition(_ state: Bool) {
         if state {
+            homeStadiumCondition = true
+            homeStadium = homeStadiumTextField.text ?? "default"
+            homeStadiumLabel.textColor = HBColor.correct
+            homeStadiumTextField.textColor = HBColor.correct
+            homeStadiumTextField.tintColor = HBColor.correct
+            homeStadiumTextFieldBorder.backgroundColor = HBColor.correct
             
+            if !homeStadiumConditionImageView.isDescendant(of: self.view) {
+                self.view.addSubview(homeStadiumConditionImageView)
+                self.view.addConstraints(homeStadiumConditionImageViewConstraints())
+            }
         } else {
+            homeStadiumCondition = false
+            homeStadium = homeStadiumTextField.text ?? "default"
+            homeStadiumLabel.textColor = .white
+            homeStadiumTextField.textColor = .white
+            homeStadiumTextField.tintColor = .white
+            homeStadiumTextFieldBorder.backgroundColor = .white
             
+            if homeStadiumConditionImageView.isDescendant(of: self.view) {
+                homeStadiumConditionImageView.removeFromSuperview()
+            }
+        }
+    }
+    
+    private func createdAtTextFieldCondition(_ state: Bool) {
+        if state {
+            createdAtCondition = true
+            createdAt = Int(createdAtTextField.text!) ?? 0
+            createdAtLabel.textColor = HBColor.correct
+            createdAtTextField.textColor = HBColor.correct
+            createdAtTextField.tintColor = HBColor.correct
+            createdAtTextFieldBorder.backgroundColor = HBColor.correct
+            
+            if !createdAtConditionImageView.isDescendant(of: self.view) {
+                self.view.addSubview(createdAtConditionImageView)
+                self.view.addConstraints(createdAtConditionImageViewConstraints())
+            }
+        } else {
+            createdAtCondition = false
+            createdAt = Int(createdAtTextField.text!) ?? 0
+            createdAtLabel.textColor = .white
+            createdAtTextField.textColor = .white
+            createdAtTextField.tintColor = .white
+            createdAtTextFieldBorder.backgroundColor = .white
+            
+            if createdAtConditionImageView.isDescendant(of: self.view) {
+                createdAtConditionImageView.removeFromSuperview()
+            }
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentCount = textField.text?.count ?? 0
+        let replacementCount = currentCount + string.count - range.length
+        
+        switch textField {
+        case homeStadiumTextField:
+            if replacementCount > 0 {
+                homeStadiumTextFieldCondition(true)
+            } else {
+                homeStadiumTextFieldCondition(false)
+            }
+        case createdAtTextField:
+            if replacementCount == 4 {
+                createdAtTextFieldCondition(true)
+            } else if replacementCount < 4 {
+                createdAtTextFieldCondition(false)
+            } else {
+                return false
+            }
+        default:
+            break
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case homeStadiumTextField:
+            createdAtTextField.becomeFirstResponder()
+        case createdAtTextField:
+            self.view.endEditing(true)
+        default:
+            break
+        }
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let textCount = textField.text?.count ?? 0
+        
+        switch textField {
+        case homeStadiumTextField:
+            if textCount > 0 {
+                homeStadiumTextFieldCondition(true)
+            } else {
+                homeStadiumTextFieldCondition(false)
+            }
+        case createdAtTextField:
+            if textCount == 4 {
+                createdAtTextFieldCondition(true)
+            } else if textCount < 4 {
+                createdAtTextFieldCondition(false)
+            }
+        default:
+            break
         }
     }
 }
@@ -543,55 +654,89 @@ extension TeamSettingTeamDataViewController {
         return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
     }
     
-    private func createAtLabelConstraints() -> [NSLayoutConstraint] {
+    private func homeStadiumConditionImageViewConstraints() -> [NSLayoutConstraint] {
+        let centerYConstraint = NSLayoutConstraint(
+            item: homeStadiumConditionImageView, attribute: .centerY, relatedBy: .equal,
+            toItem: homeStadiumTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let leadingConstraint = NSLayoutConstraint(
-            item: createAtLabel, attribute: .leading, relatedBy: .equal,
+            item: homeStadiumConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: homeStadiumTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: homeStadiumConditionImageView, attribute: .width, relatedBy: .equal,
+            toItem: homeStadiumTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: homeStadiumConditionImageView, attribute: .height, relatedBy: .equal,
+            toItem: homeStadiumConditionImageView, attribute: .width, multiplier: 18.0/20.0, constant: 0.0)
+        
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func createdAtLabelConstraints() -> [NSLayoutConstraint] {
+        let leadingConstraint = NSLayoutConstraint(
+            item: createdAtLabel, attribute: .leading, relatedBy: .equal,
             toItem: self.view, attribute: .centerX, multiplier: 44/207, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
-            item: createAtLabel, attribute: .top, relatedBy: .equal,
+            item: createdAtLabel, attribute: .top, relatedBy: .equal,
             toItem: teamLogoImageView, attribute: .bottom, multiplier: 1.0, constant: self.view.bounds.size.height * 142/736)
         let widthConstraint = NSLayoutConstraint(
-            item: createAtLabel, attribute: .width, relatedBy: .equal,
+            item: createdAtLabel, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 100/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: createAtLabel, attribute: .height, relatedBy: .equal,
+            item: createdAtLabel, attribute: .height, relatedBy: .equal,
             toItem: self.view, attribute: .height, multiplier: 19/736, constant: 0.0)
         
         return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
     }
     
-    private func createAtTextFieldConstraints() -> [NSLayoutConstraint] {
+    private func createdAtTextFieldConstraints() -> [NSLayoutConstraint] {
         let leadingConstraint = NSLayoutConstraint(
-            item: createAtTextField, attribute: .leading, relatedBy: .equal,
-            toItem: createAtLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
+            item: createdAtTextField, attribute: .leading, relatedBy: .equal,
+            toItem: createdAtLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
-            item: createAtTextField, attribute: .top, relatedBy: .equal,
-            toItem: createAtLabel, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            item: createdAtTextField, attribute: .top, relatedBy: .equal,
+            toItem: createdAtLabel, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: createAtTextField, attribute: .width, relatedBy: .equal,
+            item: createdAtTextField, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 297/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: createAtTextField, attribute: .height, relatedBy: .equal,
+            item: createdAtTextField, attribute: .height, relatedBy: .equal,
             toItem: self.view, attribute: .height, multiplier: 37/736, constant: 0.0)
         
         return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
     }
     
-    private func createAtTextFieldBorderConstraints() -> [NSLayoutConstraint] {
+    private func createdAtTextFieldBorderConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
-            item: createAtTextFieldBorder, attribute: .centerX, relatedBy: .equal,
+            item: createdAtTextFieldBorder, attribute: .centerX, relatedBy: .equal,
             toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
-            item: createAtTextFieldBorder, attribute: .top, relatedBy: .equal,
-            toItem: createAtTextField, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            item: createdAtTextFieldBorder, attribute: .top, relatedBy: .equal,
+            toItem: createdAtTextField, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: createAtTextFieldBorder, attribute: .width, relatedBy: .equal,
+            item: createdAtTextFieldBorder, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 345/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: createAtTextFieldBorder, attribute: .height, relatedBy: .equal,
+            item: createdAtTextFieldBorder, attribute: .height, relatedBy: .equal,
             toItem: self.view, attribute: .height, multiplier: 2/736, constant: 0.0)
         
         return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func createdAtConditionImageViewConstraints() -> [NSLayoutConstraint] {
+        let centerYConstraint = NSLayoutConstraint(
+            item: createdAtConditionImageView, attribute: .centerY, relatedBy: .equal,
+            toItem: createdAtTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(
+            item: createdAtConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: createdAtTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: createdAtConditionImageView, attribute: .width, relatedBy: .equal,
+            toItem: createdAtTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: createdAtConditionImageView, attribute: .height, relatedBy: .equal,
+            toItem: createdAtConditionImageView, attribute: .width, multiplier: 18.0/20.0, constant: 0.0)
+        
+        return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
     private func teamMemberButtonConstraints() -> [NSLayoutConstraint] {
