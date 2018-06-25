@@ -61,22 +61,23 @@ class TeamTableViewController: UITableViewController {
     }
     
     private func fetchTeamData() {
-        if let mainTabBarController = self.tabBarController as? MainTabBarController {
-            teamData = mainTabBarController.teamData
-            teamLogo = mainTabBarController.teamLogo
-            teamPhoto = mainTabBarController.teamPhoto
-            teamInfoView.teamData = teamData
-            teamInfoView.teamLogo = teamLogo
-            teamInfoView.teamPhoto = teamPhoto
-            
-            self.playerList = teamData.members
-            self.playerList = self.playerList.sorted(
-                by: { $0.backNumber < $1.backNumber })
-            checkTeamAdmin()
-        }
+        guard let mainTabBarController = self.tabBarController as? MainTabBarController else { return }
+        
+        teamData = mainTabBarController.teamData
+        teamLogo = mainTabBarController.teamLogo
+        teamPhoto = mainTabBarController.teamPhoto
+        teamInfoView.teamData = teamData
+        teamInfoView.teamLogo = teamLogo
+        teamInfoView.teamPhoto = teamPhoto
+        
+        self.playerList = teamData.members
+        self.playerList = self.playerList.sorted(
+            by: { $0.backNumber < $1.backNumber })
+        checkTeamAdmin()
     }
     
     private func tableViewReloadData() {
+        fetchTeamData()
         viewDisabled(self.view)
         self.navigationController?.view.isUserInteractionEnabled = false
         
@@ -141,11 +142,6 @@ class TeamTableViewController: UITableViewController {
                 navigationItem.rightBarButtonItem = settingButton
             }
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
         tableViewReloadData()
     }
     

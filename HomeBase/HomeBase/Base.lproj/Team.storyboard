@@ -68,11 +68,32 @@
                     <view key="view" contentMode="scaleToFill" id="HTK-xt-LAk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Shs-kW-Beb">
+                                <rect key="frame" x="177" y="333.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Shs-kW-Beb" firstAttribute="centerY" secondItem="glF-uJ-wIC" secondAttribute="centerY" id="CAL-Rs-VMN"/>
+                            <constraint firstItem="Shs-kW-Beb" firstAttribute="centerX" secondItem="glF-uJ-wIC" secondAttribute="centerX" id="Jz1-5x-AOp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="glF-uJ-wIC"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="lI0-it-jcN" appends="YES" id="hUr-CG-FvV"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="spinner" destination="Shs-kW-Beb" id="rZn-49-Ocz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NeQ-UE-Wsq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="lI0-it-jcN">
+                    <connections>
+                        <action selector="backgroundDidTapped:" destination="b9L-Sa-Pak" id="8nG-9k-PaG"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3316" y="975"/>
         </scene>

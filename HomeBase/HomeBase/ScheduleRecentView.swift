@@ -199,6 +199,8 @@ class ScheduleRecentView: UIView {
         super.layoutSubviews()
         
         teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.size.width / 2
+        
+        teamLogoImageView.image = teamLogo
     }
     
     override func draw(_ rect: CGRect) {
@@ -210,8 +212,6 @@ class ScheduleRecentView: UIView {
         self.addConstraints(teamLogoImageViewConstraints())
         self.addSubview(recordLabel)
         self.addConstraints(recordLabelConstraints())
-//        self.addSubview(noDataLabel)
-//        self.addConstraints(noDataLabelConstraints())
     }
 }
 

@@ -128,6 +128,7 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     private func tableViewReloadData() {
+        fetchTeamData()
         viewDisabled(self.view)
         
         if let navigationController = self.navigationController {
@@ -221,9 +222,6 @@ class ScheduleTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchTeamData()
-        tableViewReloadData()
-        
         self.tableView.register(
             ScheduleMonthlySectionHeaderCell.self,
             forCellReuseIdentifier: headerCellReuseIdendifier)
@@ -240,6 +238,8 @@ class ScheduleTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        tableViewReloadData()
         
         if let navigationController = self.navigationController {
             navigationController.navigationBar.shadowImage = UIImage()
