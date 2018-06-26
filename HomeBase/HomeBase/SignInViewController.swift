@@ -48,26 +48,33 @@ class SignInViewController: UIViewController {
                                     
                                     if let teamData = teamData {
                                         let storageRef = Storage.storage().reference()
-                                        let imageRef = storageRef.child(teamData.logo)
+                                        let logoRef = storageRef.child(teamData.logo)
+                                        let photoRef = storageRef.child(teamData.photo)
                                         
-                                        imageRef.getData(maxSize: 4 * 1024 * 1024) {
-                                            (data, error) in
+                                        logoRef.getData(maxSize: 4 * 1024 * 1024) {
+                                            (logoData, error) in
                                             
-                                            if let error = error {
-                                                print(error)
-                                            } else {
-                                                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                                
-                                                guard let mainTabBarController = mainStoryboard.instantiateViewController(
-                                                    withIdentifier: "MainTabBarController")
-                                                    as? MainTabBarController else { return }
-                                                
-                                                mainTabBarController.playerData = playerData
-                                                mainTabBarController.teamData = teamData
-                                                mainTabBarController.teamLogo = UIImage(data: data!) ?? #imageLiteral(resourceName: "team_logo")
-                                                self.spinnerStopAnimating(self.spinner)
+                                            photoRef.getData(maxSize: 4 * 1024 * 1024) {
+                                                (photoData, error) in
                                             
-                                                UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                                if let error = error {
+                                                    print(error)
+                                                } else {
+                                                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                                    
+                                                    guard let mainTabBarController = mainStoryboard.instantiateViewController(
+                                                        withIdentifier: "MainTabBarController")
+                                                        as? MainTabBarController else { return }
+                                                    
+                                                    mainTabBarController.playerData = playerData
+                                                    mainTabBarController.teamData = teamData
+                                                    mainTabBarController.teamLogo = UIImage(data: logoData!) ?? #imageLiteral(resourceName: "team_logo")
+                                                    mainTabBarController.teamPhoto = UIImage(data: photoData!) ?? #imageLiteral(resourceName: "backgroundMain")
+                                                    
+                                                    self.spinnerStopAnimating(self.spinner)
+                                                
+                                                    UIApplication.shared.keyWindow?.rootViewController = mainTabBarController
+                                                }
                                             }
                                         }
                                     }

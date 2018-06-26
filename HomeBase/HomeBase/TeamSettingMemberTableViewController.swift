@@ -12,6 +12,9 @@ class TeamSettingMemberTableViewController: UITableViewController {
 
     // MARK: Properties
     
+    var teamData: HBTeam!
+    var playerList = [HBPlayer]()
+    
     private let cellReuseIdendifier = "teamSettingMemberCell"
     
     private lazy var titleLabel: UILabel = {
@@ -24,11 +27,27 @@ class TeamSettingMemberTableViewController: UITableViewController {
         return titleLabel
     }()
     
+    // MARK: Methods
+    
+    private func sortPlayerList() {
+        playerList = teamData.members
+        playerList = playerList.sorted(
+            by: { $0.backNumber < $1.backNumber })
+        
+        for (index, player) in playerList.enumerated() {
+            if player.pid == teamData.admin {
+                playerList.remove(at: index)
+            }
+        }
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        sortPlayerList()
+        
         self.view.backgroundColor = HBColor.lightGray
         
         self.tableView.register(
@@ -53,13 +72,16 @@ extension TeamSettingMemberTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return playerList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: cellReuseIdendifier,
             for: indexPath) as! TeamSettingMemberCell
+        
+        cell.backNumber = playerList[indexPath.row].backNumber
+        cell.name = playerList[indexPath.row].name
         
         return cell
     }

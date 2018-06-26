@@ -311,6 +311,7 @@ class TeamSettingTeamDataViewController: UIViewController {
                 withIdentifier: "TeamSettingMemberTableViewController")
                 as? TeamSettingMemberTableViewController else { return }
         
+        teamSettingMemberTableViewController.teamData = teamData
         self.navigationController?.pushViewController(
             teamSettingMemberTableViewController,
             animated: true)
