@@ -63,7 +63,28 @@ class TeamSettingCheckViewController: UIViewController {
                         self.performSegue(withIdentifier: "unwindToTeamMainSegue", sender: nil)
                     }
                 } else if self.removeCondition {
-                    
+                    databaseRef.child("players").child(self.player.pid).removeValue {
+                        (error, ref) in
+                        
+                        databaseRef.child("users").child(self.player.pid).removeValue {
+                            (error, ref) in
+                            
+                            CloudFunction.getTeamDataWith(userData.teamCode) {
+                                (teamData, error) in
+                                
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                    return
+                                }
+                                
+                                guard let teamData = teamData else { return }
+                                mainTabBarController.teamData = teamData
+                                
+                                self.spinnerStopAnimating(self.spinner)
+                                self.performSegue(withIdentifier: "unwindToTeamMainSegue", sender: nil)
+                            }
+                        }
+                    }
                 }
             }
         }
