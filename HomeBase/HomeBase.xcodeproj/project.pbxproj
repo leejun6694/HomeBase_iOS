@@ -47,6 +47,7 @@
 		7282D75A20E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */; };
 		7282D75C20E2B0CB00716CB9 /* TeamSettingMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */; };
 		7282D75E20E2C35400716CB9 /* TeamSettingMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D75D20E2C35400716CB9 /* TeamSettingMoreViewController.swift */; };
+		7282D76020E3A32000716CB9 /* TeamSettingCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D75F20E3A32000716CB9 /* TeamSettingCheckViewController.swift */; };
 		72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72881E7A1FFA8579009D23C2 /* AppDelegate.swift */; };
 		72881E821FFA8579009D23C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72881E811FFA8579009D23C2 /* Assets.xcassets */; };
 		72881E851FFA8579009D23C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881E831FFA8579009D23C2 /* LaunchScreen.storyboard */; };
@@ -150,6 +151,7 @@
 		7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingMemberTableViewController.swift; sourceTree = "<group>"; };
 		7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingMemberCell.swift; sourceTree = "<group>"; };
 		7282D75D20E2C35400716CB9 /* TeamSettingMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingMoreViewController.swift; sourceTree = "<group>"; };
+		7282D75F20E3A32000716CB9 /* TeamSettingCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingCheckViewController.swift; sourceTree = "<group>"; };
 		72881E771FFA8579009D23C2 /* HomeBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72881E7A1FFA8579009D23C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72881E811FFA8579009D23C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -241,10 +243,7 @@
 				7213179320C2892E00A512C1 /* TeamInfoView.swift */,
 				7213179520C2969000A512C1 /* TeamDataView.swift */,
 				7213179720C3F97800A512C1 /* TeamPlayerListCell.swift */,
-				7213179920C52F4700A512C1 /* TeamSettingTeamDataViewController.swift */,
-				7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */,
-				7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */,
-				7282D75D20E2C35400716CB9 /* TeamSettingMoreViewController.swift */,
+				7282D76120E3A33300716CB9 /* Setting */,
 			);
 			name = Team;
 			sourceTree = "<group>";
@@ -256,6 +255,18 @@
 				721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */,
 			);
 			name = SignUp;
+			sourceTree = "<group>";
+		};
+		7282D76120E3A33300716CB9 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				7213179920C52F4700A512C1 /* TeamSettingTeamDataViewController.swift */,
+				7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */,
+				7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */,
+				7282D75D20E2C35400716CB9 /* TeamSettingMoreViewController.swift */,
+				7282D75F20E3A32000716CB9 /* TeamSettingCheckViewController.swift */,
+			);
+			name = Setting;
 			sourceTree = "<group>";
 		};
 		72881E6E1FFA8579009D23C2 = {
@@ -752,6 +763,7 @@
 				72B7A75020B6E1E500E9AEB9 /* PersonalBatterView.swift in Sources */,
 				725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */,
 				721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */,
+				7282D76020E3A32000716CB9 /* TeamSettingCheckViewController.swift in Sources */,
 				72D1035C2074E6EE007D1610 /* CustomProperties.swift in Sources */,
 				720E98AE20B72B9400C45CEE /* PersonalRecordView.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,

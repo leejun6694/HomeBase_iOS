@@ -107,6 +107,10 @@ class TeamTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func unwindToTeamMainSegue(_ segue: UIStoryboardSegue) {
+        
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -138,12 +142,13 @@ class TeamTableViewController: UITableViewController {
             navigationController.hidesBarsOnSwipe = false
         }
         
+        tableViewReloadData()
+        
         if let currentUser = Auth.auth().currentUser {
             if teamData.admin == currentUser.uid {
                 navigationItem.rightBarButtonItem = settingButton
             }
         }
-        tableViewReloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
