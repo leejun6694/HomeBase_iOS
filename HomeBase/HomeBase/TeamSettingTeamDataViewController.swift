@@ -199,6 +199,10 @@ class TeamSettingTeamDataViewController: UIViewController {
         teamMemberButton.titleLabel?.adjustsFontSizeToFitWidth = true
         teamMemberButton.titleLabel?.minimumScaleFactor = 0.5
         teamMemberButton.backgroundColor = .white
+        teamMemberButton.addTarget(
+            self,
+            action: #selector(teamMemberButtonDidTapped(_:)),
+            for: .touchUpInside)
         teamMemberButton.translatesAutoresizingMaskIntoConstraints = false
         
         return teamMemberButton
@@ -299,6 +303,20 @@ class TeamSettingTeamDataViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+    
+    @objc func teamMemberButtonDidTapped(_ sender: UIButton) {
+        guard let teamSettingMemberTableViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "TeamSettingMemberTableViewController")
+                as? TeamSettingMemberTableViewController else { return }
+        
+        teamSettingMemberTableViewController.teamData = teamData
+        self.navigationController?.pushViewController(
+            teamSettingMemberTableViewController,
+            animated: true)
+//        teamSettingMemberTableViewController.modalPresentationStyle = .overCurrentContext
+//        self.present(teamSettingMemberTableViewController, animated: true, completion: nil)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

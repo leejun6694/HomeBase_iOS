@@ -56,6 +56,7 @@ class TeamTableViewController: UITableViewController {
         for (index, player) in playerList.enumerated() {
             if player.pid == teamData.admin {
                 playerList.swapAt(0, index)
+                break
             }
         }
     }
