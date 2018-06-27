@@ -46,6 +46,7 @@
 		7277BF9F209B862600AA8256 /* ScheduleMonthlySectionBlankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7277BF9E209B862600AA8256 /* ScheduleMonthlySectionBlankCell.swift */; };
 		7282D75A20E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */; };
 		7282D75C20E2B0CB00716CB9 /* TeamSettingMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */; };
+		7282D75E20E2C35400716CB9 /* TeamSettingMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D75D20E2C35400716CB9 /* TeamSettingMoreViewController.swift */; };
 		72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72881E7A1FFA8579009D23C2 /* AppDelegate.swift */; };
 		72881E821FFA8579009D23C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72881E811FFA8579009D23C2 /* Assets.xcassets */; };
 		72881E851FFA8579009D23C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72881E831FFA8579009D23C2 /* LaunchScreen.storyboard */; };
@@ -148,6 +149,7 @@
 		7277BF9E209B862600AA8256 /* ScheduleMonthlySectionBlankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleMonthlySectionBlankCell.swift; sourceTree = "<group>"; };
 		7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingMemberTableViewController.swift; sourceTree = "<group>"; };
 		7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingMemberCell.swift; sourceTree = "<group>"; };
+		7282D75D20E2C35400716CB9 /* TeamSettingMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingMoreViewController.swift; sourceTree = "<group>"; };
 		72881E771FFA8579009D23C2 /* HomeBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72881E7A1FFA8579009D23C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72881E811FFA8579009D23C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				7213179920C52F4700A512C1 /* TeamSettingTeamDataViewController.swift */,
 				7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */,
 				7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */,
+				7282D75D20E2C35400716CB9 /* TeamSettingMoreViewController.swift */,
 			);
 			name = Team;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				72C5755220297E94000432DB /* MainTabBarController.swift in Sources */,
 				728EE776202FAD95006108F9 /* MainNextScheduleView.swift in Sources */,
 				72E15E7E203D6C0B00ECA9A3 /* MainTopRankingView.swift in Sources */,
+				7282D75E20E2C35400716CB9 /* TeamSettingMoreViewController.swift in Sources */,
 				729AC646201F34DE00F5FED2 /* SignInViewController.swift in Sources */,
 				72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */,
 				7277BF9F209B862600AA8256 /* ScheduleMonthlySectionBlankCell.swift in Sources */,

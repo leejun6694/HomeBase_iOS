@@ -67,16 +67,18 @@ class TeamSettingMemberCell: UITableViewCell {
         return nameLabel
     }()
     
-    private lazy var moreImageView: UIImageView = {
-        let moreImageView = UIImageView(image: #imageLiteral(resourceName: "iconMore"))
-        moreImageView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var moreButton: UIButton = {
+        let moreButton = UIButton(type: .system)
+        moreButton.setImage(#imageLiteral(resourceName: "iconMore"), for: .normal)
+        moreButton.tintColor = .white
+        moreButton.translatesAutoresizingMaskIntoConstraints = false
         
-        return moreImageView
+        return moreButton
     }()
     
     private lazy var divisionView: UIView = {
         let divisionView = UIView()
-        divisionView.backgroundColor = UIColor(red: 44, green: 44, blue: 44, alpha: 0.3)
+        divisionView.backgroundColor = UIColor(red: 44, green: 44, blue: 44, alpha: 0.1)
         divisionView.translatesAutoresizingMaskIntoConstraints = false
         
         return divisionView
@@ -111,8 +113,8 @@ class TeamSettingMemberCell: UITableViewCell {
         self.addConstraints(playerImageViewConstraints())
         self.addSubview(nameLabel)
         self.addConstraints(nameLabelConstraints())
-        self.addSubview(moreImageView)
-        self.addConstraints(moreImageViewConstraints())
+        self.addSubview(moreButton)
+        self.addConstraints(moreButtonConstraints())
     }
 }
 
@@ -185,19 +187,19 @@ extension TeamSettingMemberCell {
         return [centerXConstraint, bottomConstraint, widthConstraint, heightConstraint]
     }
     
-    private func moreImageViewConstraints() -> [NSLayoutConstraint] {
+    private func moreButtonConstraints() -> [NSLayoutConstraint] {
         let leadingConstraint = NSLayoutConstraint(
-            item: moreImageView, attribute: .leading, relatedBy: .equal,
+            item: moreButton, attribute: .leading, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 347/207, constant: 0.0)
         let centerYConstraint = NSLayoutConstraint(
-            item: moreImageView, attribute: .centerY, relatedBy: .equal,
+            item: moreButton, attribute: .centerY, relatedBy: .equal,
             toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: moreImageView, attribute: .width, relatedBy: .equal,
+            item: moreButton, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 40/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: moreImageView, attribute: .height, relatedBy: .equal,
-            toItem: moreImageView, attribute: .width, multiplier: 1.0, constant: 0.0)
+            item: moreButton, attribute: .height, relatedBy: .equal,
+            toItem: moreButton, attribute: .width, multiplier: 1.0, constant: 0.0)
         
         return [leadingConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }

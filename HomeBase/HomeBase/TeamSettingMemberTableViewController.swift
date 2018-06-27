@@ -41,6 +41,27 @@ class TeamSettingMemberTableViewController: UITableViewController {
         }
     }
     
+    @objc private func moreButtonDidTapped(_ sender: UIButton) {
+        guard let teamSettingMoreViewController = self.storyboard?.instantiateViewController(
+            withIdentifier: "TeamSettingMoreViewController")
+            as? TeamSettingMoreViewController else { return }
+        
+        self.navigationController?.navigationBar.alpha = 0.5
+        self.tableView.alpha = 0.5
+        
+        self.tabBarController?.definesPresentationContext = false
+        teamSettingMoreViewController.modalPresentationStyle = .overFullScreen
+        
+        teamSettingMoreViewController.player = playerList[sender.tag]
+        
+        self.present(teamSettingMoreViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func unwindToMemberView(_ segue: UIStoryboardSegue) {
+        self.navigationController?.navigationBar.alpha = 1.0
+        self.tableView.alpha = 1.0
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -82,6 +103,11 @@ extension TeamSettingMemberTableViewController {
         
         cell.backNumber = playerList[indexPath.row].backNumber
         cell.name = playerList[indexPath.row].name
+        cell.moreButton.tag = indexPath.row
+        cell.moreButton.addTarget(
+            self,
+            action: #selector(moreButtonDidTapped(_:)),
+            for: .touchUpInside)
         
         return cell
     }

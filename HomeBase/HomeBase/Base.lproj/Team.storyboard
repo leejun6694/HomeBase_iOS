@@ -127,6 +127,25 @@
             </objects>
             <point key="canvasLocation" x="4143" y="975"/>
         </scene>
+        <!--Team Setting More View Controller-->
+        <scene sceneID="C9I-dF-lxJ">
+            <objects>
+                <viewController storyboardIdentifier="TeamSettingMoreViewController" id="Lh8-cg-oC2" customClass="TeamSettingMoreViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Fi-lD-9ZN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="wvq-89-7qp"/>
+                    </view>
+                    <connections>
+                        <segue destination="0mQ-pn-P7a" kind="unwind" identifier="unwindToMemberView" unwindAction="unwindToMemberView:" id="7Dg-2O-2H1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="elp-cF-gcK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="0mQ-pn-P7a" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4945" y="975"/>
+        </scene>
     </scenes>
     <resources>
         <image name="teamIcon" width="27" height="27"/>
