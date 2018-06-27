@@ -12,6 +12,7 @@ class TeamSettingMoreViewController: UIViewController {
 
     // MARK: Properties
     
+    var teamData: HBTeam!
     var player: HBPlayer!
     
     private lazy var cancelButton: UIButton = {
@@ -62,6 +63,11 @@ class TeamSettingMoreViewController: UIViewController {
         adminView.isUserInteractionEnabled = true
         adminView.translatesAutoresizingMaskIntoConstraints = false
         
+        let adminTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(adminViewDidTapped(_:)))
+        adminView.addGestureRecognizer(adminTapGesture)
+        
         return adminView
     }()
     
@@ -89,6 +95,11 @@ class TeamSettingMoreViewController: UIViewController {
         removeView.isUserInteractionEnabled = true
         removeView.translatesAutoresizingMaskIntoConstraints = false
         
+        let removeTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(removeViewDidTapped(_:)))
+        removeView.addGestureRecognizer(removeTapGesture)
+        
         return removeView
     }()
     
@@ -114,7 +125,35 @@ class TeamSettingMoreViewController: UIViewController {
     // MARK: Methods
     
     @objc private func cancelButtonDidTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "unwindToMemberView", sender: nil)
+        performSegue(withIdentifier: "unwindToMemberViewSegue", sender: nil)
+    }
+    
+    @objc private func adminViewDidTapped(_ sender: UITapGestureRecognizer) {
+        guard let teamSettingCheckViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "TeamSettingCheckViewController")
+                as? TeamSettingCheckViewController else { return }
+        
+        teamSettingCheckViewController.teamData = teamData
+        teamSettingCheckViewController.player = player
+        teamSettingCheckViewController.adminCondition = true
+        teamSettingCheckViewController.modalPresentationStyle = .overFullScreen
+        
+        self.present(teamSettingCheckViewController, animated: false, completion: nil)
+    }
+    
+    @objc private func removeViewDidTapped(_ sender: UITapGestureRecognizer) {
+        guard let teamSettingCheckViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "TeamSettingCheckViewController")
+                as? TeamSettingCheckViewController else { return }
+        
+        teamSettingCheckViewController.teamData = teamData
+        teamSettingCheckViewController.player = player
+        teamSettingCheckViewController.removeCondition = true
+        teamSettingCheckViewController.modalPresentationStyle = .overFullScreen
+        
+        self.present(teamSettingCheckViewController, animated: false, completion: nil)
     }
     
     // MARK: Life Cycle

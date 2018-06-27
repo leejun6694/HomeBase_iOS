@@ -52,12 +52,13 @@ class TeamSettingMemberTableViewController: UITableViewController {
         self.tabBarController?.definesPresentationContext = false
         teamSettingMoreViewController.modalPresentationStyle = .overFullScreen
         
+        teamSettingMoreViewController.teamData = teamData
         teamSettingMoreViewController.player = playerList[sender.tag]
         
         self.present(teamSettingMoreViewController, animated: true, completion: nil)
     }
     
-    @IBAction func unwindToMemberView(_ segue: UIStoryboardSegue) {
+    @IBAction func unwindToMemberViewSegue(_ segue: UIStoryboardSegue) {
         self.navigationController?.navigationBar.alpha = 1.0
         self.tableView.alpha = 1.0
     }

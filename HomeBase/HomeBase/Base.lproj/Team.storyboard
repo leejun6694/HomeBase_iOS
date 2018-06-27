@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -138,16 +140,135 @@
                         <viewLayoutGuide key="safeArea" id="wvq-89-7qp"/>
                     </view>
                     <connections>
-                        <segue destination="0mQ-pn-P7a" kind="unwind" identifier="unwindToMemberView" unwindAction="unwindToMemberView:" id="7Dg-2O-2H1"/>
+                        <segue destination="0mQ-pn-P7a" kind="unwind" identifier="unwindToMemberViewSegue" unwindAction="unwindToMemberViewSegue:" id="EcH-PF-Qtp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elp-cF-gcK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="0mQ-pn-P7a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4945" y="975"/>
+            <point key="canvasLocation" x="4142" y="1751"/>
+        </scene>
+        <!--Team Setting Check View Controller-->
+        <scene sceneID="GZ2-j0-DJv">
+            <objects>
+                <viewController storyboardIdentifier="TeamSettingCheckViewController" id="cah-XS-dDG" customClass="TeamSettingCheckViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mu4-Tm-ft9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vXG-ng-OcQ">
+                                <rect key="frame" x="47" y="121.5" width="281" height="296"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5qb-bQ-sVL" userLabel="cancel">
+                                        <rect key="frame" x="227" y="13.5" width="41" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="5qb-bQ-sVL" secondAttribute="height" multiplier="1:1" id="dko-jG-kcw"/>
+                                        </constraints>
+                                        <state key="normal" image="iconExit"/>
+                                        <connections>
+                                            <action selector="cancelButtonDidTapped:" destination="cah-XS-dDG" eventType="touchUpInside" id="JEI-VX-lts"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockIcon" translatesAutoresizingMaskIntoConstraints="NO" id="BlU-rB-gNy">
+                                        <rect key="frame" x="110" y="36.5" width="61" height="61"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="BlU-rB-gNy" secondAttribute="height" multiplier="1:1" id="T1f-EA-Ves"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팀 이름을 입력해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="G2M-Ug-TrJ">
+                                        <rect key="frame" x="27.5" y="117" width="226" height="29"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                        <color key="textColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="팀 이름" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="yn4-r2-UWn">
+                                        <rect key="frame" x="41" y="173" width="199" height="20"/>
+                                        <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vFl-fH-41h">
+                                        <rect key="frame" x="27" y="199" width="227" height="2"/>
+                                        <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2g-Rz-RqP">
+                                        <rect key="frame" x="20" y="231.5" width="241" height="41"/>
+                                        <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <state key="normal" title="확인"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="j7d-Mr-05L">
+                                        <rect key="frame" x="130" y="138" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="vFl-fH-41h" firstAttribute="top" secondItem="yn4-r2-UWn" secondAttribute="bottom" constant="6" id="1FG-2i-hdr"/>
+                                    <constraint firstItem="vFl-fH-41h" firstAttribute="width" secondItem="vXG-ng-OcQ" secondAttribute="width" multiplier="250/310" id="4SE-iN-Cgw"/>
+                                    <constraint firstItem="G2M-Ug-TrJ" firstAttribute="top" secondItem="vXG-ng-OcQ" secondAttribute="centerY" multiplier="128/161.5" id="5Ct-TI-Klm"/>
+                                    <constraint firstItem="v2g-Rz-RqP" firstAttribute="centerX" secondItem="vXG-ng-OcQ" secondAttribute="centerX" id="B8K-F8-anR"/>
+                                    <constraint firstItem="BlU-rB-gNy" firstAttribute="width" secondItem="vXG-ng-OcQ" secondAttribute="width" multiplier="67/310" id="B8s-Xr-wDu"/>
+                                    <constraint firstItem="v2g-Rz-RqP" firstAttribute="top" secondItem="vXG-ng-OcQ" secondAttribute="centerY" multiplier="256/163.5" id="BlD-9i-oPc"/>
+                                    <constraint firstItem="G2M-Ug-TrJ" firstAttribute="width" secondItem="vXG-ng-OcQ" secondAttribute="width" multiplier="250/310" id="Cge-yU-LjH"/>
+                                    <constraint firstItem="BlU-rB-gNy" firstAttribute="top" secondItem="vXG-ng-OcQ" secondAttribute="centerY" multiplier="40/161.5" id="DQj-op-fk6"/>
+                                    <constraint firstItem="vFl-fH-41h" firstAttribute="centerX" secondItem="vXG-ng-OcQ" secondAttribute="centerX" id="DZS-IT-zMN"/>
+                                    <constraint firstItem="vFl-fH-41h" firstAttribute="height" secondItem="vXG-ng-OcQ" secondAttribute="height" multiplier="2/327" id="GnG-ir-xmF"/>
+                                    <constraint firstItem="5qb-bQ-sVL" firstAttribute="width" secondItem="vXG-ng-OcQ" secondAttribute="width" multiplier="45/310" id="Kax-Of-hZi"/>
+                                    <constraint firstItem="j7d-Mr-05L" firstAttribute="centerX" secondItem="vXG-ng-OcQ" secondAttribute="centerX" id="YMZ-Hw-L0H"/>
+                                    <constraint firstItem="j7d-Mr-05L" firstAttribute="centerY" secondItem="vXG-ng-OcQ" secondAttribute="centerY" id="Z3a-LX-rL9"/>
+                                    <constraint firstItem="yn4-r2-UWn" firstAttribute="height" secondItem="vXG-ng-OcQ" secondAttribute="height" multiplier="22/327" id="b0b-hH-k49"/>
+                                    <constraint firstItem="5qb-bQ-sVL" firstAttribute="top" secondItem="vXG-ng-OcQ" secondAttribute="centerY" multiplier="15/161.5" id="cQd-42-sbT"/>
+                                    <constraint firstItem="G2M-Ug-TrJ" firstAttribute="centerX" secondItem="vXG-ng-OcQ" secondAttribute="centerX" id="dpz-5u-a1v"/>
+                                    <constraint firstItem="yn4-r2-UWn" firstAttribute="centerX" secondItem="vXG-ng-OcQ" secondAttribute="centerX" id="gly-Qe-IYk"/>
+                                    <constraint firstItem="5qb-bQ-sVL" firstAttribute="leading" secondItem="vXG-ng-OcQ" secondAttribute="centerX" multiplier="251/155" id="hqv-30-qNU"/>
+                                    <constraint firstItem="yn4-r2-UWn" firstAttribute="width" secondItem="vXG-ng-OcQ" secondAttribute="width" multiplier="220/310" id="j8x-Vj-LeE"/>
+                                    <constraint firstItem="BlU-rB-gNy" firstAttribute="centerX" secondItem="vXG-ng-OcQ" secondAttribute="centerX" id="pBd-8K-hPJ"/>
+                                    <constraint firstItem="yn4-r2-UWn" firstAttribute="top" secondItem="vXG-ng-OcQ" secondAttribute="centerY" multiplier="191/163.5" id="pTI-9v-wph"/>
+                                    <constraint firstItem="v2g-Rz-RqP" firstAttribute="width" secondItem="vXG-ng-OcQ" secondAttribute="width" multiplier="266/310" id="tSF-S2-M6R"/>
+                                    <constraint firstItem="G2M-Ug-TrJ" firstAttribute="height" secondItem="vXG-ng-OcQ" secondAttribute="height" multiplier="31/323" id="vaj-Mm-YgA"/>
+                                    <constraint firstItem="v2g-Rz-RqP" firstAttribute="height" secondItem="vXG-ng-OcQ" secondAttribute="height" multiplier="45/327" id="yPT-i3-Qjv"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vXG-ng-OcQ" firstAttribute="width" secondItem="Mu4-Tm-ft9" secondAttribute="width" multiplier="310/414" id="Khh-Fr-44F"/>
+                            <constraint firstItem="vXG-ng-OcQ" firstAttribute="centerX" secondItem="Q0q-Mb-ko0" secondAttribute="centerX" id="Wc2-56-Vpb"/>
+                            <constraint firstItem="vXG-ng-OcQ" firstAttribute="height" secondItem="Mu4-Tm-ft9" secondAttribute="height" multiplier="327/736" id="eZc-9y-7mA"/>
+                            <constraint firstItem="vXG-ng-OcQ" firstAttribute="top" secondItem="Q0q-Mb-ko0" secondAttribute="centerY" multiplier="130/368" id="vOG-b1-XM6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Q0q-Mb-ko0"/>
+                    </view>
+                    <connections>
+                        <outlet property="okButton" destination="v2g-Rz-RqP" id="pPi-Fi-KbI"/>
+                        <outlet property="spinner" destination="j7d-Mr-05L" id="nuB-SX-bdn"/>
+                        <outlet property="teamNameTextField" destination="yn4-r2-UWn" id="H5v-DJ-Vbk"/>
+                        <segue destination="MVD-Hv-UI7" kind="unwind" identifier="unwindToTeamMainSegue" unwindAction="unwindToTeamMainSegue:" id="9mQ-FE-gf3"/>
+                        <segue destination="MVD-Hv-UI7" kind="unwind" identifier="unwindToMemberViewSegue" unwindAction="unwindToMemberViewSegue:" id="dha-DS-1dH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UYb-ZA-o7j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="MVD-Hv-UI7" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="5016.8000000000002" y="1750.9745127436283"/>
         </scene>
     </scenes>
     <resources>
+        <image name="iconExit" width="45" height="45"/>
+        <image name="lockIcon" width="66" height="67"/>
         <image name="teamIcon" width="27" height="27"/>
     </resources>
 </document>
