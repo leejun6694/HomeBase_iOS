@@ -52,7 +52,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2Y-Xj-Coj">
-                                <rect key="frame" x="0.0" y="614.5" width="185" height="52.5"/>
+                                <rect key="frame" x="0.0" y="614.5" width="186.5" height="52.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
                                 <state key="normal" title="로그아웃">
@@ -63,7 +63,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3b-fW-ANZ">
-                                <rect key="frame" x="190" y="614.5" width="185" height="52.5"/>
+                                <rect key="frame" x="188.5" y="614.5" width="186.5" height="52.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
                                 <state key="normal" title="팀 탈퇴">
@@ -74,7 +74,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qQ1-Oh-flq" firstAttribute="bottom" secondItem="F2Y-Xj-Coj" secondAttribute="bottom" id="Go0-0I-oFK"/>
-                            <constraint firstItem="H3b-fW-ANZ" firstAttribute="leading" secondItem="F2Y-Xj-Coj" secondAttribute="trailing" constant="5" id="ZB4-IU-q3g"/>
+                            <constraint firstItem="H3b-fW-ANZ" firstAttribute="leading" secondItem="F2Y-Xj-Coj" secondAttribute="trailing" constant="2" id="ZB4-IU-q3g"/>
                             <constraint firstItem="H3b-fW-ANZ" firstAttribute="width" secondItem="F2Y-Xj-Coj" secondAttribute="width" id="hPZ-Br-4OL"/>
                             <constraint firstItem="F2Y-Xj-Coj" firstAttribute="height" secondItem="qQ1-Oh-flq" secondAttribute="height" multiplier="60/736" id="iqT-pJ-DFi"/>
                             <constraint firstItem="F2Y-Xj-Coj" firstAttribute="leading" secondItem="qQ1-Oh-flq" secondAttribute="leading" id="l7I-Q7-V3P"/>

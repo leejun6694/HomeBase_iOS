@@ -72,6 +72,62 @@ class PersonalSettingViewController: UIViewController {
         return personalPhotoSettingImageView
     }()
     
+    private lazy var divisionView: UIView = {
+        let divisionView = UIView()
+        divisionView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        divisionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return divisionView
+    }()
+    
+    private lazy var userButton: UIButton = {
+        let userButton = UIButton(type: .system)
+        userButton.setTitle("기본정보", for: .normal)
+        userButton.setTitleColor(.white, for: .normal)
+        userButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 17.0)
+        userButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        userButton.titleLabel?.minimumScaleFactor = 0.5
+        userButton.backgroundColor = UIColor.clear
+        userButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        userButton.addTarget(
+            self,
+            action: #selector(userButtonDidTapped(_:)),
+            for: .touchUpInside)
+        
+        return userButton
+    }()
+    
+    private lazy var playerButton: UIButton = {
+        let playerButton = UIButton(type: .system)
+        playerButton.setTitle("선수정보", for: .normal)
+        playerButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .normal)
+        playerButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 17.0)
+        playerButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        playerButton.titleLabel?.minimumScaleFactor = 0.5
+        playerButton.backgroundColor = UIColor.clear
+        playerButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        playerButton.addTarget(
+            self,
+            action: #selector(playerButtonDidTapped(_:)),
+            for: .touchUpInside)
+        
+        return playerButton
+    }()
+    
+    private lazy var buttonUnderView: UIView = {
+        let buttonUnderView = UIView()
+        buttonUnderView.backgroundColor = .white
+        buttonUnderView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return buttonUnderView
+    }()
+    
     // MARK: Methods
     
     @objc private func backButtonDidTapped(_ sender: UIButton) {
@@ -86,6 +142,30 @@ class PersonalSettingViewController: UIViewController {
         imagePicker.allowsEditing = true
         
         self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @objc private func userButtonDidTapped(_ sender: UIButton) {
+        playerButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .normal)
+        userButton.setTitleColor(.white, for: .normal)
+        
+        if buttonUnderView.isDescendant(of: self.view) {
+            buttonUnderView.removeFromSuperview()
+        }
+        
+        self.view.addSubview(buttonUnderView)
+        self.view.addConstraints(userButtonUnderViewConstraints())
+    }
+    
+    @objc private func playerButtonDidTapped(_ sender: UIButton) {
+        userButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .normal)
+        playerButton.setTitleColor(.white, for: .normal)
+        
+        if buttonUnderView.isDescendant(of: self.view) {
+            buttonUnderView.removeFromSuperview()
+        }
+        
+        self.view.addSubview(buttonUnderView)
+        self.view.addConstraints(playerButtonUnderViewConstraints())
     }
     
     @IBAction func signOutButtonDidTapped(_ sender: UIButton) {
@@ -120,6 +200,14 @@ class PersonalSettingViewController: UIViewController {
         self.view.addConstraints(personalPhotoImageViewConstraints())
         self.view.addSubview(personalPhotoSettingImageView)
         self.view.addConstraints(personalPhotoSettingImageViewConstraints())
+        self.view.addSubview(divisionView)
+        self.view.addConstraints(divisionViewConstraints())
+        self.view.addSubview(userButton)
+        self.view.addConstraints(userButtonConstraints())
+        self.view.addSubview(playerButton)
+        self.view.addConstraints(playerButtonConstraints())
+        self.view.addSubview(buttonUnderView)
+        self.view.addConstraints(userButtonUnderViewConstraints())
     }
     
     override func viewDidLayoutSubviews() {
@@ -213,5 +301,90 @@ extension PersonalSettingViewController {
             toItem: personalPhotoSettingImageView, attribute: .width, multiplier: 1.0, constant: 0.0)
         
         return [centerXConstraint, bottomConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func divisionViewConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: divisionView, attribute: .centerX, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: divisionView, attribute: .top, relatedBy: .equal,
+            toItem: self.view, attribute: .centerY, multiplier: 290/368, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: divisionView, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: divisionView, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 3/736, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func userButtonConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: userButton, attribute: .centerX, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 134.5/207, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: userButton, attribute: .top, relatedBy: .equal,
+            toItem: self.view, attribute: .centerY, multiplier: 262/368, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: userButton, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 70/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: userButton, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 20/736, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func playerButtonConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: playerButton, attribute: .centerX, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 264.5/207, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: playerButton, attribute: .top, relatedBy: .equal,
+            toItem: self.view, attribute: .centerY, multiplier: 262/368, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: playerButton, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 70/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: playerButton, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 20/736, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func userButtonUnderViewConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: buttonUnderView, attribute: .centerX, relatedBy: .equal,
+            toItem: userButton, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let centerYConstraint = NSLayoutConstraint(
+            item: buttonUnderView, attribute: .centerY, relatedBy: .equal,
+            toItem: divisionView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: buttonUnderView, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 70/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: buttonUnderView, attribute: .height, relatedBy: .equal,
+            toItem: divisionView, attribute: .height, multiplier: 1.0, constant: 0.0)
+        
+        return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func playerButtonUnderViewConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: buttonUnderView, attribute: .centerX, relatedBy: .equal,
+            toItem: playerButton, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let centerYConstraint = NSLayoutConstraint(
+            item: buttonUnderView, attribute: .centerY, relatedBy: .equal,
+            toItem: divisionView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: buttonUnderView, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 70/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: buttonUnderView, attribute: .height, relatedBy: .equal,
+            toItem: divisionView, attribute: .height, multiplier: 1.0, constant: 0.0)
+        
+        return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
 }
