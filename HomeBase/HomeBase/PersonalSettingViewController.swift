@@ -128,6 +128,20 @@ class PersonalSettingViewController: UIViewController {
         return buttonUnderView
     }()
     
+    private lazy var userView: PersonalSettingUserView = {
+        let userView = PersonalSettingUserView()
+        userView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return userView
+    }()
+    
+    private lazy var playerView: PersonalSettingPlayerView = {
+        let playerView = PersonalSettingPlayerView()
+        playerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return playerView
+    }()
+    
     // MARK: Methods
     
     @objc private func backButtonDidTapped(_ sender: UIButton) {
@@ -208,6 +222,8 @@ class PersonalSettingViewController: UIViewController {
         self.view.addConstraints(playerButtonConstraints())
         self.view.addSubview(buttonUnderView)
         self.view.addConstraints(userButtonUnderViewConstraints())
+        self.view.addSubview(userView)
+        self.view.addConstraints(userViewConstraints())
     }
     
     override func viewDidLayoutSubviews() {
@@ -386,5 +402,39 @@ extension PersonalSettingViewController {
             toItem: divisionView, attribute: .height, multiplier: 1.0, constant: 0.0)
         
         return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func userViewConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: userView, attribute: .centerX, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: userView, attribute: .top, relatedBy: .equal,
+            toItem: divisionView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: userView, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: userView, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 426/736, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func playerViewConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: playerView, attribute: .centerX, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: playerView, attribute: .top, relatedBy: .equal,
+            toItem: divisionView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: playerView, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: playerView, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 426/736, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
     }
 }
