@@ -88,6 +88,9 @@
                             <outletCollection property="gestureRecognizers" destination="fk1-U1-7uG" appends="YES" id="tvL-cD-ohJ"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="signOutButton" destination="F2Y-Xj-Coj" id="Jhl-gh-5qA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9lX-Fa-Qlc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="fk1-U1-7uG">

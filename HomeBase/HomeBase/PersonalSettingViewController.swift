@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class PersonalSettingViewController: UIViewController {
     
@@ -151,10 +153,10 @@ class PersonalSettingViewController: UIViewController {
     
     private lazy var userView: PersonalSettingUserView = {
         let userView = PersonalSettingUserView()
-        userView.name = userData.name
-        userView.birth = userData.birth
-        userView.height = playerData.height
-        userView.weight = playerData.weight
+        userView.dbName = userData.name
+        userView.dbBirth = userData.birth
+        userView.dbHeight = playerData.height
+        userView.dbWeight = playerData.weight
         userView.translatesAutoresizingMaskIntoConstraints = false
         
         return userView
@@ -162,10 +164,22 @@ class PersonalSettingViewController: UIViewController {
     
     private lazy var playerView: PersonalSettingPlayerView = {
         let playerView = PersonalSettingPlayerView()
+        playerView.dbPosition = playerData.position
+        playerView.dbPlayerNumber = playerData.backNumber
+        playerView.dbPitcher = playerData.pitchPosition
+        playerView.dbHitter = playerData.batPosition
+        
+        playerView.position = playerData.position
+        playerView.playerNumber = playerData.backNumber
+        playerView.pitcher = playerData.pitchPosition
+        playerView.hitter = playerData.batPosition
         playerView.translatesAutoresizingMaskIntoConstraints = false
         
         return playerView
     }()
+    
+    @IBOutlet var signOutButton: UIButton!
+    
     
     // MARK: Methods
     
@@ -178,8 +192,64 @@ class PersonalSettingViewController: UIViewController {
     }
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
-        if userView.userCondition {
-            print("yes")
+        if userView.userCondition, playerView.playerCondition {
+            guard let mainTabBarController =
+                self.tabBarController as? MainTabBarController else { return }
+            
+            var batPosition = "우"
+            let hitterControlValue = playerView.hitterControl.selectedSegmentIndex
+            if hitterControlValue == 0 { batPosition = "좌" }
+            else { batPosition = "우" }
+            
+            var pitchPosition = "우"
+            let pitcherControlValue = playerView.pitcherControl.selectedSegmentIndex
+            if pitcherControlValue == 0 { pitchPosition = "좌" }
+            else { pitchPosition = "우" }
+            
+            let databaseRef = Database.database().reference()
+            if let currentUser = Auth.auth().currentUser {
+                let userRef = databaseRef.child("users").child(currentUser.uid)
+                let playerRef = databaseRef.child("players").child(currentUser.uid)
+                
+                userRef.updateChildValues(
+                    ["name": userView.name,
+                     "birth": userView.birth]) {
+                        (error, ref) in
+                    
+                        CloudFunction.getUserDataWith(currentUser) {
+                            (userData, error) in
+                                                
+                            if let _ = error {
+                                return
+                            } else {
+                                mainTabBarController.userData = userData
+                                                    
+                                playerRef.updateChildValues(
+                                    ["name": self.userView.name,
+                                     "height": self.userView.height,
+                                     "weight": self.userView.weight,
+                                     "position": self.playerView.position,
+                                     "backNumber": self.playerView.playerNumber,
+                                     "pitchPosition": pitchPosition,
+                                     "batPosition": batPosition]) {
+                                        (error, ref) in
+                                        
+                                        CloudFunction.getPlayerDataWith(currentUser) {
+                                            (playerData, error) in
+                                                                                        
+                                            if let _ = error {
+                                                return
+                                            } else {
+                                                mainTabBarController.playerData = playerData
+                                                                                            
+                                                self.dismiss(animated: true, completion: nil)
+                                            }
+                                        }
+                                }
+                            }
+                        }
+                }
+            }
         } else {
             print("no")
         }
@@ -280,6 +350,12 @@ class PersonalSettingViewController: UIViewController {
                 if bottomLocationOf(userView.weightTextField) - 295.0 < keyboardHeight {
                     self.view.frame.origin.y -= keyboardHeight
                 }
+            }
+            
+            if playerView.positionTextField.isFirstResponder {
+                    self.view.frame.origin.y -= keyboardHeight
+            } else if playerView.playerNumberTextField.isFirstResponder {
+                self.view.frame.origin.y -= keyboardHeight
             }
         }
     }
@@ -536,11 +612,11 @@ extension PersonalSettingViewController {
         let widthConstraint = NSLayoutConstraint(
             item: userView, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0.0)
-        let heightConstraint = NSLayoutConstraint(
-            item: userView, attribute: .height, relatedBy: .equal,
-            toItem: self.view, attribute: .height, multiplier: 426/736, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: userView, attribute: .bottom, relatedBy: .equal,
+            toItem: signOutButton, attribute: .top, multiplier: 1.0, constant: 0.0)
         
-        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+        return [centerXConstraint, topConstraint, widthConstraint, bottomConstraint]
     }
     
     private func playerViewConstraints() -> [NSLayoutConstraint] {
@@ -553,10 +629,10 @@ extension PersonalSettingViewController {
         let widthConstraint = NSLayoutConstraint(
             item: playerView, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0.0)
-        let heightConstraint = NSLayoutConstraint(
-            item: playerView, attribute: .height, relatedBy: .equal,
-            toItem: self.view, attribute: .height, multiplier: 426/736, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: playerView, attribute: .bottom, relatedBy: .equal,
+            toItem: signOutButton, attribute: .top, multiplier: 1.0, constant: 0.0)
         
-        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+        return [centerXConstraint, topConstraint, widthConstraint, bottomConstraint]
     }
 }

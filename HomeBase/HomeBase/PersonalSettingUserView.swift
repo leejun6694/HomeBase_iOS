@@ -12,30 +12,34 @@ class PersonalSettingUserView: UIView {
     
     // MARK: Properties
     
-    var name: String = "" {
+    var dbName: String = "" {
         didSet {
-            nameTextField.text = name
+            nameTextField.text = dbName
         }
     }
-    var birth: String = "" {
+    var dbBirth: String = "" {
         didSet {
-            birthTextField.text = birth
+            birthTextField.text = dbBirth
         }
     }
-    var height: Int = 0 {
+    var dbHeight: Int = 0 {
         didSet {
-            heightTextField.text = "\(height) cm"
+            heightTextField.text = "\(dbHeight) cm"
         }
     }
-    var weight: Int = 0 {
+    var dbWeight: Int = 0 {
         didSet {
-            weightTextField.text = "\(weight) kg"
+            weightTextField.text = "\(dbWeight) kg"
         }
     }
     
+    var name: String = ""
+    var birth: String = ""
     private var year: String = ""
     private var month: String = ""
     private var day: String = ""
+    var height: Int = 0
+    var weight: Int = 0
     
     var userCondition = true
     private var nameCondition = true
@@ -209,6 +213,11 @@ class PersonalSettingUserView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
+        name = dbName
+        birth = dbBirth
+        height = dbHeight
+        weight = dbWeight
+        
         self.addSubview(nameLabel)
         self.addConstraints(nameLabelConstraints())
         self.addSubview(nameTextField)
@@ -327,6 +336,7 @@ extension PersonalSettingUserView: UITextFieldDelegate {
     private func birthTextFieldCondition(_ state: Bool) {
         if state {
             birthCondition = true
+            birth = "\(year).\(month).\(day)"
             birthLabel.textColor = HBColor.correct
             birthTextField.textColor = HBColor.correct
             birthTextField.tintColor = HBColor.correct
@@ -338,6 +348,7 @@ extension PersonalSettingUserView: UITextFieldDelegate {
             }
         } else {
             birthCondition = false
+            birth = ""
             birthLabel.textColor = .white
             birthTextField.textColor = .white
             birthTextField.tintColor = .white
@@ -599,7 +610,7 @@ extension PersonalSettingUserView {
             toItem: self, attribute: .centerX, multiplier: 44/207, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 20/213, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 30/213, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: nameLabel, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 60/414, constant: 0.0)
@@ -664,7 +675,7 @@ extension PersonalSettingUserView {
             toItem: self, attribute: .centerX, multiplier: 44/207, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
             item: birthLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 104/213, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 114/213, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: birthLabel, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 60/414, constant: 0.0)
@@ -729,7 +740,7 @@ extension PersonalSettingUserView {
             toItem: self, attribute: .centerX, multiplier: 44/207, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
             item: heightLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 203/213, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 223/213, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: heightLabel, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 60/414, constant: 0.0)
@@ -794,7 +805,7 @@ extension PersonalSettingUserView {
             toItem: self, attribute: .centerX, multiplier: 44/207, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
             item: weightLabel, attribute: .top, relatedBy: .equal,
-            toItem: self, attribute: .centerY, multiplier: 287/213, constant: 0.0)
+            toItem: self, attribute: .centerY, multiplier: 307/213, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: weightLabel, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 60/414, constant: 0.0)

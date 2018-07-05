@@ -35,9 +35,9 @@ class SignInViewController: UIViewController {
     private func userConnected() {
         if let currentUser = Auth.auth().currentUser {
             CloudFunction.getUserDataWith(currentUser) {
-                (user, error) -> Void in
+                (userData, error) -> Void in
                 
-                if let teamCode = user?.teamCode {
+                if let teamCode = userData?.teamCode {
                     if teamCode != "default" {
                         CloudFunction.getPlayerDataWith(currentUser) {
                             (player, error) -> Void in
@@ -66,6 +66,7 @@ class SignInViewController: UIViewController {
                                                         withIdentifier: "MainTabBarController")
                                                         as? MainTabBarController else { return }
                                                     
+                                                    mainTabBarController.userData = userData
                                                     mainTabBarController.playerData = playerData
                                                     mainTabBarController.teamData = teamData
                                                     mainTabBarController.teamLogo = UIImage(data: logoData!) ?? #imageLiteral(resourceName: "team_logo")
