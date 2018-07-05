@@ -14,6 +14,7 @@ class MainTabBarController: UITabBarController {
     
     // MARK: Properties
     
+    var userData: HBUser!
     var playerData: HBPlayer!
     var teamData: HBTeam!
     var teamLogo: UIImage!

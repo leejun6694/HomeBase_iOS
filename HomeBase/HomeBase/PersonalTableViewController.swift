@@ -30,6 +30,11 @@ class PersonalTableViewController: UITableViewController {
                 withIdentifier: "PersonalSettingViewController")
                 as? PersonalSettingViewController else { return }
         
+        if let mainTabBarController = self.tabBarController as? MainTabBarController {
+            personalSettingViewController.userData = mainTabBarController.userData
+            personalSettingViewController.playerData = mainTabBarController.playerData
+        }
+        
         self.present(personalSettingViewController, animated: true, completion: nil)
     }
     

@@ -62,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                 
                                                 guard let mainTabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController else { return }
                                                 
+                                                mainTabBarController.userData = userData
                                                 mainTabBarController.playerData = playerData
                                                 mainTabBarController.teamData = teamData
                                                 mainTabBarController.teamLogo = UIImage(data: logoData!) ?? #imageLiteral(resourceName: "team_logo")

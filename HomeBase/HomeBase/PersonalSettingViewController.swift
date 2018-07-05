@@ -13,6 +13,11 @@ class PersonalSettingViewController: UIViewController {
     
     // MARK: Properties
     
+    var userData: HBUser!
+    var playerData: HBPlayer!
+    
+    private var currentOriginY: CGFloat = 0.0
+    
     private lazy var backButton: UIButton = {
         let backButton = UIButton(type: .system)
         backButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
@@ -24,6 +29,22 @@ class PersonalSettingViewController: UIViewController {
             for: .touchUpInside)
         
         return backButton
+    }()
+    
+    private lazy var doneButton: UIButton = {
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("완료", for: .normal)
+        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 17.0)
+        doneButton.addTarget(
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return doneButton
     }()
     
     private lazy var titleLabel: UILabel = {
@@ -130,6 +151,10 @@ class PersonalSettingViewController: UIViewController {
     
     private lazy var userView: PersonalSettingUserView = {
         let userView = PersonalSettingUserView()
+        userView.name = userData.name
+        userView.birth = userData.birth
+        userView.height = playerData.height
+        userView.weight = playerData.weight
         userView.translatesAutoresizingMaskIntoConstraints = false
         
         return userView
@@ -144,8 +169,20 @@ class PersonalSettingViewController: UIViewController {
     
     // MARK: Methods
     
+    @IBAction func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     @objc private func backButtonDidTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func doneButtonDidTapped(_ sender: UIButton) {
+        if userView.userCondition {
+            print("yes")
+        } else {
+            print("no")
+        }
     }
     
     @objc private func personalPhotoDidTapped(_ sender: UITapGestureRecognizer) {
@@ -212,6 +249,45 @@ class PersonalSettingViewController: UIViewController {
         }
     }
     
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            self.view.frame.origin.y = currentOriginY
+            
+            if userView.nameTextField.isFirstResponder {
+                if bottomLocationOf(userView.weightTextField) - 295.0 < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOf(userView.weightTextField)
+                            - 290.0
+                            - keyboardHeight)
+                }
+            } else if userView.birthTextField.isFirstResponder {
+                if bottomLocationOf(userView.weightTextField) - 295.0 < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOf(userView.weightTextField)
+                            - 290.0
+                            - keyboardHeight)
+                }
+            } else if userView.heightTextField.isFirstResponder {
+                if bottomLocationOf(userView.weightTextField) - 295.0 < keyboardHeight {
+                    self.view.frame.origin.y -= keyboardHeight
+                }
+            } else if userView.weightTextField.isFirstResponder {
+                if bottomLocationOf(userView.weightTextField) - 295.0 < keyboardHeight {
+                    self.view.frame.origin.y -= keyboardHeight
+                }
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification:NSNotification) {
+        self.view.frame.origin.y = currentOriginY
+    }
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -221,6 +297,8 @@ class PersonalSettingViewController: UIViewController {
         
         self.view.addSubview(backButton)
         self.view.addConstraints(backButtonConstraints())
+        self.view.addSubview(doneButton)
+        self.view.addConstraints(doneButtonConstraints())
         self.view.addSubview(titleLabel)
         self.view.addConstraints(titleLabelConstraints())
         
@@ -238,6 +316,19 @@ class PersonalSettingViewController: UIViewController {
         self.view.addConstraints(userButtonUnderViewConstraints())
         self.view.addSubview(userView)
         self.view.addConstraints(userViewConstraints())
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: NSNotification.Name.UIKeyboardWillHide,
+            object: nil
+        )
     }
     
     override func viewDidLayoutSubviews() {
@@ -280,6 +371,23 @@ extension PersonalSettingViewController {
             toItem: backButton, attribute: .height, multiplier: 1.0, constant: 0.0)
         
         return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func doneButtonConstraints() -> [NSLayoutConstraint] {
+        let leadingConstraint = NSLayoutConstraint(
+            item: doneButton, attribute: .leading, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 360/207, constant: 0.0)
+        let centerYConstraint = NSLayoutConstraint(
+            item: doneButton, attribute: .centerY, relatedBy: .equal,
+            toItem: backButton, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: doneButton, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 40/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: doneButton, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 30/736, constant: 0.0)
+        
+        return [leadingConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
     
     private func titleLabelConstraints() -> [NSLayoutConstraint] {
