@@ -166,8 +166,15 @@ class PersonalSettingViewController: UIViewController {
             buttonUnderView.removeFromSuperview()
         }
         
+        if playerView.isDescendant(of: self.view) {
+            playerView.removeFromSuperview()
+        }
+        
         self.view.addSubview(buttonUnderView)
         self.view.addConstraints(userButtonUnderViewConstraints())
+        
+        self.view.addSubview(userView)
+        self.view.addConstraints(userViewConstraints())
     }
     
     @objc private func playerButtonDidTapped(_ sender: UIButton) {
@@ -178,8 +185,15 @@ class PersonalSettingViewController: UIViewController {
             buttonUnderView.removeFromSuperview()
         }
         
+        if userView.isDescendant(of: self.view) {
+            userView.removeFromSuperview()
+        }
+        
         self.view.addSubview(buttonUnderView)
         self.view.addConstraints(playerButtonUnderViewConstraints())
+        
+        self.view.addSubview(playerView)
+        self.view.addConstraints(playerViewConstraints())
     }
     
     @IBAction func signOutButtonDidTapped(_ sender: UIButton) {

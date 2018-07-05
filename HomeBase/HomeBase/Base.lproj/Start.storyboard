@@ -2657,7 +2657,7 @@
         <image name="iconError" width="70" height="70"/>
         <image name="iconExit" width="45" height="45"/>
         <image name="iconSelect" width="70" height="70"/>
-        <image name="lockIcon" width="85" height="85"/>
+        <image name="lockIcon" width="66" height="67"/>
         <image name="logo" width="208" height="163"/>
         <image name="mail" width="80" height="58"/>
         <image name="registerTeamlogo" width="120" height="120"/>
