@@ -43,6 +43,8 @@
 		726376792045248000388939 /* ScheduleCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726376782045248000388939 /* ScheduleCreateViewController.swift */; };
 		7263767D204551EE00388939 /* ScheduleNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7263767C204551EE00388939 /* ScheduleNavigation.swift */; };
 		7263767F2045CE3F00388939 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7263767E2045CE3F00388939 /* MainViewController.swift */; };
+		7266D5CB20ECBFCA00687C11 /* PersonalSettingUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7266D5CA20ECBFCA00687C11 /* PersonalSettingUserView.swift */; };
+		7266D5CD20ECBFD700687C11 /* PersonalSettingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7266D5CC20ECBFD700687C11 /* PersonalSettingPlayerView.swift */; };
 		7277BF9F209B862600AA8256 /* ScheduleMonthlySectionBlankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7277BF9E209B862600AA8256 /* ScheduleMonthlySectionBlankCell.swift */; };
 		7282D75A20E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */; };
 		7282D75C20E2B0CB00716CB9 /* TeamSettingMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */; };
@@ -147,6 +149,8 @@
 		726376782045248000388939 /* ScheduleCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreateViewController.swift; sourceTree = "<group>"; };
 		7263767C204551EE00388939 /* ScheduleNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNavigation.swift; sourceTree = "<group>"; };
 		7263767E2045CE3F00388939 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		7266D5CA20ECBFCA00687C11 /* PersonalSettingUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalSettingUserView.swift; sourceTree = "<group>"; };
+		7266D5CC20ECBFD700687C11 /* PersonalSettingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalSettingPlayerView.swift; sourceTree = "<group>"; };
 		7277BF9E209B862600AA8256 /* ScheduleMonthlySectionBlankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleMonthlySectionBlankCell.swift; sourceTree = "<group>"; };
 		7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingMemberTableViewController.swift; sourceTree = "<group>"; };
 		7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingMemberCell.swift; sourceTree = "<group>"; };
@@ -255,6 +259,16 @@
 				721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */,
 			);
 			name = SignUp;
+			sourceTree = "<group>";
+		};
+		7266D5CE20ECC1C300687C11 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				720E98AF20B8230500C45CEE /* PersonalSettingViewController.swift */,
+				7266D5CA20ECBFCA00687C11 /* PersonalSettingUserView.swift */,
+				7266D5CC20ECBFD700687C11 /* PersonalSettingPlayerView.swift */,
+			);
+			name = Setting;
 			sourceTree = "<group>";
 		};
 		7282D76120E3A33300716CB9 /* Setting */ = {
@@ -381,7 +395,7 @@
 				720E98AD20B72B9400C45CEE /* PersonalRecordView.swift */,
 				72B7A74F20B6E1E500E9AEB9 /* PersonalBatterView.swift */,
 				720E98AB20B728A900C45CEE /* PersonalPitcherView.swift */,
-				720E98AF20B8230500C45CEE /* PersonalSettingViewController.swift */,
+				7266D5CE20ECC1C300687C11 /* Setting */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -731,6 +745,7 @@
 				7213179A20C52F4700A512C1 /* TeamSettingTeamDataViewController.swift in Sources */,
 				72B7A74C20B597A700E9AEB9 /* PersonalRankingGraphView.swift in Sources */,
 				7220479F2034B7B40088BEE4 /* MainTopSectionCell.swift in Sources */,
+				7266D5CD20ECBFD700687C11 /* PersonalSettingPlayerView.swift in Sources */,
 				720E98B020B8230500C45CEE /* PersonalSettingViewController.swift in Sources */,
 				72E6600420A97BA600371A5E /* ScheduleDetailLoadPlayerViewController.swift in Sources */,
 				72F5ECF720473AE400C7B594 /* ScheduleDetailPlayerCell.swift in Sources */,
@@ -764,6 +779,7 @@
 				725B85001FFE326B0024588D /* SignUpViewController.swift in Sources */,
 				721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */,
 				7282D76020E3A32000716CB9 /* TeamSettingCheckViewController.swift in Sources */,
+				7266D5CB20ECBFCA00687C11 /* PersonalSettingUserView.swift in Sources */,
 				72D1035C2074E6EE007D1610 /* CustomProperties.swift in Sources */,
 				720E98AE20B72B9400C45CEE /* PersonalRecordView.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,

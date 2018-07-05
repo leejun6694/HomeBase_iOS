@@ -15,16 +15,6 @@ class PersonalTableViewController: UITableViewController {
     let headerView = PersonalHeaderView()
     let recordView = PersonalRecordView()
     
-    private lazy var settingButton: UIBarButtonItem = {
-        let settingButton = UIBarButtonItem(
-            image: #imageLiteral(resourceName: "settingIcon"),
-            style: .plain,
-            target: self,
-            action: #selector(settingButtonDidTapped(_:)))
-
-        return settingButton
-    }()
-    
     // MARK: Methods
     
     private func fetchPlayerData() {
@@ -37,10 +27,10 @@ class PersonalTableViewController: UITableViewController {
     @objc private func settingButtonDidTapped(_ sender: UIButton) {
         guard let personalSettingViewController =
             self.storyboard?.instantiateViewController(
-                withIdentifier: "PersonalSettingViewController") as? PersonalSettingViewController else { return }
+                withIdentifier: "PersonalSettingViewController")
+                as? PersonalSettingViewController else { return }
         
-        self.navigationController?.pushViewController(
-            personalSettingViewController, animated: true)
+        self.present(personalSettingViewController, animated: true, completion: nil)
     }
     
     // MARK: Life Cycle
@@ -49,14 +39,6 @@ class PersonalTableViewController: UITableViewController {
         super.viewDidLoad()
         
         fetchPlayerData()
-        
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.barTintColor = HBColor.lightGray
-            navigationController.navigationBar.shadowImage = UIImage()
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.hidesBarsOnSwipe = true
-        }
-        navigationItem.rightBarButtonItem = settingButton
         
         self.view.backgroundColor = HBColor.lightGray
         self.tableView.bounces = false
@@ -85,7 +67,12 @@ extension PersonalTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         switch section {
-        case 0: return headerView
+        case 0:
+            headerView.settingButton.addTarget(
+                self,
+                action: #selector(settingButtonDidTapped(_:)),
+                for: .touchUpInside)
+            return headerView
         case 1: return recordView
         default: return nil
         }
@@ -94,7 +81,7 @@ extension PersonalTableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         switch section {
-        case 0: return CGFloat(self.view.frame.size.height * 527/736).rounded()
+        case 0: return CGFloat(self.view.frame.size.height * 567/736).rounded()
         case 1: return CGFloat(self.view.frame.size.height * 518/736).rounded()
         default: return 0.0
         }

@@ -282,25 +282,48 @@ class TeamSettingTeamDataViewController: UIViewController {
                 }
                 
                 if self.homeStadiumCondition {
-                    teamRef.updateChildValues(["homeStadium": self.homeStadium])
-                    mainTabBarController.teamData.homeStadium = self.homeStadium
+                    teamRef.updateChildValues(["homeStadium": self.homeStadium]) {
+                        (error, ref) in
+                        
+                        mainTabBarController.teamData.homeStadium = self.homeStadium
+                        
+                        self.viewEnabled(self.view)
+                        self.spinnerStopAnimating(self.spinner)
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 } else {
-                    teamRef.updateChildValues(["homeStadium": "default"])
-                    mainTabBarController.teamData.homeStadium = "default"
+                    teamRef.updateChildValues(["homeStadium": "default"]) {
+                        (error, ref) in
+                        
+                        mainTabBarController.teamData.homeStadium = "default"
+                        
+                        self.viewEnabled(self.view)
+                        self.spinnerStopAnimating(self.spinner)
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
                 
                 if self.createdAtCondition {
-                    teamRef.updateChildValues(["createdAt": self.createdAt])
-                    mainTabBarController.teamData.createdAt = self.createdAt
+                    teamRef.updateChildValues(["createdAt": self.createdAt]) {
+                        (error, ref) in
+                        
+                        mainTabBarController.teamData.createdAt = self.createdAt
+                        
+                        self.viewEnabled(self.view)
+                        self.spinnerStopAnimating(self.spinner)
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 } else {
-                    teamRef.updateChildValues(["createdAt": 0])
-                    mainTabBarController.teamData.createdAt = 0
+                    teamRef.updateChildValues(["createdAt": 0]) {
+                        (error, ref) in
+                        
+                        mainTabBarController.teamData.createdAt = 0
+                        
+                        self.viewEnabled(self.view)
+                        self.spinnerStopAnimating(self.spinner)
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
-                
-                self.viewEnabled(self.view)
-                self.spinnerStopAnimating(self.spinner)
-                
-                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -644,9 +667,9 @@ extension TeamSettingTeamDataViewController {
         let centerXConstraint = NSLayoutConstraint(
             item: teamLogoSettingImageView, attribute: .centerX, relatedBy: .equal,
             toItem: self.view, attribute: .centerX, multiplier: 253/207, constant: 0.0)
-        let centerYConstraint = NSLayoutConstraint(
-            item: teamLogoSettingImageView, attribute: .centerY, relatedBy: .equal,
-            toItem: teamPhotoImageView, attribute: .centerY, multiplier: 316/140, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: teamLogoSettingImageView, attribute: .bottom, relatedBy: .equal,
+            toItem: teamLogoImageView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
             item: teamLogoSettingImageView, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 36/414, constant: 0.0)
@@ -654,7 +677,7 @@ extension TeamSettingTeamDataViewController {
             item: teamLogoSettingImageView, attribute: .height, relatedBy: .equal,
             toItem: teamLogoSettingImageView, attribute: .width, multiplier: 1.0, constant: 0.0)
         
-        return [centerXConstraint, centerYConstraint, widthConstraint, heightConstraint]
+        return [centerXConstraint, bottomConstraint, widthConstraint, heightConstraint]
     }
     
     private func homeStadiumLabelConstraints() -> [NSLayoutConstraint] {
