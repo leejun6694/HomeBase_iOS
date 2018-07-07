@@ -208,6 +208,25 @@ class TeamSettingTeamDataViewController: UIViewController {
         return teamMemberButton
     }()
     
+    private lazy var teamCodeButton: UIButton = {
+        let teamCodeButton = UIButton(type: .system)
+        teamCodeButton.setTitle("팀 코드", for: .normal)
+        teamCodeButton.setTitleColor(HBColor.lightGray, for: .normal)
+        teamCodeButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 16.0)
+        teamCodeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        teamCodeButton.titleLabel?.minimumScaleFactor = 0.5
+        teamCodeButton.backgroundColor = .white
+        teamCodeButton.addTarget(
+            self,
+            action: #selector(teamCodeButtonDidTapped(_:)),
+            for: .touchUpInside)
+        teamCodeButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return teamCodeButton
+    }()
+    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
@@ -338,8 +357,31 @@ class TeamSettingTeamDataViewController: UIViewController {
         self.navigationController?.pushViewController(
             teamSettingMemberTableViewController,
             animated: true)
-//        teamSettingMemberTableViewController.modalPresentationStyle = .overCurrentContext
-//        self.present(teamSettingMemberTableViewController, animated: true, completion: nil)
+    }
+    
+    @objc func teamCodeButtonDidTapped(_ sender: UIButton) {
+        guard let teamSettingCodeViewController =
+            self.storyboard?.instantiateViewController(
+                withIdentifier: "TeamSettingCodeViewController")
+                as? TeamSettingCodeViewController else { return }
+        
+        teamSettingCodeViewController.modalPresentationStyle = .overCurrentContext
+        teamSettingCodeViewController.teamData = teamData
+        
+        if let currentUser = Auth.auth().currentUser {
+            CloudFunction.getUserDataWith(currentUser) {
+                (userData, error) in
+                
+                if let _ = error {
+                    return
+                }
+                
+                if let userData = userData {
+                    teamSettingCodeViewController.teamCode = userData.teamCode
+                    self.present(teamSettingCodeViewController, animated: false, completion: nil)
+                }
+            }
+        }
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -412,6 +454,8 @@ class TeamSettingTeamDataViewController: UIViewController {
         self.view.addConstraints(createdAtTextFieldBorderConstraints())
         self.view.addSubview(teamMemberButton)
         self.view.addConstraints(teamMemberButtonConstraints())
+        self.view.addSubview(teamCodeButton)
+        self.view.addConstraints(teamCodeButtonConstraints())
         
         NotificationCenter.default.addObserver(
             self,
@@ -462,6 +506,7 @@ class TeamSettingTeamDataViewController: UIViewController {
         teamLogoSettingImageView.layer.cornerRadius =
             teamLogoSettingImageView.frame.size.height / 2
         teamMemberButton.layer.cornerRadius = 10.0
+        teamCodeButton.layer.cornerRadius = 10.0
     }
 }
 
@@ -822,13 +867,30 @@ extension TeamSettingTeamDataViewController {
             toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
             item: teamMemberButton, attribute: .top, relatedBy: .equal,
-            toItem: teamLogoImageView, attribute: .bottom, multiplier: 1.0, constant: self.view.bounds.size.height * 255/736)
+            toItem: teamLogoImageView, attribute: .bottom, multiplier: 1.0, constant: self.view.bounds.size.height * 218/736)
         let widthConstraint = NSLayoutConstraint(
             item: teamMemberButton, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 345/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
             item: teamMemberButton, attribute: .height, relatedBy: .equal,
-            toItem: self.view, attribute: .height, multiplier: 60/736, constant: 0.0)
+            toItem: self.view, attribute: .height, multiplier: 45/736, constant: 0.0)
+        
+        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func teamCodeButtonConstraints() -> [NSLayoutConstraint] {
+        let centerXConstraint = NSLayoutConstraint(
+            item: teamCodeButton, attribute: .centerX, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(
+            item: teamCodeButton, attribute: .top, relatedBy: .equal,
+            toItem: teamLogoImageView, attribute: .bottom, multiplier: 1.0, constant: self.view.bounds.size.height * 276/736)
+        let widthConstraint = NSLayoutConstraint(
+            item: teamCodeButton, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 345/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: teamCodeButton, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 45/736, constant: 0.0)
         
         return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
     }
