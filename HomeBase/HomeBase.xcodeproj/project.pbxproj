@@ -75,6 +75,8 @@
 		72B7A75020B6E1E500E9AEB9 /* PersonalBatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A74F20B6E1E500E9AEB9 /* PersonalBatterView.swift */; };
 		72B7A75220B6E2F700E9AEB9 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7A75120B6E2F700E9AEB9 /* RecordView.swift */; };
 		72C44F572062D1BD00554FFA /* ScheduleNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C44F562062D1BD00554FFA /* ScheduleNoDataView.swift */; };
+		72C54DE020F11A080066AD4F /* TeamSettingCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C54DDF20F11A070066AD4F /* TeamSettingCodeViewController.swift */; };
+		72C54DE220F120590066AD4F /* TeamSettingCodeCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C54DE120F120590066AD4F /* TeamSettingCodeCompleteViewController.swift */; };
 		72C5755220297E94000432DB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5755120297E94000432DB /* MainTabBarController.swift */; };
 		72D1035C2074E6EE007D1610 /* CustomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1035B2074E6EE007D1610 /* CustomProperties.swift */; };
 		72D9322020239B21003F3889 /* RegisterTeamJoinErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */; };
@@ -186,6 +188,8 @@
 		72B7A74F20B6E1E500E9AEB9 /* PersonalBatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalBatterView.swift; sourceTree = "<group>"; };
 		72B7A75120B6E2F700E9AEB9 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		72C44F562062D1BD00554FFA /* ScheduleNoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoDataView.swift; sourceTree = "<group>"; };
+		72C54DDF20F11A070066AD4F /* TeamSettingCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingCodeViewController.swift; sourceTree = "<group>"; };
+		72C54DE120F120590066AD4F /* TeamSettingCodeCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingCodeCompleteViewController.swift; sourceTree = "<group>"; };
 		72C5755120297E94000432DB /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		72D1035B2074E6EE007D1610 /* CustomProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProperties.swift; sourceTree = "<group>"; };
 		72D9321F20239B21003F3889 /* RegisterTeamJoinErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamJoinErrorViewController.swift; sourceTree = "<group>"; };
@@ -263,21 +267,12 @@
 			name = SignUp;
 			sourceTree = "<group>";
 		};
-		7266D5CE20ECC1C300687C11 /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				720E98AF20B8230500C45CEE /* PersonalSettingViewController.swift */,
-				7266D5CA20ECBFCA00687C11 /* PersonalSettingUserView.swift */,
-				7266D5CC20ECBFD700687C11 /* PersonalSettingPlayerView.swift */,
-				72209AF220F0DE1E008AA116 /* PersonalSettingErrorViewController.swift */,
-			);
-			name = Setting;
-			sourceTree = "<group>";
-		};
 		7282D76120E3A33300716CB9 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
 				7213179920C52F4700A512C1 /* TeamSettingTeamDataViewController.swift */,
+				72C54DDF20F11A070066AD4F /* TeamSettingCodeViewController.swift */,
+				72C54DE120F120590066AD4F /* TeamSettingCodeCompleteViewController.swift */,
 				7282D75920E2A95B00716CB9 /* TeamSettingMemberTableViewController.swift */,
 				7282D75B20E2B0CB00716CB9 /* TeamSettingMemberCell.swift */,
 				7282D75D20E2C35400716CB9 /* TeamSettingMoreViewController.swift */,
@@ -323,7 +318,7 @@
 				72C5755320297EA3000432DB /* Main */,
 				72B7A74920B57BD300E9AEB9 /* Schedule */,
 				7213179220C286AE00A512C1 /* Team */,
-				72B7A74420B2EE5600E9AEB9 /* Personal */,
+				72C54DDD20F1114A0066AD4F /* Personal */,
 				72881E9C1FFB3291009D23C2 /* Start.storyboard */,
 				72881EA11FFB3B98009D23C2 /* Main.storyboard */,
 				7263766C203FF5ED00388939 /* Schedule.storyboard */,
@@ -387,22 +382,6 @@
 			name = Register;
 			sourceTree = "<group>";
 		};
-		72B7A74420B2EE5600E9AEB9 /* Personal */ = {
-			isa = PBXGroup;
-			children = (
-				72B7A74020B2EDFF00E9AEB9 /* PersonalNavigation.swift */,
-				72B7A74220B2EE5100E9AEB9 /* PersonalTableViewController.swift */,
-				72B7A74520B2F0D900E9AEB9 /* PersonalHeaderView.swift */,
-				72B7A74720B57BB700E9AEB9 /* PersonalRankingView.swift */,
-				72B7A74B20B597A700E9AEB9 /* PersonalRankingGraphView.swift */,
-				720E98AD20B72B9400C45CEE /* PersonalRecordView.swift */,
-				72B7A74F20B6E1E500E9AEB9 /* PersonalBatterView.swift */,
-				720E98AB20B728A900C45CEE /* PersonalPitcherView.swift */,
-				7266D5CE20ECC1C300687C11 /* Setting */,
-			);
-			name = Personal;
-			sourceTree = "<group>";
-		};
 		72B7A74920B57BD300E9AEB9 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +416,33 @@
 				72E6600720A98CBE00371A5E /* ScheduleDetailLoadPitcherView.swift */,
 			);
 			name = Detail;
+			sourceTree = "<group>";
+		};
+		72C54DDD20F1114A0066AD4F /* Personal */ = {
+			isa = PBXGroup;
+			children = (
+				72B7A74020B2EDFF00E9AEB9 /* PersonalNavigation.swift */,
+				72B7A74220B2EE5100E9AEB9 /* PersonalTableViewController.swift */,
+				72B7A74520B2F0D900E9AEB9 /* PersonalHeaderView.swift */,
+				72B7A74720B57BB700E9AEB9 /* PersonalRankingView.swift */,
+				72B7A74B20B597A700E9AEB9 /* PersonalRankingGraphView.swift */,
+				720E98AD20B72B9400C45CEE /* PersonalRecordView.swift */,
+				72B7A74F20B6E1E500E9AEB9 /* PersonalBatterView.swift */,
+				720E98AB20B728A900C45CEE /* PersonalPitcherView.swift */,
+				72C54DDE20F111570066AD4F /* Setting */,
+			);
+			name = Personal;
+			sourceTree = "<group>";
+		};
+		72C54DDE20F111570066AD4F /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				720E98AF20B8230500C45CEE /* PersonalSettingViewController.swift */,
+				7266D5CA20ECBFCA00687C11 /* PersonalSettingUserView.swift */,
+				7266D5CC20ECBFD700687C11 /* PersonalSettingPlayerView.swift */,
+				72209AF220F0DE1E008AA116 /* PersonalSettingErrorViewController.swift */,
+			);
+			name = Setting;
 			sourceTree = "<group>";
 		};
 		72C5755320297EA3000432DB /* Main */ = {
@@ -759,6 +765,7 @@
 				728EE77A203369F2006108F9 /* MainBlankView.swift in Sources */,
 				72DAEE9C20C2867E00E9E3E3 /* TeamTableViewController.swift in Sources */,
 				72134FC2203D9300007B7FCB /* MainTableViewController.swift in Sources */,
+				72C54DE220F120590066AD4F /* TeamSettingCodeCompleteViewController.swift in Sources */,
 				720DFFE3204C2C980098C473 /* ScheduleDetailRecordPlayerHeaderView.swift in Sources */,
 				72637671203FFC7E00388939 /* ScheduleRecentView.swift in Sources */,
 				72F5ECF42046E44B00C7B594 /* ScheduleDetailInfoView.swift in Sources */,
@@ -766,6 +773,7 @@
 				720DFFDF204BFEDD0098C473 /* ScheduleDetailTableViewController.swift in Sources */,
 				72C44F572062D1BD00554FFA /* ScheduleNoDataView.swift in Sources */,
 				725B850A200181350024588D /* RegisterUserInfoViewController.swift in Sources */,
+				72C54DE020F11A080066AD4F /* TeamSettingCodeViewController.swift in Sources */,
 				72F07C0B200C77FC004C83F6 /* ForgotSelectNavigation.swift in Sources */,
 				72E96C96200600E000B68F29 /* RegisterTeamCreateViewController.swift in Sources */,
 				7213D76D2020DC3F00FB028C /* RegisterTeamCompleteViewController.swift in Sources */,
