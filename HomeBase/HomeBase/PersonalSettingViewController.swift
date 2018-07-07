@@ -8,10 +8,20 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class PersonalSettingViewController: UIViewController {
     
     // MARK: Properties
+    
+    var userData: HBUser!
+    var playerData: HBPlayer!
+    var playerPhoto = #imageLiteral(resourceName: "personal_default")
+    
+    private var photoIsEditing = false
+    
+    private var currentOriginY: CGFloat = 0.0
     
     private lazy var backButton: UIButton = {
         let backButton = UIButton(type: .system)
@@ -26,6 +36,22 @@ class PersonalSettingViewController: UIViewController {
         return backButton
     }()
     
+    private lazy var doneButton: UIButton = {
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("완료", for: .normal)
+        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.titleLabel?.font = UIFont(
+            name: "AppleSDGothicNeo-Bold",
+            size: 17.0)
+        doneButton.addTarget(
+            self,
+            action: #selector(doneButtonDidTapped(_:)),
+            for: .touchUpInside)
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        return doneButton
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "내 설정"
@@ -38,7 +64,7 @@ class PersonalSettingViewController: UIViewController {
     }()
     
     private lazy var personalPhotoImageView: UIImageView = {
-        let personalPhotoImageView = UIImageView(image: #imageLiteral(resourceName: "personal_default"))
+        let personalPhotoImageView = UIImageView(image: playerPhoto)
         personalPhotoImageView.layer.borderColor =
             UIColor.black.withAlphaComponent(0.15).cgColor
         personalPhotoImageView.layer.borderWidth = 1.0
@@ -130,6 +156,10 @@ class PersonalSettingViewController: UIViewController {
     
     private lazy var userView: PersonalSettingUserView = {
         let userView = PersonalSettingUserView()
+        userView.dbName = userData.name
+        userView.dbBirth = userData.birth
+        userView.dbHeight = playerData.height
+        userView.dbWeight = playerData.weight
         userView.translatesAutoresizingMaskIntoConstraints = false
         
         return userView
@@ -137,15 +167,130 @@ class PersonalSettingViewController: UIViewController {
     
     private lazy var playerView: PersonalSettingPlayerView = {
         let playerView = PersonalSettingPlayerView()
+        playerView.dbPosition = playerData.position
+        playerView.dbPlayerNumber = playerData.backNumber
+        playerView.dbPitcher = playerData.pitchPosition
+        playerView.dbHitter = playerData.batPosition
+        
+        playerView.position = playerData.position
+        playerView.playerNumber = playerData.backNumber
+        playerView.pitcher = playerData.pitchPosition
+        playerView.hitter = playerData.batPosition
         playerView.translatesAutoresizingMaskIntoConstraints = false
         
         return playerView
     }()
     
+    @IBOutlet private var signOutButton: UIButton!
+    @IBOutlet private var spinner: UIActivityIndicatorView!
+    
     // MARK: Methods
+    
+    @IBAction func backgroundDidTapped(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     
     @objc private func backButtonDidTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func doneButtonDidTapped(_ sender: UIButton) {
+        if userView.userCondition, playerView.playerCondition {
+            spinnerStartAnimating(spinner)
+            
+            if let currentUser = Auth.auth().currentUser {
+                if photoIsEditing {
+                    let storageRef = Storage.storage().reference()
+                    let personalRef = storageRef.child(userData.teamCode).child(currentUser.uid)
+                    
+                    if let personalImage = personalPhotoImageView.image {
+                        if let photoData = UIImagePNGRepresentation(personalImage) {
+                            personalRef.putData(photoData, metadata: nil) {
+                                (metaData, error) in
+                                
+                                let databaseRef = Database.database().reference()
+                                let playerRef = databaseRef.child("players").child(currentUser.uid)
+                                
+                                playerRef.updateChildValues(["playerPhoto": personalRef.fullPath]) {
+                                    (error, ref) in
+                                    
+                                    self.editedInfoSaved(currentUser)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    editedInfoSaved(currentUser)
+                }
+            }
+        } else {
+            guard let personalSettingErrorViewController =
+                self.storyboard?.instantiateViewController(
+                    withIdentifier: "PersonalSettingErrorViewController")
+                    as? PersonalSettingErrorViewController else { return }
+            
+            personalSettingErrorViewController.modalPresentationStyle = .overCurrentContext
+            self.present(personalSettingErrorViewController, animated: false, completion: nil)
+        }
+    }
+    
+    private func editedInfoSaved(_ currentUser: User) {
+        guard let mainTabBarController =
+            self.presentingViewController as? MainTabBarController else { return }
+        
+        var batPosition = "우"
+        let hitterControlValue = playerView.hitterControl.selectedSegmentIndex
+        if hitterControlValue == 0 { batPosition = "좌" }
+        else { batPosition = "우" }
+        
+        var pitchPosition = "우"
+        let pitcherControlValue = playerView.pitcherControl.selectedSegmentIndex
+        if pitcherControlValue == 0 { pitchPosition = "좌" }
+        else { pitchPosition = "우" }
+        
+        let databaseRef = Database.database().reference()
+        let userRef = databaseRef.child("users").child(currentUser.uid)
+        let playerRef = databaseRef.child("players").child(currentUser.uid)
+        
+        userRef.updateChildValues(
+            ["name": userView.name,
+             "birth": userView.birth]) {
+                (error, ref) in
+                
+                CloudFunction.getUserDataWith(currentUser) {
+                    (userData, error) in
+                    
+                    if let _ = error {
+                        return
+                    } else {
+                        mainTabBarController.userData = userData
+                        
+                        playerRef.updateChildValues(
+                            ["name": self.userView.name,
+                             "height": self.userView.height,
+                             "weight": self.userView.weight,
+                             "position": self.playerView.position,
+                             "backNumber": self.playerView.playerNumber,
+                             "pitchPosition": pitchPosition,
+                             "batPosition": batPosition]) {
+                                (error, ref) in
+                                
+                                CloudFunction.getPlayerDataWith(currentUser) {
+                                    (playerData, error) in
+                                    
+                                    if let _ = error {
+                                        return
+                                    } else {
+                                        mainTabBarController.playerData = playerData
+                                        
+                                        self.spinnerStopAnimating(self.spinner)
+                                        self.dismiss(animated: true, completion: nil)
+                                    }
+                                }
+                        }
+                    }
+                }
+        }
     }
     
     @objc private func personalPhotoDidTapped(_ sender: UITapGestureRecognizer) {
@@ -197,19 +342,63 @@ class PersonalSettingViewController: UIViewController {
     }
     
     @IBAction func signOutButtonDidTapped(_ sender: UIButton) {
-        if let user = Auth.auth().currentUser {
-            do {
-                print("sign out: \(user.email ?? "default")")
-                try Auth.auth().signOut()
-                
-                let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-                let signInViewController = storyBoard.instantiateInitialViewController()
-                
+        do {
+            try Auth.auth().signOut()
+            
+            let storyBoard = UIStoryboard(name: "Start", bundle: nil)
+            let signInViewController = storyBoard.instantiateInitialViewController()
+            
+            self.dismiss(animated: true) {
                 UIApplication.shared.keyWindow?.rootViewController = signInViewController
-            } catch {
-                print(error)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            self.view.frame.origin.y = currentOriginY
+            
+            if userView.nameTextField.isFirstResponder {
+                if bottomLocationOf(userView.weightTextField) - 295.0 < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOf(userView.weightTextField)
+                            - 290.0
+                            - keyboardHeight)
+                }
+            } else if userView.birthTextField.isFirstResponder {
+                if bottomLocationOf(userView.weightTextField) - 295.0 < keyboardHeight {
+                    self.view.frame.origin.y += (
+                        bottomLocationOf(userView.weightTextField)
+                            - 290.0
+                            - keyboardHeight)
+                }
+            } else if userView.heightTextField.isFirstResponder {
+                if bottomLocationOf(userView.weightTextField) - 295.0 < keyboardHeight {
+                    self.view.frame.origin.y -= keyboardHeight
+                }
+            } else if userView.weightTextField.isFirstResponder {
+                if bottomLocationOf(userView.weightTextField) - 295.0 < keyboardHeight {
+                    self.view.frame.origin.y -= keyboardHeight
+                }
+            }
+            
+            if playerView.positionTextField.isFirstResponder {
+                    self.view.frame.origin.y -= keyboardHeight
+            } else if playerView.playerNumberTextField.isFirstResponder {
+                self.view.frame.origin.y -= keyboardHeight
             }
         }
+    }
+    
+    @objc private func keyboardWillHide(_ notification:NSNotification) {
+        self.view.frame.origin.y = currentOriginY
     }
     
     // MARK: Life Cycle
@@ -221,6 +410,8 @@ class PersonalSettingViewController: UIViewController {
         
         self.view.addSubview(backButton)
         self.view.addConstraints(backButtonConstraints())
+        self.view.addSubview(doneButton)
+        self.view.addConstraints(doneButtonConstraints())
         self.view.addSubview(titleLabel)
         self.view.addConstraints(titleLabelConstraints())
         
@@ -238,6 +429,19 @@ class PersonalSettingViewController: UIViewController {
         self.view.addConstraints(userButtonUnderViewConstraints())
         self.view.addSubview(userView)
         self.view.addConstraints(userViewConstraints())
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: NSNotification.Name.UIKeyboardWillHide,
+            object: nil
+        )
     }
     
     override func viewDidLayoutSubviews() {
@@ -254,6 +458,7 @@ extension PersonalSettingViewController: UINavigationControllerDelegate, UIImage
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             personalPhotoImageView.image = image
+            photoIsEditing = true
         }
         
         self.dismiss(animated: true, completion: nil)
@@ -280,6 +485,23 @@ extension PersonalSettingViewController {
             toItem: backButton, attribute: .height, multiplier: 1.0, constant: 0.0)
         
         return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
+    }
+    
+    private func doneButtonConstraints() -> [NSLayoutConstraint] {
+        let leadingConstraint = NSLayoutConstraint(
+            item: doneButton, attribute: .leading, relatedBy: .equal,
+            toItem: self.view, attribute: .centerX, multiplier: 360/207, constant: 0.0)
+        let centerYConstraint = NSLayoutConstraint(
+            item: doneButton, attribute: .centerY, relatedBy: .equal,
+            toItem: backButton, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let widthConstraint = NSLayoutConstraint(
+            item: doneButton, attribute: .width, relatedBy: .equal,
+            toItem: self.view, attribute: .width, multiplier: 40/414, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(
+            item: doneButton, attribute: .height, relatedBy: .equal,
+            toItem: self.view, attribute: .height, multiplier: 30/736, constant: 0.0)
+        
+        return [leadingConstraint, centerYConstraint, widthConstraint, heightConstraint]
     }
     
     private func titleLabelConstraints() -> [NSLayoutConstraint] {
@@ -428,11 +650,11 @@ extension PersonalSettingViewController {
         let widthConstraint = NSLayoutConstraint(
             item: userView, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0.0)
-        let heightConstraint = NSLayoutConstraint(
-            item: userView, attribute: .height, relatedBy: .equal,
-            toItem: self.view, attribute: .height, multiplier: 426/736, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: userView, attribute: .bottom, relatedBy: .equal,
+            toItem: signOutButton, attribute: .top, multiplier: 1.0, constant: 0.0)
         
-        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+        return [centerXConstraint, topConstraint, widthConstraint, bottomConstraint]
     }
     
     private func playerViewConstraints() -> [NSLayoutConstraint] {
@@ -445,10 +667,10 @@ extension PersonalSettingViewController {
         let widthConstraint = NSLayoutConstraint(
             item: playerView, attribute: .width, relatedBy: .equal,
             toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0.0)
-        let heightConstraint = NSLayoutConstraint(
-            item: playerView, attribute: .height, relatedBy: .equal,
-            toItem: self.view, attribute: .height, multiplier: 426/736, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(
+            item: playerView, attribute: .bottom, relatedBy: .equal,
+            toItem: signOutButton, attribute: .top, multiplier: 1.0, constant: 0.0)
         
-        return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
+        return [centerXConstraint, topConstraint, widthConstraint, bottomConstraint]
     }
 }

@@ -2502,7 +2502,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockIcon" translatesAutoresizingMaskIntoConstraints="NO" id="1ab-NV-gfe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockIconWhite" translatesAutoresizingMaskIntoConstraints="NO" id="1ab-NV-gfe">
                                 <rect key="frame" x="164.66666666666666" y="71.333333333333329" width="85" height="84.999999999999986"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1ab-NV-gfe" secondAttribute="height" multiplier="1:1" id="ohz-IF-IXN"/>
@@ -2657,7 +2657,7 @@
         <image name="iconError" width="70" height="70"/>
         <image name="iconExit" width="45" height="45"/>
         <image name="iconSelect" width="70" height="70"/>
-        <image name="lockIcon" width="66" height="67"/>
+        <image name="lockIconWhite" width="85" height="85"/>
         <image name="logo" width="208" height="163"/>
         <image name="mail" width="80" height="58"/>
         <image name="registerTeamlogo" width="120" height="120"/>

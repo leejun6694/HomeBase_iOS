@@ -120,7 +120,6 @@ class RegisterTeamCreateViewController: UIViewController {
                 photoRef.putData(photoData, metadata: nil) {
                     (photoMetaData, photoError) in
                     
-                    
                     guard let currentUser = Auth.auth().currentUser else { return }
                     let admin: String = currentUser.uid
                     var provider: String = ""

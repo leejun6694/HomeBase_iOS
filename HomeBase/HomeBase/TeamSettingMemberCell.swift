@@ -18,9 +18,9 @@ class TeamSettingMemberCell: UITableViewCell {
         }
     }
     
-    var playerImage: UIImage = UIImage() {
+    var playerPhoto: UIImage = #imageLiteral(resourceName: "personal_default") {
         didSet {
-            playerImageView.image = playerImage
+            playerImageView.image = playerPhoto
         }
     }
     

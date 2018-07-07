@@ -24,6 +24,12 @@ class PersonalHeaderView: UIView {
         }
     }
     
+    var playerPhoto: UIImage = #imageLiteral(resourceName: "personal_default") {
+        didSet {
+            playerImageView.image = playerPhoto
+        }
+    }
+    
     lazy var settingButton: UIButton = {
         let settingButton = UIButton(type: .system)
         settingButton.setImage(#imageLiteral(resourceName: "settingIcon"), for: .normal)

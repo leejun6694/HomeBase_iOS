@@ -39,6 +39,7 @@ class HBPlayer {
     var weight: Int
     var batPosition: String
     var pitchPosition: String
+    var playerPhoto: String
     
     init(pid: String,
          name: String,
@@ -47,7 +48,8 @@ class HBPlayer {
          height: Int,
          weight: Int,
          batPoition: String,
-         pitchPosition: String) {
+         pitchPosition: String,
+         playerPhoto: String) {
         
         self.pid = pid
         self.name = name
@@ -57,6 +59,7 @@ class HBPlayer {
         self.weight = weight
         self.batPosition = batPoition
         self.pitchPosition = pitchPosition
+        self.playerPhoto = playerPhoto
     }
 }
 

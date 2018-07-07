@@ -12,10 +12,52 @@ class PersonalSettingPlayerView: UIView {
     
     // MARK: Properties
     
+    var dbPosition: String = "" {
+        didSet {
+            positionTextField.text = dbPosition
+        }
+    }
+    var dbPlayerNumber: Int = 0 {
+        didSet {
+            playerNumberTextField.text = "\(dbPlayerNumber)"
+        }
+    }
+    var dbPitcher: String = "우" {
+        didSet {
+            if dbPitcher == "좌" {
+                pitcherControl.selectedSegmentIndex = 0
+            } else {
+                pitcherControl.selectedSegmentIndex = 1
+            }
+        }
+    }
+    var dbHitter: String = "우" {
+        didSet {
+            if dbHitter == "좌" {
+                hitterControl.selectedSegmentIndex = 0
+            } else {
+                hitterControl.selectedSegmentIndex = 1
+            }
+        }
+    }
+    
+    var position: String = ""
+    var playerNumber: Int = 0
+    var pitcher: String = ""
+    var hitter: String = ""
+    
+    var playerCondition = true
+    private var positionCondition = true
+    private var playerNumberCondition = true
+    
+    private let systemFont = UIFont.systemFont(ofSize: 13.0)
+    private let barButtonFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 17.0)
+    private let controlFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 13.0)
+    
     private lazy var positionLabel: UILabel = {
         let positionLabel = UILabel()
         positionLabel.text = "포지션"
-        positionLabel.textColor = .white
+        positionLabel.textColor = HBColor.correct
         positionLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15.0)
         positionLabel.textAlignment = .left
         positionLabel.adjustsFontSizeToFitWidth = true
@@ -26,18 +68,19 @@ class PersonalSettingPlayerView: UIView {
     }()
     lazy var positionTextField: UITextField = {
         let positionTextField = UITextField()
-        positionTextField.textColor = .white
-        positionTextField.tintColor = .white
+        positionTextField.textColor = HBColor.correct
+        positionTextField.tintColor = HBColor.correct
         positionTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
         positionTextField.adjustsFontSizeToFitWidth = true
         positionTextField.minimumFontSize = 9.0
         positionTextField.translatesAutoresizingMaskIntoConstraints = false
+        positionTextField.delegate = self
         
         return positionTextField
     }()
     private lazy var positionTextFieldBorder: UIView = {
         let positionTextFieldBorder = UIView()
-        positionTextFieldBorder.backgroundColor = .white
+        positionTextFieldBorder.backgroundColor = HBColor.correct
         positionTextFieldBorder.translatesAutoresizingMaskIntoConstraints = false
         
         return positionTextFieldBorder
@@ -48,42 +91,96 @@ class PersonalSettingPlayerView: UIView {
         
         return positionConditionImageView
     }()
+    private lazy var pickerToolBar: UIToolbar = {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = false
+        toolBar.sizeToFit()
+        
+        let positionDoneButton = UIBarButtonItem(
+            title: "완료",
+            style: .plain,
+            target: self,
+            action: #selector(positionDoneButtonDidTapped(_:)))
+        positionDoneButton.setTitleTextAttributes(
+            [NSAttributedStringKey.font: barButtonFont ?? systemFont],
+            for: .normal)
+        positionDoneButton.tintColor = HBColor.correct
+        let positionSpaceItem = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil)
+        let positionCancelButton = UIBarButtonItem(
+            title: "취소",
+            style: .plain,
+            target: self,
+            action: #selector(positionCancelButtondDidTapped(_:)))
+        positionCancelButton.setTitleTextAttributes(
+            [NSAttributedStringKey.font: barButtonFont ?? systemFont],
+            for: .normal)
+        positionCancelButton.tintColor = HBColor.correct
+        toolBar.setItems(
+            [positionCancelButton,
+             positionSpaceItem,
+             positionDoneButton],
+            animated: false)
+        
+        return toolBar
+    }()
+    private let positionData: [String] = ["선발투수", "중간계투", "마무리투수",
+                                          "포수", "1루수", "2루수",
+                                          "3루수", "유격수", "좌익수",
+                                          "중견수", "우익수", "지명타자"]
+    private let subData: [String] = ["SP", "RP", "CP",
+                                     "C", "1B", "2B",
+                                     "3B", "SS", "LF",
+                                     "CF", "RF", "DH"]
     
-    private lazy var backNumberLabel: UILabel = {
-        let backNumberLabel = UILabel()
-        backNumberLabel.text = "선수번호"
-        backNumberLabel.textColor = .white
-        backNumberLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15.0)
-        backNumberLabel.textAlignment = .left
-        backNumberLabel.adjustsFontSizeToFitWidth = true
-        backNumberLabel.minimumScaleFactor = 0.5
-        backNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var positionPickerView: UIPickerView = {
+        let positionPickerView = UIPickerView()
+        positionPickerView.backgroundColor = .white
+        positionPickerView.delegate = self
         
-        return backNumberLabel
+        return positionPickerView
     }()
-    lazy var backNumberTextField: UITextField = {
-        let backNumberTextField = UITextField()
-        backNumberTextField.textColor = .white
-        backNumberTextField.tintColor = .white
-        backNumberTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
-        backNumberTextField.adjustsFontSizeToFitWidth = true
-        backNumberTextField.minimumFontSize = 9.0
-        backNumberTextField.translatesAutoresizingMaskIntoConstraints = false
+    
+    private lazy var playerNumberLabel: UILabel = {
+        let playerNumberLabel = UILabel()
+        playerNumberLabel.text = "선수번호"
+        playerNumberLabel.textColor = HBColor.correct
+        playerNumberLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15.0)
+        playerNumberLabel.textAlignment = .left
+        playerNumberLabel.adjustsFontSizeToFitWidth = true
+        playerNumberLabel.minimumScaleFactor = 0.5
+        playerNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        return backNumberTextField
+        return playerNumberLabel
     }()
-    private lazy var backNumberTextFieldBorder: UIView = {
-        let backNumberTextFieldBorder = UIView()
-        backNumberTextFieldBorder.backgroundColor = .white
-        backNumberTextFieldBorder.translatesAutoresizingMaskIntoConstraints = false
+    lazy var playerNumberTextField: UITextField = {
+        let playerNumberTextField = UITextField()
+        playerNumberTextField.textColor = HBColor.correct
+        playerNumberTextField.tintColor = HBColor.correct
+        playerNumberTextField.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 19.0)
+        playerNumberTextField.adjustsFontSizeToFitWidth = true
+        playerNumberTextField.minimumFontSize = 9.0
+        playerNumberTextField.translatesAutoresizingMaskIntoConstraints = false
+        playerNumberTextField.keyboardType = .numberPad
+        playerNumberTextField.delegate = self
         
-        return backNumberTextFieldBorder
+        return playerNumberTextField
     }()
-    private lazy var backNumberConditionImageView: UIImageView = {
-        let backNumberConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
-        backNumberConditionImageView.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var playerNumberTextFieldBorder: UIView = {
+        let playerNumberTextFieldBorder = UIView()
+        playerNumberTextFieldBorder.backgroundColor = HBColor.correct
+        playerNumberTextFieldBorder.translatesAutoresizingMaskIntoConstraints = false
         
-        return backNumberConditionImageView
+        return playerNumberTextFieldBorder
+    }()
+    private lazy var playerNumberConditionImageView: UIImageView = {
+        let playerNumberConditionImageView = UIImageView(image: #imageLiteral(resourceName: "path2"))
+        playerNumberConditionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return playerNumberConditionImageView
     }()
     
     private lazy var pitcherLabel: UILabel = {
@@ -98,7 +195,7 @@ class PersonalSettingPlayerView: UIView {
         
         return pitcherLabel
     }()
-    private lazy var pitcherControl: UISegmentedControl = {
+    lazy var pitcherControl: UISegmentedControl = {
         let pitcherControl = UISegmentedControl(items: ["좌", "우"])
         pitcherControl.tintColor = HBColor.correct
         pitcherControl.translatesAutoresizingMaskIntoConstraints = false
@@ -118,13 +215,26 @@ class PersonalSettingPlayerView: UIView {
         
         return hitterLabel
     }()
-    private lazy var hitterControl: UISegmentedControl = {
+    lazy var hitterControl: UISegmentedControl = {
         let hitterControl = UISegmentedControl(items: ["좌", "우"])
         hitterControl.tintColor = HBColor.correct
         hitterControl.translatesAutoresizingMaskIntoConstraints = false
         
         return hitterControl
     }()
+    
+    // MARK: Methods
+    
+    @objc private func positionDoneButtonDidTapped(_ sender: UIBarButtonItem) {
+        positionTextFieldCondition(true)
+        playerNumberTextField.becomeFirstResponder()
+    }
+    
+    @objc private func positionCancelButtondDidTapped(_ sender: UIBarButtonItem) {
+        positionTextFieldCondition(false)
+        positionTextField.text = nil
+        positionTextField.resignFirstResponder()
+    }
     
     // MARK: Draw
     
@@ -137,27 +247,208 @@ class PersonalSettingPlayerView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
+        position = dbPosition
+        playerNumber = dbPlayerNumber
+        pitcher = dbPitcher
+        hitter = dbHitter
+        
         self.addSubview(positionLabel)
         self.addConstraints(positionLabelConstraints())
         self.addSubview(positionTextField)
         self.addConstraints(positionTextFieldConstraints())
         self.addSubview(positionTextFieldBorder)
         self.addConstraints(positionTextFieldBorderConstraints())
+        self.addSubview(positionConditionImageView)
+        self.addConstraints(positionConditionImageViewConstraints())
         
-        self.addSubview(backNumberLabel)
-        self.addConstraints(backNumberLabelConstraints())
-        self.addSubview(backNumberTextField)
-        self.addConstraints(backNumberTextFieldConstraints())
-        self.addSubview(backNumberTextFieldBorder)
-        self.addConstraints(backNumberTextFieldBorderConstraints())
+        self.addSubview(playerNumberLabel)
+        self.addConstraints(playerNumberLabelConstraints())
+        self.addSubview(playerNumberTextField)
+        self.addConstraints(playerNumberTextFieldConstraints())
+        self.addSubview(playerNumberTextFieldBorder)
+        self.addConstraints(playerNumberTextFieldBorderConstraints())
+        self.addSubview(playerNumberConditionImageView)
+        self.addConstraints(playerNumberConditionImageViewConstraints())
+        
         self.addSubview(pitcherLabel)
         self.addConstraints(pitcherLabelConstraints())
         self.addSubview(pitcherControl)
         self.addConstraints(pitcherControlConstraints())
+        
         self.addSubview(hitterLabel)
         self.addConstraints(hitterLabelConstraints())
         self.addSubview(hitterControl)
         self.addConstraints(hitterControlConstraints())
+    }
+}
+
+extension PersonalSettingPlayerView: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    // MARK: Custom Methods
+    
+    private func positionTextFieldCondition(_ state: Bool) {
+        if state {
+            positionCondition = true
+            position = positionTextField.text ?? "default"
+            positionLabel.textColor = HBColor.correct
+            positionTextField.textColor = HBColor.correct
+            positionTextField.tintColor = HBColor.correct
+            positionTextFieldBorder.backgroundColor = HBColor.correct
+            
+            if !positionConditionImageView.isDescendant(of: self) {
+                self.addSubview(positionConditionImageView)
+                self.addConstraints(positionConditionImageViewConstraints())
+            }
+        } else {
+            positionCondition = false
+            position = positionTextField.text ?? "default"
+            positionLabel.textColor = .white
+            positionTextField.textColor = .white
+            positionTextField.tintColor = .white
+            positionTextFieldBorder.backgroundColor = .white
+            
+            if positionConditionImageView.isDescendant(of: self) {
+                positionConditionImageView.removeFromSuperview()
+            }
+        }
+        textFieldConditionChecked()
+    }
+    
+    // MARK: PickerView Delegate
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return positionData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        
+        pickerLabel.textColor = .black
+        pickerLabel.textAlignment = .center
+        pickerLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 19.0)
+        pickerLabel.text = "\(positionData[row]) (\(subData[row]))"
+        
+        return pickerLabel
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        positionTextField.text = positionData[row]
+        positionTextFieldCondition(true)
+    }
+}
+
+extension PersonalSettingPlayerView: UITextFieldDelegate {
+    // MARK: Custom Methods
+    
+    private func textFieldConditionChecked() {
+        if positionCondition, playerNumberCondition {
+            playerCondition = true
+        } else {
+            playerCondition = false
+        }
+    }
+    
+    private func playerNumberTextFieldCondition(_ state: Bool) {
+        if state {
+            playerNumberCondition = true
+            playerNumber = Int(playerNumberTextField.text ?? "0") ?? 0
+            playerNumberLabel.textColor = HBColor.correct
+            playerNumberTextField.textColor = HBColor.correct
+            playerNumberTextField.tintColor = HBColor.correct
+            playerNumberTextFieldBorder.backgroundColor = HBColor.correct
+            
+            if !playerNumberConditionImageView.isDescendant(of: self) {
+                self.addSubview(playerNumberConditionImageView)
+                self.addConstraints(playerNumberConditionImageViewConstraints())
+            }
+        } else {
+            playerNumberCondition = false
+            playerNumber = Int(playerNumberTextField.text ?? "0") ?? 0
+            playerNumberLabel.textColor = .white
+            playerNumberTextField.textColor = .white
+            playerNumberTextField.tintColor = .white
+            playerNumberTextFieldBorder.backgroundColor = .white
+            
+            if playerNumberConditionImageView.isDescendant(of: self) {
+                playerNumberConditionImageView.removeFromSuperview()
+            }
+        }
+        textFieldConditionChecked()
+    }
+    
+    // MARK: TextField Delegate
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case positionTextField:
+            positionTextField.text = "선발투수"
+            
+            positionTextField.inputView = positionPickerView
+            positionTextField.inputAccessoryView = pickerToolBar
+        default:
+            break
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentCount = textField.text?.count ?? 0
+        let replacementCount = currentCount + string.count - range.length
+        
+        switch textField {
+        case playerNumberTextField:
+            if currentCount == 1, string.count == 1 {
+                if playerNumberTextField.text == "0" {
+                    playerNumberTextField.text?.removeLast()
+                }
+            }
+            
+            if currentCount == 2, string.count == 1 {
+                playerNumberTextField.text?.append(string)
+                playerNumberTextField.resignFirstResponder()
+                
+                return false
+            }
+            
+            if currentCount == 0, string.count == 1 {
+                playerNumberTextFieldCondition(true)
+            } else if replacementCount > 0 {
+                playerNumberTextFieldCondition(true)
+            } else {
+                playerNumberTextFieldCondition(false)
+            }
+            
+            if replacementCount < 4 { return true }
+            else { return false }
+        default:
+            break
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.endEditing(true)
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case playerNumberTextField:
+            let playerNumberText = playerNumberTextField.text ?? ""
+            if playerNumberText.count > 0, playerNumberText.count < 4 {
+                playerNumberTextFieldCondition(true)
+            } else {
+                playerNumberTextFieldCondition(false)
+            }
+        default:
+            break
+        }
     }
 }
 
@@ -227,67 +518,67 @@ extension PersonalSettingPlayerView {
         return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }
     
-    private func backNumberLabelConstraints() -> [NSLayoutConstraint] {
+    private func playerNumberLabelConstraints() -> [NSLayoutConstraint] {
         let leadingConstraint = NSLayoutConstraint(
-            item: backNumberLabel, attribute: .leading, relatedBy: .equal,
+            item: playerNumberLabel, attribute: .leading, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 44/207, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
-            item: backNumberLabel, attribute: .top, relatedBy: .equal,
+            item: playerNumberLabel, attribute: .top, relatedBy: .equal,
             toItem: self, attribute: .centerY, multiplier: 141/213, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: backNumberLabel, attribute: .width, relatedBy: .equal,
+            item: playerNumberLabel, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 60/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: backNumberLabel, attribute: .height, relatedBy: .equal,
+            item: playerNumberLabel, attribute: .height, relatedBy: .equal,
             toItem: self, attribute: .height, multiplier: 19/426, constant: 0.0)
         
         return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
     }
-    private func backNumberTextFieldConstraints() -> [NSLayoutConstraint] {
+    private func playerNumberTextFieldConstraints() -> [NSLayoutConstraint] {
         let leadingConstraint = NSLayoutConstraint(
-            item: backNumberTextField, attribute: .leading, relatedBy: .equal,
+            item: playerNumberTextField, attribute: .leading, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 44/207, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
-            item: backNumberTextField, attribute: .top, relatedBy: .equal,
-            toItem: backNumberLabel, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            item: playerNumberTextField, attribute: .top, relatedBy: .equal,
+            toItem: playerNumberLabel, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: backNumberTextField, attribute: .width, relatedBy: .equal,
+            item: playerNumberTextField, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 297/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: backNumberTextField, attribute: .height, relatedBy: .equal,
+            item: playerNumberTextField, attribute: .height, relatedBy: .equal,
             toItem: self, attribute: .height, multiplier: 37/426, constant: 0.0)
         
         return [leadingConstraint, topConstraint, widthConstraint, heightConstraint]
     }
-    private func backNumberTextFieldBorderConstraints() -> [NSLayoutConstraint] {
+    private func playerNumberTextFieldBorderConstraints() -> [NSLayoutConstraint] {
         let centerXConstraint = NSLayoutConstraint(
-            item: backNumberTextFieldBorder, attribute: .centerX, relatedBy: .equal,
+            item: playerNumberTextFieldBorder, attribute: .centerX, relatedBy: .equal,
             toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         let topConstraint = NSLayoutConstraint(
-            item: backNumberTextFieldBorder, attribute: .top, relatedBy: .equal,
-            toItem: backNumberTextField, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            item: playerNumberTextFieldBorder, attribute: .top, relatedBy: .equal,
+            toItem: playerNumberTextField, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         let widthConstraint = NSLayoutConstraint(
-            item: backNumberTextFieldBorder, attribute: .width, relatedBy: .equal,
+            item: playerNumberTextFieldBorder, attribute: .width, relatedBy: .equal,
             toItem: self, attribute: .width, multiplier: 345/414, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: backNumberTextFieldBorder, attribute: .height, relatedBy: .equal,
+            item: playerNumberTextFieldBorder, attribute: .height, relatedBy: .equal,
             toItem: self, attribute: .height, multiplier: 2/426, constant: 0.0)
         
         return [centerXConstraint, topConstraint, widthConstraint, heightConstraint]
     }
-    private func backNumberConditionImageViewConstraints() -> [NSLayoutConstraint] {
+    private func playerNumberConditionImageViewConstraints() -> [NSLayoutConstraint] {
         let centerYConstraint = NSLayoutConstraint(
-            item: backNumberConditionImageView, attribute: .centerY, relatedBy: .equal,
-            toItem: backNumberTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+            item: playerNumberConditionImageView, attribute: .centerY, relatedBy: .equal,
+            toItem: playerNumberTextField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let leadingConstraint = NSLayoutConstraint(
-            item: backNumberConditionImageView, attribute: .leading, relatedBy: .equal,
-            toItem: backNumberTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
+            item: playerNumberConditionImageView, attribute: .leading, relatedBy: .equal,
+            toItem: playerNumberTextField, attribute: .trailing, multiplier: 1.0, constant: 10.0)
         let widthConstraint = NSLayoutConstraint(
-            item: backNumberConditionImageView, attribute: .width, relatedBy: .equal,
-            toItem: backNumberTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
+            item: playerNumberConditionImageView, attribute: .width, relatedBy: .equal,
+            toItem: playerNumberTextField, attribute: .width, multiplier: 20.0/297.0, constant: 0.0)
         let heightConstraint = NSLayoutConstraint(
-            item: backNumberConditionImageView, attribute: .height, relatedBy: .equal,
-            toItem: backNumberConditionImageView, attribute: .width, multiplier: 18.0/20.0, constant: 0.0)
+            item: playerNumberConditionImageView, attribute: .height, relatedBy: .equal,
+            toItem: playerNumberConditionImageView, attribute: .width, multiplier: 18.0/20.0, constant: 0.0)
         
         return [centerYConstraint, leadingConstraint, widthConstraint, heightConstraint]
     }

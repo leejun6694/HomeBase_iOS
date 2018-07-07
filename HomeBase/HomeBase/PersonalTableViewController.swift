@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class PersonalTableViewController: UITableViewController {
 
@@ -15,12 +16,26 @@ class PersonalTableViewController: UITableViewController {
     let headerView = PersonalHeaderView()
     let recordView = PersonalRecordView()
     
+    var playerPhoto = #imageLiteral(resourceName: "personal_default")
+    
     // MARK: Methods
     
     private func fetchPlayerData() {
         if let mainTabBarController = self.tabBarController as? MainTabBarController {
             headerView.playerData = mainTabBarController.playerData
             recordView.playerData = mainTabBarController.playerData
+            
+            if mainTabBarController.playerData.playerPhoto != "default" {
+                let storageRef = Storage.storage().reference()
+                let playerPhotoRef = storageRef.child(mainTabBarController.playerData.playerPhoto)
+                
+                playerPhotoRef.getData(maxSize: 4 * 1024 * 1024) {
+                    (playerPhotoData, error) in
+                    
+                    self.playerPhoto = UIImage(data: playerPhotoData!) ?? #imageLiteral(resourceName: "personal_default")
+                    self.headerView.playerPhoto = self.playerPhoto
+                }
+            }
         }
     }
     
@@ -29,6 +44,13 @@ class PersonalTableViewController: UITableViewController {
             self.storyboard?.instantiateViewController(
                 withIdentifier: "PersonalSettingViewController")
                 as? PersonalSettingViewController else { return }
+        
+        if let mainTabBarController = self.tabBarController as? MainTabBarController {
+            personalSettingViewController.userData = mainTabBarController.userData
+            personalSettingViewController.playerData = mainTabBarController.playerData
+        }
+        
+        personalSettingViewController.playerPhoto = playerPhoto
         
         self.present(personalSettingViewController, animated: true, completion: nil)
     }
@@ -50,6 +72,9 @@ class PersonalTableViewController: UITableViewController {
         if let navigationController = self.navigationController {
             navigationController.hidesBarsOnSwipe = true
         }
+        
+        fetchPlayerData()
+        self.tableView.reloadData()
         
         headerView.reloadGraph()
     }

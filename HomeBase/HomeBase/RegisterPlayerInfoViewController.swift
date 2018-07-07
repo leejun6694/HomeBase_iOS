@@ -189,6 +189,13 @@ class RegisterPlayerInfoViewController: UIViewController {
             dateFormatter.dateFormat = "yyyy.MM.dd"
             let joinedAt = dateFormatter.string(from: Date())
             
+            let userData = HBUser(
+                email: currentUser.email ?? "no eamil",
+                name: name,
+                birth: "\(year).\(month).\(day)",
+                teamCode: teamCode,
+                provider: provider)
+            
             let playerData = HBPlayer(
                 pid: currentUser.uid,
                 name: name,
@@ -197,7 +204,8 @@ class RegisterPlayerInfoViewController: UIViewController {
                 height: height,
                 weight: weight,
                 batPoition: batPosition,
-                pitchPosition: pitchPosition)
+                pitchPosition: pitchPosition,
+                playerPhoto: "default")
             
             ref.child("users").child(currentUser.uid).updateChildValues(
                 ["email": currentUser.email ?? "no email",
@@ -214,7 +222,8 @@ class RegisterPlayerInfoViewController: UIViewController {
                  "batPosition": batPosition,
                  "pitchPosition": pitchPosition,
                  "teamCode": teamCode,
-                 "joinedAt": joinedAt]) {
+                 "joinedAt": joinedAt,
+                 "playerPhoto": "default"]) {
                     (error, ref) -> Void in
                     
                     sleep(2)
@@ -242,6 +251,7 @@ class RegisterPlayerInfoViewController: UIViewController {
                                                 withIdentifier: "MainTabBarController")
                                                 as? MainTabBarController else { return }
                                         
+                                        mainTabBarController.userData = userData
                                         mainTabBarController.playerData = playerData
                                         mainTabBarController.teamData = teamData
                                         mainTabBarController.teamLogo = UIImage(data: logoData!) ?? #imageLiteral(resourceName: "team_logo")

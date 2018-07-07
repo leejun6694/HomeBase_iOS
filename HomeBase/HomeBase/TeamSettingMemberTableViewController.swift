@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class TeamSettingMemberTableViewController: UITableViewController {
 
@@ -101,6 +102,17 @@ extension TeamSettingMemberTableViewController {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: cellReuseIdendifier,
             for: indexPath) as! TeamSettingMemberCell
+        
+        if playerList[indexPath.row].playerPhoto != "default" {
+            let storageRef = Storage.storage().reference()
+            let playerPhotoRef = storageRef.child(playerList[indexPath.row].playerPhoto)
+            
+            playerPhotoRef.getData(maxSize: 4 * 1024 * 1024) {
+                (playerPhotoData, error) in
+                
+                cell.playerPhoto = UIImage(data: playerPhotoData!) ?? #imageLiteral(resourceName: "personal_default")
+            }
+        }
         
         cell.backNumber = playerList[indexPath.row].backNumber
         cell.name = playerList[indexPath.row].name

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -70,24 +71,118 @@
                                     <color key="titleColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="K6N-b2-9Os">
+                                <rect key="frame" x="177.5" y="333.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="qQ1-Oh-flq" firstAttribute="bottom" secondItem="F2Y-Xj-Coj" secondAttribute="bottom" id="Go0-0I-oFK"/>
+                            <constraint firstItem="K6N-b2-9Os" firstAttribute="centerY" secondItem="qQ1-Oh-flq" secondAttribute="centerY" id="IxN-Tr-b3q"/>
                             <constraint firstItem="H3b-fW-ANZ" firstAttribute="leading" secondItem="F2Y-Xj-Coj" secondAttribute="trailing" constant="2" id="ZB4-IU-q3g"/>
                             <constraint firstItem="H3b-fW-ANZ" firstAttribute="width" secondItem="F2Y-Xj-Coj" secondAttribute="width" id="hPZ-Br-4OL"/>
                             <constraint firstItem="F2Y-Xj-Coj" firstAttribute="height" secondItem="qQ1-Oh-flq" secondAttribute="height" multiplier="60/736" id="iqT-pJ-DFi"/>
                             <constraint firstItem="F2Y-Xj-Coj" firstAttribute="leading" secondItem="qQ1-Oh-flq" secondAttribute="leading" id="l7I-Q7-V3P"/>
+                            <constraint firstItem="K6N-b2-9Os" firstAttribute="centerX" secondItem="qQ1-Oh-flq" secondAttribute="centerX" id="lJ9-Tf-fhy"/>
                             <constraint firstItem="qQ1-Oh-flq" firstAttribute="trailing" secondItem="H3b-fW-ANZ" secondAttribute="trailing" id="qwI-Gu-Nxq"/>
                             <constraint firstItem="qQ1-Oh-flq" firstAttribute="bottom" secondItem="H3b-fW-ANZ" secondAttribute="bottom" id="rHm-3y-FAu"/>
                             <constraint firstItem="H3b-fW-ANZ" firstAttribute="height" secondItem="F2Y-Xj-Coj" secondAttribute="height" id="zvu-cF-UtC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qQ1-Oh-flq"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="fk1-U1-7uG" appends="YES" id="tvL-cD-ohJ"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="signOutButton" destination="F2Y-Xj-Coj" id="Jhl-gh-5qA"/>
+                        <outlet property="spinner" destination="K6N-b2-9Os" id="piK-ra-oyG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9lX-Fa-Qlc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="fk1-U1-7uG">
+                    <connections>
+                        <action selector="backgroundDidTapped:" destination="cEV-fz-4z8" id="OX2-RC-XdJ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2975" y="878"/>
+        </scene>
+        <!--Personal Setting Error View Controller-->
+        <scene sceneID="axm-iS-6HK">
+            <objects>
+                <viewController storyboardIdentifier="PersonalSettingErrorViewController" id="ckv-3s-ImS" customClass="PersonalSettingErrorViewController" customModule="HomeBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SYF-Dn-LCd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVN-yO-mzs">
+                                <rect key="frame" x="47" y="193" width="281" height="230"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconError" translatesAutoresizingMaskIntoConstraints="NO" id="xRr-Di-bcS">
+                                        <rect key="frame" x="108.5" y="33.5" width="64" height="63.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="xRr-Di-bcS" secondAttribute="height" multiplier="1:1" id="kvi-UY-i9g"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모든 정보를 올바르게 입력해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="7kw-rL-7gv">
+                                        <rect key="frame" x="13.5" y="105" width="254" height="32"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4N4-pS-ucq">
+                                        <rect key="frame" x="20" y="162" width="241" height="40.5"/>
+                                        <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="doneButtonDidTapped:" destination="ckv-3s-ImS" eventType="touchUpInside" id="ujF-Lt-s2F"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="7kw-rL-7gv" firstAttribute="height" secondItem="GVN-yO-mzs" secondAttribute="height" multiplier="35/254" id="DAl-oc-hep"/>
+                                    <constraint firstItem="7kw-rL-7gv" firstAttribute="centerX" secondItem="GVN-yO-mzs" secondAttribute="centerX" id="EWM-MR-izO"/>
+                                    <constraint firstItem="4N4-pS-ucq" firstAttribute="height" secondItem="GVN-yO-mzs" secondAttribute="height" multiplier="45/254" id="GF0-Na-rYP"/>
+                                    <constraint firstItem="4N4-pS-ucq" firstAttribute="top" secondItem="GVN-yO-mzs" secondAttribute="centerY" multiplier="179/127" id="OWa-oV-lrK"/>
+                                    <constraint firstItem="xRr-Di-bcS" firstAttribute="top" secondItem="GVN-yO-mzs" secondAttribute="centerY" multiplier="38/127" id="SH4-9D-peu"/>
+                                    <constraint firstItem="4N4-pS-ucq" firstAttribute="centerX" secondItem="GVN-yO-mzs" secondAttribute="centerX" id="eaY-kY-avb"/>
+                                    <constraint firstItem="xRr-Di-bcS" firstAttribute="width" secondItem="GVN-yO-mzs" secondAttribute="width" multiplier="70/310" id="g7k-y8-fxp"/>
+                                    <constraint firstItem="7kw-rL-7gv" firstAttribute="top" secondItem="GVN-yO-mzs" secondAttribute="centerY" multiplier="117/127" id="gTD-Ej-l6m"/>
+                                    <constraint firstItem="7kw-rL-7gv" firstAttribute="width" secondItem="GVN-yO-mzs" secondAttribute="width" multiplier="280/310" id="lqT-R1-yLA"/>
+                                    <constraint firstItem="4N4-pS-ucq" firstAttribute="width" secondItem="GVN-yO-mzs" secondAttribute="width" multiplier="266/310" id="nme-Ki-UeP"/>
+                                    <constraint firstItem="xRr-Di-bcS" firstAttribute="centerX" secondItem="GVN-yO-mzs" secondAttribute="centerX" id="yPO-Oc-nwI"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GVN-yO-mzs" firstAttribute="top" secondItem="PQZ-iP-IWL" secondAttribute="centerY" multiplier="207/368" id="BdX-8a-7pX"/>
+                            <constraint firstItem="GVN-yO-mzs" firstAttribute="height" secondItem="SYF-Dn-LCd" secondAttribute="height" multiplier="254/736" id="O8N-KA-d4z"/>
+                            <constraint firstItem="GVN-yO-mzs" firstAttribute="width" secondItem="SYF-Dn-LCd" secondAttribute="width" multiplier="310/414" id="T82-zG-d6F"/>
+                            <constraint firstItem="GVN-yO-mzs" firstAttribute="centerX" secondItem="PQZ-iP-IWL" secondAttribute="centerX" id="sC8-Kg-rkF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PQZ-iP-IWL"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oPS-cQ-NRI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3841" y="878"/>
         </scene>
         <!--개인-->
         <scene sceneID="i08-B6-o47">
@@ -111,6 +206,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="iconError" width="70" height="70"/>
         <image name="personalIcon" width="27" height="27"/>
     </resources>
 </document>

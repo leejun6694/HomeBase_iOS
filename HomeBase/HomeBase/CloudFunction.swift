@@ -89,7 +89,8 @@ struct CloudFunction {
                         let height = value["height"] as? Int,
                         let weight = value["weight"] as? Int,
                         let batPosition = value["batPosition"] as? String,
-                        let pitchPosition = value["pitchPosition"] as? String {
+                        let pitchPosition = value["pitchPosition"] as? String,
+                        let playerPhoto = value["playerPhoto"] as? String {
                         
                         let player = HBPlayer(
                             pid: currentUser.uid,
@@ -99,7 +100,8 @@ struct CloudFunction {
                             height: height,
                             weight: weight,
                             batPoition: batPosition,
-                            pitchPosition: pitchPosition)
+                            pitchPosition: pitchPosition,
+                            playerPhoto: playerPhoto)
                         
                         completion(player, nil)
                     }
@@ -144,7 +146,8 @@ struct CloudFunction {
                                 let height = member["height"] as? Int,
                                 let weight = member["weight"] as? Int,
                                 let batPosition = member["batPosition"] as? String,
-                                let pitchPosition = member["pitchPosition"] as? String {
+                                let pitchPosition = member["pitchPosition"] as? String,
+                                let playerPhoto = member["playerPhoto"] as? String {
 
                                 let player = HBPlayer(
                                     pid: pid,
@@ -154,7 +157,8 @@ struct CloudFunction {
                                     height: height,
                                     weight: weight,
                                     batPoition: batPosition,
-                                    pitchPosition: pitchPosition)
+                                    pitchPosition: pitchPosition,
+                                    playerPhoto: playerPhoto)
 
                                 members.append(player)
                             }
