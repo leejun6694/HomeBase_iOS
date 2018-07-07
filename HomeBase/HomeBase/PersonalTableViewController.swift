@@ -56,6 +56,9 @@ class PersonalTableViewController: UITableViewController {
             navigationController.hidesBarsOnSwipe = true
         }
         
+        fetchPlayerData()
+        self.tableView.reloadData()
+        
         headerView.reloadGraph()
     }
 }

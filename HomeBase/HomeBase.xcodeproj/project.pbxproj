@@ -25,6 +25,7 @@
 		7213D7732021C74A00FB028C /* RegisterUserNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213D7722021C74A00FB028C /* RegisterUserNavigation.swift */; };
 		721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */; };
 		7220479F2034B7B40088BEE4 /* MainTopSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220479E2034B7B40088BEE4 /* MainTopSectionCell.swift */; };
+		72209AF320F0DE1E008AA116 /* PersonalSettingErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72209AF220F0DE1E008AA116 /* PersonalSettingErrorViewController.swift */; };
 		7221D7BF2072A23900533E6B /* ScheduleMonthlySectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7221D7BE2072A23900533E6B /* ScheduleMonthlySectionHeaderCell.swift */; };
 		7231C9272018F3AD004FE531 /* CloudFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C9262018F3AD004FE531 /* CloudFunction.swift */; };
 		7231C929201905F7004FE531 /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C928201905F7004FE531 /* FindEmailViewController.swift */; };
@@ -130,6 +131,7 @@
 		7213D7722021C74A00FB028C /* RegisterUserNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserNavigation.swift; sourceTree = "<group>"; };
 		721A619C20189EFD000A5646 /* SignUpCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompleteViewController.swift; sourceTree = "<group>"; };
 		7220479E2034B7B40088BEE4 /* MainTopSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopSectionCell.swift; sourceTree = "<group>"; };
+		72209AF220F0DE1E008AA116 /* PersonalSettingErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalSettingErrorViewController.swift; sourceTree = "<group>"; };
 		7221D7BE2072A23900533E6B /* ScheduleMonthlySectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleMonthlySectionHeaderCell.swift; sourceTree = "<group>"; };
 		7231C9262018F3AD004FE531 /* CloudFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunction.swift; sourceTree = "<group>"; };
 		7231C928201905F7004FE531 /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				720E98AF20B8230500C45CEE /* PersonalSettingViewController.swift */,
 				7266D5CA20ECBFCA00687C11 /* PersonalSettingUserView.swift */,
 				7266D5CC20ECBFD700687C11 /* PersonalSettingPlayerView.swift */,
+				72209AF220F0DE1E008AA116 /* PersonalSettingErrorViewController.swift */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -780,6 +783,7 @@
 				721A619D20189EFD000A5646 /* SignUpCompleteViewController.swift in Sources */,
 				7282D76020E3A32000716CB9 /* TeamSettingCheckViewController.swift in Sources */,
 				7266D5CB20ECBFCA00687C11 /* PersonalSettingUserView.swift in Sources */,
+				72209AF320F0DE1E008AA116 /* PersonalSettingErrorViewController.swift in Sources */,
 				72D1035C2074E6EE007D1610 /* CustomProperties.swift in Sources */,
 				720E98AE20B72B9400C45CEE /* PersonalRecordView.swift in Sources */,
 				72881E7B1FFA8579009D23C2 /* AppDelegate.swift in Sources */,

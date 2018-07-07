@@ -178,8 +178,8 @@ class PersonalSettingViewController: UIViewController {
         return playerView
     }()
     
-    @IBOutlet var signOutButton: UIButton!
-    
+    @IBOutlet private var signOutButton: UIButton!
+    @IBOutlet private var spinner: UIActivityIndicatorView!
     
     // MARK: Methods
     
@@ -193,8 +193,10 @@ class PersonalSettingViewController: UIViewController {
     
     @objc private func doneButtonDidTapped(_ sender: UIButton) {
         if userView.userCondition, playerView.playerCondition {
+            spinnerStartAnimating(spinner)
+            
             guard let mainTabBarController =
-                self.tabBarController as? MainTabBarController else { return }
+                self.presentingViewController as? MainTabBarController else { return }
             
             var batPosition = "우"
             let hitterControlValue = playerView.hitterControl.selectedSegmentIndex
@@ -241,7 +243,8 @@ class PersonalSettingViewController: UIViewController {
                                                 return
                                             } else {
                                                 mainTabBarController.playerData = playerData
-                                                                                            
+                                                
+                                                self.spinnerStopAnimating(self.spinner)
                                                 self.dismiss(animated: true, completion: nil)
                                             }
                                         }
@@ -251,7 +254,13 @@ class PersonalSettingViewController: UIViewController {
                 }
             }
         } else {
-            print("no")
+            guard let personalSettingErrorViewController =
+                self.storyboard?.instantiateViewController(
+                    withIdentifier: "PersonalSettingErrorViewController")
+                    as? PersonalSettingErrorViewController else { return }
+            
+            personalSettingErrorViewController.modalPresentationStyle = .overCurrentContext
+            self.present(personalSettingErrorViewController, animated: false, completion: nil)
         }
     }
     
