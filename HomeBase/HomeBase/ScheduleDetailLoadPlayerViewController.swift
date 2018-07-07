@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class ScheduleDetailLoadPlayerViewController: UIViewController {
 
@@ -183,6 +184,17 @@ class ScheduleDetailLoadPlayerViewController: UIViewController {
     }
     
     private func fetchData() {
+        if player.playerPhoto != "default" {
+            let storageRef = Storage.storage().reference()
+            let playerPhotoRef = storageRef.child(player.playerPhoto)
+
+            playerPhotoRef.getData(maxSize: 4 * 1024 * 1024) {
+                (playerPhotoData, error) in
+                
+                self.playerImageView.image = UIImage(data: playerPhotoData!) ?? #imageLiteral(resourceName: "personal_default")
+            }
+        }
+        
         nameLabel.text = "\(player.name)"
         
         if let record = self.record {

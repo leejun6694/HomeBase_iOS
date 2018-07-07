@@ -17,6 +17,9 @@ class PersonalSettingViewController: UIViewController {
     
     var userData: HBUser!
     var playerData: HBPlayer!
+    var playerPhoto = #imageLiteral(resourceName: "personal_default")
+    
+    private var photoIsEditing = false
     
     private var currentOriginY: CGFloat = 0.0
     
@@ -61,7 +64,7 @@ class PersonalSettingViewController: UIViewController {
     }()
     
     private lazy var personalPhotoImageView: UIImageView = {
-        let personalPhotoImageView = UIImageView(image: #imageLiteral(resourceName: "personal_default"))
+        let personalPhotoImageView = UIImageView(image: playerPhoto)
         personalPhotoImageView.layer.borderColor =
             UIColor.black.withAlphaComponent(0.15).cgColor
         personalPhotoImageView.layer.borderWidth = 1.0
@@ -195,62 +198,29 @@ class PersonalSettingViewController: UIViewController {
         if userView.userCondition, playerView.playerCondition {
             spinnerStartAnimating(spinner)
             
-            guard let mainTabBarController =
-                self.presentingViewController as? MainTabBarController else { return }
-            
-            var batPosition = "우"
-            let hitterControlValue = playerView.hitterControl.selectedSegmentIndex
-            if hitterControlValue == 0 { batPosition = "좌" }
-            else { batPosition = "우" }
-            
-            var pitchPosition = "우"
-            let pitcherControlValue = playerView.pitcherControl.selectedSegmentIndex
-            if pitcherControlValue == 0 { pitchPosition = "좌" }
-            else { pitchPosition = "우" }
-            
-            let databaseRef = Database.database().reference()
             if let currentUser = Auth.auth().currentUser {
-                let userRef = databaseRef.child("users").child(currentUser.uid)
-                let playerRef = databaseRef.child("players").child(currentUser.uid)
-                
-                userRef.updateChildValues(
-                    ["name": userView.name,
-                     "birth": userView.birth]) {
-                        (error, ref) in
+                if photoIsEditing {
+                    let storageRef = Storage.storage().reference()
+                    let personalRef = storageRef.child(userData.teamCode).child(currentUser.uid)
                     
-                        CloudFunction.getUserDataWith(currentUser) {
-                            (userData, error) in
-                                                
-                            if let _ = error {
-                                return
-                            } else {
-                                mainTabBarController.userData = userData
-                                                    
-                                playerRef.updateChildValues(
-                                    ["name": self.userView.name,
-                                     "height": self.userView.height,
-                                     "weight": self.userView.weight,
-                                     "position": self.playerView.position,
-                                     "backNumber": self.playerView.playerNumber,
-                                     "pitchPosition": pitchPosition,
-                                     "batPosition": batPosition]) {
-                                        (error, ref) in
-                                        
-                                        CloudFunction.getPlayerDataWith(currentUser) {
-                                            (playerData, error) in
-                                                                                        
-                                            if let _ = error {
-                                                return
-                                            } else {
-                                                mainTabBarController.playerData = playerData
-                                                
-                                                self.spinnerStopAnimating(self.spinner)
-                                                self.dismiss(animated: true, completion: nil)
-                                            }
-                                        }
+                    if let personalImage = personalPhotoImageView.image {
+                        if let photoData = UIImagePNGRepresentation(personalImage) {
+                            personalRef.putData(photoData, metadata: nil) {
+                                (metaData, error) in
+                                
+                                let databaseRef = Database.database().reference()
+                                let playerRef = databaseRef.child("players").child(currentUser.uid)
+                                
+                                playerRef.updateChildValues(["playerPhoto": personalRef.fullPath]) {
+                                    (error, ref) in
+                                    
+                                    self.editedInfoSaved(currentUser)
                                 }
                             }
                         }
+                    }
+                } else {
+                    editedInfoSaved(currentUser)
                 }
             }
         } else {
@@ -261,6 +231,65 @@ class PersonalSettingViewController: UIViewController {
             
             personalSettingErrorViewController.modalPresentationStyle = .overCurrentContext
             self.present(personalSettingErrorViewController, animated: false, completion: nil)
+        }
+    }
+    
+    private func editedInfoSaved(_ currentUser: User) {
+        guard let mainTabBarController =
+            self.presentingViewController as? MainTabBarController else { return }
+        
+        var batPosition = "우"
+        let hitterControlValue = playerView.hitterControl.selectedSegmentIndex
+        if hitterControlValue == 0 { batPosition = "좌" }
+        else { batPosition = "우" }
+        
+        var pitchPosition = "우"
+        let pitcherControlValue = playerView.pitcherControl.selectedSegmentIndex
+        if pitcherControlValue == 0 { pitchPosition = "좌" }
+        else { pitchPosition = "우" }
+        
+        let databaseRef = Database.database().reference()
+        let userRef = databaseRef.child("users").child(currentUser.uid)
+        let playerRef = databaseRef.child("players").child(currentUser.uid)
+        
+        userRef.updateChildValues(
+            ["name": userView.name,
+             "birth": userView.birth]) {
+                (error, ref) in
+                
+                CloudFunction.getUserDataWith(currentUser) {
+                    (userData, error) in
+                    
+                    if let _ = error {
+                        return
+                    } else {
+                        mainTabBarController.userData = userData
+                        
+                        playerRef.updateChildValues(
+                            ["name": self.userView.name,
+                             "height": self.userView.height,
+                             "weight": self.userView.weight,
+                             "position": self.playerView.position,
+                             "backNumber": self.playerView.playerNumber,
+                             "pitchPosition": pitchPosition,
+                             "batPosition": batPosition]) {
+                                (error, ref) in
+                                
+                                CloudFunction.getPlayerDataWith(currentUser) {
+                                    (playerData, error) in
+                                    
+                                    if let _ = error {
+                                        return
+                                    } else {
+                                        mainTabBarController.playerData = playerData
+                                        
+                                        self.spinnerStopAnimating(self.spinner)
+                                        self.dismiss(animated: true, completion: nil)
+                                    }
+                                }
+                        }
+                    }
+                }
         }
     }
     
@@ -313,18 +342,17 @@ class PersonalSettingViewController: UIViewController {
     }
     
     @IBAction func signOutButtonDidTapped(_ sender: UIButton) {
-        if let user = Auth.auth().currentUser {
-            do {
-                print("sign out: \(user.email ?? "default")")
-                try Auth.auth().signOut()
-                
-                let storyBoard = UIStoryboard(name: "Start", bundle: nil)
-                let signInViewController = storyBoard.instantiateInitialViewController()
-                
+        do {
+            try Auth.auth().signOut()
+            
+            let storyBoard = UIStoryboard(name: "Start", bundle: nil)
+            let signInViewController = storyBoard.instantiateInitialViewController()
+            
+            self.dismiss(animated: true) {
                 UIApplication.shared.keyWindow?.rootViewController = signInViewController
-            } catch {
-                print(error)
             }
+        } catch {
+            print(error)
         }
     }
     
@@ -430,6 +458,7 @@ extension PersonalSettingViewController: UINavigationControllerDelegate, UIImage
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             personalPhotoImageView.image = image
+            photoIsEditing = true
         }
         
         self.dismiss(animated: true, completion: nil)

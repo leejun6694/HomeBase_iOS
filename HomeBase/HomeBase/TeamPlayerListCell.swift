@@ -18,15 +18,15 @@ class TeamPlayerListCell: UITableViewCell {
         }
     }
     
-    var playerImage: UIImage = UIImage() {
-        didSet {
-            playerImageView.image = playerImage
-        }
-    }
-    
     var name: String = "" {
         didSet {
             nameLabel.text = name
+        }
+    }
+    
+    var playerPhoto: UIImage = #imageLiteral(resourceName: "personal_default") {
+        didSet {
+            playerImageView.image = playerPhoto
         }
     }
     

@@ -204,7 +204,8 @@ class RegisterPlayerInfoViewController: UIViewController {
                 height: height,
                 weight: weight,
                 batPoition: batPosition,
-                pitchPosition: pitchPosition)
+                pitchPosition: pitchPosition,
+                playerPhoto: "default")
             
             ref.child("users").child(currentUser.uid).updateChildValues(
                 ["email": currentUser.email ?? "no email",
@@ -221,7 +222,8 @@ class RegisterPlayerInfoViewController: UIViewController {
                  "batPosition": batPosition,
                  "pitchPosition": pitchPosition,
                  "teamCode": teamCode,
-                 "joinedAt": joinedAt]) {
+                 "joinedAt": joinedAt,
+                 "playerPhoto": "default"]) {
                     (error, ref) -> Void in
                     
                     sleep(2)
